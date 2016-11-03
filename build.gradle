@@ -34,8 +34,8 @@ buildscript {
     }
 }
 dependencies {
-	optUedTemplate 'com.ai.opt.uniframe:opt-ued-template:1.0-SNAPSHOT'
-	jsCommonLibs 'com.ai.opt.uniframe:opt-jscommon-libs:1.0-SNAPSHOT'
+	optUedTemplate 'com.ai.opt.uniframe:yc-ued-template:1.0-SNAPSHOT'
+	jsCommonLibs 'com.ai.opt.uniframe:yc-jscommon-libs:1.0-SNAPSHOT'
     compile 'org.sitemesh:sitemesh:3.0.1'
     compile "jstl:jstl:1.2"
     compile "org.springframework:spring-web:4.1.7.RELEASE"
