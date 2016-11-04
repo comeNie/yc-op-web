@@ -1,4 +1,4 @@
-package com.ai.yc.op.web.controller.routetargetarea;
+/*package com.ai.yc.op.web.controller.routetargetarea;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +42,14 @@ import com.alibaba.fastjson.JSON;
 @RestController
 public class RouteTargetAreaController {
 	private static final Logger log = LoggerFactory.getLogger(RouteTargetAreaController.class);
-	/**
+	*//**
 	 * 根据租户id和routeItemId列表查询所有区域信息
 	 * @param request
 	 * @return
 	 * @author zhangzd
 	 * @ApiDocMethod
 	 * @ApiCode
-	 */
+	 *//*
 	public AreaQueryByRouteItemIdResponse queryAreaByRouteItemIds(HttpServletRequest request){
 		String tenantId = request.getParameter("tenantId");
 		String[] routeItemIds = request.getParameterValues("routeItemIds");
@@ -66,14 +66,14 @@ public class RouteTargetAreaController {
 		//
 		return response;
 	}
-	/**
+	*//**
 	 * 根据租户id和routeItemId查询所有区域信息
 	 * @param request
 	 * @return
 	 * @author zhangzd
 	 * @ApiDocMethod
 	 * @ApiCode
-	 */
+	 *//*
 	public AreaQueryByRouteItemIdResponse queryAreaByRouteItemId(HttpServletRequest request){
 		String tenantId = request.getParameter("tenantId");
 		String routeItemId = request.getParameter("routeItemId");
@@ -173,7 +173,7 @@ public class RouteTargetAreaController {
 		}
 		return targetAreaInfoList;
 	}
-	/**
+	*//**
 	 * 判断商品域的区域是否在配货组下的仓库域已经选择
 	 * @param routeItemId
 	 * @param areaQueryByRouteItemIdResponse
@@ -181,7 +181,7 @@ public class RouteTargetAreaController {
 	 * @author zhangzd
 	 * @ApiDocMethod
 	 * @ApiCode
-	 */
+	 *//*
 	public boolean routeItemIdInTargetArea(String areaCode,AreaQueryByRouteItemIdResponse areaQueryByRouteItemIdResponse){
 		boolean flag = false;
 		if(null != areaQueryByRouteItemIdResponse && !CollectionUtil.isEmpty(areaQueryByRouteItemIdResponse.getVoList())){
@@ -226,14 +226,14 @@ public class RouteTargetAreaController {
 		//
 		return response;
 	}
-	/**
+	*//**
 	 * 删除区域信息
 	 * @param tenantId
 	 * @param routeItemId
 	 * @author zhangzd
 	 * @ApiDocMethod
 	 * @ApiCode
-	 */
+	 *//*
 	public void deleteAreaByRouteItemId(String tenantId,String routeItemId){
 		AreaDeleteByRouteItemIdRequest request = new AreaDeleteByRouteItemIdRequest();
 		//
@@ -254,3 +254,4 @@ public class RouteTargetAreaController {
 		return response;
 	}
 }
+*/
