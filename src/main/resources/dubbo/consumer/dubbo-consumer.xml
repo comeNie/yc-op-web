@@ -30,60 +30,7 @@
 
 	
 
-	<!-- 商品查询服务 
-	<dubbo:reference id="iSearchProductSV"
-		interface="com.ai.slp.product.api.webfront.interfaces.ISearchProductSV" />
-	
-	<dubbo:reference id="iProductDetailSV"
-		interface="com.ai.slp.product.api.webfront.interfaces.IProductDetailSV"
-		registry="baasRegistry" />
-
-	<dubbo:reference id="iProductHomeSV"
-		interface="com.ai.slp.product.api.webfront.interfaces.IProductHomeSV"
-		registry="baasRegistry" />
-	-->
-	
-	<!-- 地区查询 -->
-	<dubbo:reference id="iGnAreaQuerySV"
-		interface="com.ai.platform.common.api.area.interfaces.IGnAreaQuerySV" />
-	
-	<!-- 缓存
-	<dubbo:reference id="iCacheSV"
-		interface="com.ai.platform.common.api.cache.interfaces.ICacheSV" />
-	 -->
-	<!-- 商品类目
-	<dubbo:reference id="iProductCatSV"
-		interface="com.ai.slp.product.api.productcat.interfaces.IProductCatSV" />
-	 -->
-	<!-- 行业类型
-	<dubbo:reference id="iIndustrySV"
-		interface="com.ai.platform.common.api.industry.interfaces.IIndustrySV" />
-	 -->
-	<!-- 路由管理 -->
-	<dubbo:reference id="routeManageSV"
-		interface="com.ai.slp.route.api.routemanage.interfaces.IRouteManageSV" />
-	
-	<dubbo:reference id="routeProdSupplyManageSV"
-		interface="com.ai.slp.route.api.routeprodsupplymanage.interfaces.IRouteProdSupplyManageSV" />
-	
-	<dubbo:reference id="routeSupplyAddsLogManageSV"
-		interface="com.ai.slp.route.api.routesupplyaddslog.interfaces.IRouteSupplyAddsLogManageSV" />
-	<dubbo:reference id="routeItemManageSV"
-		interface="com.ai.slp.route.api.routeitemmanage.interfaces.IRouteItemManageSV" />
-	
-	<dubbo:reference id="normProductSV"
-		interface="com.ai.slp.product.api.normproduct.interfaces.INormProductSV" />
-	<!-- com.ai.slp.product.api.product.interfaces.IProductServerSV#queryProductAndRouteGroup -->
-	<dubbo:reference id="productServerSV"
-		interface="com.ai.slp.product.api.product.interfaces.IProductServerSV" />
-		
-	<!-- 配货组服务 -->
-	<dubbo:reference id="routeGroupManageSV"
-		interface="com.ai.slp.route.api.routegroupmanage.interfaces.IRouteGroupManageSV" />
-	<!-- 根据销售商品id查询商品的销售地域  -->
-	<dubbo:reference id="productSV"
-		interface="com.ai.slp.product.api.product.interfaces.IProductSV" />
-	<!-- 配货仓库销售地域 -->
-	<dubbo:reference id="routeTargetAreaSV"
-		interface="com.ai.slp.route.api.routetargetarea.interfaces.IRouteTargetAreaSV" />		
+	<!-- 订单中心 -->	
+	<dubbo:reference id="iQueryOrderDetailsSV"
+		interface="com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV" />		
 </beans>

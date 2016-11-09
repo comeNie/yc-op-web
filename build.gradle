@@ -93,6 +93,9 @@ dependencies {
             "org.springframework:spring-test:4.1.7.RELEASE",
             "junit:junit:4.12"
     )
+	
+	/********************订单中心*************************/
+	compile 'com.ai.yc.order:orderdetails:1.0-SNAPSHOT'
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
 	jarPaths=configurations.optUedTemplate.files.asType(List)

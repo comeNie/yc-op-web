@@ -55,4 +55,5 @@
 <script src="${uedroot}/scripts/plugin/jquery.nanoscroller.min.js"></script>
 <script src="${uedroot}/scripts/modular/skin.js"></script>
 <script src="${uedroot}/scripts/modular/theme.js"></script>
+<script src="${uedroot}/scripts/modular/frame.js"></script>  
 <link rel="stylesheet" type="text/css" href="${_base}/resources/spm_modules/optDialog/css/ui-dialog.css"/>

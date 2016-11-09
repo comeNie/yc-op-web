@@ -60,6 +60,9 @@ $.views.helpers({
  */
 $.views.helpers({
 	"timesToFmatter":function(times){
+		if(!times){
+			return "";
+		}
 		var format = function(time, format){ 
 			var t = new Date(time); 
 			var tf = function(i){return (i < 10 ? '0' : '') + i}; 
