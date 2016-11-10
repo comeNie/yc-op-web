@@ -21,30 +21,32 @@
 		                    	<ul>
 		                    		<li class="col-md-6">
 							            <p class="word">订单编号</p>
-							            <p><input class="int-text int-medium"  type="text"></p>
+							            <p><input class="int-text int-medium"  id="orderId" type="text"></p>
 						            </li>
 		                    		<li class="col-md-6">
 							            <p class="word">昵称</p>
-							            <p><input class="int-text int-medium"  type="text"></p>
+							            <p><input class="int-text int-medium" id="nickName" type="text"></p>
 						            </li>
 		                    	</ul>
 		                    	<ul>
 						            <li class="col-md-6">
-								            	<p class="word">语种方向</p>
-							            		<p>
-								            		<select class="select select-medium">
-								            			<option value="">请选择</option>
-								            		</select>
-							            		</p>
-							            		<p class="sos"><a href="javascript:void(0);">高级搜索<i class="fa fa-caret-down"></i></a>
+						            	<p class="word">语种方向</p>
+					            		<p>
+						            		<select class="select select-medium" id="langugePaire">
+						            			<option value="">请选择</option>
+						            		</select>
+					            		</p>
+					            		<p>
+					            			高级搜索<a href="javascript:void(0);"><i class="fa fa-caret-down" id="showQuery"></i></a>
+							         	</p>
 							         </li>
 		                    	</ul>
-		                    	<div id="selectDiv" class="open" style="display:none;">
+		                    	<div id="selectDiv" style="display:none;">
 			                    	<ul>
 			                    		<li class="col-md-6">
 								           <p class="word">支付方式</p>
 						            		<p>
-							            		<select class="select select-medium">
+							            		<select class="select select-medium" id="payStyle">
 							            			<option value="">请选择</option>
 							            		</select>
 						            		</p>
@@ -52,7 +54,7 @@
 			                    		<li class="col-md-6">
 								            <p class="word">订单状态</p>
 								            <p>
-							            		<select class="select select-medium">
+							            		<select class="select select-medium" id="searchOrderState">
 							            			<option value="">请选择</option>
 							            		</select>
 						            		</p>
@@ -94,25 +96,15 @@
 			                    		<li class="col-md-6">
 								            <p class="word">订单来源</p>
 								            <p>
-							            		<select class="select select-medium">
+							            		<select class="select select-medium" id="orderSource">
 							            			<option value="">请选择</option>
 							            		</select>
 						            		</p>
 							            </li>
 							            <li class="col-md-6">
-								            <p class="word">时区</p>
-								            <p>
-							            		<select class="select select-medium">
-							            			<option value="">请选择</option>
-							            		</select>
-						            		</p>
-							            </li>
-		                    		</ul>
-		                    		<ul>
-		                    			<li class="col-md-6">
 								            <p class="word">订单类型</p>
 								            <p>
-							            		<select class="select select-medium">
+							            		<select class="select select-medium" id="orderType">
 							            			<option value="">请选择</option>
 							            		</select>
 						            		</p>
@@ -125,7 +117,7 @@
 										<p class="word"><input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5"
 												  id="search" value="查  询"></p>
 										<p><input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5"
-												  id="search" value="导  出"></p>
+												   value="导  出"></p>
 									</li>
 								</ul>
 					         </div>
@@ -177,8 +169,7 @@
                                 <!--分页-->
 								 <div>
 					 				 <nav style="text-align: center">
-										<ul id="pagination">
-										</ul>
+										<ul id="pagination"></ul>
 									</nav>
 								  </div>
 								<!--分页结束-->
@@ -190,6 +181,33 @@
     	</div>
    </div> 
 <script id="orderListTemple" type="text/template">
+	<tr>
+  	  <td>{{:chlId}}</td>
+      <td>{{:orderType}}</td>
+      <td>{{:orderId}}</td>
+      <td>{{:timeZone}}</td>
+ 	  <td>{{:orderTime}}</td>
+      <td>{{:userName}}</td>
+ 	  <td>
+      	 <table class="table close-border" width="100%">
+      		<tbody>
+				{{if ordProdExtendList!=null}}
+					{{for ordProdExtendList}}
+      					<tr>
+      						<td class="new-td" style="">{{:langungePairChName}}</td>	
+      					</tr>
+					{{/for}}
+				{{/if}}
+      		</tbody>	
+      	</table>
+      </td>
+      <td>{{:totalFee}}</td>
+      <td>{{:totalFee}}</td>
+      <td>{{:payStyle}}</td>
+      <td>{{:payTime}}</td>
+     <td>{{:state}}</td>
+     <td><a href="#">订单详情</a></td>
+  </tr>                                                                       
 </script> 
   <script type="text/javascript">
   <%-- 展示日历 --%>
@@ -205,11 +223,13 @@
 		console.log("click calendar "+timeId);
 		WdatePicker({el:timeId,readOnly:true});
 	});
-	<%-- 高级区域 --%>
-	$(".form-label ul li .sos a").click(function () {
-		$(".open ").slideToggle(100);
-		$(".nav-form ").toggleClass("reorder remove");
-	});
+	var pager;
+	(function () {
+		seajs.use('app/jsp/order/orderList', function (OrderListPager) {
+			pager = new OrderListPager({element: document.body});
+			pager.render();
+		});
+	})();
  </script>  
 </body>
 

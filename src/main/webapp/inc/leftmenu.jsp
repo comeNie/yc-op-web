@@ -21,7 +21,7 @@
 							class="fa fa-chevron-circle-right drop-icon"></i>
 					</a> <!-- 一级菜单结束--> <!--二级菜单-->
 						<ul class="submenu">
-							<li menuAttr="menu"><a href="${_base}/jsp/order/orderList.jsp" target="mainFrame">订单列表</a></li>
+							<li menuAttr="menu"><a href="${_base}/order/toOrderList" target="mainFrame">订单列表</a></li>
 						    <li menuAttr="menu"><a href="${_base}/order/orderdetails?orderId=2000000016140885" target="mainFrame">订单详情</a></li>
 						</ul> <!--二级菜单结束--></li>
 

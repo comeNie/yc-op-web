@@ -66,28 +66,18 @@ dependencies {
     }
 
 
-	compile 'com.ai.opt.sdk:opt-sdk:2.2-SNAPSHOT'
+	compile 'com.ai.opt.sdk:opt-sdk:2.2.1-SNAPSHOT'
 	compile 'com.ai.opt.xss.filter:opt-xss-firewall:1.0-SNAPSHOT'
 	compile 'com.ai.opt.uni.session:opt-uni-session:2.0-SNAPSHOT'
 	compile 'com.ai.opt.sso.client:opt-sso-client:1.0.2-SNAPSHOT'
     compile "com.ai:ipaas-idps:0.3"
 	//cache
 	compile 'com.ai.runner.center.mmp:manager:1.0.0-SNAPSHOT'
-	//短信验证等
-	compile 'com.ai.opt.uac:account:2.0-SNAPSHOT'
 	
 	//jersey
 	compile 'org.glassfish.jersey.core:jersey-client:2.9.1'
 	
 	compile 'com.ai.baas.smc:sysparamcache:2.0-SNAPSHOT'
-    
-    //地区
-    compile 'com.ai.platform.common:area:1.0-SNAPSHOT'
-    //ip地址
-    compile 'com.ai.platform.common:ipaddr:1.0-SNAPSHOT'
-    //缓存
-    compile 'com.ai.platform.common:cache:1.0-SNAPSHOT'
-    compile 'com.ai.platform.common:servicenum:1.0.1-SNAPSHOT'
     
     testCompile(
             "org.springframework:spring-test:4.1.7.RELEASE",
@@ -96,6 +86,10 @@ dependencies {
 	
 	/********************订单中心*************************/
 	compile 'com.ai.yc.order:orderdetails:1.0-SNAPSHOT'
+	compile 'com.ai.yc.order:orderquery:1.0-SNAPSHOT'
+	/********************公共中心*************************/
+	compile 'com.ai.yc.common:cache:1.0-SNAPSHOT'
+	
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
 	jarPaths=configurations.optUedTemplate.files.asType(List)
