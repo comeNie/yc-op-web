@@ -29,10 +29,10 @@
 						            </li>
 		                    	</ul>
 		                    	<ul>
-						            <li class="col-md-6">
-						            	<p class="word">语种方向</p>
-					            		<p>
-						            		<select class="select select-medium" id="langugePaire">
+							         <li class="col-md-6">
+							            <p class="word">订单类型</p>
+							            <p>
+						            		<select class="select select-medium" id="orderType">
 						            			<option value="">请选择</option>
 						            		</select>
 					            		</p>
@@ -102,13 +102,13 @@
 						            		</p>
 							            </li>
 							            <li class="col-md-6">
-								            <p class="word">订单类型</p>
-								            <p>
-							            		<select class="select select-medium" id="orderType">
+							            	<p class="word">语种方向</p>
+						            		<p>
+							            		<select class="select select-medium" id="langugePaire">
 							            			<option value="">请选择</option>
 							            		</select>
 						            		</p>
-							            </li>
+							         	</li>
 		                    		</ul>
 		                    	</div> 
 	                    		<ul>
@@ -182,11 +182,11 @@
    </div> 
 <script id="orderListTemple" type="text/template">
 	<tr>
-  	  <td>{{:chlId}}</td>
-      <td>{{:orderType}}</td>
+  	  <td>{{:chlIdPage}}</td>
+      <td>{{:orderTypePage}}</td>
       <td>{{:orderId}}</td>
       <td>{{:timeZone}}</td>
- 	  <td>{{:orderTime}}</td>
+ 	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
       <td>{{:userName}}</td>
  	  <td>
       	 <table class="table close-border" width="100%">
@@ -203,9 +203,9 @@
       </td>
       <td>{{:totalFee}}</td>
       <td>{{:totalFee}}</td>
-      <td>{{:payStyle}}</td>
+      <td>{{:payStylePage}}</td>
       <td>{{:payTime}}</td>
-     <td>{{:state}}</td>
+     <td>{{:statePage}}</td>
      <td><a href="#">订单详情</a></td>
   </tr>                                                                       
 </script> 

@@ -10,7 +10,7 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 	private String orderTimeE;
 	private String payTimeS;
 	private String payTimeE;
-
+	private String orderPageId;
 	public String getOrderTimeS() {
 		return orderTimeS;
 	}
@@ -41,6 +41,14 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 
 	public void setPayTimeE(String payTimeE) {
 		this.payTimeE = payTimeE;
+	}
+
+	public String getOrderPageId() {
+		return orderPageId;
+	}
+
+	public void setOrderPageId(String orderPageId) {
+		this.orderPageId = orderPageId;
 	}
 
 }

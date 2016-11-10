@@ -28,7 +28,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     	},
     	//事件代理
     	events: {
-    		  "click #showQuery":"_showQueryInfo",
+    		 "click #showQuery":"_showQueryInfo",
     		//查询
             "click #search":"_searchOrderList"
         },
@@ -38,6 +38,10 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     		// 初始化执行搜索
     		this._searchOrderList();
     		this._bindChlIdSelect();
+    		this._bindOrdTypeSelect();
+    		this._bindStateSelect();
+    		this._bindPayStyleSelect();
+    		this._bindLanguageSelect();
     	},
     	_showQueryInfo: function(){
 			//展示查询条件
@@ -47,6 +51,96 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 		    }else{
 		    	$("#selectDiv").hide();
 		    }
+		},
+		// 下拉 语种方向
+		_bindLanguageSelect:function() {
+			var this_=this;
+			$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/getLangugeSelect",
+				dataType : "json",
+				data : {
+				},
+				message : "正在加载数据..",
+				success : function(data) {
+					var d=data.data;
+					$.each(d,function(index,item){
+						var langugeName = d[index].sourceCn+"->"+d[index].targetCn;
+						var langugeCode = d[index].duadId;
+						$("#langugePaire").append('<option value="'+langugeCode+'">'+langugeName+'</option>');
+					})
+				}
+			});
+		},
+		// 下拉订单类型
+		_bindOrdTypeSelect:function() {
+			var this_=this;
+			$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/getSelect",
+				dataType : "json",
+				data : {
+					paramCode:"ORDER_TYPE",
+					typeCode:"ORD_ORDER"
+				},
+				message : "正在加载数据..",
+				success : function(data) {
+					var d=data.data;
+					$.each(d,function(index,item){
+						var paramName = d[index].columnDesc;
+						var paramCode = d[index].columnValue;
+						$("#orderType").append('<option value="'+paramCode+'">'+paramName+'</option>');
+					})
+				}
+			});
+		},
+		// 下拉订单状态
+		_bindStateSelect : function() {
+			var this_=this;
+			$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/getSelect",
+				dataType : "json",
+				data : {
+					paramCode:"STATE",
+					typeCode:"ORD_ORDER"
+				},
+				message : "正在加载数据..",
+				success : function(data) {
+					var d=data.data;
+					$.each(d,function(index,item){
+						var paramName = d[index].columnDesc;
+						var paramCode = d[index].columnValue;
+						$("#searchOrderState").append('<option value="'+paramCode+'">'+paramName+'</option>');
+					})
+				}
+			});
+		},
+		// 下拉 支付方式
+		_bindPayStyleSelect : function() {
+			var this_=this;
+			$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/getSelect",
+				dataType : "json",
+				data : {
+					paramCode:"PAY_STYLE",
+					typeCode:"ORD_ORDER"
+				},
+				message : "正在加载数据..",
+				success : function(data) {
+					var d=data.data;
+					$.each(d,function(index,item){
+						var paramName = d[index].columnDesc;
+						var paramCode = d[index].columnValue;
+						$("#payStyle").append('<option value="'+paramCode+'">'+paramName+'</option>');
+					})
+				}
+			});
 		},
 		// 下拉 订单来源
 		_bindChlIdSelect : function() {
@@ -72,7 +166,6 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 			});
 		},
 		_searchOrderList:function(){
-			alert("kikio");
 			var _this=this;
 			var url = _base+"/order/getOrderPageData";
 			var queryData = this._getSearchParams();
@@ -100,7 +193,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 	
 		_getSearchParams:function(){
     		return {
-    		"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
+    			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
     			"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
     			"payTimeS":jQuery.trim($("#payTimeBegin").val()),
     			"payTimeE":jQuery.trim($("#payTimeEnd").val()),
@@ -109,7 +202,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     			"orderType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
     			"state":jQuery.trim($("#searchOrderState").val()),
-    			"orderId":jQuery.trim($("#orderId").val())
+    			"orderPageId":jQuery.trim($("#orderId").val())
     		}
     	}
 		
