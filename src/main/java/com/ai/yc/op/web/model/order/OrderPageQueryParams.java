@@ -11,6 +11,7 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 	private String payTimeS;
 	private String payTimeE;
 	private String orderPageId;
+	private String langungePaire;
 	public String getOrderTimeS() {
 		return orderTimeS;
 	}
@@ -49,6 +50,14 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 
 	public void setOrderPageId(String orderPageId) {
 		this.orderPageId = orderPageId;
+	}
+
+	public String getLangungePaire() {
+		return langungePaire;
+	}
+
+	public void setLangungePaire(String langungePaire) {
+		this.langungePaire = langungePaire;
 	}
 
 }

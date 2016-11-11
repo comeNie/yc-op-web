@@ -17,6 +17,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     //实例化AJAX控制处理对象
     var ajaxController = new AjaxController();
     //定义页面组件类
+    var exportFlag = true;
     var OrderListPager = Widget.extend({
     	
     	Implements:SendMessageUtil,
@@ -30,7 +31,9 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     	events: {
     		 "click #showQuery":"_showQueryInfo",
     		//查询
-            "click #search":"_searchOrderList"
+            "click #search":"_searchOrderList",
+            "click #export":"_export"
+            
         },
     	//重写父类
     	setup: function () {
@@ -165,6 +168,35 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				}
 			});
 		},
+		_export:function(){
+			var _this=this;
+			var orderTimeS=jQuery.trim($("#orderTimeBegin").val());
+			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
+			var payTimeS=jQuery.trim($("#payTimeBegin").val());
+			var payTimeE=jQuery.trim($("#payTimeEnd").val());
+			var userName=jQuery.trim($("#nickName").val());
+			var chlId=jQuery.trim($("#orderSource option:selected").val());
+			var orderType=jQuery.trim($("#orderType option:selected").val());
+			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
+			var state=jQuery.trim($("#searchOrderState").val());
+			var orderPageId=jQuery.trim($("#orderId").val());
+			alert("------"+orderPageId);
+			if(exportFlag){
+					window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
+					'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&state='
+				+state+'&orderPageId='+orderPageId;
+			}else{
+				Dialog({
+					width: '200px',
+					height: '50px',
+					content: "无导出数据,请查询数据后再操作",
+					okValue:"确定",
+                    ok:function(){
+                    	this.close;
+                    }
+				}).showModal();
+			}
+		},
 		_searchOrderList:function(){
 			var _this=this;
 			var url = _base+"/order/getOrderPageData";
@@ -184,8 +216,10 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 						var template = $.templates("#orderListTemple");
 						var htmlOut = template.render(data);
 						$("#orderListData").html(htmlOut);
+						exportFlag = true;
 					}else{
 						$("#orderListData").html("未搜索到信息");
+						exportFlag = false;
 					}
 				},
 			});

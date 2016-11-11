@@ -117,7 +117,7 @@
 										<p class="word"><input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5"
 												  id="search" value="查  询"></p>
 										<p><input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5"
-												   value="导  出"></p>
+												   id="export" value="导  出"></p>
 									</li>
 								</ul>
 					         </div>
