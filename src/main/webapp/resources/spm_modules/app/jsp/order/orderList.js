@@ -69,7 +69,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				success : function(data) {
 					var d=data.data;
 					$.each(d,function(index,item){
-						var langugeName = d[index].sourceCn+"->"+d[index].targetCn;
+						var langugeName = d[index].languaNmae+"->"+d[index].transTypeName+"->"+d[index].sourceCn+"->"+d[index].targetCn;
 						var langugeCode = d[index].duadId;
 						$("#langugePaire").append('<option value="'+langugeCode+'">'+langugeName+'</option>');
 					})
@@ -204,7 +204,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				url:url,
 				method: "POST",
 				dataType: "json",
-				//messageId:"showMessage",
+				messageId:"showMessage",
 				renderId:"orderListData",
 				data : queryData,
 				pageSize: OrderListPager.DEFAULT_PAGE_SIZE,

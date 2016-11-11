@@ -17,10 +17,16 @@ public final class Constants {
 	public static final String ORD_CHL_ID = "CHL_ID";
 	/** 支付方式*/
 	public static final String ORD_PAY_STYLE = "PAY_STYLE";
+	/** 翻译类型*/
+	public static final String ORD_TRANSLATE_TYPE = "TRANSLATE_TYPE";
 	/** 美元*/
 	public static final String CURRENCY_UNIT_S = "2";
 	/** 人民币*/
 	public static final String CURRENCY_UNIT_R = "1";
+	/** 中文站*/
+	public static final String ZH_LANGE = "zh_CN";
+	/** 英文站*/
+	public static final String EN_LANGE = "1";
 	
 	public static final class ExcelConstants{
     	private ExcelConstants(){}
