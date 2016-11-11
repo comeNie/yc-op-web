@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ai.opt.base.vo.PageInfo;
+import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
 import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
@@ -23,10 +24,12 @@ import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
+import com.ai.paas.ipaas.ccs.IConfigClient;
 import com.ai.yc.common.api.cache.interfaces.ICacheSV;
 import com.ai.yc.common.api.cache.param.SysParam;
 import com.ai.yc.common.api.cache.param.SysParamSingleCond;
 import com.ai.yc.op.web.constant.Constants;
+import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
@@ -187,7 +190,12 @@ public class OrderListController {
 			ordReq.setOrderTimeEnd(orderTimeE);
 		}
 	    ordReq.setPageNo(1);
-	    ordReq.setPageSize(100);
+	    try {
+	  //获取配置中的导出最大数值
+	    IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
+        String maxRow =  configClient.get(ExcelConstants.EXCEL_OUTPUT_MAX_ROW);
+        int excelMaxRow = Integer.valueOf(maxRow);
+	    ordReq.setPageSize(excelMaxRow);
 	    IOrderQuerySV orderQuerySV = DubboConsumerFactory.getService(IOrderQuerySV.class);
 	    ICacheSV iCacheSV = DubboConsumerFactory.getService(ICacheSV.class);
 	    QueryOrderRsponse orderListResponse = orderQuerySV.queryOrder(ordReq);
@@ -328,7 +336,7 @@ public class OrderListController {
 			}
 		}
 		
-		try {
+		
 			ServletOutputStream outputStream = response.getOutputStream();
 			response.reset();// 清空输出流
             response.setContentType("application/msexcel");// 定义输出类型

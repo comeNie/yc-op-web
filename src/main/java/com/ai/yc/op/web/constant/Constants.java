@@ -22,5 +22,10 @@ public final class Constants {
 	/** 人民币*/
 	public static final String CURRENCY_UNIT_R = "1";
 	
-	
+	public static final class ExcelConstants{
+    	private ExcelConstants(){}
+    	
+    	/**excel导出最大行数**/
+    	public static final String EXCEL_OUTPUT_MAX_ROW = "/excel_output_max_row";
+    }
 }
