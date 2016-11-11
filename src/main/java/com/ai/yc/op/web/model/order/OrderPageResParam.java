@@ -8,6 +8,8 @@ public class OrderPageResParam extends OrdOrderVo {
 	private String orderTypePage;
 	private String payStylePage;
 	private String statePage;
+	private String totalFeePage;
+	
 
 	public String getChlIdPage() {
 		return chlIdPage;
@@ -39,6 +41,14 @@ public class OrderPageResParam extends OrdOrderVo {
 
 	public void setStatePage(String statePage) {
 		this.statePage = statePage;
+	}
+
+	public String getTotalFeePage() {
+		return totalFeePage;
+	}
+
+	public void setTotalFeePage(String totalFeePage) {
+		this.totalFeePage = totalFeePage;
 	}
 
 }

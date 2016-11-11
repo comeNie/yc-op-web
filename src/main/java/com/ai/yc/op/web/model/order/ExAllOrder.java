@@ -7,8 +7,8 @@ public class ExAllOrder {
 	private String orderTime;
 	private String userName;
 	private String langire;
-	private long totalFee;
-	private long realFee;
+	private String totalFee;
+	private String realFee;
 	private String payStyle;
 	private String payTime;
 	private String state;
@@ -53,14 +53,6 @@ public class ExAllOrder {
 		this.langire = langire;
 	}
 
-	public long getTotalFee() {
-		return totalFee;
-	}
-
-	public void setTotalFee(long totalFee) {
-		this.totalFee = totalFee;
-	}
-
 	public String getPayStyle() {
 		return payStyle;
 	}
@@ -93,11 +85,20 @@ public class ExAllOrder {
 		this.payTime = payTime;
 	}
 
-	public long getRealFee() {
+	public String getTotalFee() {
+		return totalFee;
+	}
+
+	public void setTotalFee(String totalFee) {
+		this.totalFee = totalFee;
+	}
+
+	public String getRealFee() {
 		return realFee;
 	}
 
-	public void setRealFee(long realFee) {
+	public void setRealFee(String realFee) {
 		this.realFee = realFee;
 	}
+
 }

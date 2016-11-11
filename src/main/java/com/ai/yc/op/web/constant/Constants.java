@@ -17,4 +17,10 @@ public final class Constants {
 	public static final String ORD_CHL_ID = "CHL_ID";
 	/** 支付方式*/
 	public static final String ORD_PAY_STYLE = "PAY_STYLE";
+	/** 美元*/
+	public static final String CURRENCY_UNIT_S = "2";
+	/** 人民币*/
+	public static final String CURRENCY_UNIT_R = "1";
+	
+	
 }

@@ -201,10 +201,10 @@
       		</tbody>	
       	</table>
       </td>
-      <td>{{:totalFee}}</td>
-      <td>{{:totalFee}}</td>
+      <td>{{:totalFeePage}}</td>
+      <td>{{:totalFeePage}}</td>
       <td>{{:payStylePage}}</td>
-      <td>{{:payTime}}</td>
+      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', payTime)}}</td>
      <td>{{:statePage}}</td>
      <td><a href="#">订单详情</a></td>
   </tr>                                                                       

@@ -180,7 +180,6 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var state=jQuery.trim($("#searchOrderState").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
-			alert("------"+orderPageId);
 			if(exportFlag){
 					window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
 					'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&state='

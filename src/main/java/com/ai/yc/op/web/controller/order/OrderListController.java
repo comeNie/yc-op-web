@@ -1,6 +1,5 @@
 package com.ai.yc.op.web.controller.order;
 
-import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,11 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
@@ -33,9 +30,9 @@ import com.ai.yc.op.web.constant.Constants;
 import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
+import com.ai.yc.op.web.utils.AmountUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
-import com.ai.yc.order.api.orderquery.param.OrdProdExtendVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
 
@@ -138,6 +135,14 @@ public class OrderListController {
                 		if(stateParam!=null){
                 			resParam.setStatePage(stateParam.getColumnDesc());
                 		}
+                		//转换金额格式
+                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+                				resParam.setTotalFeePage(vo.getTotalFee()+"$");
+                			}else{
+                				resParam.setTotalFeePage(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+                			}
+                		}
 						resultList.add(resParam);
 					}
 				}
@@ -234,13 +239,25 @@ public class OrderListController {
 		        		if(stateParam!=null){
 		        			exOrder.setState(stateParam.getColumnDesc());
 		        		}
-		        		exOrder.setOrderTime(vo.getOrderTime().toString());
+		        		//转换金额格式
+                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+                				exOrder.setRealFee(vo.getTotalFee()+"$");
+                				exOrder.setTotalFee(vo.getTotalFee()+"$");
+                			}else{
+                				exOrder.setRealFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+                			}
+                		}
+                		if(vo.getOrderTime()!=null){
+                			exOrder.setOrderTime(vo.getOrderTime().toString());
+                		}
 		        		exOrder.setUserName(vo.getUserName());
-		        		exOrder.setRealFee(vo.getTotalFee());
 		        		exOrder.setPayStyle(vo.getPayStyle());
-		        		exOrder.setTotalFee(vo.getTotalFee());
 		        		exOrder.setOrderId(vo.getOrderId());
-		        		exOrder.setPayTime(vo.getPayTime().toString());
+		        		if(vo.getPayTime()!=null){
+		        			exOrder.setPayTime(vo.getPayTime().toString());
+		        		}
 		        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
 		        		exportList.add(exOrder);
 					}
@@ -286,13 +303,25 @@ public class OrderListController {
 	        		if(stateParam!=null){
 	        			exOrder.setState(stateParam.getColumnDesc());
 	        		}
-	        		exOrder.setOrderTime(vo.getOrderTime().toString());
+	        		//转换金额格式
+            		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+            			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+            				exOrder.setRealFee(vo.getTotalFee()+"$");
+            				exOrder.setTotalFee(vo.getTotalFee()+"$");
+            			}else{
+            				exOrder.setRealFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+            				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+            			}
+            		}
+            		if(vo.getOrderTime()!=null){
+            			exOrder.setOrderTime(vo.getOrderTime().toString());
+            		}
+	        		
 	        		exOrder.setUserName(vo.getUserName());
-	        		exOrder.setRealFee(vo.getTotalFee());
 	        		exOrder.setPayStyle(vo.getPayStyle());
-	        		exOrder.setTotalFee(vo.getTotalFee());
-	        		exOrder.setPayTime(vo.getPayTime().toString());
-	        		exOrder.setLangire("");
+	        		if(vo.getPayTime()!=null){
+	        			exOrder.setPayTime(vo.getPayTime().toString());
+	        		}
 	        		exOrder.setOrderId(vo.getOrderId());
 	        		exportList.add(exOrder);
 				}
