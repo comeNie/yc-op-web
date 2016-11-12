@@ -9,6 +9,7 @@ public class OrderPageResParam extends OrdOrderVo {
 	private String payStylePage;
 	private String statePage;
 	private String totalFeePage;
+	private String cancelTypePage;
 	
 
 	public String getChlIdPage() {
@@ -49,6 +50,14 @@ public class OrderPageResParam extends OrdOrderVo {
 
 	public void setTotalFeePage(String totalFeePage) {
 		this.totalFeePage = totalFeePage;
+	}
+
+	public String getCancelTypePage() {
+		return cancelTypePage;
+	}
+
+	public void setCancelTypePage(String cancelTypePage) {
+		this.cancelTypePage = cancelTypePage;
 	}
 
 }

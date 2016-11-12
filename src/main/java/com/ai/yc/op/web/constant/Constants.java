@@ -34,4 +34,19 @@ public final class Constants {
     	/**excel导出最大行数**/
     	public static final String EXCEL_OUTPUT_MAX_ROW = "/excel_output_max_row";
     }
+	public static final class State{
+		private State(){}
+		public static final String CANCEL_STATE = "91";
+	}
+	public static final class CancelType{
+		private CancelType(){}
+		/** 系统操作编码*/
+		public static final String SYSTEM_OPER = "1000011";
+		/** 系统操作名称*/
+		public static final String SYSTEM_OPER_NAME = "系统取消";
+		/** 用户操作名称*/
+		public static final String USER_OPER_NAME = "用户取消";
+		
+	}
+	
 }

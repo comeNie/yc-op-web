@@ -83,6 +83,19 @@ public class OrderListController {
 				Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
+			//支付时间
+			String payTimeBegin = queryRequest.getPayTimeS();
+			if (!StringUtil.isBlank(payTimeBegin)) {
+				payTimeBegin = payTimeBegin + " 00:00:00";
+				Timestamp payTimeS = Timestamp.valueOf(payTimeBegin);
+				ordReq.setPayTimeStart(payTimeS);
+			}
+			String payTimeEnd = queryRequest.getPayTimeE();
+			if (!StringUtil.isBlank(payTimeEnd)) {
+				payTimeEnd = payTimeEnd + " 23:59:59";
+				Timestamp payTimeE = Timestamp.valueOf(payTimeEnd);
+				ordReq.setPayTimeEnd(payTimeE);
+			}
 			String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
 		    String strPageSize=(null==request.getParameter("pageSize"))?"10":request.getParameter("pageSize");
 		    ordReq.setPageNo(Integer.parseInt(strPageNo));

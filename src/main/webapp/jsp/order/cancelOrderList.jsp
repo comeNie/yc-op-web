@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>订单列表</title>
+<title>已取消订单列表</title>
 <%@include file="/inc/inc.jsp" %>
 </head>
 <body>
@@ -44,17 +44,17 @@
 		                    	<div id="selectDiv" style="display:none;">
 			                    	<ul>
 			                    		<li class="col-md-6">
-								           <p class="word">支付方式</p>
-						            		<p>
-							            		<select class="select select-medium" id="payStyle">
+								            <p class="word">订单来源</p>
+								            <p>
+							            		<select class="select select-medium" id="orderSource">
 							            			<option value="">全部</option>
 							            		</select>
 						            		</p>
 							            </li>
 			                    		<li class="col-md-6">
-								            <p class="word">订单状态</p>
+								            <p class="word">取消类型</p>
 								            <p>
-							            		<select class="select select-medium" id="searchOrderState">
+							            		<select class="select select-medium" id="cancelType">
 							            			<option value="">全部</option>
 							            		</select>
 						            		</p>
@@ -76,31 +76,23 @@
 							                </li> 
 						            	</ul>
 			                    	</div>
-						           <div id="payTimeDiv">
+						           <div id="cancelTimeDiv">
 							           	<ul>
 							                <li class="col-md-6">
-							                    <p class="word">支付开始时间</p>
-							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="payTimeBegin" name="payTimeBegin"/>
+							                    <p class="word">取消开始时间</p>
+							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="cancelTimeBegin" name="cancelTimeBegin"/>
 							                   <span class="time"> <i class="fa  fa-calendar" ></i></span>
 							                    </p>
 							                </li>
 							                <li class="col-md-6">
-							                    <p class="word">支付结束时间</p>
-							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="payTimeEnd" name="payTimeEnd"/>
+							                    <p class="word">取消结束时间</p>
+							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="cancelTimeEnd" name="cancelTimeEnd"/>
 							                     <span class="time"><i class="fa  fa-calendar" ></i></span>
 							                    </p>
 							                </li> 
 							            </ul> 
 						           </div>
 						            <ul>
-			                    		<li class="col-md-6">
-								            <p class="word">订单来源</p>
-								            <p>
-							            		<select class="select select-medium" id="orderSource">
-							            			<option value="">全部</option>
-							            		</select>
-						            		</p>
-							            </li>
 							            <li class="col-md-6">
 							            	<p class="word">语种方向</p>
 						            		<p>
@@ -152,9 +144,8 @@
                                                 <th>昵称</th>
                                                 <th>语种方向</th>
                                                 <th>订单金额</th>
-                                                <th>实付金额</th>
-                                                <th>支付方式</th>
-                                                <th>支付时间</th>
+                                                <th>取消时间</th>
+                                                <th>取消类型</th>
                                                 <th>订单状态</th>
                                                 <th>操作</th>
                                             </tr>
@@ -200,9 +191,8 @@
       	</table>
       </td>
       <td>{{:totalFeePage}}</td>
-      <td>{{:totalFeePage}}</td>
-      <td>{{:payStylePage}}</td>
-      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', payTime)}}</td>
+	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', stateChgTime)}}</td>
+      <td>{{:cancelTypePage}}</td>
      <td>{{:statePage}}</td>
      <td><a href="#">查看</a></td>
   </tr>                                                                       
@@ -212,19 +202,17 @@
 	$('#orderTimeDiv').delegate('.fa-calendar','click',function(){
 		var calInput = $(this).parent().prev();
 		var timeId = calInput.attr('id');
-		console.log("click calendar "+timeId);
 		WdatePicker({el:timeId,readOnly:true});
 	});
-	$('#payTimeDiv').delegate('.fa-calendar','click',function(){
+	$('#cancelTimeDiv').delegate('.fa-calendar','click',function(){
 		var calInput = $(this).parent().prev();
 		var timeId = calInput.attr('id');
-		console.log("click calendar "+timeId);
 		WdatePicker({el:timeId,readOnly:true});
 	});
 	var pager;
 	(function () {
-		seajs.use('app/jsp/order/orderList', function (OrderListPager) {
-			pager = new OrderListPager({element: document.body});
+		seajs.use('app/jsp/order/cancelOrderList', function (CancelOrderListPager) {
+			pager = new CancelOrderListPager({element: document.body});
 			pager.render();
 		});
 	})();
