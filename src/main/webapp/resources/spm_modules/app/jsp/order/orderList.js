@@ -180,10 +180,11 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var state=jQuery.trim($("#searchOrderState").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
+			var payStyle = jQuery.trim($("#payStyle option:selected").val());
 			if(exportFlag){
 					window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
 					'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&state='
-				+state+'&orderPageId='+orderPageId;
+				+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle;
 			}else{
 				Dialog({
 					width: '200px',
@@ -235,7 +236,8 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     			"orderType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
     			"state":jQuery.trim($("#searchOrderState").val()),
-    			"orderPageId":jQuery.trim($("#orderId").val())
+    			"orderPageId":jQuery.trim($("#orderId").val()),
+    			"payStyle":jQuery.trim($("#payStyle option:selected").val())
     		}
     	}
 		

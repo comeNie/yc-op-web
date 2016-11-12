@@ -339,7 +339,6 @@ public class OrderListController {
             		}
 	        		
 	        		exOrder.setUserName(vo.getUserName());
-	        		exOrder.setPayStyle(vo.getPayStyle());
 	        		if(vo.getPayTime()!=null){
 	        			exOrder.setPayTime(vo.getPayTime().toString());
 	        		}

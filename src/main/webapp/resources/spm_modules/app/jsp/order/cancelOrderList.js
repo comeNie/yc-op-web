@@ -155,10 +155,11 @@ define('app/jsp/order/cancelOrderList', function (require, exports, module) {
 			var orderType=jQuery.trim($("#orderType option:selected").val());
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
+			var cancelType = jQuery.trim($("#cancelType option:selected").val()),
 			if(exportFlag){
-					window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
-					'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&state='
-				+state+'&orderPageId='+orderPageId;
+					window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&cancelTimeS='+cancelTimeS+
+					'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&cancelType='
+				+cancelType+'&orderPageId='+orderPageId+'&cancelTimeE='+cancelTimeE;
 			}else{
 				Dialog({
 					width: '200px',
