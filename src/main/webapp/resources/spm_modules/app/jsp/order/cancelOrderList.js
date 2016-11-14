@@ -17,7 +17,6 @@ define('app/jsp/order/cancelOrderList', function (require, exports, module) {
     //实例化AJAX控制处理对象
     var ajaxController = new AjaxController();
     //定义页面组件类
-    var exportFlag = true;
     var CancelOrderListPager = Widget.extend({
     	
     	Implements:SendMessageUtil,
@@ -144,34 +143,7 @@ define('app/jsp/order/cancelOrderList', function (require, exports, module) {
 				}
 			});
 		},
-		_export:function(){
-			var _this=this;
-			var orderTimeS=jQuery.trim($("#orderTimeBegin").val());
-			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
-			var cancelTimeS=jQuery.trim($("#cancelTimeBegin").val());
-			var cancelTimeE=jQuery.trim($("#cancelTimeEnd").val());
-			var userName=jQuery.trim($("#nickName").val());
-			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var orderType=jQuery.trim($("#orderType option:selected").val());
-			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
-			var orderPageId=jQuery.trim($("#orderId").val());
-			var cancelType = jQuery.trim($("#cancelType option:selected").val()),
-			if(exportFlag){
-					window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&cancelTimeS='+cancelTimeS+
-					'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&cancelType='
-				+cancelType+'&orderPageId='+orderPageId+'&cancelTimeE='+cancelTimeE;
-			}else{
-				Dialog({
-					width: '200px',
-					height: '50px',
-					content: "无导出数据,请查询数据后再操作",
-					okValue:"确定",
-                    ok:function(){
-                    	this.close;
-                    }
-				}).showModal();
-			}
-		},
+		
 		_searchOrderList:function(){
 			var _this=this;
 			var url = _base+"/getCancelOrderData";
@@ -191,15 +163,28 @@ define('app/jsp/order/cancelOrderList', function (require, exports, module) {
 						var template = $.templates("#orderListTemple");
 						var htmlOut = template.render(data);
 						$("#orderListData").html(htmlOut);
-						exportFlag = true;
 					}else{
 						$("#orderListData").html("未搜索到信息");
-						exportFlag = false;
 					}
 				},
 			});
 		},
-	
+		_export:function(){
+			var _this=this;
+			var orderTimeS=jQuery.trim($("#orderTimeBegin").val());
+			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
+			var cancelTimeS=jQuery.trim($("#cancelTimeBegin").val());
+			var cancelTimeE=jQuery.trim($("#cancelTimeEnd").val());
+			var userName=jQuery.trim($("#nickName").val());
+			var chlId=jQuery.trim($("#orderSource option:selected").val());
+			var orderType=jQuery.trim($("#orderType option:selected").val());
+			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
+			var orderPageId=jQuery.trim($("#orderId").val());
+			var cancelType = jQuery.trim($("#cancelType option:selected").val());
+			window.location.href=_base+'/cancelOrdExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&cancelTimeS='+cancelTimeS+
+			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&cancelType='
+		+cancelType+'&orderPageId='+orderPageId+'&cancelTimeE='+cancelTimeE;
+		},
 		_getSearchParams:function(){
     		return {
     			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),

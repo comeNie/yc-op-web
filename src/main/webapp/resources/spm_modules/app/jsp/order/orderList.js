@@ -17,7 +17,6 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     //实例化AJAX控制处理对象
     var ajaxController = new AjaxController();
     //定义页面组件类
-    var exportFlag = true;
     var OrderListPager = Widget.extend({
     	
     	Implements:SendMessageUtil,
@@ -181,21 +180,9 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 			var state=jQuery.trim($("#searchOrderState").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var payStyle = jQuery.trim($("#payStyle option:selected").val());
-			if(exportFlag){
-					window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
-					'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&state='
-				+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle;
-			}else{
-				Dialog({
-					width: '200px',
-					height: '50px',
-					content: "无导出数据,请查询数据后再操作",
-					okValue:"确定",
-                    ok:function(){
-                    	this.close;
-                    }
-				}).showModal();
-			}
+			window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
+			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&state='
+		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle;
 		},
 		_searchOrderList:function(){
 			var _this=this;
@@ -216,10 +203,8 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 						var template = $.templates("#orderListTemple");
 						var htmlOut = template.render(data);
 						$("#orderListData").html(htmlOut);
-						exportFlag = true;
 					}else{
 						$("#orderListData").html("未搜索到信息");
-						exportFlag = false;
 					}
 				},
 			});

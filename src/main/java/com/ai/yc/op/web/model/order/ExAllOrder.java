@@ -12,6 +12,9 @@ public class ExAllOrder {
 	private String payStyle;
 	private String payTime;
 	private String state;
+	
+	private String cancelType;
+	private String cancelTime;
 
 	public String getChlId() {
 		return chlId;
@@ -99,6 +102,22 @@ public class ExAllOrder {
 
 	public void setRealFee(String realFee) {
 		this.realFee = realFee;
+	}
+
+	public String getCancelType() {
+		return cancelType;
+	}
+
+	public void setCancelType(String cancelType) {
+		this.cancelType = cancelType;
+	}
+
+	public String getCancelTime() {
+		return cancelTime;
+	}
+
+	public void setCancelTime(String cancelTime) {
+		this.cancelTime = cancelTime;
 	}
 
 }
