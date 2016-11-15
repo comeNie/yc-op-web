@@ -10,7 +10,8 @@ public class OrderPageResParam extends OrdOrderVo {
 	private String statePage;
 	private String totalFeePage;
 	private String cancelTypePage;
-	
+
+	private String orderLevelPage;
 
 	public String getChlIdPage() {
 		return chlIdPage;
@@ -58,6 +59,14 @@ public class OrderPageResParam extends OrdOrderVo {
 
 	public void setCancelTypePage(String cancelTypePage) {
 		this.cancelTypePage = cancelTypePage;
+	}
+
+	public String getOrderLevelPage() {
+		return orderLevelPage;
+	}
+
+	public void setOrderLevelPage(String orderLevelPage) {
+		this.orderLevelPage = orderLevelPage;
 	}
 
 }

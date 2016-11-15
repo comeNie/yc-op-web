@@ -16,6 +16,9 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 	private String cancelTimeS;
 	private String cancelTimeE;
 	private String cancelType;
+	
+	private String updateTimeS;
+	private String updateTimeE;
 	public String getOrderTimeS() {
 		return orderTimeS;
 	}
@@ -86,6 +89,22 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 
 	public void setCancelType(String cancelType) {
 		this.cancelType = cancelType;
+	}
+
+	public String getUpdateTimeS() {
+		return updateTimeS;
+	}
+
+	public void setUpdateTimeS(String updateTimeS) {
+		this.updateTimeS = updateTimeS;
+	}
+
+	public String getUpdateTimeE() {
+		return updateTimeE;
+	}
+
+	public void setUpdateTimeE(String updateTimeE) {
+		this.updateTimeE = updateTimeE;
 	}
 
 }

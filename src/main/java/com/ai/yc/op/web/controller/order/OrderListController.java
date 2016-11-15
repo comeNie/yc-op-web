@@ -274,7 +274,6 @@ public class OrderListController {
                 			exOrder.setOrderTime(vo.getOrderTime().toString());
                 		}
 		        		exOrder.setUserName(vo.getUserName());
-		        		exOrder.setPayStyle(vo.getPayStyle());
 		        		exOrder.setOrderId(vo.getOrderId());
 		        		if(vo.getPayTime()!=null){
 		        			exOrder.setPayTime(vo.getPayTime().toString());

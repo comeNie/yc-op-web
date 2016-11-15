@@ -22,7 +22,10 @@
 					</a> <!-- 一级菜单结束--> <!--二级菜单-->
 						<ul class="submenu">
 							<li menuAttr="menu"><a href="${_base}/order/toOrderList" target="mainFrame">订单列表</a></li>
-							<li menuAttr="menu"><a href="${_base}/toOrderList" target="mainFrame">已取消订单列表</a></li>
+							<li menuAttr="menu"><a href="${_base}/toCancelOrderList" target="mainFrame">已取消订单列表</a></li>
+							<li menuAttr="menu"><a href="${_base}/toWaitPriceOrderList" target="mainFrame">待报价订单列表</a></li>
+						    <li menuAttr="menu"><a href="${_base}/toWaitPayOrderList" target="mainFrame">待支付订单列表</a></li>
+						    <li menuAttr="menu"><a href="${_base}/toUnclaimOrderList" target="mainFrame">待领取订单列表</a></li>
 						</ul> <!--二级菜单结束--></li>
   
 				</ul>
