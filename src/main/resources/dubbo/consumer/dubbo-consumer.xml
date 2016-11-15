@@ -28,9 +28,7 @@
 
 	<context:component-scan base-package="com.ai.yc" />
 
-	
-
-	<!-- 订单中心  -->	
+	<!-- 订单中心 -->
 	<dubbo:reference id="iQueryOrderDetailsSV"
 		interface="com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV" registry="baasRegistry"/>
 	
@@ -43,7 +41,7 @@
 	<dubbo:reference id="iOrderLevelSV"
 		interface="com.ai.yc.order.api.orderlevel.interfaces.IOrderLevelSV" registry="baasRegistry"/>
 	  
-		<!-- 缓存 -->
+	<!-- 公共中心 -->
 	<dubbo:reference id="ICacheSV"
 		interface="com.ai.yc.common.api.cache.interfaces.ICacheSV "
 		registry="baasRegistry" />		
@@ -63,4 +61,9 @@
     <!-- 用户中心 -->				
     <dubbo:reference id="iYCUserServiceSV"
 		interface="com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV" />		
+
+	<dubbo:reference id="iQuerySysDuadSV"
+		interface="com.ai.yc.common.api.sysduad.interfaces.IQuerySysDuadSV"
+		registry="baasRegistry" />
+
 </beans>

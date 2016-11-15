@@ -10,7 +10,12 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 	private String orderTimeE;
 	private String payTimeS;
 	private String payTimeE;
-
+	private String orderPageId;
+	private String langungePaire;
+	
+	private String cancelTimeS;
+	private String cancelTimeE;
+	private String cancelType;
 	public String getOrderTimeS() {
 		return orderTimeS;
 	}
@@ -41,6 +46,46 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 
 	public void setPayTimeE(String payTimeE) {
 		this.payTimeE = payTimeE;
+	}
+
+	public String getOrderPageId() {
+		return orderPageId;
+	}
+
+	public void setOrderPageId(String orderPageId) {
+		this.orderPageId = orderPageId;
+	}
+
+	public String getLangungePaire() {
+		return langungePaire;
+	}
+
+	public void setLangungePaire(String langungePaire) {
+		this.langungePaire = langungePaire;
+	}
+
+	public String getCancelTimeS() {
+		return cancelTimeS;
+	}
+
+	public void setCancelTimeS(String cancelTimeS) {
+		this.cancelTimeS = cancelTimeS;
+	}
+
+	public String getCancelTimeE() {
+		return cancelTimeE;
+	}
+
+	public void setCancelTimeE(String cancelTimeE) {
+		this.cancelTimeE = cancelTimeE;
+	}
+
+	public String getCancelType() {
+		return cancelType;
+	}
+
+	public void setCancelType(String cancelType) {
+		this.cancelType = cancelType;
 	}
 
 }

@@ -1,4 +1,4 @@
-define('app/jsp/order/orderList', function (require, exports, module) {
+define('app/jsp/order/cancelOrderList', function (require, exports, module) {
     'use strict';
     var $=require('jquery'),
     Widget = require('arale-widget/1.2.0/widget'),
@@ -17,7 +17,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     //实例化AJAX控制处理对象
     var ajaxController = new AjaxController();
     //定义页面组件类
-    var OrderListPager = Widget.extend({
+    var CancelOrderListPager = Widget.extend({
     	
     	Implements:SendMessageUtil,
     	//属性，使用时由类的构造函数传入
@@ -36,13 +36,12 @@ define('app/jsp/order/orderList', function (require, exports, module) {
         },
     	//重写父类
     	setup: function () {
-    		OrderListPager.superclass.setup.call(this);
+    		CancelOrderListPager.superclass.setup.call(this);
     		// 初始化执行搜索
     		this._searchOrderList();
     		this._bindChlIdSelect();
     		this._bindOrdTypeSelect();
-    		this._bindStateSelect();
-    		this._bindPayStyleSelect();
+    		this._bindCancelTypeSelect();
     		this._bindLanguageSelect();
     	},
     	_showQueryInfo: function(){
@@ -98,8 +97,8 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				}
 			});
 		},
-		// 下拉订单状态
-		_bindStateSelect : function() {
+		// 下拉取消类型
+		_bindCancelTypeSelect : function() {
 			var this_=this;
 			$.ajax({
 				type : "post",
@@ -107,7 +106,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				url : _base+ "/getSelect",
 				dataType : "json",
 				data : {
-					paramCode:"STATE",
+					paramCode:"CANCEL_TYPE",
 					typeCode:"ORD_ORDER"
 				},
 				message : "正在加载数据..",
@@ -116,30 +115,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 					$.each(d,function(index,item){
 						var paramName = d[index].columnDesc;
 						var paramCode = d[index].columnValue;
-						$("#searchOrderState").append('<option value="'+paramCode+'">'+paramName+'</option>');
-					})
-				}
-			});
-		},
-		// 下拉 支付方式
-		_bindPayStyleSelect : function() {
-			var this_=this;
-			$.ajax({
-				type : "post",
-				processing : false,
-				url : _base+ "/getSelect",
-				dataType : "json",
-				data : {
-					paramCode:"PAY_STYLE",
-					typeCode:"ORD_ORDER"
-				},
-				message : "正在加载数据..",
-				success : function(data) {
-					var d=data.data;
-					$.each(d,function(index,item){
-						var paramName = d[index].columnDesc;
-						var paramCode = d[index].columnValue;
-						$("#payStyle").append('<option value="'+paramCode+'">'+paramName+'</option>');
+						$("#cancelType").append('<option value="'+paramCode+'">'+paramName+'</option>');
 					})
 				}
 			});
@@ -167,26 +143,10 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				}
 			});
 		},
-		_export:function(){
-			var _this=this;
-			var orderTimeS=jQuery.trim($("#orderTimeBegin").val());
-			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
-			var payTimeS=jQuery.trim($("#payTimeBegin").val());
-			var payTimeE=jQuery.trim($("#payTimeEnd").val());
-			var userName=jQuery.trim($("#nickName").val());
-			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var orderType=jQuery.trim($("#orderType option:selected").val());
-			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
-			var state=jQuery.trim($("#searchOrderState").val());
-			var orderPageId=jQuery.trim($("#orderId").val());
-			var payStyle = jQuery.trim($("#payStyle option:selected").val());
-			window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
-			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&state='
-		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle;
-		},
+		
 		_searchOrderList:function(){
 			var _this=this;
-			var url = _base+"/order/getOrderPageData";
+			var url = _base+"/getCancelOrderData";
 			var queryData = this._getSearchParams();
 			$("#pagination").runnerPagination({
 				url:url,
@@ -195,7 +155,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				messageId:"showMessage",
 				renderId:"orderListData",
 				data : queryData,
-				pageSize: OrderListPager.DEFAULT_PAGE_SIZE,
+				pageSize: CancelOrderListPager.DEFAULT_PAGE_SIZE,
 				visiblePages:5,
 				message: "正在为您查询数据..",
 				render: function (data) {
@@ -209,25 +169,39 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				},
 			});
 		},
-	
+		_export:function(){
+			var _this=this;
+			var orderTimeS=jQuery.trim($("#orderTimeBegin").val());
+			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
+			var cancelTimeS=jQuery.trim($("#cancelTimeBegin").val());
+			var cancelTimeE=jQuery.trim($("#cancelTimeEnd").val());
+			var userName=jQuery.trim($("#nickName").val());
+			var chlId=jQuery.trim($("#orderSource option:selected").val());
+			var orderType=jQuery.trim($("#orderType option:selected").val());
+			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
+			var orderPageId=jQuery.trim($("#orderId").val());
+			var cancelType = jQuery.trim($("#cancelType option:selected").val());
+			window.location.href=_base+'/cancelOrdExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&cancelTimeS='+cancelTimeS+
+			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&cancelType='
+		+cancelType+'&orderPageId='+orderPageId+'&cancelTimeE='+cancelTimeE;
+		},
 		_getSearchParams:function(){
     		return {
     			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
     			"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
-    			"payTimeS":jQuery.trim($("#payTimeBegin").val()),
-    			"payTimeE":jQuery.trim($("#payTimeEnd").val()),
+    			"cancelTimeS":jQuery.trim($("#cancelTimeBegin").val()),
+    			"cancelTimeE":jQuery.trim($("#cancelTimeEnd").val()),
     			"userName":jQuery.trim($("#nickName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
     			"orderType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
-    			"state":jQuery.trim($("#searchOrderState").val()),
-    			"orderPageId":jQuery.trim($("#orderId").val()),
-    			"payStyle":jQuery.trim($("#payStyle option:selected").val())
+    			"cancelType":jQuery.trim($("#cancelType option:selected").val()),
+    			"orderPageId":jQuery.trim($("#orderId").val())
     		}
     	}
 		
     });
     
-    module.exports = OrderListPager
+    module.exports = CancelOrderListPager
 });
 

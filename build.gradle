@@ -97,6 +97,8 @@ dependencies {
 	/********************客户中心*************************/
 	compile 'com.ai.yc.user:userservice:1.0-SNAPSHOT'
 	    
+	compile 'com.ai.yc.common:sysduad:1.0-SNAPSHOT'
+	
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
 	jarPaths=configurations.optUedTemplate.files.asType(List)
