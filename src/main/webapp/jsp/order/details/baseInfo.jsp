@@ -120,7 +120,7 @@
 									</li>
 									<li class="col-md-6">
 										<p class="word">支付时间：</p>
-										<p>{{:~timesToFmatter(payTime)}}</p>
+										<p>{{:~timesToFmatter(orderFee.payTime)}}</p>
 									</li>
                                   {{/if}}
 
@@ -136,7 +136,7 @@
 										<p>{{:~timesToFmatter(stateChgTime)}}</p>
 									</li>
 								  {{/if}}
-                                  {{if state=='52'}}
+                                  {{if state=='51'||state=='52'}}
 									<li class="col-md-6">
 										<p class="word">确认类型：</p>
 										<p>{{if operId=='1000011'}}后台确认{{else}}用户确认{{/if}}</p>

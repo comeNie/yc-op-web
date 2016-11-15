@@ -61,10 +61,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		setup : function() {
 			var _this = this;
 			orderDetailsPager.superclass.setup.call(this);
-			var formValidator =_this._initValidate();
-			$(":input").bind("focusout",function(){
-				formValidator.element(this);
-			});
 			
 			//日期控件
 			$(document).on("click",".fa-calendar",function(){
@@ -310,6 +306,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 								prodFiles[i].fileNum = prodFiles.length;
 								prodFiles[i].fileSubmitTime =  rs.data.orderTime;
 								prodFiles[i].translateFileSubmitTime = rs.data.prod.updateTime;
+								prodFiles[i].state = rs.data.state;
 							}
 							rs.data.prodFiles = prodFiles;
 							//alert(JSON.stringify(rs.data));
@@ -340,8 +337,13 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 						//初始化单价
 						_this._getWordPrice(rs.data.prod.useCode,rs.data.prodExtends[0].langungePair,rs.data.prodLevels[0].translateLevel);
 						
-						
 						_this._initUploaderBtn();
+						
+						var formValidator =_this._initValidate();
+						$(":input").bind("focusout",function(){
+							formValidator.element(this);
+						});
+						
 					}else{
 						showErrorDialog(rs.statusInfo);
 					}
@@ -470,10 +472,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     					digits:true
     				},
     				"startTime":{
-    					required:true
+    					required:true,
+    					minlength:8
     				},
     				"endTime":{
-    					required:true
+    					required:true,
+    					minlength:8
     				},
     				"prod.takeDay":{
     					required:true,
@@ -540,10 +544,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     					digits:"译员数量必须为整数"
     				},
     				"startTime":{
-    					required:"请选择开始时间"
+    					required:"请选择开始时间",
+    					minlength:"请选择开始时间"
     				},
     				"endTime":{
-    					required:"请选择结束时间"
+    					required:"请选择结束时间",
+    					minlength:"请选择结束时间"
     				},
     				"prod.takeDay":{
     					required:"请输入翻译耗时天数",

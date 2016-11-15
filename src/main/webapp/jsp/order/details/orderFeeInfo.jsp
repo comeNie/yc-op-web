@@ -196,6 +196,7 @@
 		                                      <input id="translateLevel" name="translateLevel" value="100130" type="checkbox" class="checkbox-100130">
 		                                      <label for="checkbox-100130">交替传译</label>
 	                                    </p>
+                                        <label id="translateLevel-error" class="error" for="translateLevel"></label>
 									</li>
 									<li class="col-md-6">
 										<p class="word">会议地址：</p>
@@ -229,7 +230,9 @@
 										 <p>
 										    <input id="startTime" name="startTime" readonly value="{{:~timesToFmatter(prod.stateTime)}}" class="int-text int-medium " type="text" />
 							                <span class="time"><i class="fa  fa-calendar" ></i></span>
+                                           
 							             </p>
+                                          <label id="startTime-error" class="error" for="startTime" style="display: none;"></label>
 									</li>
 									<li class="col-md-6">
 										<p class="word">结束时间：</p>
@@ -237,6 +240,7 @@
 										     <input id="endTime" name="endTime" readonly value="{{:~timesToFmatter(prod.endTime)}}" class="int-text int-medium " type="text" />
 							                 <span class="time"> <i class="fa  fa-calendar" ></i></span>
 							             </p>
+                                         <label id="endTime-error" class="error" for="endTime" style="display: none;"></label>
 									</li>
 									<li class="col-md-6">
                                         <input name="orderFee.currencyUnit" type="hidden" value="{{:orderFee.currencyUnit}}"/>
@@ -244,7 +248,7 @@
 										<p>
 										   <input id="totalFee" name="totalFee" type="text" value="{{:~liToYuan3(orderFee.totalFee)}}" class="int-text int-small" />
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
-                                            &nbsp;<label id="totalFee-error" class="error" for="totalFee" style="display: none;"></label>
+                                            <label id="totalFee-error" class="error" for="totalFee" style="display: none;"></label>
 										</p>
 									</li>
 									<li class="col-md-6">

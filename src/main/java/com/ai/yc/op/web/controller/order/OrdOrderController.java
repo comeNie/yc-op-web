@@ -279,7 +279,7 @@ public class OrdOrderController {
 				prodFile.setFileSaveId(pager.getFileSaveIds()[i]);
 				if(pager.getFileTranslateIds()!=null&&pager.getFileTranslateIds()[i]!=null){
 					prodFile.setFileTranslateName(pager.getFileTranslateNames()[i]);
-					prodFile.setFileTraslateId(pager.getFileTranslateIds()[i]);
+					prodFile.setFileTranslateId(pager.getFileTranslateIds()[i]);
 				}
 				prodFiles.add(prodFile);
 			}

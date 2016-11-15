@@ -64,6 +64,7 @@ define(function (require, exports, module) {
 	stateMap.put("40", "待审核");
 	stateMap.put("41", "已审核");
 	stateMap.put("42", "审核不通过");
+	stateMap.put("50", "待确认");
 	stateMap.put("51", "已确认");
 	stateMap.put("52", "待评价");
 	stateMap.put("53", "已评价");
@@ -166,6 +167,9 @@ define(function (require, exports, module) {
 	     },
 	     "getTranslateLevelName": function (translateLevel){	
 		      return translateLevelMap.get(translateLevel);
+	     },
+	     "getPayStyleName": function (payStyle){	
+		      return payStyleMap.get(payStyle);
 	     }
 	     
 	});

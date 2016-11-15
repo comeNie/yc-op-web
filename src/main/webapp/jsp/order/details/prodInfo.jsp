@@ -75,9 +75,9 @@
 											<td>
                                                 <input type="hidden" name="fileSaveIds" value="{{:fileSaveId}}"/>
                                                 <input type="hidden" name="fileNames" value="{{:fileName}}"/>
-                                               
+                                                {{if state=='24'||state=='25'||state=='40'||state=='41'||state=='42'||state=='50'}}
 											      <a id="upload_{{:fileSaveId}}" class="biu-btn upload "><i class="icon-upload-alt"> </i>上传 </a> 
-                                               
+                                               {{/if}}
 											    <a class="biu-btn download"><i class="icon-download-alt"> </i>下载 </a>
 											</td>
 										</tr>
@@ -85,7 +85,7 @@
 										{{for prodFiles}}
                                         {{if fileTranslateId!=null}}
 										<tr>
-                                            {{if #index==0}}
+                                            {{if #getIndex()==0}}
                                                <td rowspan="{{:fileNum}}">译文内容:</td>
                                             {{/if}}
 											

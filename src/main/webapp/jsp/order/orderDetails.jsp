@@ -17,7 +17,7 @@
 <body>
     <form id="orderForm">
     <input id="orderId" name="orderId" type="hidden" value="${orderId}"/>
-	
+	 <div class="row">
 	 
 		<!--内侧框架-->
 		<div class="col-lg-12">
@@ -85,7 +85,7 @@
 			</div>
 			
 		</div>
-		
+	</div>	
 	
    </form>
 </body>
