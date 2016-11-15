@@ -32,12 +32,35 @@
 
 	<!-- 订单中心 -->	
 	<dubbo:reference id="iQueryOrderDetailsSV"
-		interface="com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV" />
-		
+		interface="com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV" registry="baasRegistry"/>
+	
+	<dubbo:reference id="iUpdateOrderSV"
+		interface="com.ai.yc.order.api.updateorder.interfaces.IUpdateOrderSV" registry="baasRegistry"/>
+	
 	<dubbo:reference id="iOrderQuerySV"
-		interface="com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV" />
+		interface="com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV" registry="baasRegistry"/>
+	
+	<dubbo:reference id="iOrderLevelSV"
+		interface="com.ai.yc.order.api.orderlevel.interfaces.IOrderLevelSV" registry="baasRegistry"/>
+	
 		<!-- 缓存 -->
 	<dubbo:reference id="ICacheSV"
 		interface="com.ai.yc.common.api.cache.interfaces.ICacheSV "
-		registry="baasRegistry" />				
+		registry="baasRegistry" />		
+		
+    <!-- 用途 -->	
+	<dubbo:reference id="iQuerySysPurposeSV"
+		interface="com.ai.yc.common.api.syspurpose.interfaces.IQuerySysPurposeSV" />	
+		
+	<!-- 领域-->	
+	<dubbo:reference id="iQuerySysDomainSV"
+		interface="com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV" />	
+		
+	<!-- 自动报价-->	
+	<dubbo:reference id="iQueryAutoOfferSV"
+		interface="com.ai.yc.order.api.autooffer.interfaces.IQueryAutoOfferSV" />	
+	
+    <!-- 用户中心 -->				
+    <dubbo:reference id="iYCUserServiceSV"
+		interface="com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV" />		
 </beans>

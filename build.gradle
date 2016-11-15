@@ -87,8 +87,15 @@ dependencies {
 	/********************订单中心*************************/
 	compile 'com.ai.yc.order:orderdetails:1.0-SNAPSHOT'
 	compile 'com.ai.yc.order:orderquery:1.0-SNAPSHOT'
+	compile 'com.ai.yc.order:autooffer:1.0-SNAPSHOT'
+	compile 'com.ai.yc.order:updateorder:1.0-SNAPSHOT'
+	compile 'com.ai.yc.order:orderlevel:1.0-SNAPSHOT'
 	/********************公共中心*************************/
 	compile 'com.ai.yc.common:cache:1.0-SNAPSHOT'
+	compile 'com.ai.yc.common:syspurpose:1.0-SNAPSHOT'
+	compile 'com.ai.yc.common:sysdomain:1.0-SNAPSHOT'
+	/********************客户中心*************************/
+	compile 'com.ai.yc.user:userservice:1.0-SNAPSHOT'
 	
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){

@@ -60,6 +60,9 @@ $.views.helpers({
  */
 $.views.helpers({
 	"timesToFmatter":function(times){
+		if(!times){
+			return "";
+		}
 		var format = function(time, format){ 
 			var t = new Date(time); 
 			var tf = function(i){return (i < 10 ? '0' : '') + i}; 
@@ -184,6 +187,15 @@ $.views.helpers({
 	"liToYuan2":function(li){
 		if(isNaN(li) || !li){
 			return null;
+		}
+        return fmoneyNoSplit(parseInt(li)/1000, 2);
+	}
+});
+
+$.views.helpers({
+	"liToYuan3":function(li){
+		if(isNaN(li) || !li){
+			return '0.00';
 		}
         return fmoneyNoSplit(parseInt(li)/1000, 2);
 	}
