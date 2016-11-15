@@ -30,7 +30,7 @@
 
 	
 
-	<!-- 订单中心 -->	
+	<!-- 订单中心  -->	
 	<dubbo:reference id="iQueryOrderDetailsSV"
 		interface="com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV" registry="baasRegistry"/>
 	
