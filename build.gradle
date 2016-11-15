@@ -94,10 +94,11 @@ dependencies {
 	compile 'com.ai.yc.common:cache:1.0-SNAPSHOT'
 	compile 'com.ai.yc.common:syspurpose:1.0-SNAPSHOT'
 	compile 'com.ai.yc.common:sysdomain:1.0-SNAPSHOT'
-	/********************客户中心*************************/
+	compile 'com.ai.yc.common:sysduad:1.0-SNAPSHOT'
+	/********************用户中心*************************/
 	compile 'com.ai.yc.user:userservice:1.0-SNAPSHOT'
 	    
-	compile 'com.ai.yc.common:sysduad:1.0-SNAPSHOT'
+	
 	
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
