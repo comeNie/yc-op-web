@@ -17,8 +17,7 @@
 <body>
     <form id="orderForm">
     <input id="orderId" name="orderId" type="hidden" value="${orderId}"/>
-	<!--删格化-->
-	<div class="row">
+	
 	 
 		<!--内侧框架-->
 		<div class="col-lg-12">
@@ -35,8 +34,6 @@
 				</div>
 				<!--选项卡1-->
 				<div id="date1">
-				  
-					<div id="orderInfoDiv" class="main-box clearfix">
 					<script id="orderInfoTempl" type="text/x-jsrender">
 						<!--白色背景-->
 						<div class="main-box-body clearfix">
@@ -49,25 +46,24 @@
 						    {{include tmpl="#payInfoTempl" /}}
 
                             {{include tmpl="#prodInfoTempl" /}}
-
-						  </div>
-						</div>
-                        {{if displayFlag!='52'&&displayFlag!='90'&&displayFlag!='91'&&displayFlag!='92'}}
-                        <div class="col-md-12">
-                           <input id="save" type="button" class="btn-default btn-blue btn-medium btn-ml-100 btn-ext" value="保存" />
-				           <input id="back" type="button" class="btn-default  btn-yellow btn-medium btn-ml-100" value="返回" />
+              
+						    {{if displayFlag!='52'&&displayFlag!='90'&&displayFlag!='91'&&displayFlag!='92'}}
+                               <div class="bc-ang mb-12">
+                                   <input id="save" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="保存" />
+				                   <input id="back" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />
 				           
-				        </div>
-                        {{/if}}
+				               </div>
+                            {{/if}}
+                          </div>
+						</div>
+                       
 					</script>
-					</div>	
 				</div>
 				<!--选项卡2-->
 				<div id="date2" style="display: none;">
-				   <div class="main-box clearfix" >
-				     <!--白色背景-->
+				   <!--白色背景-->
 					<div class="main-box-body clearfix">
-		            <div class="table-responsive clearfix">
+		              <div class="table-responsive clearfix">
 						<table class="table table-hover table-border table-bordered">
 									<thead>
 										<tr>
@@ -82,8 +78,7 @@
 									  
 									</tbody>
 						 </table>
-					</div>	
-				  </div>
+					  </div>	
 				  </div>	
 						    
 				</div>
@@ -91,7 +86,7 @@
 			
 		</div>
 		
-	</div>
+	
    </form>
 </body>
 <script id="orderStateChgTempl" type="text/x-jsrender">

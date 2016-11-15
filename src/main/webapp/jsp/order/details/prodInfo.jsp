@@ -54,7 +54,7 @@
 								</ul>
                                 <ul>
 									<li class="col-md-12">
-									<table class="table" style="width:70%;">
+									<table class="table" style="width:85%;">
 									<thead>
 										<tr>
 											<th>文档类型</th>

@@ -106,7 +106,7 @@
 								  {{if subFlag==1&&orderFee.updateOperId!=null}}
                                     <li class="col-md-6">
 										<p class="word">报价人：</p>
-										<p>{{:orderFee.updateOperId}}</p>
+										<p>{{:orderFee.updateOperName}}</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">报价时间：</p>

@@ -315,7 +315,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 							//alert(JSON.stringify(rs.data));
 						}
 						var orderInfoHtml = $("#orderInfoTempl").render(rs.data);
-						$("#orderInfoDiv").html(orderInfoHtml);
+						$("#date1").html(orderInfoHtml);
 						
 						
 						var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
@@ -420,7 +420,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"contacts.contactTel": {
     					required:true,
-    					regexp:/^1[34578]\d{9}$/
+    					regexp:/(^(86){0,1}1\d{10}$)|(^(00){0,1}(1){1}\d{10,12}$)/
     				},
     				"contacts.contactEmail":{
     					required:true,
