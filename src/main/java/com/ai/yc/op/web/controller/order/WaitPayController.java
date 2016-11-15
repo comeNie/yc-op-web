@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.PageInfo;
+import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
 import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
@@ -38,22 +40,25 @@ import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
+import com.ai.yc.order.api.paystatus.interfaces.IUpdatePayStatusSV;
+import com.ai.yc.order.api.paystatus.param.OrderFeeVo;
+import com.ai.yc.order.api.paystatus.param.UpdatePayStatusRequest;
 
 @Controller
-public class CancelOrderListController {
-	private static final Logger logger = Logger.getLogger(CancelOrderListController.class);
+public class WaitPayController {
+	private static final Logger logger = Logger.getLogger(WaitPayController.class);
 
-	@RequestMapping("/toCancelOrderList")
-	public ModelAndView toCancelOrderList(HttpServletRequest request) {
-		return new ModelAndView("jsp/order/cancelOrderList");
+	@RequestMapping("/toWaitPayOrderList")
+	public ModelAndView toWaitPayOrderList(HttpServletRequest request) {
+		return new ModelAndView("jsp/order/waitPayOrderList");
 	}
 
 	/**
-	 * 订单信息查询
+	 * 待支付订单信息查询
 	 */
-	@RequestMapping("/getCancelOrderData")
+	@RequestMapping("/getWaitPayOrderData")
 	@ResponseBody
-	public ResponseData<PageInfo<OrderPageResParam>> getCancelList(HttpServletRequest request,
+	public ResponseData<PageInfo<OrderPageResParam>> getgetWaitPayList(HttpServletRequest request,
 			OrderPageQueryParams queryRequest) {
 		ResponseData<PageInfo<OrderPageResParam>> responseData = null;
 		List<OrderPageResParam> resultList = new ArrayList<OrderPageResParam>();
@@ -82,26 +87,21 @@ public class CancelOrderListController {
 				Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
-			String cancelTimeBegin = queryRequest.getCancelTimeS();
-			if (!StringUtil.isBlank(cancelTimeBegin)) {
-				cancelTimeBegin = cancelTimeBegin + " 00:00:00";
-				Timestamp cancelTimeS = Timestamp.valueOf(cancelTimeBegin);
-				ordReq.setStateChgTimeStart(cancelTimeS);
+			//报价时间
+			String updateTimeBegin = queryRequest.getUpdateTimeS();
+			if (!StringUtil.isBlank(updateTimeBegin)) {
+				updateTimeBegin = updateTimeBegin + " 00:00:00";
+				Timestamp updateTimeS = Timestamp.valueOf(updateTimeBegin);
+				ordReq.setUpdateTimeStart(updateTimeS);
 			}
-			String cancelTimeEnd = queryRequest.getCancelTimeE();
-			if (!StringUtil.isBlank(cancelTimeEnd)) {
-				cancelTimeEnd = cancelTimeEnd + " 23:59:59";
-				Timestamp cancelTimeE = Timestamp.valueOf(cancelTimeEnd);
-				ordReq.setStateChgTimeEnd(cancelTimeE);
+			String updateTimeEnd = queryRequest.getUpdateTimeE();
+			if (!StringUtil.isBlank(updateTimeEnd)) {
+				updateTimeEnd = updateTimeEnd + " 23:59:59";
+				Timestamp updateTimeE = Timestamp.valueOf(updateTimeEnd);
+				ordReq.setUpdateTimeEnd(updateTimeE);
 			}
-			ordReq.setState(Constants.State.CANCEL_STATE);
-			// 判断取消类型
-			String cancelType = queryRequest.getCancelType();
-			if (!StringUtil.isBlank(cancelType)) {
-				if (Constants.CancelType.SYSTEM_OPER.equals(cancelType)) {
-					ordReq.setOperId(Constants.CancelType.SYSTEM_OPER);
-				}
-			}
+			ordReq.setState(Constants.State.WAIT_PAY_STATE);
+
 			String strPageNo = (null == request.getParameter("pageNo")) ? "1" : request.getParameter("pageNo");
 			String strPageSize = (null == request.getParameter("pageSize")) ? "10" : request.getParameter("pageSize");
 			ordReq.setPageNo(Integer.parseInt(strPageNo));
@@ -127,6 +127,16 @@ public class CancelOrderListController {
 						if (chldParam != null) {
 							resParam.setChlIdPage(chldParam.getColumnDesc());
 						}
+						//翻译订单级别
+                		paramCond = new SysParamSingleCond();
+                		paramCond.setTenantId(Constants.TENANT_ID);
+    					paramCond.setColumnValue(vo.getOrderLevel());
+    					paramCond.setTypeCode(Constants.TYPE_CODE);
+    					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+                		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+                		if(levelParam!=null){
+                			resParam.setOrderLevelPage(levelParam.getColumnDesc());
+                		}
 						// 翻译订单类型
 						paramCond = new SysParamSingleCond();
 						paramCond.setTenantId(Constants.TENANT_ID);
@@ -137,15 +147,6 @@ public class CancelOrderListController {
 						if (orderTypeParam != null) {
 							resParam.setOrderTypePage(orderTypeParam.getColumnDesc());
 						}
-						// 翻译取消类型
-						if (!StringUtil.isBlank(vo.getOperId())) {
-							if (Constants.CancelType.SYSTEM_OPER.equals(vo.getOperId())) {
-								resParam.setCancelTypePage(Constants.CancelType.SYSTEM_OPER_NAME);
-							} else {
-								resParam.setCancelTypePage(Constants.CancelType.USER_OPER_NAME);
-							}
-						}
-
 						// 翻译订单状态
 						paramCond = new SysParamSingleCond();
 						paramCond.setTenantId(Constants.TENANT_ID);
@@ -156,14 +157,14 @@ public class CancelOrderListController {
 						if (stateParam != null) {
 							resParam.setStatePage(stateParam.getColumnDesc());
 						}
-						// 转换金额格式
-						if (!StringUtil.isBlank(vo.getCurrencyUnit())) {
-							if (Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())) {
-								resParam.setTotalFeePage(vo.getTotalFee() + "$");
-							} else {
-								resParam.setTotalFeePage(AmountUtil.LiToYuan(vo.getTotalFee()) + "¥");
-							}
-						}
+						//转换金额格式
+                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+                				resParam.setTotalFeePage(vo.getTotalFee()+"$");
+                			}else{
+                				resParam.setTotalFeePage(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+                			}
+                		}
 						resultList.add(resParam);
 					}
 				}
@@ -175,7 +176,7 @@ public class CancelOrderListController {
 						null);
 			}
 		} catch (Exception e) {
-			logger.error("查询已取消订单列表失败：", e);
+			logger.error("查询待支付订单列表失败：", e);
 			responseData = new ResponseData<PageInfo<OrderPageResParam>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常",
 					null);
 		}
@@ -184,13 +185,13 @@ public class CancelOrderListController {
 	 /**
      * 订单信息导出
      */
-    @RequestMapping("/cancelOrdExport")
+    @RequestMapping("/exportWaitPayOrd")
     @ResponseBody
-    public void  cancelOrdExport(HttpServletRequest request, HttpServletResponse response, OrderPageQueryParams queryRequest) {
+    public void  export(HttpServletRequest request, HttpServletResponse response, OrderPageQueryParams queryRequest) {
     	QueryOrderRequest ordReq = new QueryOrderRequest();
-    	BeanUtils.copyProperties(ordReq, queryRequest);
-    	String pgeOrderId = queryRequest.getOrderPageId();
-    	if (!StringUtil.isBlank(pgeOrderId)) {
+		BeanUtils.copyProperties(ordReq, queryRequest);
+		String pgeOrderId = queryRequest.getOrderPageId();
+		if (!StringUtil.isBlank(pgeOrderId)) {
 			boolean isNum = pgeOrderId.matches("[0-9]+");
 			if (isNum) {
 				ordReq.setOrderId(Long.parseLong(pgeOrderId));
@@ -210,26 +211,20 @@ public class CancelOrderListController {
 			Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
 			ordReq.setOrderTimeEnd(orderTimeE);
 		}
-		String cancelTimeBegin = queryRequest.getCancelTimeS();
-		if (!StringUtil.isBlank(cancelTimeBegin)) {
-			cancelTimeBegin = cancelTimeBegin + " 00:00:00";
-			Timestamp cancelTimeS = Timestamp.valueOf(cancelTimeBegin);
-			ordReq.setStateChgTimeStart(cancelTimeS);
+		//报价时间
+		String updateTimeBegin = queryRequest.getUpdateTimeS();
+		if (!StringUtil.isBlank(updateTimeBegin)) {
+			updateTimeBegin = updateTimeBegin + " 00:00:00";
+			Timestamp updateTimeS = Timestamp.valueOf(updateTimeBegin);
+			ordReq.setUpdateTimeStart(updateTimeS);
 		}
-		String cancelTimeEnd = queryRequest.getCancelTimeE();
-		if (!StringUtil.isBlank(cancelTimeEnd)) {
-			cancelTimeEnd = cancelTimeEnd + " 23:59:59";
-			Timestamp cancelTimeE = Timestamp.valueOf(cancelTimeEnd);
-			ordReq.setStateChgTimeEnd(cancelTimeE);
+		String updateTimeEnd = queryRequest.getUpdateTimeE();
+		if (!StringUtil.isBlank(updateTimeEnd)) {
+			updateTimeEnd = updateTimeEnd + " 23:59:59";
+			Timestamp updateTimeE = Timestamp.valueOf(updateTimeEnd);
+			ordReq.setUpdateTimeEnd(updateTimeE);
 		}
-		ordReq.setState(Constants.State.CANCEL_STATE);
-		// 判断取消类型
-		String cancelType = queryRequest.getCancelType();
-		if (!StringUtil.isBlank(cancelType)) {
-			if (Constants.CancelType.SYSTEM_OPER.equals(cancelType)) {
-				ordReq.setOperId(Constants.CancelType.SYSTEM_OPER);
-			}
-		}
+		ordReq.setState(Constants.State.WAIT_PAY_STATE);
 	    ordReq.setPageNo(1);
 	    try {
 	  //获取配置中的导出最大数值
@@ -278,14 +273,6 @@ public class CancelOrderListController {
 		        		if(stateParam!=null){
 		        			exOrder.setState(stateParam.getColumnDesc());
 		        		}
-		        		// 翻译取消类型
-						if (!StringUtil.isBlank(vo.getOperId())) {
-							if (Constants.CancelType.SYSTEM_OPER.equals(vo.getOperId())) {
-								exOrder.setCancelType(Constants.CancelType.SYSTEM_OPER_NAME);
-							} else {
-								exOrder.setCancelType(Constants.CancelType.USER_OPER_NAME);
-							}
-						}
 		        		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
@@ -300,10 +287,22 @@ public class CancelOrderListController {
                 		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
-		        		if(vo.getStateChgTime()!=null){
-		        			exOrder.setCancelTime(vo.getStateChgTime().toString());
+		        		//报价时间
+		        		if(vo.getUpdateTime()!=null){
+		        			exOrder.setUpdateTime(vo.getUpdateTime().toString());
 		        		}
 		        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
+		        		//翻译订单级别
+                		paramCond = new SysParamSingleCond();
+                		paramCond.setTenantId(Constants.TENANT_ID);
+    					paramCond.setColumnValue(vo.getOrderLevel());
+    					paramCond.setTypeCode(Constants.TYPE_CODE);
+    					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+                		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+                		if(levelParam!=null){
+                			exOrder.setOrderLevel(levelParam.getColumnDesc());
+                		}
+		        		exOrder.setUpdateName(vo.getUpdateOperName());
 		        		exportList.add(exOrder);
 					}
 				}else{
@@ -328,14 +327,6 @@ public class CancelOrderListController {
 	        		if(orderTypeParam!=null){
 	        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
 	        		}
-	        		// 翻译取消类型
-					if (!StringUtil.isBlank(vo.getOperId())) {
-						if (Constants.CancelType.SYSTEM_OPER.equals(vo.getOperId())) {
-							exOrder.setCancelType(Constants.CancelType.SYSTEM_OPER_NAME);
-						} else {
-							exOrder.setCancelType(Constants.CancelType.USER_OPER_NAME);
-						}
-					}
 	        		//翻译订单状态
 	        		paramCond = new SysParamSingleCond();
 	        		paramCond.setTenantId(Constants.TENANT_ID);
@@ -354,16 +345,27 @@ public class CancelOrderListController {
             				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
             			}
             		}
-            		//下单时间
             		if(vo.getOrderTime()!=null){
             			exOrder.setOrderTime(vo.getOrderTime().toString());
             		}
+	        		
 	        		exOrder.setUserName(vo.getUserName());
-	        		//取消时间
-	        		if(vo.getStateChgTime()!=null){
-	        			exOrder.setCancelTime(vo.getStateChgTime().toString());
+	        		//报价时间
+	        		if(vo.getUpdateTime()!=null){
+	        			exOrder.setUpdateTime(vo.getUpdateTime().toString());
 	        		}
 	        		exOrder.setOrderId(vo.getOrderId());
+	        		//翻译订单级别
+            		paramCond = new SysParamSingleCond();
+            		paramCond.setTenantId(Constants.TENANT_ID);
+					paramCond.setColumnValue(vo.getOrderLevel());
+					paramCond.setTypeCode(Constants.TYPE_CODE);
+					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+            		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+            		if(levelParam!=null){
+            			exOrder.setOrderLevel(levelParam.getColumnDesc());
+            		}
+	        		exOrder.setUpdateName(vo.getUpdateOperName());
 	        		exportList.add(exOrder);
 				}
 			}
@@ -374,13 +376,44 @@ public class CancelOrderListController {
 			response.reset();// 清空输出流
             response.setContentType("application/msexcel");// 定义输出类型
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
-            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单金额","取消时间","取消类型","订单状态"};
+            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单金额","订单级别","报价时间","报价人","状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
-    				"userName", "langire","totalFee","cancelTime","cancelType","state"};
+    				"userName", "langire","totalFee","orderLevel","updateTime","updateName","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
              excelHelper.writeExcel(outputStream, "订单信息"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+    /**
+	 * 修改支付状态
+	 */
+	@RequestMapping("/updatePayState")
+	@ResponseBody
+	public ResponseData<String> updateAttr(String orderId,String remark,String updateFee,String currencyUnit,String payStyle) {
+		ResponseData<String> responseData = null;
+		IUpdatePayStatusSV iUpdatePayStatusSV = DubboConsumerFactory.getService(IUpdatePayStatusSV.class);
+		UpdatePayStatusRequest request  = new UpdatePayStatusRequest();
+		request.setOperId("123");
+		request.setOrderId(Long.valueOf(orderId));
+		OrderFeeVo feeVo = new OrderFeeVo();
+		feeVo.setCurrencyUnit(currencyUnit);
+		feeVo.setPayStyle(payStyle);
+		feeVo.setRemark(remark);
+		feeVo.setTotalFee(Long.valueOf(updateFee));
+		feeVo.setAdjustFee(0L);
+		feeVo.setDiscountFee(0L);
+		feeVo.setPaidFee(0L);
+		feeVo.setPayFee(0L);
+		feeVo.setOperDiscountFee(0L);
+		feeVo.setPayStyle(payStyle);
+		request.setOrderFee(feeVo);
+		BaseResponse response = iUpdatePayStatusSV.updatePayStatus(request);
+		ResponseHeader header = response.getResponseHeader();
+		if (header!=null && !header.isSuccess()){
+            responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "修改失败:"+header.getResultMessage());
+        }
+        return responseData;
 	}
 }

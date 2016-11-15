@@ -15,6 +15,10 @@ public class ExAllOrder {
 	
 	private String cancelType;
 	private String cancelTime;
+	
+	private String updateTime;
+	private String updateName;
+	private String orderLevel;
 
 	public String getChlId() {
 		return chlId;
@@ -118,6 +122,30 @@ public class ExAllOrder {
 
 	public void setCancelTime(String cancelTime) {
 		this.cancelTime = cancelTime;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getUpdateName() {
+		return updateName;
+	}
+
+	public void setUpdateName(String updateName) {
+		this.updateName = updateName;
+	}
+
+	public String getOrderLevel() {
+		return orderLevel;
+	}
+
+	public void setOrderLevel(String orderLevel) {
+		this.orderLevel = orderLevel;
 	}
 
 }

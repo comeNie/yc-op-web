@@ -15,6 +15,8 @@ public final class Constants {
 	public static final String ORDER_TYPE = "ORDER_TYPE";
 	/** 订单来源*/
 	public static final String ORD_CHL_ID = "CHL_ID";
+	/** 订单级别*/
+	public static final String ORD_ORDER_LEVEL = "ORDER_LEVEL";
 	/** 支付方式*/
 	public static final String ORD_PAY_STYLE = "PAY_STYLE";
 	/** 翻译类型*/
@@ -36,7 +38,22 @@ public final class Constants {
     }
 	public static final class State{
 		private State(){}
+		/**
+		 * 已取消
+		 */
 		public static final String CANCEL_STATE = "91";
+		/**
+		 * 待报价
+		 */
+		public static final String WAIT_PRICE_STATE = "13";
+		/**
+		 * 待支付
+		 */
+		public static final String WAIT_PAY_STATE = "11";
+		/**
+		 * 待领取
+		 */
+		public static final String UN_CLAIM_STATE = "20";
 	}
 	public static final class CancelType{
 		private CancelType(){}
