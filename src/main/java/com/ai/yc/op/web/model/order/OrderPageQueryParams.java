@@ -12,13 +12,20 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 	private String payTimeE;
 	private String orderPageId;
 	private String langungePaire;
-	
+
 	private String cancelTimeS;
 	private String cancelTimeE;
 	private String cancelType;
-	
+
 	private String updateTimeS;
 	private String updateTimeE;
+
+	private String lockTimeS;
+	private String lockTimeE;
+
+	private String submitTimeS;
+	private String submitTimeE;
+
 	public String getOrderTimeS() {
 		return orderTimeS;
 	}
@@ -105,6 +112,38 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 
 	public void setUpdateTimeE(String updateTimeE) {
 		this.updateTimeE = updateTimeE;
+	}
+
+	public String getLockTimeS() {
+		return lockTimeS;
+	}
+
+	public void setLockTimeS(String lockTimeS) {
+		this.lockTimeS = lockTimeS;
+	}
+
+	public String getLockTimeE() {
+		return lockTimeE;
+	}
+
+	public void setLockTimeE(String lockTimeE) {
+		this.lockTimeE = lockTimeE;
+	}
+
+	public String getSubmitTimeS() {
+		return submitTimeS;
+	}
+
+	public void setSubmitTimeS(String submitTimeS) {
+		this.submitTimeS = submitTimeS;
+	}
+
+	public String getSubmitTimeE() {
+		return submitTimeE;
+	}
+
+	public void setSubmitTimeE(String submitTimeE) {
+		this.submitTimeE = submitTimeE;
 	}
 
 }

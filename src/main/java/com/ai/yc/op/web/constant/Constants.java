@@ -54,6 +54,14 @@ public final class Constants {
 		 * 待领取
 		 */
 		public static final String UN_CLAIM_STATE = "20";
+		/**
+		 * 翻译中
+		 */
+		public static final String TRANSLTING_STATE = "23";
+		/**
+		 * 待确认
+		 */
+		public static final String TBC_STATE = "50";
 	}
 	public static final class CancelType{
 		private CancelType(){}

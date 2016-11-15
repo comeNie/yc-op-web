@@ -19,7 +19,12 @@ public class ExAllOrder {
 	private String updateTime;
 	private String updateName;
 	private String orderLevel;
-
+	
+	private String lockTime;
+	private String remaningTime;
+	
+	private String submitTime;
+	
 	public String getChlId() {
 		return chlId;
 	}
@@ -146,6 +151,30 @@ public class ExAllOrder {
 
 	public void setOrderLevel(String orderLevel) {
 		this.orderLevel = orderLevel;
+	}
+
+	public String getLockTime() {
+		return lockTime;
+	}
+
+	public void setLockTime(String lockTime) {
+		this.lockTime = lockTime;
+	}
+
+	public String getRemaningTime() {
+		return remaningTime;
+	}
+
+	public void setRemaningTime(String remaningTime) {
+		this.remaningTime = remaningTime;
+	}
+
+	public String getSubmitTime() {
+		return submitTime;
+	}
+
+	public void setSubmitTime(String submitTime) {
+		this.submitTime = submitTime;
 	}
 
 }
