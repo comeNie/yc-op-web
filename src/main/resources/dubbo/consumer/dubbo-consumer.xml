@@ -42,7 +42,7 @@
 	
 	<dubbo:reference id="iOrderLevelSV"
 		interface="com.ai.yc.order.api.orderlevel.interfaces.IOrderLevelSV" registry="baasRegistry"/>
-	
+	  
 		<!-- 缓存 -->
 	<dubbo:reference id="ICacheSV"
 		interface="com.ai.yc.common.api.cache.interfaces.ICacheSV "
