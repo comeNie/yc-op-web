@@ -22,8 +22,11 @@ public class ExAllOrder {
 	
 	private String lockTime;
 	private String remaningTime;
+	private String finishTime;
 	
 	private String submitTime;
+	
+	private String translateLevel;
 	
 	public String getChlId() {
 		return chlId;
@@ -175,6 +178,22 @@ public class ExAllOrder {
 
 	public void setSubmitTime(String submitTime) {
 		this.submitTime = submitTime;
+	}
+
+	public String getTranslateLevel() {
+		return translateLevel;
+	}
+
+	public void setTranslateLevel(String translateLevel) {
+		this.translateLevel = translateLevel;
+	}
+
+	public String getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(String finishTime) {
+		this.finishTime = finishTime;
 	}
 
 }
