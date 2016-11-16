@@ -5,7 +5,7 @@
 									<li>订单属性及金额信息</li>
 								</ul>
 						  </div>
-                  {{if displayFlag=='11'||displayFlag=='13'}}
+                  {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13')}}
                         {{if translateType!='2'}}
                            <div id="penTraslateDiv" class="form-label">
 							    <ul>

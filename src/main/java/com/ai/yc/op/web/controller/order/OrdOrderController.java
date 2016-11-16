@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,8 +51,9 @@ public class OrdOrderController {
 	public final static String ORDER_DETAILS_PAGE = "jsp/order/orderDetails";
 	
 	 @RequestMapping("/orderdetails")
-	 public ModelAndView toOrderDetailsPage(Long orderId) {
+	 public ModelAndView toOrderDetailsPage(@RequestParam(value="mod",defaultValue="view")String mod,Long orderId) {
 		 ModelAndView view = new ModelAndView(ORDER_DETAILS_PAGE);
+		 view.addObject("model", mod);
 		 view.addObject("orderId", orderId);
 	     return view;
 	 } 

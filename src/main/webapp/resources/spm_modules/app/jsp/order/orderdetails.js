@@ -300,6 +300,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				data: param,
 				success: function (rs) {
 					if ("1" === rs.statusCode) {
+						var model = $("#mod").val();
+						rs.data.mod = model;
 						var prodFiles = rs.data.prodFiles;
 						if(prodFiles){
 							for(var i=0;i<prodFiles.length;i++){
@@ -307,9 +309,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 								prodFiles[i].fileSubmitTime =  rs.data.orderTime;
 								prodFiles[i].translateFileSubmitTime = rs.data.prod.updateTime;
 								prodFiles[i].state = rs.data.state;
+								prodFiles[i].mod = model;
 							}
 							rs.data.prodFiles = prodFiles;
-							//alert(JSON.stringify(rs.data));
 						}
 						var orderInfoHtml = $("#orderInfoTempl").render(rs.data);
 						$("#date1").html(orderInfoHtml);

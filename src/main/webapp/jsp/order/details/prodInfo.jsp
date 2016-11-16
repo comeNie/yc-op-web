@@ -26,7 +26,7 @@
 								<ul>
 									<li class="col-md-12">
 										<p class="word">译文：</p>
-                                        {{if state=='24'||state=='25'||state=='40'||state=='41'||state=='42'||state=='50'}}  
+                                        {{if mod=='edit'&&(state=='24'||state=='25'||state=='40'||state=='41'||state=='42'||state=='50')}}  
 										  <p>
 											<textarea id="translateInfo" name="prod.translateInfo" class="int-text textarea-xxlarge">{{:prod.translateInfo}}</textarea>
 										  </p>
@@ -75,7 +75,7 @@
 											<td>
                                                 <input type="hidden" name="fileSaveIds" value="{{:fileSaveId}}"/>
                                                 <input type="hidden" name="fileNames" value="{{:fileName}}"/>
-                                                {{if state=='24'||state=='25'||state=='40'||state=='41'||state=='42'||state=='50'}}
+                                                {{if mod=='edit'&&(state=='24'||state=='25'||state=='40'||state=='41'||state=='42'||state=='50')}}
 											      <a id="upload_{{:fileSaveId}}" class="biu-btn upload "><i class="icon-upload-alt"> </i>上传 </a> 
                                                {{/if}}
 											    <a class="biu-btn download"><i class="icon-download-alt"> </i>下载 </a>
@@ -94,7 +94,7 @@
 											<td>
                                                 <input type="hidden" name="fileTranslateIds" value="{{:fileTranslateId}}"/>
                                                 <input type="hidden" name="fileTranslateNames" value="{{:fileTranslateName}}"/>
-											    {{if state=='24'||state=='25'||state=='40'||state=='41'||state=='42'||state=='50'}}
+											    {{if mod=='edit'&&(state=='24'||state=='25'||state=='40'||state=='41'||state=='42'||state=='50')}}
 											      <a id="upload_{{:fileTranslateId}}" class="biu-btn upload"><i class="icon-upload-alt"> </i>上传 </a> 
                                                 {{/if}}
 											    <a class="biu-btn download"><i class="icon-download-alt"> </i>下载 </a>

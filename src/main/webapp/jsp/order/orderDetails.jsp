@@ -15,6 +15,7 @@
 </style>
 </head>
 <body>
+    <input id="mod" type="hidden" value="${model}"/>
     <form id="orderForm">
     <input id="orderId" name="orderId" type="hidden" value="${orderId}"/>
 	 <div class="row">
@@ -47,7 +48,7 @@
 
                             {{include tmpl="#prodInfoTempl" /}}
               
-						    {{if displayFlag!='52'&&displayFlag!='90'&&displayFlag!='91'&&displayFlag!='92'}}
+						    {{if mod=='edit'&&displayFlag!='52'&&displayFlag!='90'&&displayFlag!='91'&&displayFlag!='92'}}
                                <div class="bc-ang mb-12">
                                    <input id="save" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="保存" />
 				                   <input id="back" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />

@@ -7,11 +7,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>待支付订单列表</title>
 <%@include file="/inc/inc.jsp" %>
-<input type="hidden" id="orderIdUpdate">
-<input type="hidden" id="payStyleUpdate">
-<input type="hidden" id="currencyUnitUpdate">
+
 </head>
 <body>
+<input type="hidden" id="orderIdUpdate"/>
+<input type="hidden" id="payStyleUpdate"/>
+<input type="hidden" id="currencyUnitUpdate"/>
    <div class="content-wrapper-iframe" ><!--右侧灰色背景-->
         <!--框架标签结束-->
       <div class="row"><!--外围框架-->
