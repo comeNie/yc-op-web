@@ -31,11 +31,13 @@ import com.ai.yc.common.api.cache.param.SysParamSingleCond;
 import com.ai.yc.op.web.constant.Constants;
 import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.order.ExAllOrder;
+import com.ai.yc.op.web.model.order.OrdTransLevelVo;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
 import com.ai.yc.op.web.utils.AmountUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
+import com.ai.yc.order.api.orderquery.param.OrdProdLevelVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
 @Controller
@@ -149,6 +151,25 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
                 		if(stateParam!=null){
                 			resParam.setStatePage(stateParam.getColumnDesc());
                 		}
+                		//翻译翻译级别
+                		List<OrdProdLevelVo> levelList = vo.getOrdProdLevelList();
+                		List<OrdTransLevelVo> transLevelLists = new ArrayList<OrdTransLevelVo>();
+                		if(!CollectionUtil.isEmpty(levelList)){
+                			for(OrdProdLevelVo leveVo:levelList){
+                				OrdTransLevelVo levelVo = new OrdTransLevelVo();
+                    			paramCond = new SysParamSingleCond();
+                        		paramCond.setTenantId(Constants.TENANT_ID);
+            					paramCond.setColumnValue(leveVo.getTranslateLevel());
+            					paramCond.setTypeCode(Constants.TYPE_CODE);
+            					paramCond.setParamCode(Constants.ORD_TRANSLATE_LEVEL);
+                        		SysParam transLevelParam = iCacheSV.getSysParamSingle(paramCond);
+                        		if(transLevelParam!=null){
+                        			levelVo.setTranslateLevelPage(transLevelParam.getColumnDesc());
+                        		}
+                        		transLevelLists.add(levelVo);
+                			}
+                		}
+                		resParam.setOrdTransLevelList(transLevelLists);
                 		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
@@ -229,7 +250,145 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 		List<ExAllOrder> exportList = new ArrayList<ExAllOrder>();
 		if(!CollectionUtil.isEmpty(orderList)){
 			for(OrdOrderVo vo:orderList){
-				if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList())){
+				if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList()) && !CollectionUtil.isEmpty(vo.getOrdProdLevelList())){
+					if(vo.getOrdProdExtendList().size()>vo.getOrdProdLevelList().size()){
+						for(int i=0;i<vo.getOrdProdExtendList().size();i++){
+							ExAllOrder exOrder = new ExAllOrder();
+							//翻译订单来源
+							SysParamSingleCond	paramCond = new SysParamSingleCond();
+							paramCond.setTenantId(Constants.TENANT_ID);
+							paramCond.setColumnValue(vo.getChlId());
+							paramCond.setTypeCode(Constants.TYPE_CODE);
+							paramCond.setParamCode(Constants.ORD_CHL_ID);
+			        		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
+			        		if(chldParam!=null){
+			        			exOrder.setChlId(chldParam.getColumnDesc());
+			        		}
+			        		//翻译订单类型
+			        		paramCond = new SysParamSingleCond();
+			        		paramCond.setTenantId(Constants.TENANT_ID);
+							paramCond.setColumnValue(vo.getOrderType());
+							paramCond.setTypeCode(Constants.TYPE_CODE);
+							paramCond.setParamCode(Constants.ORDER_TYPE);
+			        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
+			        		if(orderTypeParam!=null){
+			        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
+			        		}
+			        		//翻译订单状态
+			        		paramCond = new SysParamSingleCond();
+			        		paramCond.setTenantId(Constants.TENANT_ID);
+							paramCond.setColumnValue(vo.getState());
+							paramCond.setTypeCode(Constants.TYPE_CODE);
+							paramCond.setParamCode(Constants.ORD_STATE);
+			        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
+			        		if(stateParam!=null){
+			        			exOrder.setState(stateParam.getColumnDesc());
+			        		}
+			        		//翻译订单级别
+	                		paramCond = new SysParamSingleCond();
+	                		paramCond.setTenantId(Constants.TENANT_ID);
+	    					paramCond.setColumnValue(vo.getOrderLevel());
+	    					paramCond.setTypeCode(Constants.TYPE_CODE);
+	    					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+	                		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+	                		if(levelParam!=null){
+	                			exOrder.setOrderLevel(levelParam.getColumnDesc());
+	                		}
+			        		//转换金额格式
+	                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+	                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+	                				exOrder.setTotalFee(vo.getTotalFee()+"$");
+	                			}else{
+	                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+	                			}
+	                		}
+	                		if(vo.getOrderTime()!=null){
+	                			exOrder.setOrderTime(vo.getOrderTime().toString());
+	                		}
+			        		exOrder.setUserName(vo.getUserName());
+			        		exOrder.setOrderId(vo.getOrderId());
+			        		if(vo.getFinishTime()!=null){
+			        			exOrder.setFinishTime(vo.getFinishTime().toString());
+			        		}
+			        		if(vo.getRemainingTime()!=null){
+			        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
+			        		}
+			        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
+			        		exportList.add(exOrder);
+						}
+					}else{
+						for(int i=0;i<vo.getOrdProdLevelList().size();i++){
+							ExAllOrder exOrder = new ExAllOrder();
+							////翻译订单来源
+								SysParamSingleCond	paramCond = new SysParamSingleCond();
+								paramCond.setTenantId(Constants.TENANT_ID);
+								paramCond.setColumnValue(vo.getChlId());
+								paramCond.setTypeCode(Constants.TYPE_CODE);
+								paramCond.setParamCode(Constants.ORD_CHL_ID);
+				        		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
+				        		if(chldParam!=null){
+				        			exOrder.setChlId(chldParam.getColumnDesc());
+				        		}
+				        		//翻译订单类型
+				        		paramCond = new SysParamSingleCond();
+				        		paramCond.setTenantId(Constants.TENANT_ID);
+								paramCond.setColumnValue(vo.getOrderType());
+								paramCond.setTypeCode(Constants.TYPE_CODE);
+								paramCond.setParamCode(Constants.ORDER_TYPE);
+				        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
+				        		if(orderTypeParam!=null){
+				        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
+				        		}
+				        		//翻译订单状态
+				        		paramCond = new SysParamSingleCond();
+				        		paramCond.setTenantId(Constants.TENANT_ID);
+								paramCond.setColumnValue(vo.getState());
+								paramCond.setTypeCode(Constants.TYPE_CODE);
+								paramCond.setParamCode(Constants.ORD_STATE);
+				        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
+				        		if(stateParam!=null){
+				        			exOrder.setState(stateParam.getColumnDesc());
+				        		}
+				        		//翻译订单级别
+		                		paramCond = new SysParamSingleCond();
+		                		paramCond.setTenantId(Constants.TENANT_ID);
+		    					paramCond.setColumnValue(vo.getOrderLevel());
+		    					paramCond.setTypeCode(Constants.TYPE_CODE);
+		    					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+		                		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+		                		if(levelParam!=null){
+		                			exOrder.setOrderLevel(levelParam.getColumnDesc());
+		                		}
+				        		//转换金额格式
+		                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+		                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+		                				exOrder.setTotalFee(vo.getTotalFee()+"$");
+		                			}else{
+		                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+		                			}
+		                		}
+		                		if(vo.getOrderTime()!=null){
+		                			exOrder.setOrderTime(vo.getOrderTime().toString());
+		                		}
+				        		exOrder.setUserName(vo.getUserName());
+				        		exOrder.setOrderId(vo.getOrderId());
+				        		if(vo.getRemainingTime()!=null){
+				        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
+				        		}
+				        		//翻译翻译级别
+                    			paramCond = new SysParamSingleCond();
+                        		paramCond.setTenantId(Constants.TENANT_ID);
+            					paramCond.setColumnValue(vo.getOrdProdLevelList().get(i).getTranslateLevel());
+            					paramCond.setTypeCode(Constants.TYPE_CODE);
+            					paramCond.setParamCode(Constants.ORD_TRANSLATE_LEVEL);
+                        		SysParam transLevelParam = iCacheSV.getSysParamSingle(paramCond);
+                        		if(transLevelParam!=null){
+                        			exOrder.setTranslateLevel(transLevelParam.getColumnDesc());
+                        		}
+				        		exportList.add(exOrder);
+						}
+					}
+				}else if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList()) && CollectionUtil.isEmpty(vo.getOrdProdLevelList())){
 					for(int i=0;i<vo.getOrdProdExtendList().size();i++){
 						ExAllOrder exOrder = new ExAllOrder();
 						//翻译订单来源
@@ -252,23 +411,148 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 		        		if(orderTypeParam!=null){
 		        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
 		        		}
-		        		
+		        		//翻译订单状态
+		        		paramCond = new SysParamSingleCond();
+		        		paramCond.setTenantId(Constants.TENANT_ID);
+						paramCond.setColumnValue(vo.getState());
+						paramCond.setTypeCode(Constants.TYPE_CODE);
+						paramCond.setParamCode(Constants.ORD_STATE);
+		        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
+		        		if(stateParam!=null){
+		        			exOrder.setState(stateParam.getColumnDesc());
+		        		}
+		        		//翻译订单级别
+	            		paramCond = new SysParamSingleCond();
+	            		paramCond.setTenantId(Constants.TENANT_ID);
+						paramCond.setColumnValue(vo.getOrderLevel());
+						paramCond.setTypeCode(Constants.TYPE_CODE);
+						paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+	            		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+	            		if(levelParam!=null){
+	            			exOrder.setOrderLevel(levelParam.getColumnDesc());
+	            		}
 		        		//转换金额格式
-                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
-                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				exOrder.setTotalFee(vo.getTotalFee()+"$");
-                			}else{
-                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
-                			}
-                		}
-                		//下单时间
-                		if(vo.getOrderTime()!=null){
-                			exOrder.setOrderTime(vo.getOrderTime().toString());
-                		}
+	            		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+	            			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+	            				exOrder.setTotalFee(vo.getTotalFee()+"$");
+	            			}else{
+	            				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+	            			}
+	            		}
+	            		if(vo.getOrderTime()!=null){
+	            			exOrder.setOrderTime(vo.getOrderTime().toString());
+	            		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
-		        		
+		        		if(vo.getRemainingTime()!=null){
+		        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
+		        		}
 		        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
+		        		exportList.add(exOrder);
+					}
+				}else if(CollectionUtil.isEmpty(vo.getOrdProdExtendList()) && !CollectionUtil.isEmpty(vo.getOrdProdLevelList())){
+					for(int i=0;i<vo.getOrdProdLevelList().size();i++){
+						ExAllOrder exOrder = new ExAllOrder();
+						////翻译订单来源
+							SysParamSingleCond	paramCond = new SysParamSingleCond();
+							paramCond.setTenantId(Constants.TENANT_ID);
+							paramCond.setColumnValue(vo.getChlId());
+							paramCond.setTypeCode(Constants.TYPE_CODE);
+							paramCond.setParamCode(Constants.ORD_CHL_ID);
+			        		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
+			        		if(chldParam!=null){
+			        			exOrder.setChlId(chldParam.getColumnDesc());
+			        		}
+			        		//翻译订单类型
+			        		paramCond = new SysParamSingleCond();
+			        		paramCond.setTenantId(Constants.TENANT_ID);
+							paramCond.setColumnValue(vo.getOrderType());
+							paramCond.setTypeCode(Constants.TYPE_CODE);
+							paramCond.setParamCode(Constants.ORDER_TYPE);
+			        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
+			        		if(orderTypeParam!=null){
+			        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
+			        		}
+			        		//翻译订单状态
+			        		paramCond = new SysParamSingleCond();
+			        		paramCond.setTenantId(Constants.TENANT_ID);
+							paramCond.setColumnValue(vo.getState());
+							paramCond.setTypeCode(Constants.TYPE_CODE);
+							paramCond.setParamCode(Constants.ORD_STATE);
+			        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
+			        		if(stateParam!=null){
+			        			exOrder.setState(stateParam.getColumnDesc());
+			        		}
+			        		//翻译订单级别
+	                		paramCond = new SysParamSingleCond();
+	                		paramCond.setTenantId(Constants.TENANT_ID);
+	    					paramCond.setColumnValue(vo.getOrderLevel());
+	    					paramCond.setTypeCode(Constants.TYPE_CODE);
+	    					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+	                		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+	                		if(levelParam!=null){
+	                			exOrder.setOrderLevel(levelParam.getColumnDesc());
+	                		}
+			        		//转换金额格式
+	                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+	                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+	                				exOrder.setTotalFee(vo.getTotalFee()+"$");
+	                			}else{
+	                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+	                			}
+	                		}
+	                		if(vo.getOrderTime()!=null){
+	                			exOrder.setOrderTime(vo.getOrderTime().toString());
+	                		}
+			        		exOrder.setUserName(vo.getUserName());
+			        		exOrder.setOrderId(vo.getOrderId());
+			        		if(vo.getRemainingTime()!=null){
+			        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
+			        		}
+			        		//翻译翻译级别
+                			paramCond = new SysParamSingleCond();
+                    		paramCond.setTenantId(Constants.TENANT_ID);
+        					paramCond.setColumnValue(vo.getOrdProdLevelList().get(i).getTranslateLevel());
+        					paramCond.setTypeCode(Constants.TYPE_CODE);
+        					paramCond.setParamCode(Constants.ORD_TRANSLATE_LEVEL);
+                    		SysParam transLevelParam = iCacheSV.getSysParamSingle(paramCond);
+                    		if(transLevelParam!=null){
+                    			exOrder.setTranslateLevel(transLevelParam.getColumnDesc());
+                    		}
+			        		exportList.add(exOrder);
+					}
+				}else{
+						ExAllOrder exOrder = new ExAllOrder();
+						////翻译订单来源
+						SysParamSingleCond	paramCond = new SysParamSingleCond();
+						paramCond.setTenantId(Constants.TENANT_ID);
+						paramCond.setColumnValue(vo.getChlId());
+						paramCond.setTypeCode(Constants.TYPE_CODE);
+						paramCond.setParamCode(Constants.ORD_CHL_ID);
+		        		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
+		        		if(chldParam!=null){
+		        			exOrder.setChlId(chldParam.getColumnDesc());
+		        		}
+		        		//翻译订单类型
+		        		paramCond = new SysParamSingleCond();
+		        		paramCond.setTenantId(Constants.TENANT_ID);
+						paramCond.setColumnValue(vo.getOrderType());
+						paramCond.setTypeCode(Constants.TYPE_CODE);
+						paramCond.setParamCode(Constants.ORDER_TYPE);
+		        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
+		        		if(orderTypeParam!=null){
+		        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
+		        		}
+		        		//翻译订单状态
+		        		paramCond = new SysParamSingleCond();
+		        		paramCond.setTenantId(Constants.TENANT_ID);
+						paramCond.setColumnValue(vo.getState());
+						paramCond.setTypeCode(Constants.TYPE_CODE);
+						paramCond.setParamCode(Constants.ORD_STATE);
+		        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
+		        		if(stateParam!=null){
+		        			exOrder.setState(stateParam.getColumnDesc());
+		        		}
 		        		//翻译订单级别
                 		paramCond = new SysParamSingleCond();
                 		paramCond.setTenantId(Constants.TENANT_ID);
@@ -279,55 +563,23 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
                 		if(levelParam!=null){
                 			exOrder.setOrderLevel(levelParam.getColumnDesc());
                 		}
+		        		//转换金额格式
+                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+                				exOrder.setTotalFee(vo.getTotalFee()+"$");
+                			}else{
+                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+                			}
+                		}
+                		if(vo.getOrderTime()!=null){
+                			exOrder.setOrderTime(vo.getOrderTime().toString());
+                		}
+		        		exOrder.setUserName(vo.getUserName());
+		        		exOrder.setOrderId(vo.getOrderId());
+		        		if(vo.getRemainingTime()!=null){
+		        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
+		        		}
 		        		exportList.add(exOrder);
-					}
-				}else{
-					ExAllOrder exOrder = new ExAllOrder();
-					////翻译订单来源
-					SysParamSingleCond	paramCond = new SysParamSingleCond();
-					paramCond.setTenantId(Constants.TENANT_ID);
-					paramCond.setColumnValue(vo.getChlId());
-					paramCond.setTypeCode(Constants.TYPE_CODE);
-					paramCond.setParamCode(Constants.ORD_CHL_ID);
-	        		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
-	        		if(chldParam!=null){
-	        			exOrder.setChlId(chldParam.getColumnDesc());
-	        		}
-	        		//翻译订单类型
-	        		paramCond = new SysParamSingleCond();
-	        		paramCond.setTenantId(Constants.TENANT_ID);
-					paramCond.setColumnValue(vo.getOrderType());
-					paramCond.setTypeCode(Constants.TYPE_CODE);
-					paramCond.setParamCode(Constants.ORDER_TYPE);
-	        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
-	        		if(orderTypeParam!=null){
-	        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
-	        		}
-	        		//转换金额格式
-            		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
-            			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-            				exOrder.setTotalFee(vo.getTotalFee()+"$");
-            			}else{
-            				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
-            			}
-            		}
-            		if(vo.getOrderTime()!=null){
-            			exOrder.setOrderTime(vo.getOrderTime().toString());
-            		}
-	        		
-	        		exOrder.setUserName(vo.getUserName());
-	        		exOrder.setOrderId(vo.getOrderId());
-	        		//翻译订单级别
-            		paramCond = new SysParamSingleCond();
-            		paramCond.setTenantId(Constants.TENANT_ID);
-					paramCond.setColumnValue(vo.getOrderLevel());
-					paramCond.setTypeCode(Constants.TYPE_CODE);
-					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
-            		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
-            		if(levelParam!=null){
-            			exOrder.setOrderLevel(levelParam.getColumnDesc());
-            		}
-	        		exportList.add(exOrder);
 				}
 			}
 		}
@@ -335,9 +587,9 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 			response.reset();// 清空输出流
             response.setContentType("application/msexcel");// 定义输出类型
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
-            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单金额","订单级别","剩余时间","翻译级别","状态"};
+            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","翻译级别","订单级别","订单金额","实付金额","交稿剩余时间","订单状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
-    				"userName", "langire","totalFee","orderLevel","updateTime","updateName","state"};
+    				"userName","langire","translateLevel","orderLevel", "totalFee","totalFee","remaningTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
              excelHelper.writeExcel(outputStream, "订单信息"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {
