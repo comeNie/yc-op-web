@@ -40,19 +40,19 @@ import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.OrdProdLevelVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
+
 @Controller
-public class unClaimedOrdListController {
-private static final Logger logger = Logger.getLogger(unClaimedOrdListController.class);
+public class DoneOrderListController {
+private static final Logger logger = Logger.getLogger(DoneOrderListController.class);
 	
-	@RequestMapping("/toUnclaimOrderList")
+	@RequestMapping("/toDoneOrderList")
 	public ModelAndView toAlertOrder(HttpServletRequest request) {
-		return new ModelAndView("jsp/order/unClaimedOrderList");
+		return new ModelAndView("jsp/order/doneOrderList");
 	}
-	
 	/**
      * 订单信息查询
      */
-    @RequestMapping("/getUnclaimOrdPageData")
+    @RequestMapping("/getDoneOrdPageData")
     @ResponseBody
     public ResponseData<PageInfo<OrderPageResParam>> getList(HttpServletRequest request,OrderPageQueryParams queryRequest){
     	ResponseData<PageInfo<OrderPageResParam>> responseData = null;
@@ -82,20 +82,7 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 				Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
-			//支付时间
-			String payTimeBegin = queryRequest.getPayTimeS();
-			if (!StringUtil.isBlank(payTimeBegin)) {
-				payTimeBegin = payTimeBegin + " 00:00:00";
-				Timestamp payTimeS = Timestamp.valueOf(payTimeBegin);
-				ordReq.setPayTimeStart(payTimeS);
-			}
-			String payTimeEnd = queryRequest.getPayTimeE();
-			if (!StringUtil.isBlank(payTimeEnd)) {
-				payTimeEnd = payTimeEnd + " 23:59:59";
-				Timestamp payTimeE = Timestamp.valueOf(payTimeEnd);
-				ordReq.setPayTimeEnd(payTimeE);
-			}
-			ordReq.setState(Constants.State.UN_CLAIM_STATE);
+			ordReq.setState(Constants.State.DONE_STATE);
 			String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
 		    String strPageSize=(null==request.getParameter("pageSize"))?"10":request.getParameter("pageSize");
 		    ordReq.setPageNo(Integer.parseInt(strPageNo));
@@ -111,6 +98,9 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 					for(OrdOrderVo vo:orderList){
 						OrderPageResParam resParam = new OrderPageResParam();
 						BeanUtils.copyProperties(resParam, vo);
+						if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList())){
+							resParam.setExtendSize(vo.getOrdProdExtendList().size());
+						}
 						//翻译订单来源
     					SysParamSingleCond	paramCond = new SysParamSingleCond();
     					paramCond.setTenantId(Constants.TENANT_ID);
@@ -120,16 +110,6 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
                 		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
                 		if(chldParam!=null){
                 			resParam.setChlIdPage(chldParam.getColumnDesc());
-                		}
-                		//翻译订单类型
-                		paramCond = new SysParamSingleCond();
-                		paramCond.setTenantId(Constants.TENANT_ID);
-    					paramCond.setColumnValue(vo.getOrderType());
-    					paramCond.setTypeCode(Constants.TYPE_CODE);
-    					paramCond.setParamCode(Constants.ORDER_TYPE);
-                		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
-                		if(orderTypeParam!=null){
-                			resParam.setOrderTypePage(orderTypeParam.getColumnDesc());
                 		}
                 		//翻译订单级别
                 		paramCond = new SysParamSingleCond();
@@ -141,20 +121,11 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
                 		if(levelParam!=null){
                 			resParam.setOrderLevelPage(levelParam.getColumnDesc());
                 		}
-                		//翻译订单状态
-                		paramCond = new SysParamSingleCond();
-                		paramCond.setTenantId(Constants.TENANT_ID);
-    					paramCond.setColumnValue(vo.getState());
-    					paramCond.setTypeCode(Constants.TYPE_CODE);
-    					paramCond.setParamCode(Constants.ORD_STATE);
-                		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
-                		if(stateParam!=null){
-                			resParam.setStatePage(stateParam.getColumnDesc());
-                		}
                 		//翻译翻译级别
                 		List<OrdProdLevelVo> levelList = vo.getOrdProdLevelList();
                 		List<OrdTransLevelVo> transLevelLists = new ArrayList<OrdTransLevelVo>();
                 		if(!CollectionUtil.isEmpty(levelList)){
+                			resParam.setLevelSize(levelList.size());
                 			for(OrdProdLevelVo leveVo:levelList){
                 				OrdTransLevelVo levelVo = new OrdTransLevelVo();
                     			paramCond = new SysParamSingleCond();
@@ -170,6 +141,28 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
                 			}
                 		}
                 		resParam.setOrdTransLevelList(transLevelLists);
+                		
+                		//翻译订单类型
+                		paramCond = new SysParamSingleCond();
+                		paramCond.setTenantId(Constants.TENANT_ID);
+    					paramCond.setColumnValue(vo.getOrderType());
+    					paramCond.setTypeCode(Constants.TYPE_CODE);
+    					paramCond.setParamCode(Constants.ORDER_TYPE);
+                		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
+                		if(orderTypeParam!=null){
+                			resParam.setOrderTypePage(orderTypeParam.getColumnDesc());
+                		}
+                		
+                		//翻译订单状态
+                		paramCond = new SysParamSingleCond();
+                		paramCond.setTenantId(Constants.TENANT_ID);
+    					paramCond.setColumnValue(vo.getState());
+    					paramCond.setTypeCode(Constants.TYPE_CODE);
+    					paramCond.setParamCode(Constants.ORD_STATE);
+                		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
+                		if(stateParam!=null){
+                			resParam.setStatePage(stateParam.getColumnDesc());
+                		}
                 		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
@@ -187,7 +180,7 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 				responseData = new ResponseData<PageInfo<OrderPageResParam>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);
 			}
 		} catch (Exception e) {
-			logger.error("查询待领取订单列表失败：", e);
+			logger.error("查询已完成订单列表失败：", e);
 			responseData = new ResponseData<PageInfo<OrderPageResParam>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
 		}
 	    return responseData;
@@ -195,7 +188,7 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
     /**
      * 订单信息导出
      */
-    @RequestMapping("/exportUnclaimOrd")
+    @RequestMapping("/doneExport")
     @ResponseBody
     public void  export(HttpServletRequest request, HttpServletResponse response, OrderPageQueryParams queryRequest) {
     	QueryOrderRequest ordReq = new QueryOrderRequest();
@@ -221,20 +214,7 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 			Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
 			ordReq.setOrderTimeEnd(orderTimeE);
 		}
-		//支付时间
-		String payTimeBegin = queryRequest.getPayTimeS();
-		if (!StringUtil.isBlank(payTimeBegin)) {
-			payTimeBegin = payTimeBegin + " 00:00:00";
-			Timestamp payTimeS = Timestamp.valueOf(payTimeBegin);
-			ordReq.setPayTimeStart(payTimeS);
-		}
-		String payTimeEnd = queryRequest.getPayTimeE();
-		if (!StringUtil.isBlank(payTimeEnd)) {
-			payTimeEnd = payTimeEnd + " 23:59:59";
-			Timestamp payTimeE = Timestamp.valueOf(payTimeEnd);
-			ordReq.setPayTimeEnd(payTimeE);
-		}
-		ordReq.setState(Constants.State.UN_CLAIM_STATE);
+		ordReq.setState(Constants.State.DONE_STATE);
 	    ordReq.setPageNo(1);
 	    try {
 	  //获取配置中的导出最大数值
@@ -372,6 +352,9 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 		                		}
 				        		exOrder.setUserName(vo.getUserName());
 				        		exOrder.setOrderId(vo.getOrderId());
+				        		if(vo.getFinishTime()!=null){
+				        			exOrder.setFinishTime(vo.getFinishTime().toString());
+				        		}
 				        		if(vo.getRemainingTime()!=null){
 				        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
 				        		}
@@ -444,6 +427,9 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 	            		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
+		        		if(vo.getFinishTime()!=null){
+		        			exOrder.setFinishTime(vo.getFinishTime().toString());
+		        		}
 		        		if(vo.getRemainingTime()!=null){
 		        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
 		        		}
@@ -506,6 +492,9 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 	                		}
 			        		exOrder.setUserName(vo.getUserName());
 			        		exOrder.setOrderId(vo.getOrderId());
+			        		if(vo.getFinishTime()!=null){
+			        			exOrder.setFinishTime(vo.getFinishTime().toString());
+			        		}
 			        		if(vo.getRemainingTime()!=null){
 			        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
 			        		}
@@ -576,6 +565,9 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
                 		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
+		        		if(vo.getFinishTime()!=null){
+		        			exOrder.setFinishTime(vo.getFinishTime().toString());
+		        		}
 		        		if(vo.getRemainingTime()!=null){
 		        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
 		        		}
@@ -587,9 +579,9 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 			response.reset();// 清空输出流
             response.setContentType("application/msexcel");// 定义输出类型
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
-            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","翻译级别","订单级别","订单金额","实付金额","交稿剩余时间","订单状态"};
+            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","翻译级别","订单级别","订单金额","领取时间","提交时间","确认时间","订单状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
-    				"userName","langire","translateLevel","orderLevel", "totalFee","totalFee","remaningTime","state"};
+    				"userName", "langire","translateLevel","orderLevel","totalFee","lockTime","finishTime","remaningTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
              excelHelper.writeExcel(outputStream, "订单信息"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {

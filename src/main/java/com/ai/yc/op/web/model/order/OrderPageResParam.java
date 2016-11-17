@@ -1,5 +1,7 @@
 package com.ai.yc.op.web.model.order;
 
+import java.util.List;
+
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 
 public class OrderPageResParam extends OrdOrderVo {
@@ -12,6 +14,12 @@ public class OrderPageResParam extends OrdOrderVo {
 	private String cancelTypePage;
 
 	private String orderLevelPage;
+	
+	private List<OrdTransLevelVo> ordTransLevelList;
+	
+	private int levelSize;
+	
+	private int extendSize;
 
 	public String getChlIdPage() {
 		return chlIdPage;
@@ -67,6 +75,30 @@ public class OrderPageResParam extends OrdOrderVo {
 
 	public void setOrderLevelPage(String orderLevelPage) {
 		this.orderLevelPage = orderLevelPage;
+	}
+
+	public List<OrdTransLevelVo> getOrdTransLevelList() {
+		return ordTransLevelList;
+	}
+
+	public void setOrdTransLevelList(List<OrdTransLevelVo> ordTransLevelList) {
+		this.ordTransLevelList = ordTransLevelList;
+	}
+
+	public int getLevelSize() {
+		return levelSize;
+	}
+
+	public void setLevelSize(int levelSize) {
+		this.levelSize = levelSize;
+	}
+
+	public int getExtendSize() {
+		return extendSize;
+	}
+
+	public void setExtendSize(int extendSize) {
+		this.extendSize = extendSize;
 	}
 
 }
