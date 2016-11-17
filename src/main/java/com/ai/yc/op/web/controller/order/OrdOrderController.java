@@ -21,6 +21,8 @@ import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.op.web.model.order.OrdOrderDetails;
 import com.ai.yc.op.web.model.order.OrderDetailPagerRequest;
+import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
+import com.ai.yc.op.web.utils.LoginUtil;
 import com.ai.yc.order.api.autooffer.interfaces.IQueryAutoOfferSV;
 import com.ai.yc.order.api.autooffer.param.QueryAutoOfferReq;
 import com.ai.yc.order.api.autooffer.param.QueryAutoOfferRes;
@@ -206,8 +208,9 @@ public class OrdOrderController {
 		if(req==null){
 			throw new BusinessException(ExceptCodeConstants.Special.PARAM_IS_NULL, "参数不能为空");
 		}
-		req.setOperId("10000");
-		req.setOperName("admin");
+		GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+		req.setOperId(loginUser.getUserId());
+		req.setOperName(loginUser.getLoginName());
 		if(pager==null){
 			return req;
 		}

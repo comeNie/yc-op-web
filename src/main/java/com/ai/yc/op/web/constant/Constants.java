@@ -92,4 +92,6 @@ public final class Constants {
 		
 	}
 	
+	public static final String IPAAS_ORDER_FILE_DSS = "order-file-dss";
+	
 }

@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ai.opt.sdk.components.dss.DSSClientFactory;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.paas.ipaas.dss.base.interfaces.IDSSClient;
-import com.ai.yc.op.web.constants.Constants;
+import com.ai.yc.op.web.constant.Constants;
 import com.ai.yc.op.web.controller.order.OrdOrderController;
 import com.ai.yc.op.web.model.common.Attachment;
 

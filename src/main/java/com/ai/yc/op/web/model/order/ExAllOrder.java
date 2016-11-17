@@ -28,7 +28,6 @@ public class ExAllOrder {
 	
 	private String translateLevel;
 	
-	private String translateLevel;
 	
 	private String InterperName;
 	

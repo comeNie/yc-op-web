@@ -27,6 +27,7 @@
 						    <li menuAttr="menu"><a href="${_base}/toWaitPayOrderList" target="mainFrame">待支付订单列表</a></li>
 						    <li menuAttr="menu"><a href="${_base}/toUnclaimOrderList" target="mainFrame">待领取订单列表</a></li>
 						     <li menuAttr="menu"><a href="${_base}/toTranslateOrderList" target="mainFrame">翻译中订单列表</a></li>
+						     <li menuAttr="menu"><a href="${_base}/order/toReviewOrderList" target="mainFrame">待审核订单列表</a></li>
 						     <li menuAttr="menu"><a href="${_base}/toTbcOrderList" target="mainFrame">待确认订单列表</a></li>
 						     <li menuAttr="menu"><a href="${_base}/toUpdateOrderList" target="mainFrame">修改中订单列表</a></li>
 						     <li menuAttr="menu"><a href="${_base}/toDoneOrderList" target="mainFrame">已完成订单列表</a></li>
