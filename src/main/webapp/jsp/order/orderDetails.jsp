@@ -48,13 +48,13 @@
 
                             {{include tmpl="#prodInfoTempl" /}}
               
-						    {{if mod=='edit'&&displayFlag!='52'&&displayFlag!='90'&&displayFlag!='91'&&displayFlag!='92'}}
-                               <div class="bc-ang mb-12">
+                            <div class="bc-ang mb-12">
+                                  {{if mod=='edit'&&displayFlag!='52'&&displayFlag!='90'&&displayFlag!='91'&&displayFlag!='92'}}
                                    <input id="save" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="保存" />
-				                   <input id="back" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />
-				           
-				               </div>
-                            {{/if}}
+				                  {{/if}} 
+                                  <input id="back" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />
+				            </div>
+                            
                           </div>
 						</div>
                        
