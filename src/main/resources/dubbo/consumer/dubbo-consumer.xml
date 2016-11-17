@@ -43,6 +43,10 @@
 	  
 	<dubbo:reference id="iUpdatePayStatusSV"
 		interface="com.ai.yc.order.api.paystatus.interfaces.IUpdatePayStatusSV" />	
+		
+	<dubbo:reference id="iOrderReviewSV"
+		interface="com.ai.yc.order.api.orderreview.interfaces.IOrderReviewSV" />
+				
 	<!-- 公共中心 -->
 	<dubbo:reference id="ICacheSV"
 		interface="com.ai.yc.common.api.cache.interfaces.ICacheSV "

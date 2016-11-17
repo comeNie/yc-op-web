@@ -22,9 +22,24 @@ public class ExAllOrder {
 	
 	private String lockTime;
 	private String remaningTime;
+	private String finishTime;
 	
 	private String submitTime;
 	
+	private String translateLevel;
+	
+	private String InterperName;
+	
+	
+	
+	public String getInterperName() {
+		return InterperName;
+	}
+
+	public void setInterperName(String interperName) {
+		InterperName = interperName;
+	}
+
 	public String getChlId() {
 		return chlId;
 	}
@@ -175,6 +190,22 @@ public class ExAllOrder {
 
 	public void setSubmitTime(String submitTime) {
 		this.submitTime = submitTime;
+	}
+
+	public String getTranslateLevel() {
+		return translateLevel;
+	}
+
+	public void setTranslateLevel(String translateLevel) {
+		this.translateLevel = translateLevel;
+	}
+
+	public String getFinishTime() {
+		return finishTime;
+	}
+
+	public void setFinishTime(String finishTime) {
+		this.finishTime = finishTime;
 	}
 
 }

@@ -21,6 +21,8 @@ public final class Constants {
 	public static final String ORD_PAY_STYLE = "PAY_STYLE";
 	/** 翻译类型*/
 	public static final String ORD_TRANSLATE_TYPE = "TRANSLATE_TYPE";
+	/** 翻译级别*/
+	public static final String ORD_TRANSLATE_LEVEL = "TRANSLATE_LEVEL";
 	/** 美元*/
 	public static final String CURRENCY_UNIT_S = "2";
 	/** 人民币*/
@@ -58,10 +60,26 @@ public final class Constants {
 		 * 翻译中
 		 */
 		public static final String TRANSLTING_STATE = "23";
+		
+		/**
+		 * 待确认
+		 */
+		public static final String REVIEW_STATE = "40";
+		
 		/**
 		 * 待确认
 		 */
 		public static final String TBC_STATE = "50";
+		/**
+		 * 修改中
+		 */
+		public static final String UPDATING_STATE = "25";
+		/**
+		 * 已完成
+		 */
+		public static final String DONE_STATE = "90";
+		
+		
 	}
 	public static final class CancelType{
 		private CancelType(){}
