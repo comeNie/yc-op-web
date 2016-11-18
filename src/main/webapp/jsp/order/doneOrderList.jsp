@@ -221,12 +221,12 @@
 		</tr>		
 	{{/for}}
 {{/if}}
-  {{if ordProdExtendList==null && extendSize==null}}
+  {{if levelSize===0 && extendSize===0}}
 	<tr>
 	<td>{{:chlIdPage}}</td>
 	<td>{{:orderTypePage}}</td>
 	<td>{{:orderId}}</td>
-	<td>{{:timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
+	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
 	<td>{{:userName}}</td>
 	<td></td>
 	<td></td>
