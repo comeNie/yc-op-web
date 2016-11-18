@@ -171,11 +171,6 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
                 				resParam.setTotalFeePage(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
                 			}
                 		}
-                		if(resParam.getLevelSize()>resParam.getExtendSize()){
-                			resParam.setChaSize(resParam.getLevelSize()-resParam.getExtendSize());
-                		}else{
-                			resParam.setChaSize(resParam.getExtendSize()-resParam.getLevelSize());
-                		}
 						resultList.add(resParam);
 					}
 				}

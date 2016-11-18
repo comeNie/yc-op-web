@@ -118,6 +118,7 @@
                                                 <th>昵称</th>
                                                 <th>语种方向</th>
                                                 <th>翻译级别</th>
+                                                <th>订单级别</th>
                                                 <th>订单金额</th>
                                                 <th>领取时间</th>
                                                 <th>提交时间</th>
@@ -150,8 +151,8 @@
 {{if levelSize>=extendSize && levelSize!=0 && extendSize!=0}}
 	{{for ordTransLevelList ~chlIdPage=chlIdPage ~orderTypePage=orderTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
-		 ~remainingTime=remainingTime  ~statePage=statePage ~chaSize=chaSize ~levelSize=levelSize
-		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize
+		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize
+		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
 	}}
 		<tr>
 			{{if #index ==0}}
@@ -174,6 +175,7 @@
 			{{/if}}
 			<td>{{:translateLevelPage}}</td>
 			{{if #index ==0 }}
+				<td rowspan="{{:~levelSize}}">{{:~orderLevelPage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~totalFeePage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~lockTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
@@ -187,8 +189,8 @@
 {{if levelSize<extendSize}}
 	{{for ordProdExtendList ~chlIdPage=chlIdPage ~orderTypePage=orderTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
-		 ~remainingTime=remainingTime  ~statePage=statePage ~chaSize=chaSize ~levelSize=levelSize
-		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize
+		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize
+		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
 	}}
 		<tr>
 			{{if #index ==0}}
@@ -211,6 +213,7 @@
 							{{/if}}
       				</table>
 				</td>	
+				<td rowspan="{{:~extendSize}}">{{:~orderLevelPage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~totalFeePage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~lockTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
@@ -230,11 +233,12 @@
 	<td>{{:userName}}</td>
 	<td></td>
 	<td></td>
-	<td>{{:~totalFeePage}}</td>
+	<td>{{:orderLevelPage}}</td>
+	<td>{{:totalFeePage}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', lockTime)}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', endTime)}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', finishTime)}}</td>
-	<td>{{:~statePage}}</td>
+	<td>{{:statePage}}</td>
 	<td><a  href="javascript:void(0);">查看详情</a></td>	
 	</tr>			
 {{/if}}                                           

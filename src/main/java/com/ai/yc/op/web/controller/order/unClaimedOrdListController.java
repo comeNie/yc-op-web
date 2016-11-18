@@ -111,6 +111,9 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 					for(OrdOrderVo vo:orderList){
 						OrderPageResParam resParam = new OrderPageResParam();
 						BeanUtils.copyProperties(resParam, vo);
+						if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList())){
+							resParam.setExtendSize(vo.getOrdProdExtendList().size());
+						}
 						//翻译订单来源
     					SysParamSingleCond	paramCond = new SysParamSingleCond();
     					paramCond.setTenantId(Constants.TENANT_ID);
@@ -155,6 +158,7 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
                 		List<OrdProdLevelVo> levelList = vo.getOrdProdLevelList();
                 		List<OrdTransLevelVo> transLevelLists = new ArrayList<OrdTransLevelVo>();
                 		if(!CollectionUtil.isEmpty(levelList)){
+                			resParam.setLevelSize(levelList.size());
                 			for(OrdProdLevelVo leveVo:levelList){
                 				OrdTransLevelVo levelVo = new OrdTransLevelVo();
                     			paramCond = new SysParamSingleCond();
