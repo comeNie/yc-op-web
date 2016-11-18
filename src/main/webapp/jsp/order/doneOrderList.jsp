@@ -146,46 +146,98 @@
             </div>
     	</div>
    </div> 
-<script id="orderListTemple" type="text/template">
+<script id="orderListTemple" type="text/template">  
+{{if levelSize>=extendSize && levelSize!=0 && extendSize!=0}}
+	{{for ordTransLevelList ~chlIdPage=chlIdPage ~orderTypePage=orderTypePage  ~orderId=orderId
+		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
+		 ~remainingTime=remainingTime  ~statePage=statePage ~chaSize=chaSize ~levelSize=levelSize
+		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize
+	}}
+		<tr>
+			{{if #index ==0}}
+				<td rowspan="{{:~levelSize}}">{{:~chlIdPage}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~orderTypePage}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~orderId}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~orderTime)}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~userName}}</td>
+				<td rowspan="{{:~levelSize}}">
+					 <table width="100%" height="100%">
+							{{if ~ordProdExtendList!=null}}
+								{{for ~ordProdExtendList}}
+      								<tr>
+      									<td>{{:langungePairChName}}</td>	
+      								</tr>
+								{{/for}}
+							{{/if}}
+      				</table>
+				</td>	
+			{{/if}}
+			<td>{{:translateLevelPage}}</td>
+			{{if #index ==0 }}
+				<td rowspan="{{:~levelSize}}">{{:~totalFeePage}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~lockTime)}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~finishTime)}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~statePage}}</td>
+				<td rowspan="{{:~levelSize}}"><a  href="javascript:void(0);">查看详情</a></td>
+			{{/if}}	
+		</tr>		
+	{{/for}}
+{{/if}}
+{{if levelSize<extendSize}}
+	{{for ordProdExtendList ~chlIdPage=chlIdPage ~orderTypePage=orderTypePage  ~orderId=orderId
+		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
+		 ~remainingTime=remainingTime  ~statePage=statePage ~chaSize=chaSize ~levelSize=levelSize
+		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize
+	}}
+		<tr>
+			{{if #index ==0}}
+				<td rowspan="{{:~extendSize}}">{{:~chlIdPage}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~orderTypePage}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~orderId}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~orderTime)}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~userName}}</td>
+			{{/if}}
+			<td>{{:langungePairChName}}</td>
+			{{if #index ==0 }}
+				<td rowspan="{{:~extendSize}}">
+					 <table width="100%" height="100%">
+							{{if ~ordTransLevelList!=null}}
+								{{for ~ordTransLevelList}}
+      								<tr>
+      									<td >{{:translateLevelPage}}</td>	
+      								</tr>
+								{{/for}}
+							{{/if}}
+      				</table>
+				</td>	
+				<td rowspan="{{:~extendSize}}">{{:~totalFeePage}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~lockTime)}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~finishTime)}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~statePage}}</td>
+				<td rowspan="{{:~extendSize}}"><a  href="javascript:void(0);">查看详情</a></td>
+			{{/if}}	
+		</tr>		
+	{{/for}}
+{{/if}}
+  {{if ordProdExtendList==null && extendSize==null}}
 	<tr>
-  	  <td>{{:chlIdPage}}</td>
-      <td>{{:orderTypePage}}</td>
-      <td>{{:orderId}}</td>
- 	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
-      <td>{{:userName}}</td>
- 	  <td>
-      	 <table class="table close-border" width="100%">
-      		<tbody>
-				{{if ordProdExtendList!=null}}
-					{{for ordProdExtendList}}
-      					<tr>
-      						<td class="new-td" style="">{{:langungePairChName}}</td>	
-      					</tr>
-					{{/for}}
-				{{/if}}
-      		</tbody>	
-      	</table>
-      </td>
-	  <td>
-      	 <table class="table close-border" width="100%">
-      		<tbody>
-				{{if ordTransLevelList!=null}}
-					{{for ordTransLevelList}}
-      					<tr>
-      						<td class="new-td" style="">{{:translateLevelPage}}</td>	
-      					</tr>
-					{{/for}}
-				{{/if}}
-      		</tbody>	
-      	</table>
-      </td>
-      <td>{{:totalFeePage}}</td>
-      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', lockTime)}}</td>
-      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', finishTime)}}</td>
-      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}</td>
-     <td>{{:statePage}}</td>
-     <td><a href="#">查看</a></td>
-  </tr>                                                                       
+	<td>{{:chlIdPage}}</td>
+	<td>{{:orderTypePage}}</td>
+	<td>{{:orderId}}</td>
+	<td>{{:timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
+	<td>{{:userName}}</td>
+	<td></td>
+	<td></td>
+	<td>{{:~totalFeePage}}</td>
+	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', lockTime)}}</td>
+	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', endTime)}}</td>
+	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', finishTime)}}</td>
+	<td>{{:~statePage}}</td>
+	<td><a  href="javascript:void(0);">查看详情</a></td>	
+	</tr>			
+{{/if}}                                           
 </script> 
   <script type="text/javascript">
   <%-- 展示日历 --%>

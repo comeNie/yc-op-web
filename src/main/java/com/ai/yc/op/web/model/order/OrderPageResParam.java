@@ -20,6 +20,7 @@ public class OrderPageResParam extends OrdOrderVo {
 	private int levelSize;
 	
 	private int extendSize;
+	private int chaSize;
 
 	public String getChlIdPage() {
 		return chlIdPage;
@@ -99,6 +100,14 @@ public class OrderPageResParam extends OrdOrderVo {
 
 	public void setExtendSize(int extendSize) {
 		this.extendSize = extendSize;
+	}
+
+	public int getChaSize() {
+		return chaSize;
+	}
+
+	public void setChaSize(int chaSize) {
+		this.chaSize = chaSize;
 	}
 
 }
