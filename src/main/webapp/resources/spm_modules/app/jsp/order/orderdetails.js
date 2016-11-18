@@ -197,6 +197,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				param.purposeId = useCode;
 				param.translateLevel = translateLevel;
 				param.isUrgent = false;
+				var unit = $("#currencyUnit").val();
+				if('2'==unit){
+					param.language = "us_EN"
+				}else{
+					param.language = "zh_CN"
+				}
 				ajaxController.ajax({
 					type: "post",
 					processing: false,

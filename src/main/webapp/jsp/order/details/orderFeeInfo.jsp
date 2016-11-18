@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+
 <script id="orderFeeTempl" type="text/x-jsrender">
+                          <input id="currencyUnit" type="hidden" value="{{:orderFee.currencyUnit}}"/>
                           <div class="nav-tplist-title bd-bottom pb-10  pt-15">
 								<ul>
 									<li>订单属性及金额信息</li>

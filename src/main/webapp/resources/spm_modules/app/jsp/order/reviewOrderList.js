@@ -58,7 +58,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
     		//查询
             "click #search":"_searchOrderList",
             "click #export":"_export",
-            "click #batchAdopt":"batchAdoptReviewOrder"
+            "click #batchAdopt":"_batchAdoptReviewOrder"
             
         },
     	//重写父类
@@ -111,7 +111,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				var $tr = $this.parent("td").parent("tr");
 				var param = {};
 				var $tds = $tr.find("td");
-				param.orderId = $tds.eq(0).find("input").eq(0).val();
+				param.orderIds = $tds.eq(0).find("input").eq(0).val();
 				_this.adoptReviewOrder(param);
 			});
 			
@@ -121,7 +121,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				var $tr = $this.parent("td").parent("tr");
 				var param = {};
 				var $tds = $tr.find("td");
-				param.orderId = $tds.eq(0).find("input").eq(0).val();
+				param.orderIds = $tds.eq(0).find("input").eq(0).val();
 				_this.rejectReviewOrder(param);
 			});
 			
@@ -239,8 +239,34 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+
 		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&interperName='+interperName+'&orderLevel='+orderLevel;
 		},
-		batchAdoptReviewOrder:function(){
+		_batchAdoptReviewOrder:function(){
+			var _this = this;
+			var param = {};
+			var orderIds = "";
+			$(".single").each(function(){
+				if(this.checked){
+					orderIds = orderIds+"," + this.value;
+				}
+			});
+			if(orderIds==""){
+				showErrorDialog("请至少选择一条订单信息");
+				return;
+			}
+			param.orderIds = orderIds.substring(1);
+			alert(param.orderIds);
 			
+			var d = Dialog({
+				content:"是否批量审核通过这些订单？",
+				okValue: '通过',
+				title: '审核',
+				ok:function(){
+					param.state = '41';
+					_this.handReviewOrder(param);
+				},
+				cancelValue: '取消',
+			    cancel: function () {}
+			});
+			d.show();
 			
 		},
 		rejectReviewOrder:function(param){
@@ -285,7 +311,6 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				data: param,
 				success: function (rs) {
 					if ("1" === rs.statusCode) {
-						showSuccessDialog(rs.statusInfo);
 						_this._searchOrderList();
 					}else{
 						showErrorDialog(rs.statusInfo);

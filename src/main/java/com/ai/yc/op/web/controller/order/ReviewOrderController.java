@@ -386,10 +386,19 @@ public class ReviewOrderController {
     
     @RequestMapping("/handReviewOrder")
 	@ResponseBody
-    public ResponseData<Boolean> handReviewOrder(OrderReviewRequest req){
+    public ResponseData<Boolean> handReviewOrder(OrderReviewRequest req,String orderIds){
     	if(req==null){
     		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "参数不能为空", null);
     	}
+    	if(StringUtil.isBlank(orderIds)){
+    		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "订单ID不能为空", null);
+    	}
+    	String[] datas = orderIds.split(",");
+    	List<Long> orderIdList = new ArrayList<Long>();
+    	for(String data:datas){
+    		orderIdList.add(Long.valueOf(data));
+    	}
+    	req.setOrderIdList(orderIdList);
     	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setOperId(loginUser.getUserId());
     	IOrderReviewSV iOrderReviewSV = DubboConsumerFactory.getService(IOrderReviewSV.class);

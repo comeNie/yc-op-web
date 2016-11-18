@@ -181,7 +181,7 @@
 								    <li class="col-md-6">
 										<p class="word">修改剩余时间：</p>
 										<p>
-											{{:~getOverplusTimes(stateChgTime,7)}}
+											
 										</p>
 									</li>
                                    {{/if}}
