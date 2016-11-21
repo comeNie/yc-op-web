@@ -10,6 +10,9 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     require("bootstrap-paginator/bootstrap-paginator.min");
     require("app/util/jsviews-ext");
     
+    require("jquery-validation/1.15.1/jquery.validate");
+	require("app/util/aiopt-validate-ext");
+    
     require("opt-paging/aiopt.pagination");
     require("twbs-pagination/jquery.twbsPagination.min");
     require('bootstrap/js/modal');
@@ -31,7 +34,9 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     		 "click #showQuery":"_showQueryInfo",
     		//查询
             "click #search":"_searchOrderList",
-            "click #export":"_export"
+            "click #update":"_updatePayState",
+            "click #export":"_export",
+            "click #add-close":"_closeDialog"
             
         },
     	//重写父类
@@ -44,6 +49,33 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     		this._bindStateSelect();
     		this._bindPayStyleSelect();
     		this._bindLanguageSelect();
+    		var formValidator=this._initValidate();
+			$(":input").bind("focusout",function(){
+				formValidator.element(this);
+			});
+    	},
+    	_initValidate:function(){
+    		var formValidator=$("#dataForm").validate({
+    			rules: {
+    				updateMoney: {
+    					required: true,
+    					moneyNumber: true
+    					},
+					remark: {
+    					required: true
+    					}
+    			},
+    			messages: {
+    				updateMoney: {
+    					required:"请输入修改金额!",
+    					moneyNumber:"格式不对！"
+    				},
+    				remark: {
+    					required: "请输入备注!"
+    					}
+    			}
+    		});
+    		return formValidator;
     	},
     	_showQueryInfo: function(){
 			//展示查询条件
@@ -54,6 +86,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 		    	$("#selectDiv").hide();
 		    }
 		},
+	  
 		// 下拉 语种方向
 		_bindLanguageSelect:function() {
 			var this_=this;
@@ -224,6 +257,70 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     			"orderPageId":jQuery.trim($("#orderId").val()),
     			"payStyle":jQuery.trim($("#payStyle option:selected").val())
     		}
+    	},
+    	//弹出框
+    	_popUp:function(orderId,payStylePage,currencyUnit,payStyle){
+    		var _this= this;
+    		$("#orderIdUpdate").val("");
+    		$("#payStyleUpdate").val("");
+    		$("#currencyUnitUpdate").val("");
+    		//赋值支付方式
+    		//$("#payStyle").val(payStylePage);
+			//弹出框展示
+			$('#eject-mask').fadeIn(100);
+			$('#add-samll').slideDown(200);
+			$("#orderIdUpdate").val(orderId);
+			$("#payStyleUpdate").val(payStyle);
+			$("#currencyUnitUpdate").val(currencyUnit);
+    	},
+    	_updatePayState:function(){
+    		var _this= this;
+    		var formValidator=_this._initValidate();
+			formValidator.form();
+			if(!$("#dataForm").valid()){
+				return false;
+			}
+    		var orderId = $("#orderIdUpdate").val();
+    		var money = $("#updateMoney").val();
+    		var remak = $("#remark").val();
+    		var payStyle="HK";
+    		var currencyUnit=$("#currencyUnitUpdate").val();
+    		$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/updatePayState",
+				dataType : "json",
+				data : {
+					orderId:orderId,
+					remark:remak,
+					updateFee:money,
+					currencyUnit:currencyUnit,
+					payStyle:payStyle
+				},
+				message : "正在加载数据..",
+				success : function(data) {
+					if(data.statusCode==1){
+						//跳到列表页面
+						window.location.href=_base+"/toOrderList";
+					}else{
+						var d = Dialog({
+							title: '消息',
+							content:"修改失败",
+							icon:'prompt',
+							okValue: '确 定',
+							ok:function(){
+								this.close();
+							}
+						});
+						d.show();
+					}
+				}
+			});
+    	},
+    	_closeDialog:function(){
+    		$("#errorMessage").html("");
+    		$('#eject-mask').fadeOut(100);
+    		$('#add-samll').slideUp(150);
     	}
 		
     });

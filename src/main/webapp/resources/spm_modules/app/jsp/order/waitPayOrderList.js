@@ -238,7 +238,6 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     		var orderId = $("#orderIdUpdate").val();
     		var money = $("#updateMoney").val();
     		var remak = $("#remark").val();
-    		//var payStyle=$("#payStyleUpdate").val();
     		var payStyle="HK";
     		var currencyUnit=$("#currencyUnitUpdate").val();
     		$.ajax({
@@ -255,7 +254,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 				},
 				message : "正在加载数据..",
 				success : function(data) {
-					if(data.data){
+					if(data.statusCode==1){
 						//跳到列表页面
 						window.location.href=_base+"/toWaitPayOrderList";
 					}else{

@@ -128,9 +128,10 @@ define('app/jsp/order/doneOrderList', function (require, exports, module) {
 			var orderType=jQuery.trim($("#orderType option:selected").val());
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
+			var interperName = jQuery.trim($("#interperName").val());
 			window.location.href=_base+'/doneExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+
 			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+
-		    '&orderPageId='+orderPageId;
+		    '&orderPageId='+orderPageId+'&interperName='+interperName;
 		},
 		_searchOrderList:function(){
 			var _this=this;
@@ -163,6 +164,7 @@ define('app/jsp/order/doneOrderList', function (require, exports, module) {
     			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
     			"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
     			"userName":jQuery.trim($("#nickName").val()),
+    			"interperName":jQuery.trim($("#interperName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
     			"orderType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),

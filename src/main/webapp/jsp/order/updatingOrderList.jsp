@@ -145,6 +145,7 @@
                                                 <th>语种方向</th>
                                                 <th>订单金额</th>
                                                 <th>订单级别</th>
+                                                <th>译员昵称</th>
                                                 <th>领取时间</th>
                                                 <th>修改剩余时间</th>
                                                 <th>订单状态</th>
@@ -193,6 +194,7 @@
       </td>
 	  <td>{{:totalFeePage}}</td>
  	  <td>{{:orderLevelPage}}</td>
+	  <td>{{:interperName}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', lockTime)}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}</td>
      <td>{{:statePage}}</td>

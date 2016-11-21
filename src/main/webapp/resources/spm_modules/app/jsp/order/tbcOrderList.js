@@ -130,9 +130,10 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
 			var orderType=jQuery.trim($("#orderType option:selected").val());
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
+			var interperName = jQuery.trim($("#interperName").val());
 			window.location.href=_base+'/tbcExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&submitTimeS='+submitTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+
-		    '&orderPageId='+orderPageId+'&submitTimeE='+submitTimeE;
+		    '&orderPageId='+orderPageId+'&submitTimeE='+submitTimeE+'&interperName='+interperName;
 		},
 		_searchOrderList:function(){
 			var _this=this;
@@ -167,6 +168,7 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
     			"submitTimeS":jQuery.trim($("#stateTimeBegin").val()),
     			"submitTimeE":jQuery.trim($("#stateTimeEnd").val()),
     			"userName":jQuery.trim($("#nickName").val()),
+    			"interperName":jQuery.trim($("#interperName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
     			"orderType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),

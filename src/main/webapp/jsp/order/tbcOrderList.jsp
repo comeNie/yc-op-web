@@ -51,6 +51,10 @@
 							            		</select>
 						            		</p>
 							            </li>
+							            <li class="col-md-6">
+							            	<p class="word">译员昵称</p>
+							            	<p><input class="int-text int-medium" id="interperName" type="text"></p>
+						            	</li>
 			                    	</ul>
 			                    	<div id="orderTimeDiv">
 			                    		<ul>
@@ -137,6 +141,7 @@
                                                 <th>语种方向</th>
                                                 <th>订单级别</th>
                                                 <th>订单金额</th>
+                                                <th>译员昵称</th>
                                                 <th>确认剩余时间</th>
                                                 <th>译员提交时间</th>
                                                 <th>订单状态</th>
@@ -185,6 +190,7 @@
       </td>
  	  <td>{{:orderLevelPage}}</td>
       <td>{{:totalFeePage}}</td>
+	  <td>{{:interperName}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', stateChgTime)}}</td>
      <td>{{:statePage}}</td>

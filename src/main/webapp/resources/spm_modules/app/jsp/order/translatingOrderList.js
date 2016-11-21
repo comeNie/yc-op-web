@@ -151,13 +151,14 @@ define('app/jsp/order/translatingOrderList', function (require, exports, module)
 			var lockTimeE=jQuery.trim($("#lockTimeEnd").val());
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var orderType=jQuery.trim($("#orderType option:selected").val());
-			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
+			var orderType = jQuery.trim($("#orderType option:selected").val());
+			var langungePaire = jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var orderLevel = jQuery.trim($("#orderLevel option:selected").val());
+			var interperName = jQuery.trim($("#interperName").val());
 			window.location.href=_base+'/translatingExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&lockTimeS='+lockTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+
-		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&orderLevel='+orderLevel;
+		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&orderLevel='+orderLevel+'&interperName='+interperName;
 		},
 		_searchOrderList:function(){
 			var _this=this;
@@ -192,6 +193,7 @@ define('app/jsp/order/translatingOrderList', function (require, exports, module)
     			"lockTimeS":jQuery.trim($("#lockTimeBegin").val()),
     			"lockTimeE":jQuery.trim($("#lockTimeEnd").val()),
     			"userName":jQuery.trim($("#nickName").val()),
+    			"interperName":jQuery.trim($("#interperName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
     			"orderType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),

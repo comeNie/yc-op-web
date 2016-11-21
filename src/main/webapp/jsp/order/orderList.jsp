@@ -7,6 +7,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>订单列表</title>
 <%@include file="/inc/inc.jsp" %>
+<input type="hidden" id="orderIdUpdate"/>
+<input type="hidden" id="payStyleUpdate"/>
+<input type="hidden" id="currencyUnitUpdate"/>
 </head>
 <body>
    <div class="content-wrapper-iframe" ><!--右侧灰色背景-->
@@ -173,6 +176,43 @@
 								  </div>
 								<!--分页结束-->
                             </div>
+                            <!-- 弹出框 start-->
+                            <form id="dataForm" method="post">
+                            	<div class="eject-big">
+									<div class="eject-medium" id="add-samll">
+										<div class="eject-medium-title">
+											<p>修改支付状态</p>
+											<p class="img"><i class="fa fa-times"></i></p>
+										</div>
+										<div class="form-label mt-10">
+							           		<ul>
+								                <li>
+								                    <p class="word">支付方式:</p>
+								                    <p><input type="text" id="payStyle" class="int-text int-small"value="银行汇款/转账" readonly ></p>
+								                </li>
+								                 <li>
+								                    <p class="word"><span>*</span>金额:</p>
+								                    <p><input type="text" class="int-text int-small" id="updateMoney" name="updateMoney"></p>
+								                    <p id="errorMessage"></p>
+								                </li>
+								                <li>
+								                    <p class="word"><span>*</span>备注:</p>
+								                	<p><textarea id="remark" name="remark" rows="4" cols="25" class="int-text" maxlength="100"></textarea></p>
+								                </li>
+							            	</ul>
+									    </div>	
+											<!--按钮-->
+											<div class="row mt-15"><!--删格化-->
+									               <p class="center pr-30 mt-30">
+									                   <input type="button" id="update" class="biu-btn  btn-primary  btn-auto  ml-5" value="确  认">
+									                   <input id="add-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5 edit-close" value="取  消">
+									                </p>
+									        </div>
+									</div>	
+									<div class="eject-mask" id="eject-mask"></div>	
+								</div>
+                            </form>
+                            <!-- 弹出框 end-->
                         </div>
                     </div>
                 </div>
@@ -204,7 +244,12 @@
       <td>{{:payStylePage}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', payTime)}}</td>
      <td>{{:statePage}}</td>
-     <td><a href="#">查看</a></td>
+     <td>
+		<a href="javascript:void(0)">查看</a>
+ 		{{if state==11}}
+			<a href="javascript:void(0)" onclick="pager._popUp('{{:orderId}}','{{:payStylePage}}','{{:currencyUnit}}','{{:payStyle}}')">修改支付状态</a>
+		{{/if}}	
+	</td>
   </tr>                                                                       
 </script> 
   <script type="text/javascript">

@@ -76,6 +76,12 @@
 						            		</p>
 							         	</li>
 		                    		</ul>
+		                    		<ul>
+		                    			 <li class="col-md-6">
+							            	<p class="word">译员昵称</p>
+							            	<p><input class="int-text int-medium" id="interperName" type="text"></p>
+						            	</li>
+		                    		</ul>
 		                    	</div> 
 	                    		<ul>
 									<li class="width-xlag">
@@ -120,6 +126,7 @@
                                                 <th>翻译级别</th>
                                                 <th>订单级别</th>
                                                 <th>订单金额</th>
+                                                <th>译员昵称</th>
                                                 <th>领取时间</th>
                                                 <th>提交时间</th>
                                                 <th>确认时间</th>
@@ -151,7 +158,7 @@
 {{if levelSize>=extendSize && levelSize!=0 && extendSize!=0}}
 	{{for ordTransLevelList ~chlIdPage=chlIdPage ~orderTypePage=orderTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
-		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize
+		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
 		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
 	}}
 		<tr>
@@ -177,6 +184,7 @@
 			{{if #index ==0 }}
 				<td rowspan="{{:~levelSize}}">{{:~orderLevelPage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~totalFeePage}}</td>
+ 				<td rowspan="{{:~levelSize}}">{{:~interperName}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~lockTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~finishTime)}}</td>
@@ -189,7 +197,7 @@
 {{if levelSize<extendSize}}
 	{{for ordProdExtendList ~chlIdPage=chlIdPage ~orderTypePage=orderTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
-		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize
+		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
 		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
 	}}
 		<tr>
@@ -215,6 +223,7 @@
 				</td>	
 				<td rowspan="{{:~extendSize}}">{{:~orderLevelPage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~totalFeePage}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~interperName}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~lockTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~finishTime)}}</td>
@@ -235,6 +244,7 @@
 	<td></td>
 	<td>{{:orderLevelPage}}</td>
 	<td>{{:totalFeePage}}</td>
+	<td>{{:interperName}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', lockTime)}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', endTime)}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', finishTime)}}</td>

@@ -93,6 +93,10 @@
 							            </ul> 
 						           </div>
 						            <ul>
+						            	<li class="col-md-6">
+							            	<p class="word">译员昵称</p>
+							            	<p><input class="int-text int-medium" id="interperName" type="text"></p>
+						            	</li>
 							            <li class="col-md-6">
 							            	<p class="word">语种方向</p>
 						            		<p>
@@ -147,6 +151,7 @@
                                                 <th>订单金额</th>
                                                 <th>实付金额</th>
                                                 <th>领取时间</th>
+                                                <th>译员昵称</th>
                                                 <th>交稿剩余时间</th>
                                                 <th>订单状态</th>
                                                 <th>操作</th>
@@ -196,6 +201,7 @@
       <td>{{:totalFeePage}}</td>
       <td>{{:totalFeePage}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', lockTime)}}</td>
+	  <td>{{:interperName}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}</td>
      <td>{{:statePage}}</td>
      <td><a href="#">查看</a></td>
