@@ -198,6 +198,10 @@ define('app/jsp/order/cancelOrderList', function (require, exports, module) {
     			"cancelType":jQuery.trim($("#cancelType option:selected").val()),
     			"orderPageId":jQuery.trim($("#orderId").val())
     		}
+    	},
+    	_detailPage:function(orderId){
+			window.location.href = _base+"/order/orderdetails?orderId="
+            + orderId;
     	}
 		
     });

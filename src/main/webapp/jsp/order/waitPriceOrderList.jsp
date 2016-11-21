@@ -162,7 +162,7 @@
       	</table>
       </td>
      <td>{{:statePage}}</td>
-     <td><a href="#">查看</a></td>
+     <td><a href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>
   </tr>                                                                       
 </script> 
   <script type="text/javascript">

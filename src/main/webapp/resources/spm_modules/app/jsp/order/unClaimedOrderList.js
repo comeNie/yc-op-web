@@ -198,6 +198,10 @@ define('app/jsp/order/unClaimedOrderList', function (require, exports, module) {
     			"orderPageId":jQuery.trim($("#orderId").val()),
     			"orderLevel":jQuery.trim($("#orderLevel option:selected").val())
     		}
+    	},
+    	_detailPage:function(orderId){
+			window.location.href = _base+"/order/orderdetails?orderId="
+            + orderId;
     	}
 		
     });

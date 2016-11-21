@@ -174,6 +174,10 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
     			"orderPageId":jQuery.trim($("#orderId").val())
     		}
+    	},
+    	_detailPage:function(orderId){
+			window.location.href = _base+"/order/orderdetails?orderId="
+            + orderId;
     	}
 		
     });

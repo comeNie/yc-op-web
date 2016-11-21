@@ -321,8 +321,17 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     		$("#errorMessage").html("");
     		$('#eject-mask').fadeOut(100);
     		$('#add-samll').slideUp(150);
-    	}
-		
+    	},
+    	_detailPage:function(orderId,state){
+    		if(state==11 || state==13){
+    			window.location.href = _base+"/order/orderdetails?orderId="
+	            + orderId+'&mod=edit';
+    		}else{
+    			window.location.href = _base+"/order/orderdetails?orderId="
+	            + orderId;
+    		}
+		    
+		}
     });
     
     module.exports = OrderListPager

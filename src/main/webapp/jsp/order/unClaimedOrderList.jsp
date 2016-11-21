@@ -205,7 +205,7 @@
 				<td rowspan="{{:~levelSize}}">{{:~orderLevelPage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~remainingTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~statePage}}</td>
-				<td rowspan="{{:~levelSize}}"><a  href="javascript:void(0);">查看详情</a></td>
+				<td rowspan="{{:~levelSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
 			{{/if}}	
 		</tr>		
 	{{/for}}
@@ -242,7 +242,7 @@
 				<td rowspan="{{:~extendSize}}">{{:~orderLevelPage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~remainingTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~statePage}}</td>
-				<td rowspan="{{:~extendSize}}"><a  href="javascript:void(0);">查看详情</a></td>
+				<td rowspan="{{:~extendSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
 			{{/if}}	
 		</tr>		
 	{{/for}}
@@ -261,7 +261,7 @@
 	<td>{{:orderLevelPage}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}</td>
 	<td>{{:statePage}}</td>
-	<td><a  href="javascript:void(0);">查看详情</a></td>	
+	<td><a  href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>	
 	</tr>			
 {{/if}}                                                                  
 </script> 

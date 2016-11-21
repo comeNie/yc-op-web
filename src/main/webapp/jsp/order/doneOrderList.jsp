@@ -189,7 +189,7 @@
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~finishTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~statePage}}</td>
-				<td rowspan="{{:~levelSize}}"><a  href="javascript:void(0);">查看详情</a></td>
+				<td rowspan="{{:~levelSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
 			{{/if}}	
 		</tr>		
 	{{/for}}
@@ -228,7 +228,7 @@
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~finishTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~statePage}}</td>
-				<td rowspan="{{:~extendSize}}"><a  href="javascript:void(0);">查看详情</a></td>
+				<td rowspan="{{:~extendSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
 			{{/if}}	
 		</tr>		
 	{{/for}}
@@ -249,7 +249,7 @@
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', endTime)}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', finishTime)}}</td>
 	<td>{{:statePage}}</td>
-	<td><a  href="javascript:void(0);">查看详情</a></td>	
+	<td><a  href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>	
 	</tr>			
 {{/if}}                                           
 </script> 

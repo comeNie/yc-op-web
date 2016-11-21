@@ -223,7 +223,7 @@
 	<tr>
   	  <td>{{:chlIdPage}}</td>
       <td>{{:orderTypePage}}</td>
-      <td>{{:orderId}}</td>
+      <td><a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">{{:orderId}}</a></td>
  	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
       <td>{{:userName}}</td>
  	  <td>
@@ -245,9 +245,9 @@
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', payTime)}}</td>
      <td>{{:statePage}}</td>
      <td>
-		<a href="javascript:void(0)">查看</a>
+		<a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">查看</a>
  		{{if state==11}}
-			<a href="javascript:void(0)" onclick="pager._popUp('{{:orderId}}','{{:payStylePage}}','{{:currencyUnit}}','{{:payStyle}}')">修改支付状态</a>
+			<a href="javascript:void(0);" onclick="pager._popUp('{{:orderId}}','{{:payStylePage}}','{{:currencyUnit}}','{{:payStyle}}')">修改支付状态</a>
 		{{/if}}	
 	</td>
   </tr>                                                                       

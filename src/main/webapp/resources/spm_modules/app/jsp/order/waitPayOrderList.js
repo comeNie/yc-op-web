@@ -38,8 +38,6 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
             "click #export":"_export",
             "click #update":"_updatePayState",
             "click #add-close":"_closeDialog"
-            
-            
         },
     	//重写父类
     	setup: function () {
@@ -56,9 +54,6 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     	},
     	_initValidate:function(){
     		var formValidator=$("#dataForm").validate({
-    			 /*errorPlacement: function(error, element) {
-                    $("#errorMessage").append( error );
-                 },*/
     			rules: {
     				updateMoney: {
     					required: true,
@@ -276,7 +271,11 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     		$("#errorMessage").html("");
     		$('#eject-mask').fadeOut(100);
     		$('#add-samll').slideUp(150);
-    	}
+    	},
+    	_detailPage:function(orderId){
+    		window.location.href = _base+"/order/orderdetails?orderId="
+            + orderId+'&mod=edit';
+		}
     });
     
     module.exports = WaitPayOrderListPager

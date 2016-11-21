@@ -237,8 +237,8 @@
       <td>{{:updateOperName}}</td>
      <td>{{:statePage}}</td>
      <td>
-		<a href="javascript:void(0)">查看</a>
-		<a href="javascript:void(0)" onclick="pager._popUp('{{:orderId}}','{{:payStylePage}}','{{:currencyUnit}}','{{:payStyle}}')">修改支付状态</a>
+		<a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}')">查看</a>
+		<a href="javascript:void(0);" onclick="pager._popUp('{{:orderId}}','{{:payStylePage}}','{{:currencyUnit}}','{{:payStyle}}')">修改支付状态</a>
 	</td>
   </tr>                                                                       
 </script> 
