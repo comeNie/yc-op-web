@@ -493,7 +493,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"prod.takeTime":{
     					required:true,
-    					digits:true
+    					digits:true,
+    					min:0,
+    					max:24
     				}
     			},
     			messages: {
@@ -565,7 +567,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"prod.takeTime":{
     					required:"请输入翻译耗时小时数",
-    					digits:"翻译耗时小时数必须为整数"
+    					digits:"翻译耗时小时数必须为整数",
+    				    min:"小时数不合法",
+        				max:"小时数不合法"
     				}
     				
     			}
