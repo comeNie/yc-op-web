@@ -162,9 +162,9 @@ public class WaitPayController {
 						//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				resParam.setTotalFeePage(vo.getTotalFee()+"$");
+                				resParam.setTotalFeePage(vo.getTotalFee()+"USD $");
                 			}else{
-                				resParam.setTotalFeePage(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+                				resParam.setTotalFeePage(AmountUtil.LiToYuan(vo.getTotalFee())+"CNY ¥");
                 			}
                 		}
 						resultList.add(resParam);
@@ -278,9 +278,9 @@ public class WaitPayController {
 		        		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				exOrder.setTotalFee(vo.getTotalFee()+"$");
+                				exOrder.setTotalFee(vo.getTotalFee()+"USD$");
                 			}else{
-                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"CNY¥");
                 			}
                 		}
                 		//下单时间

@@ -201,15 +201,15 @@
 								                </li>
 							            	</ul>
 									    </div>	
-											<!--按钮-->
-											<div class="row mt-15"><!--删格化-->
-									               <p class="center pr-30 mt-30">
-									                   <input type="button" id="update" class="biu-btn  btn-primary  btn-auto  ml-5" value="确  认">
-									                   <input id="add-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5 edit-close" value="取  消">
-									                </p>
-									        </div>
+										<!--按钮-->
+										<div class="row mt-15"><!--删格化-->
+								               <p class="center pr-30 mt-30">
+								                   <input type="button" id="update" class="biu-btn  btn-primary  btn-auto  ml-5" value="确  认">
+								                   <input id="add-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5 edit-close" value="取  消">
+								                </p>
+								        </div>
 									</div>	
-									<div class="eject-mask" id="eject-mask"></div>	
+									<div class="mask" id="eject-mask"></div>	
 								</div>
                             </form>
                             <!-- 弹出框 end-->

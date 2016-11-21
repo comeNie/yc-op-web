@@ -330,7 +330,6 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     			window.location.href = _base+"/order/orderdetails?orderId="
 	            + orderId;
     		}
-		    
 		}
     });
     

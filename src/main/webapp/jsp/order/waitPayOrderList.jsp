@@ -7,12 +7,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>待支付订单列表</title>
 <%@include file="/inc/inc.jsp" %>
-
-</head>
-<body>
 <input type="hidden" id="orderIdUpdate"/>
 <input type="hidden" id="payStyleUpdate"/>
 <input type="hidden" id="currencyUnitUpdate"/>
+</head>
+<body>
    <div class="content-wrapper-iframe" ><!--右侧灰色背景-->
         <!--框架标签结束-->
       <div class="row"><!--外围框架-->
@@ -190,21 +189,18 @@
 								                </li>
 							            	</ul>
 									    </div>	
-											<!--按钮-->
-											<div class="row mt-15"><!--删格化-->
-									               <p class="center pr-30 mt-30">
-									                   <input type="button" id="update" class="biu-btn  btn-primary  btn-auto  ml-5" value="确  认">
-									                   <input id="add-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5 edit-close" value="取  消">
-									                </p>
-									        </div>
+										<!--按钮-->
+										<div class="row mt-15"><!--删格化-->
+								               <p class="center pr-30 mt-30">
+								                   <input type="button" id="update" class="biu-btn  btn-primary  btn-auto  ml-5" value="确  认">
+								                   <input id="add-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5 edit-close" value="取  消">
+								                </p>
+								        </div>
 									</div>	
-									<div class="eject-mask" id="eject-mask"></div>	
+									<div class="mask" id="eject-mask"></div>	
 								</div>
                             </form>
-                            	
                             <!-- 弹出框 end-->
-                            
-                            
                         </div>
                     </div>
                 </div>
