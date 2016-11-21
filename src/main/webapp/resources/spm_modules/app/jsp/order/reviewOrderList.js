@@ -253,8 +253,6 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				return;
 			}
 			param.orderIds = orderIds.substring(1);
-			alert(param.orderIds);
-			
 			var d = Dialog({
 				content:"是否批量审核通过这些订单？",
 				okValue: '通过',

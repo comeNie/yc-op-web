@@ -31,6 +31,8 @@ public class ExAllOrder {
 	
 	private String InterperName;
 	
+	private String endChgTime;
+	
 	
 	
 	public String getInterperName() {
@@ -208,5 +210,15 @@ public class ExAllOrder {
 	public void setFinishTime(String finishTime) {
 		this.finishTime = finishTime;
 	}
+
+	public String getEndChgTime() {
+		return endChgTime;
+	}
+
+	public void setEndChgTime(String endChgTime) {
+		this.endChgTime = endChgTime;
+	}
+	
+	
 
 }

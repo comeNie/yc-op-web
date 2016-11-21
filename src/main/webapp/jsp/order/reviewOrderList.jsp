@@ -214,7 +214,7 @@
       <td>{{:interperName}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', lockTime)}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', stateChgTime)}}</td>
-      <td></td>
+      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', endChgTime)}}</td>
      <td>{{:statePage}}</td>
      <td><a href="../order/orderdetails?orderId={{:orderId}}">查看</a><a href="javascript:void(0);" class="adopt">通过</a><a href="javascript:void(0);" class="reject">驳回</a></td>
   </tr>                                                                       
