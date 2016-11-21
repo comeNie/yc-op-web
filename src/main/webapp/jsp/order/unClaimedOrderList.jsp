@@ -183,7 +183,7 @@
 			{{if #index ==0}}
 				<td rowspan="{{:~levelSize}}">{{:~chlIdPage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~orderTypePage}}</td>
-				<td rowspan="{{:~levelSize}}">{{:~orderId}}</td>
+				<td rowspan="{{:~levelSize}}"><a href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">{{:~orderId}}</a></td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~orderTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~userName}}</td>
 				<td rowspan="{{:~levelSize}}">
@@ -220,7 +220,7 @@
 			{{if #index ==0}}
 				<td rowspan="{{:~extendSize}}">{{:~chlIdPage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~orderTypePage}}</td>
-				<td rowspan="{{:~extendSize}}">{{:~orderId}}</td>
+				<td rowspan="{{:~extendSize}}"><a href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">{{:~orderId}}</a></td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~orderTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~userName}}</td>
 			{{/if}}
@@ -251,7 +251,7 @@
 	<tr>
 	<td>{{:chlIdPage}}</td>
 	<td>{{:orderTypePage}}</td>
-	<td>{{:orderId}}</td>
+	<td><a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}')">{{:orderId}}</a></td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
 	<td>{{:userName}}</td>
 	<td></td>
