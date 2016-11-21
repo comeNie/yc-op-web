@@ -26,6 +26,7 @@ import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
+import com.ai.opt.sso.client.filter.SSOClientConstants;
 import com.ai.paas.ipaas.ccs.IConfigClient;
 import com.ai.yc.common.api.cache.interfaces.ICacheSV;
 import com.ai.yc.common.api.cache.param.SysParam;
@@ -35,6 +36,7 @@ import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
+import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
 import com.ai.yc.op.web.utils.AmountUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
@@ -391,25 +393,37 @@ public class WaitPayController {
 	 */
 	@RequestMapping("/updatePayState")
 	@ResponseBody
-	public ResponseData<String> updateAttr(String orderId,String remark,String updateFee,String currencyUnit,String payStyle) {
+	public ResponseData<String> updateAttr(HttpServletRequest request,String orderId,String remark,String updateFee,String currencyUnit,String payStyle) {
 		ResponseData<String> responseData = null;
 		IUpdatePayStatusSV iUpdatePayStatusSV = DubboConsumerFactory.getService(IUpdatePayStatusSV.class);
-		UpdatePayStatusRequest request  = new UpdatePayStatusRequest();
-		request.setOperId("123");
-		request.setOrderId(Long.valueOf(orderId));
+		GeneralSSOClientUser user = (GeneralSSOClientUser) request.getSession().getAttribute(SSOClientConstants.USER_SESSION_KEY);
+		UpdatePayStatusRequest payRequest  = new UpdatePayStatusRequest();
+		payRequest.setOperId(user.getUserId());
+		payRequest.setOrderId(Long.valueOf(orderId));
 		OrderFeeVo feeVo = new OrderFeeVo();
 		feeVo.setCurrencyUnit(currencyUnit);
 		feeVo.setPayStyle(payStyle);
 		feeVo.setRemark(remark);
-		feeVo.setTotalFee(Long.valueOf(updateFee));
+		if(currencyUnit==null){
+			responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "修改失败：货币不能为空");
+			return responseData;
+		}else{
+			if(Constants.CURRENCY_UNIT_R.equals(currencyUnit)){
+				//将元转换为厘
+				feeVo.setTotalFee(AmountUtil.YuanToLi(Long.valueOf(updateFee)));
+			}else{
+				feeVo.setTotalFee(Long.valueOf(updateFee));
+			}
+		}
+		
 		feeVo.setAdjustFee(0L);
 		feeVo.setDiscountFee(0L);
 		feeVo.setPaidFee(0L);
 		feeVo.setPayFee(0L);
 		feeVo.setOperDiscountFee(0L);
 		feeVo.setPayStyle(payStyle);
-		request.setOrderFee(feeVo);
-		BaseResponse response = iUpdatePayStatusSV.updatePayStatus(request);
+		payRequest.setOrderFee(feeVo);
+		BaseResponse response = iUpdatePayStatusSV.updatePayStatus(payRequest);
 		ResponseHeader header = response.getResponseHeader();
 		if (header!=null && !header.isSuccess()){
             responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "修改失败:"+header.getResultMessage());
