@@ -35,30 +35,7 @@
 				</div>
 				<!--选项卡1-->
 				<div id="date1">
-					<script id="orderInfoTempl" type="text/x-jsrender">
-						<!--白色背景-->
-						<div class="main-box-body clearfix">
-							
-							{{include tmpl="#baseInfoTempl" /}}
-							
-                           
-							{{include tmpl="#orderFeeTempl" /}}
-							
-						    {{include tmpl="#payInfoTempl" /}}
-
-                            {{include tmpl="#prodInfoTempl" /}}
-              
-                            <div class="bc-ang mb-12">
-                                  {{if mod=='edit'&&displayFlag!='52'&&displayFlag!='90'&&displayFlag!='91'&&displayFlag!='92'}}
-                                   <input id="save" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="保存" />
-				                  {{/if}} 
-                                  <input id="back" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />
-				            </div>
-                            
-                          </div>
-						</div>
-                       
-					</script>
+					
 				</div>
 				<!--选项卡2-->
 				<div id="date2" style="display: none;">
@@ -90,6 +67,22 @@
 	
    </form>
 </body>
+<script id="orderInfoTempl" type="text/x-jsrender">
+	<!--白色背景-->
+	<div class="main-box-body clearfix">
+							
+		    {{include tmpl="#baseInfoTempl" /}}
+			{{include tmpl="#orderFeeTempl" /}}
+		    {{include tmpl="#payInfoTempl" /}}
+            {{include tmpl="#prodInfoTempl" /}}
+            <div class="bc-ang mb-12">
+               {{if mod=='edit'&&displayFlag!='52'&&displayFlag!='90'&&displayFlag!='91'&&displayFlag!='92'}}
+                     <input id="save" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="保存" />
+				     <input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="取消" />
+               {{/if}}      
+			</div>
+    </div>                       
+</script>
 <script id="orderStateChgTempl" type="text/x-jsrender">
   {{for orderStateChgs}}
    <tr>

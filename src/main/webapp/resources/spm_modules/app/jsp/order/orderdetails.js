@@ -15,6 +15,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 
 	var ajaxController = new AjaxController();
 	
+	var cache = null;
+	
 	var showErrorDialog = function(error){
     	var d = Dialog({
 			content:error,
@@ -55,7 +57,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			"change .price":"_getTotalPrice",
 			"change #totalFee":"_totalFeeChange",
 			"click #save":"_save",
-			"click #back":"_back"
+			"click #cancel":"_cancel"
 		},
 		// 重写父类
 		setup : function() {
@@ -104,8 +106,10 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				}
 			});
 		},
-        _back:function(){
-        	history.go(-1);
+        _cancel:function(){
+        	if(cache){
+        		this._initView(cache);
+        	}
 		},
 		_getInterperLevel:function(){
 			var orderLevel = $("#orderLevel").val();
@@ -305,59 +309,63 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				url: _base + "/order/queryOrderDetails",
 				data: param,
 				success: function (rs) {
-					if ("1" === rs.statusCode) {
-						var model = $("#mod").val();
-						rs.data.mod = model;
-						var prodFiles = rs.data.prodFiles;
-						if(prodFiles){
-							for(var i=0;i<prodFiles.length;i++){
-								prodFiles[i].fileNum = prodFiles.length;
-								prodFiles[i].fileSubmitTime =  rs.data.orderTime;
-								prodFiles[i].translateFileSubmitTime = rs.data.prod.updateTime;
-								prodFiles[i].state = rs.data.state;
-								prodFiles[i].mod = model;
-							}
-							rs.data.prodFiles = prodFiles;
-						}
-						var orderInfoHtml = $("#orderInfoTempl").render(rs.data);
-						$("#date1").html(orderInfoHtml);
-						
-						
-						var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
-						$("#orderStateChgTable").html(orderStateChgHtml);
-						
-						//初始化用途 领域下拉选择框
-						if (rs.data.displayFlag=='11'||rs.data.displayFlag=='13'){
-							_this.initDomainSelect('useCode',rs.data.prod.useCode);
-							_this.initPurposeSelect('fieldCode',rs.data.prod.fieldCode);
-						}
-						_this._getInterperLevel();
-						
-						//初始化口译类型checkBox
-						var prodLevels = rs.data.prodLevels;
-						for(var i=0;i<prodLevels.length;i++){
-							var checkBox = $(".checkbox-"+prodLevels[i].translateLevel);
-							if(checkBox){
-								checkBox.attr("checked","checked");
-							}
-						}
-						
-						//初始化单价
-						_this._getWordPrice(rs.data.prod.useCode,rs.data.prodExtends[0].langungePair,rs.data.prodLevels[0].translateLevel);
-						
-						_this._initUploaderBtn();
-						
-						var formValidator =_this._initValidate();
-						$(":input").bind("focusout",function(){
-							formValidator.element(this);
-						});
-						
-					}else{
-						showErrorDialog(rs.statusInfo);
-					}
+					cache = rs;
+					_this._initView(rs);
 				}
 			    
 			});
+		},
+		_initView:function(rs){
+			var _this = this;
+			if ("1" === rs.statusCode) {
+				var model = $("#mod").val();
+				rs.data.mod = model;
+				var prodFiles = rs.data.prodFiles;
+				if(prodFiles){
+					for(var i=0;i<prodFiles.length;i++){
+						prodFiles[i].fileNum = prodFiles.length;
+						prodFiles[i].fileSubmitTime =  rs.data.orderTime;
+						prodFiles[i].translateFileSubmitTime = rs.data.prod.updateTime;
+						prodFiles[i].state = rs.data.state;
+						prodFiles[i].mod = model;
+					}
+					rs.data.prodFiles = prodFiles;
+				}
+				var orderInfoHtml = $("#orderInfoTempl").render(rs.data);
+				$("#date1").html(orderInfoHtml);
+				
+				var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
+				$("#orderStateChgTable").html(orderStateChgHtml);
+				
+				//初始化用途 领域下拉选择框
+				if (rs.data.displayFlag=='11'||rs.data.displayFlag=='13'){
+					_this.initDomainSelect('useCode',rs.data.prod.useCode);
+					_this.initPurposeSelect('fieldCode',rs.data.prod.fieldCode);
+				}
+				_this._getInterperLevel();
+				
+				//初始化口译类型checkBox
+				var prodLevels = rs.data.prodLevels;
+				for(var i=0;i<prodLevels.length;i++){
+					var checkBox = $(".checkbox-"+prodLevels[i].translateLevel);
+					if(checkBox){
+						checkBox.attr("checked","checked");
+					}
+				}
+				
+				//初始化单价
+				_this._getWordPrice(rs.data.prod.useCode,rs.data.prodExtends[0].langungePair,rs.data.prodLevels[0].translateLevel);
+				
+				_this._initUploaderBtn();
+				
+				var formValidator =_this._initValidate();
+				$(":input").bind("focusout",function(){
+					formValidator.element(this);
+				});
+				
+			}else{
+				showErrorDialog(rs.statusInfo);
+			}
 		},
 		initDomainSelect:function(id,defaultVal){
 			var select = $("#"+id);
