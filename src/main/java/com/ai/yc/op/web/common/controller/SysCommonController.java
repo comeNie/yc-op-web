@@ -28,11 +28,11 @@ public class SysCommonController {
 
 	@RequestMapping(value = "/querySysDomainList")
 	@ResponseBody
-	public ResponseData<List<SysDomainVo>>  querySysDomainList(String flag){
+	public ResponseData<List<SysDomainVo>>  querySysDomainList(){
 		IQuerySysDomainSV iQuerySysDomainSV  = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
 		QuerySysDomainListRes res = null;
 		try {
-			res = iQuerySysDomainSV.querySysDomainList("0".equals(flag)?"zh_CN":"en_EN");
+			res = iQuerySysDomainSV.querySysDomainList();
 		} catch (SystemException e) {
 			log.error("系统错误，请稍后重试", e);
 			return new ResponseData<List<SysDomainVo>>(
@@ -56,11 +56,11 @@ public class SysCommonController {
 	
 	@RequestMapping(value = "/querySysPurposeList")
 	@ResponseBody
-	public ResponseData<List<SysPurposeVo>>  querySysPurposeList(String flag){
+	public ResponseData<List<SysPurposeVo>>  querySysPurposeList(){
 		IQuerySysPurposeSV iQuerySysPurposeSV  = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
 		QuerySysPurposeListRes res = null;
 		try {
-			res = iQuerySysPurposeSV.querySysPurposeList("0".equals(flag)?"zh_CN":"en_EN");
+			res = iQuerySysPurposeSV.querySysPurposeList();
 		} catch (SystemException e) {
 			log.error("系统错误，请稍后重试", e);
 			return new ResponseData<List<SysPurposeVo>>(

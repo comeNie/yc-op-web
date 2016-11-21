@@ -328,8 +328,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 						
 						//初始化用途 领域下拉选择框
 						if (rs.data.displayFlag=='11'||rs.data.displayFlag=='13'){
-							_this.initDomainSelect('useCode',rs.data.flag,rs.data.prod.useCode);
-							_this.initPurposeSelect('fieldCode',rs.data.flag,rs.data.prod.fieldCode);
+							_this.initDomainSelect('useCode',rs.data.prod.useCode);
+							_this.initPurposeSelect('fieldCode',rs.data.prod.fieldCode);
 						}
 						_this._getInterperLevel();
 						
@@ -359,13 +359,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			    
 			});
 		},
-		initDomainSelect:function(id,flag,defaultVal){
+		initDomainSelect:function(id,defaultVal){
 			var select = $("#"+id);
-			if(!select||!flag){
-				return;
-			}
 			var param = {};
-			param.flag = flag;
 			ajaxController.ajax({
 				type: "post",
 				processing: false,
@@ -390,13 +386,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				}
 			});
 		},
-		initPurposeSelect:function(id,flag,defaultVal){
+		initPurposeSelect:function(id,defaultVal){
 			var select = $("#"+id);
-			if(!select||!flag){
-				return;
-			}
 			var param = {};
-			param.flag = flag;
 			ajaxController.ajax({
 				type: "post",
 				processing: false,
