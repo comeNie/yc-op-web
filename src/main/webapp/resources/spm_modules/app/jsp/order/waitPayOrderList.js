@@ -100,7 +100,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 				success : function(data) {
 					var d=data.data;
 					$.each(d,function(index,item){
-						var langugeName = d[index].languaNmae+"->"+d[index].transTypeName+"->"+d[index].sourceCn+"->"+d[index].targetCn;
+						var langugeName = d[index].transTypeName+"->"+d[index].sourceCn+"->"+d[index].targetCn;
 						var langugeCode = d[index].duadId;
 						$("#langugePaire").append('<option value="'+langugeCode+'">'+langugeName+'</option>');
 					})
