@@ -192,7 +192,7 @@
       <td><span><input type="checkbox" value="{{:orderId}}" class="checkbox-medium single"/></span></td>
   	  <td>{{:chlIdPage}}</td>
       <td>{{:orderTypePage}}</td>
-      <td><a href="../order/orderdetails?orderId={{:orderId}}">{{:orderId}}</a></td>
+      <td><a href="../order/orderdetails?mod=edit&orderId={{:orderId}}">{{:orderId}}</a></td>
  	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
       <td>{{:userName}}</td>
  	  <td>
@@ -216,7 +216,7 @@
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', stateChgTime)}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}</td>
      <td>{{:statePage}}</td>
-     <td><a href="../order/orderdetails?orderId={{:orderId}}">查看</a><a href="javascript:void(0);" class="adopt">通过</a><a href="javascript:void(0);" class="reject">驳回</a></td>
+     <td><a href="../order/orderdetails?mod=edit&orderId={{:orderId}}">查看</a><a href="javascript:void(0);" class="adopt">通过</a><a href="javascript:void(0);" class="reject">驳回</a></td>
   </tr>                                                                       
 </script> 
   <script type="text/javascript">
