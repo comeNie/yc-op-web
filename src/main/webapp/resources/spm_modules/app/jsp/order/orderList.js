@@ -323,13 +323,8 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     		$('#add-samll').slideUp(150);
     	},
     	_detailPage:function(orderId,state){
-    		if(state==11 || state==13){
-    			window.location.href = _base+"/order/orderdetails?orderId="
-	            + orderId+'&mod=edit';
-    		}else{
-    			window.location.href = _base+"/order/orderdetails?orderId="
-	            + orderId;
-    		}
+			window.location.href = _base+"/order/orderdetails?orderId="
+            + orderId+'&mod=edit';
 		}
     });
     

@@ -173,7 +173,7 @@ define('app/jsp/order/doneOrderList', function (require, exports, module) {
     	},
     	_detailPage:function(orderId){
     			window.location.href = _base+"/order/orderdetails?orderId="
-	            + orderId;
+	            + orderId+'&mod=edit';
 		}
 		
     });

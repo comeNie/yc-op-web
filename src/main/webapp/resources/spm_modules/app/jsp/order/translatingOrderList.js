@@ -203,7 +203,7 @@ define('app/jsp/order/translatingOrderList', function (require, exports, module)
     	},
     	_detailPage:function(orderId){
 			window.location.href = _base+"/order/orderdetails?orderId="
-            + orderId;
+            + orderId+'&mod=edit';
     	}
 		
     });
