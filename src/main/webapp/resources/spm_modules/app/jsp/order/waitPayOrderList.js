@@ -37,7 +37,9 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
             "click #search":"_searchOrderList",
             "click #export":"_export",
             "click #update":"_updatePayState",
-            "click #add-close":"_closeDialog"
+            "click #add-close":"_closeDialog",
+            "click #colseImage":"_closeDialog"
+            
         },
     	//重写父类
     	setup: function () {

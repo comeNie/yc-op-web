@@ -36,7 +36,8 @@ define('app/jsp/order/orderList', function (require, exports, module) {
             "click #search":"_searchOrderList",
             "click #update":"_updatePayState",
             "click #export":"_export",
-            "click #add-close":"_closeDialog"
+            "click #add-close":"_closeDialog",
+            "click #colseImage":"_closeDialog"
             
         },
     	//重写父类

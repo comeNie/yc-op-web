@@ -170,7 +170,7 @@
 									<div class="eject-medium" id="add-samll">
 										<div class="eject-medium-title">
 											<p>修改支付状态</p>
-											<p class="img"><i class="fa fa-times"></i></p>
+											<p class="img" id="colseImage"><i class="fa fa-times"></i></p>
 										</div>
 										<div class="form-label mt-10">
 							           		<ul>
