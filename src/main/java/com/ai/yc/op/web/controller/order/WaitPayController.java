@@ -278,9 +278,9 @@ public class WaitPayController {
 		        		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				exOrder.setTotalFee(vo.getTotalFee()+"USD$");
+                				exOrder.setTotalFee(vo.getTotalFee()+"$");
                 			}else{
-                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"CNY¥");
+                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
                 			}
                 		}
                 		//下单时间
