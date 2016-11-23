@@ -27,7 +27,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				this.close();
 			}
 		});
-		d.show();
+		d.showModal();
     }
 	
 	var showSuccessDialog = function(error){
@@ -40,7 +40,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				this.close();
 			}
 		});
-		d.show();
+		d.showModal();
     }
     
 	var orderDetailsPager = Widget.extend({
@@ -98,11 +98,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				url: _base + "/order/updateOrderInfo",
 				data: param,
 				success: function (rs) {
-					if ("1" === rs.statusCode) {
-						showSuccessDialog(rs.statusInfo);
-					}else{
-						showErrorDialog(rs.statusInfo);
-					}
+					showSuccessDialog(rs.statusInfo);
 				}
 			});
 		},
@@ -181,11 +177,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				url: _base + "/order/getOrderLevel",
 				data: param,
 				success: function (rs) {
-					if ("1" === rs.statusCode) {
-						$("#orderLevel").val(rs.data);
-					}else{
-						//showErrorDialog(rs.statusInfo);
-					}
+					$("#orderLevel").val(rs.data);
 				}
 			});
 			
@@ -214,22 +206,17 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 					url: _base + "/order/queryAutoOffer",
 					data: param,
 					success: function (rs) {
-						if ("1" === rs.statusCode) {
-							var li = rs.data.price;
+						var li = rs.data.price;	
+						if(li>0){
 							
-							if(li>0){
-								
-								var yuan = _this.fmoney(parseInt(li)/1000, 2);
-								
-								wordPrice.val(yuan);
-								var currencyUnit = "元";
-								if(rs.data.currencyUnit=='2'){
-									currencyUnit = "美元";
-						        }
-								priceShow.html( _this.fmoney(yuan*1000, 2)+currencyUnit+"/1000字"); 
-							}
-						}else{
-							showErrorDialog(rs.statusInfo);
+							var yuan = _this.fmoney(parseInt(li)/1000, 2);
+							
+							wordPrice.val(yuan);
+							var currencyUnit = "元";
+							if(rs.data.currencyUnit=='2'){
+								currencyUnit = "美元";
+					        }
+							priceShow.html( _this.fmoney(yuan*1000, 2)+currencyUnit+"/1000字"); 
 						}
 					}
 				});
@@ -317,55 +304,50 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		},
 		_initView:function(rs){
 			var _this = this;
-			if ("1" === rs.statusCode) {
-				var model = $("#mod").val();
-				rs.data.mod = model;
-				var prodFiles = rs.data.prodFiles;
-				if(prodFiles){
-					for(var i=0;i<prodFiles.length;i++){
-						prodFiles[i].fileNum = prodFiles.length;
-						prodFiles[i].fileSubmitTime =  rs.data.orderTime;
-						prodFiles[i].translateFileSubmitTime = rs.data.prod.updateTime;
-						prodFiles[i].state = rs.data.state;
-						prodFiles[i].mod = model;
-					}
-					rs.data.prodFiles = prodFiles;
+			var model = $("#mod").val();
+			rs.data.mod = model;
+			var prodFiles = rs.data.prodFiles;
+			if(prodFiles){
+				for(var i=0;i<prodFiles.length;i++){
+					prodFiles[i].fileNum = prodFiles.length;
+					prodFiles[i].fileSubmitTime =  rs.data.orderTime;
+					prodFiles[i].translateFileSubmitTime = rs.data.prod.updateTime;
+					prodFiles[i].state = rs.data.state;
+					prodFiles[i].mod = model;
 				}
-				var orderInfoHtml = $("#orderInfoTempl").render(rs.data);
-				$("#date1").html(orderInfoHtml);
-				
-				var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
-				$("#orderStateChgTable").html(orderStateChgHtml);
-				
-				//初始化用途 领域下拉选择框
-				if (rs.data.displayFlag=='11'||rs.data.displayFlag=='13'){
-					_this.initDomainSelect('useCode',rs.data.prod.useCode);
-					_this.initPurposeSelect('fieldCode',rs.data.prod.fieldCode);
-				}
-				_this._getInterperLevel();
-				
-				//初始化口译类型checkBox
-				var prodLevels = rs.data.prodLevels;
-				for(var i=0;i<prodLevels.length;i++){
-					var checkBox = $(".checkbox-"+prodLevels[i].translateLevel);
-					if(checkBox){
-						checkBox.attr("checked","checked");
-					}
-				}
-				
-				//初始化单价
-				_this._getWordPrice(rs.data.prod.useCode,rs.data.prodExtends[0].langungePair,rs.data.prodLevels[0].translateLevel);
-				
-				_this._initUploaderBtn();
-				
-				var formValidator =_this._initValidate();
-				$(":input").bind("focusout",function(){
-					formValidator.element(this);
-				});
-				
-			}else{
-				showErrorDialog(rs.statusInfo);
+				rs.data.prodFiles = prodFiles;
 			}
+			var orderInfoHtml = $("#orderInfoTempl").render(rs.data);
+			$("#date1").html(orderInfoHtml);
+			
+			var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
+			$("#orderStateChgTable").html(orderStateChgHtml);
+			
+			//初始化用途 领域下拉选择框
+			if (rs.data.displayFlag=='11'||rs.data.displayFlag=='13'){
+				_this.initDomainSelect('useCode',rs.data.prod.useCode);
+				_this.initPurposeSelect('fieldCode',rs.data.prod.fieldCode);
+			}
+			_this._getInterperLevel();
+			
+			//初始化口译类型checkBox
+			var prodLevels = rs.data.prodLevels;
+			for(var i=0;i<prodLevels.length;i++){
+				var checkBox = $(".checkbox-"+prodLevels[i].translateLevel);
+				if(checkBox){
+					checkBox.attr("checked","checked");
+				}
+			}
+			
+			//初始化单价
+			_this._getWordPrice(rs.data.prod.useCode,rs.data.prodExtends[0].langungePair,rs.data.prodLevels[0].translateLevel);
+			
+			_this._initUploaderBtn();
+			
+			var formValidator =_this._initValidate();
+			$(":input").bind("focusout",function(){
+				formValidator.element(this);
+			});
 		},
 		initDomainSelect:function(id,defaultVal){
 			var select = $("#"+id);
@@ -377,20 +359,16 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				url: _base + "/sys/querySysDomainList",
 				data: param,
 				success: function (rs) {
-					if ("1" === rs.statusCode) {
-						var list = rs.data;
-						var options = "";
-						for(var i=0;i<list.length;i++){
-							if(defaultVal&&list[i].domainId==defaultVal){
-								options = options + "<option value='"+list[i].domainId+"' selected='selected'>"+list[i].domainCn+"</option>";
-							}else{
-								options = options + "<option value='"+list[i].domainId+"'>"+list[i].domainCn+"</option>";
-							}
+					var list = rs.data;
+					var options = "";
+					for(var i=0;i<list.length;i++){
+						if(defaultVal&&list[i].domainId==defaultVal){
+							options = options + "<option value='"+list[i].domainId+"' selected='selected'>"+list[i].domainCn+"</option>";
+						}else{
+							options = options + "<option value='"+list[i].domainId+"'>"+list[i].domainCn+"</option>";
 						}
-						select.append(options);
-					}else{
-						showErrorDialog(rs.statusInfo);
 					}
+					select.append(options);
 				}
 			});
 		},
@@ -404,20 +382,16 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				url: _base + "/sys/querySysPurposeList",
 				data: param,
 				success: function (rs) {
-					if ("1" === rs.statusCode) {
-						var list = rs.data;
-						var options = "";
-						for(var i=0;i<list.length;i++){
-							if(defaultVal&&list[i].purposeId==defaultVal){
-								options = options + "<option value='"+list[i].purposeId+"' selected='selected'>"+list[i].purposeCn+"</option>";
-							}else{
-								options = options + "<option value='"+list[i].purposeId+"'>"+list[i].purposeCn+"</option>";
-							}
+					var list = rs.data;
+					var options = "";
+					for(var i=0;i<list.length;i++){
+						if(defaultVal&&list[i].purposeId==defaultVal){
+							options = options + "<option value='"+list[i].purposeId+"' selected='selected'>"+list[i].purposeCn+"</option>";
+						}else{
+							options = options + "<option value='"+list[i].purposeId+"'>"+list[i].purposeCn+"</option>";
 						}
-						select.append(options);
-					}else{
-						showErrorDialog(rs.statusInfo);
 					}
+					select.append(options);
 				}
 			});
 		},

@@ -27,7 +27,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				this.close();
 			}
 		});
-		d.show();
+		d.showModal();
     }
 	
 	var showSuccessDialog = function(error){
@@ -40,7 +40,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				this.close();
 			}
 		});
-		d.show();
+		d.showModal();
     }
 	
     //定义页面组件类
@@ -264,7 +264,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				cancelValue: '取消',
 			    cancel: function () {}
 			});
-			d.show();
+			d.showModal();
 			
 		},
 		rejectReviewOrder:function(param){
@@ -282,7 +282,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				cancelValue: '取消',
 			    cancel: function () {}
 			});
-			d.show();
+			d.showModal();
 		},
 		adoptReviewOrder:function(param){
 			var _this = this;
@@ -297,7 +297,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				cancelValue: '取消',
 			    cancel: function () {}
 			});
-			d.show();
+			d.showModal();
 		},
 		handReviewOrder:function(param){
 			var _this=this;
@@ -308,11 +308,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				url: _base + "/order/handReviewOrder",
 				data: param,
 				success: function (rs) {
-					if ("1" === rs.statusCode) {
-						_this._searchOrderList();
-					}else{
-						showErrorDialog(rs.statusInfo);
-					}
+					_this._searchOrderList();
 				}
 			});
 		},

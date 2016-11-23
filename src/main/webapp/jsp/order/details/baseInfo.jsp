@@ -113,7 +113,7 @@
 										<p>{{:~timesToFmatter(orderFee.updateTime)}}</p>
 									</li>
 								  {{/if}}
-                                  {{if displayFlag!='11'&&displayFlag!='13'}}
+                                  {{if displayFlag!='11'&&displayFlag!='13'&&displayFlag!='91'}}
 									<li class="col-md-6">
 										<p class="word">支付方式：</p>
 										<p>{{:~getPayStyleName(orderFee.payStyle)}}</p>
@@ -185,7 +185,7 @@
 										</p>
 									</li>
                                    {{/if}}
-                                   {{if displayFlag!='11'&&displayFlag!='13'}}
+                                   {{if displayFlag!='11'&&displayFlag!='13'&&displayFlag!='91'}}
                                     <li class="col-md-6">
 										<p class="word">支付备注：</p>
 										<p class="col-md-8">
