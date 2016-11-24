@@ -13,7 +13,7 @@ docker push 10.19.13.18:5000/yc-op-web:v1.0
 3. 运行镜像
 #--net=host  表示为主机(host)模式  去掉该配置，默认为桥接(bridge)模式
 #-e 代表需要设置的环境变量
-docker run -d --name yc-op-web  -p 14141:8080 -e "REST_REGISTRY_ADDR=10.19.13.19:29181"  -e "casServerLoginUrl=http://10.19.13.19:14125/login"  -e "casServerUrlPrefix=http://10.19.13.19:14125"   -e "serverName=http://10.19.13.19:14141"   -e "logOutServerUrl=http://10.19.13.19:14125/logout"   -e "logOutBackUrl=http://10.19.13.19:14125"   -e "casServerLoginUrl_Inner=http://10.19.13.19:14125/login"  -e "casServerUrlPrefix_Inner=http://10.19.13.19:14125"   -e "serverName_Inner=http://10.19.13.19:14141"   -e "logOutServerUrl_Inner=http://10.19.13.19:14125/logout"   -e "logOutBackUrl_Inner=http://10.19.13.19:14125"    -e "innerDomains=changhong.com" -e "SDK_MODE=0" -e "CCS_NAME=aiopt-yc-op" -e "ZK_ADDR=10.19.13.13:29181"   10.19.13.18:5000/yc-op-web:v1.0  
+docker run -d --name yc-op-web  -p 14130:8080 -e "REST_REGISTRY_ADDR=10.19.13.23:29181"  -e "casServerLoginUrl=http://10.19.13.14:14125/uac/login"  -e "casServerUrlPrefix=http://10.19.13.24:14125/uac/"   -e "serverName=http://10.19.13.20:14130"   -e "logOutServerUrl=http://10.19.13.24:14125/uac/logout"   -e "logOutBackUrl=http://10.19.13.19:14125"   -e "casServerLoginUrl_Inner=http://10.19.13.24:14125/uac/login"  -e "casServerUrlPrefix_Inner=http://10.19.13.24:14125/uac"   -e "serverName_Inner=http://10.19.13.20:14130"   -e "logOutServerUrl_Inner=http://10.19.13.24:14125/uac/logout"   -e "logOutBackUrl_Inner=http://10.19.13.24:14125/uac/logout"    -e "innerDomains=yicloud.com" -e "SDK_MODE=0" -e "CCS_NAME=aiopt-yc-op" -e "ZK_ADDR=10.19.13.13:29181"   10.19.13.18:5000/yc-op-web:v1.0_2  
 #查看镜像启动日志
 docker logs yc-op-web-v1.0
 #进入容器，查看镜像内部的情况
