@@ -14,7 +14,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 	require("app/util/aiopt-validate-ext");
     
     require("opt-paging/aiopt.pagination");
-    require("twbs-pagination/jquery.twbsPagination.min");
+    require("twbs-pagination/jquery.twbsPagination");
     require('bootstrap/js/modal');
     var SendMessageUtil = require("app/util/sendMessage");
     //实例化AJAX控制处理对象
