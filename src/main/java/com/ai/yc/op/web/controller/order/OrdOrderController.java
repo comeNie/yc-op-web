@@ -39,8 +39,10 @@ import com.ai.yc.order.api.updateorder.param.UProdVo;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderResponse;
 import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
+import com.ai.yc.user.api.userservice.param.SearchYCTranslatorRequest;
 import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
 import com.ai.yc.user.api.userservice.param.YCLSPInfoReponse;
+import com.ai.yc.user.api.userservice.param.YCTranslatorInfoResponse;
 import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
 import com.ai.yc.user.api.userservice.param.searchYCLSPInfoRequest;
 
@@ -111,10 +113,10 @@ public class OrdOrderController {
 			}
 		}
 		if(!StringUtil.isBlank(details.getInterperId())){
-			SearchYCUserRequest searchYCUserReq = new SearchYCUserRequest();
-			searchYCUserReq.setUserId(details.getUserId());
+			SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
+			translatorRequest.setTranslatorId(details.getInterperId());
 			try {
-				YCUserInfoResponse interper = iYCUserServiceSV.searchYCUserInfo(searchYCUserReq);
+				YCTranslatorInfoResponse  interper = iYCUserServiceSV.searchYCTranslatorInfo(translatorRequest);
 				details.setInterperName(interper.getNickname());
 			} catch (Exception e) {
 				log.error("获取译员信息失败", e);
