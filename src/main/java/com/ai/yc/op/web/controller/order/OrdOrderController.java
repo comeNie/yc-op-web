@@ -38,13 +38,14 @@ import com.ai.yc.order.api.updateorder.param.UProdLevelVo;
 import com.ai.yc.order.api.updateorder.param.UProdVo;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
 import com.ai.yc.order.api.updateorder.param.UpdateOrderResponse;
+import com.ai.yc.translator.api.translatorservice.interfaces.IYCTranslatorServiceSV;
+import com.ai.yc.translator.api.translatorservice.param.SearchYCTranslatorRequest;
+import com.ai.yc.translator.api.translatorservice.param.YCLSPInfoReponse;
+import com.ai.yc.translator.api.translatorservice.param.YCTranslatorInfoResponse;
+import com.ai.yc.translator.api.translatorservice.param.searchYCLSPInfoRequest;
 import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
-import com.ai.yc.user.api.userservice.param.SearchYCTranslatorRequest;
 import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
-import com.ai.yc.user.api.userservice.param.YCLSPInfoReponse;
-import com.ai.yc.user.api.userservice.param.YCTranslatorInfoResponse;
 import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
-import com.ai.yc.user.api.userservice.param.searchYCLSPInfoRequest;
 
 @Controller
 @RequestMapping("/order")
@@ -102,11 +103,12 @@ public class OrdOrderController {
 				log.error("获取用户信息失败", e);
 			}
 		}
+		IYCTranslatorServiceSV iYCTranslatorServiceSV = DubboConsumerFactory.getService(IYCTranslatorServiceSV.class);
 		if(details.getLspId()!=null){
 			searchYCLSPInfoRequest lSPInfoRequest = new searchYCLSPInfoRequest();
 			lSPInfoRequest.setLspId(String.valueOf(details.getLspId()));
 			try {
-				YCLSPInfoReponse lsp = iYCUserServiceSV.searchLSPInfo(lSPInfoRequest);
+				YCLSPInfoReponse lsp = iYCTranslatorServiceSV.searchLSPInfo(lSPInfoRequest);
 				details.setLspName(lsp.getLspName());
 			} catch (Exception e) {
 				log.error("获取lsp信息失败", e);
@@ -116,7 +118,7 @@ public class OrdOrderController {
 			SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
 			translatorRequest.setTranslatorId(details.getInterperId());
 			try {
-				YCTranslatorInfoResponse  interper = iYCUserServiceSV.searchYCTranslatorInfo(translatorRequest);
+				YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
 				details.setInterperName(interper.getNickname());
 			} catch (Exception e) {
 				log.error("获取译员信息失败", e);

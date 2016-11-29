@@ -102,7 +102,7 @@ dependencies {
 	compile 'com.ai.yc.common:sysduad:1.0-SNAPSHOT'
 	/********************用户中心*************************/
 	compile 'com.ai.yc.user:userservice:1.0-SNAPSHOT'
-	    
+	compile 'com.ai.yc.translator:translatorservice:1.0-SNAPSHOT'
 	
 	
 }
