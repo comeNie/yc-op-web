@@ -57,7 +57,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			"change .price":"_getTotalPrice",
 			"change #totalFee":"_totalFeeChange",
 			"click #save":"_save",
-			"click #cancel":"_cancel"
+			"click #cancel":"_cancel",
+			"change #useCode":"_changeWordPrice",
+			"change #translateLevel":"_changeWordPrice"
 		},
 		// 重写父类
 		setup : function() {
@@ -182,7 +184,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			});
 			
 		},
-		_getWordPrice:function(useCode, duadId, translateLevel){
+		_getWordPrice:function(useCode, duadId, translateLevel,changeTotalPrice){
 			var _this = this;
 			var priceShow = $("#priceShow");
 			var wordPrice = $("#wordPrice");
@@ -217,6 +219,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 								currencyUnit = "美元";
 					        }
 							priceShow.html( _this.fmoney(yuan*1000, 2)+currencyUnit+"/1000字"); 
+							if(changeTotalPrice){
+								_this._getTotalPrice();
+							}
 						}
 					}
 				});
@@ -302,6 +307,13 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			    
 			});
 		},
+		_changeWordPrice:function(){
+			var useCode = $("#useCode").val();
+			var translateLevel = $("#translateLevel").val();
+			if(cache&&useCode&&translateLevel){
+				this._getWordPrice(useCode,cache.data.prodExtends[0].langungePair,translateLevel,false);
+			}
+		},
 		_initView:function(rs){
 			var _this = this;
 			var model = $("#mod").val();
@@ -325,8 +337,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			
 			//初始化用途 领域下拉选择框
 			if (rs.data.displayFlag=='11'||rs.data.displayFlag=='13'){
-				_this.initDomainSelect('useCode',rs.data.prod.useCode);
-				_this.initPurposeSelect('fieldCode',rs.data.prod.fieldCode);
+				_this.initDomainSelect('fieldCode',rs.data.prod.useCode);
+				_this.initPurposeSelect('useCode',rs.data.prod.fieldCode);
 			}
 			_this._getInterperLevel();
 			
@@ -340,7 +352,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			}
 			
 			//初始化单价
-			_this._getWordPrice(rs.data.prod.useCode,rs.data.prodExtends[0].langungePair,rs.data.prodLevels[0].translateLevel);
+			_this._getWordPrice(rs.data.prod.useCode,rs.data.prodExtends[0].langungePair,rs.data.prodLevels[0].translateLevel,false);
 			
 			_this._initUploaderBtn();
 			

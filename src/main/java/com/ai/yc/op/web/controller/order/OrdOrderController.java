@@ -104,7 +104,7 @@ public class OrdOrderController {
 			}
 		}
 		IYCTranslatorServiceSV iYCTranslatorServiceSV = DubboConsumerFactory.getService(IYCTranslatorServiceSV.class);
-		if(details.getLspId()!=null){
+		if(!StringUtil.isBlank(details.getLspId())){
 			searchYCLSPInfoRequest lSPInfoRequest = new searchYCLSPInfoRequest();
 			lSPInfoRequest.setLspId(details.getLspId());
 			try {
