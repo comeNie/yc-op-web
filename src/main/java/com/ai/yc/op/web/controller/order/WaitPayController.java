@@ -410,7 +410,7 @@ public class WaitPayController {
 		}else{
 			if(Constants.CURRENCY_UNIT_R.equals(currencyUnit)){
 				//将元转换为厘
-				feeVo.setTotalFee(AmountUtil.YuanToLi(Long.valueOf(updateFee)));
+				feeVo.setTotalFee(AmountUtil.YToLi(updateFee));
 			}else{
 				feeVo.setTotalFee(Long.valueOf(updateFee));
 			}
