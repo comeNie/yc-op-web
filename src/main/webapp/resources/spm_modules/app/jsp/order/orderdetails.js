@@ -185,6 +185,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			
 		},
 		_getWordPrice:function(useCode, duadId, translateLevel,changeTotalPrice){
+			if(!useCode||!duadId){
+				return;
+			}
 			var _this = this;
 			var priceShow = $("#priceShow");
 			var wordPrice = $("#wordPrice");
