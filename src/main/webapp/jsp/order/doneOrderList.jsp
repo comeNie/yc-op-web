@@ -173,7 +173,7 @@
 							{{if ~ordProdExtendList!=null}}
 								{{for ~ordProdExtendList}}
       								<tr>
-      									<td>{{:langungePairChName}}</td>	
+      									<td class="new-td bot-none">{{:langungePairChName}}</td>	
       								</tr>
 								{{/for}}
 							{{/if}}
@@ -215,7 +215,7 @@
 							{{if ~ordTransLevelList!=null}}
 								{{for ~ordTransLevelList}}
       								<tr>
-      									<td >{{:translateLevelPage}}</td>	
+      									<td class="new-td bot-none">{{:translateLevelPage}}</td>	
       								</tr>
 								{{/for}}
 							{{/if}}

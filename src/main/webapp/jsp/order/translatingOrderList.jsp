@@ -190,7 +190,7 @@
 				{{if ordProdExtendList!=null}}
 					{{for ordProdExtendList}}
       					<tr>
-      						<td class="new-td" style="">{{:langungePairChName}}</td>	
+      						<td class="new-td bot-none">{{:langungePairChName}}</td>	
       					</tr>
 					{{/for}}
 				{{/if}}
