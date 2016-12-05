@@ -165,9 +165,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			}else{
 				param.fee = totalFee;
 			}
-			if(!translateLevel instanceof Array){
-				param.translateLevel = translateLevel;
-			}
+			param.translateLevel = translateLevel;
 			param.translateType = translateType;
 			if(isUrgent){
 				param.isUrgent = 'N';
