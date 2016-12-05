@@ -150,10 +150,14 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			this._getOrderLevel(null);
 		},
 		_getOrderLevel:function(fee){
+			var translateType = $("#translateType").val();
+			if(translateType=='2'){
+				return;
+			}
 			var _this = this;
 			var totalFee = $("#totalFee").val();
 			var translateLevel = $("#translateLevel").val();
-			var translateType = $("#translateType").val();
+			
 			var isUrgent = $("#isUrgent").val();
 			var param = {};
 			if(fee){
