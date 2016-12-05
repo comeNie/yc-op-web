@@ -161,9 +161,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			}else{
 				param.fee = totalFee;
 			}
-			if(translateLevel instanceof Array){
-				param.translateLevel = translateLevel[0];
-			}else{
+			if(!translateLevel instanceof Array){
 				param.translateLevel = translateLevel;
 			}
 			param.translateType = translateType;
@@ -462,11 +460,13 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"prod.meetingSum":{
     					required:true,
-    					digits:true
+    					digits:true,
+    					max:100
     				},
     				"prod.interperSum":{
     					required:true,
-    					digits:true
+    					digits:true,
+    					max:100
     				},
     				"startTime":{
     					required:true,
@@ -536,11 +536,13 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"prod.meetingSum":{
     					required:"请输入会场数量",
-    					digits:"会场数量必须为整数"
+    					digits:"会场数量必须为整数",
+    					max:"会场数量不能超过100"
     				},
     				"prod.interperSum":{
     					required:"请输入译员数量",
-    					digits:"译员数量必须为整数"
+    					digits:"译员数量必须为整数",
+    					max:"译员数量不能超过100"
     				},
     				"startTime":{
     					required:"请选择开始时间",

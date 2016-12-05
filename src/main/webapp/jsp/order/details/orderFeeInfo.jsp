@@ -222,6 +222,7 @@
 										<p class="word">译员性别：</p>
 										<p>
 										   	<select id="interperGen" name="prod.interperGen" class="select select-medium">
+                                                <option value="">不限</option>
 										   	    <option value="0" {{if prod.interperGen=='0'}}selected="selected"{{/if}}>男</option>
 										   	    <option value="1" {{if prod.interperGen=='1'}}selected="selected"{{/if}}>女</option>
 											</select>
@@ -457,7 +458,7 @@
 									<li class="col-md-6">
 										<p class="word">译员性别：</p>
 										<p>
-										   {{if prod.interperGen=='0'}}男{{else}}女{{/if}}
+										   {{:~getGenName(prod.interperGen)}}
 										</p>
 									</li>
 									<li class="col-md-6">

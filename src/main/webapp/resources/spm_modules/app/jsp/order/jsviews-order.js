@@ -72,6 +72,11 @@ define(function (require, exports, module) {
 	stateMap.put("91", "已取消");
 	stateMap.put("92", "已退款");
 	
+	//翻译类型
+	var genMap = new jMap();
+	genMap.put("0", "男");
+	genMap.put("1", "女");
+	
 	/*
 	 * 获取订单操作日志操作名称
 	 */
@@ -114,7 +119,13 @@ define(function (require, exports, module) {
 	        }else{
 	        	return "元";
 	        }
-		 }
+		 },
+		 "getGenName": function (genId){	
+			if(!genId){
+				return "不限";
+			}	
+			return genMap.get(genId);
+		  }
 	});
 	
 	//获取剩余时间

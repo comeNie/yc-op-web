@@ -43,6 +43,9 @@ import com.ai.yc.translator.api.translatorservice.param.SearchYCTranslatorReques
 import com.ai.yc.translator.api.translatorservice.param.YCLSPInfoReponse;
 import com.ai.yc.translator.api.translatorservice.param.YCTranslatorInfoResponse;
 import com.ai.yc.translator.api.translatorservice.param.searchYCLSPInfoRequest;
+import com.ai.yc.ucenter.api.members.interfaces.IUcMembersSV;
+import com.ai.yc.ucenter.api.members.param.get.UcMembersGetRequest;
+import com.ai.yc.ucenter.api.members.param.get.UcMembersGetResponse;
 import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
 import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
 import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
@@ -97,11 +100,25 @@ public class OrdOrderController {
 			searchYCUserReq.setUserId(details.getUserId());
 			try {
 				YCUserInfoResponse user = iYCUserServiceSV.searchYCUserInfo(searchYCUserReq);
-				details.setUsername(user.getFullName());
 				details.setUsernick(user.getNickname());
 			} catch (Exception e) {
-				log.error("获取用户信息失败", e);
+				log.error("获取用户昵称失败", e);
 			}
+			IUcMembersSV ucMembersSV = DubboConsumerFactory.getService(IUcMembersSV.class);
+			UcMembersGetRequest membersGetRequest = new UcMembersGetRequest();
+			membersGetRequest.setUsername(details.getUserId());
+			membersGetRequest.setGetmode("1");
+			try {	
+				UcMembersGetResponse ucMember = ucMembersSV.ucGetMember(membersGetRequest);	
+				Object username = ucMember.getDate().get("username");
+				details.setUsername((String)username);
+			}catch (Exception e) {
+				log.error("获取用户名称信息失败", e);
+			}
+			
+			
+            
+
 		}
 		IYCTranslatorServiceSV iYCTranslatorServiceSV = DubboConsumerFactory.getService(IYCTranslatorServiceSV.class);
 		if(!StringUtil.isBlank(details.getLspId())){
