@@ -109,7 +109,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				}
 			});
 		},
-		// 下拉订单类型
+		// 下拉订单类型（对应库中的翻译类型）
 		_bindOrdTypeSelect:function() {
 			var this_=this;
 			$.ajax({
@@ -118,7 +118,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				url : _base+ "/getSelect",
 				dataType : "json",
 				data : {
-					paramCode:"ORDER_TYPE",
+					paramCode:"TRANSLATE_TYPE",
 					typeCode:"ORD_ORDER"
 				},
 				message : "正在加载数据..",
@@ -209,13 +209,13 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 			var payTimeE=jQuery.trim($("#payTimeEnd").val());
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var orderType=jQuery.trim($("#orderType option:selected").val());
+			var translateType=jQuery.trim($("#orderType option:selected").val());
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var state=jQuery.trim($("#searchOrderState").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var payStyle = jQuery.trim($("#payStyle option:selected").val());
 			window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
-			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&state='
+			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+'&state='
 		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle;
 		},
 		_searchOrderList:function(){
@@ -252,7 +252,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     			"payTimeE":jQuery.trim($("#payTimeEnd").val()),
     			"userName":jQuery.trim($("#nickName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
-    			"orderType":jQuery.trim($("#orderType option:selected").val()),
+    			"translateType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
     			"state":jQuery.trim($("#searchOrderState").val()),
     			"orderPageId":jQuery.trim($("#orderId").val()),

@@ -191,7 +191,7 @@
 	<tr>
       <td><span><input type="checkbox" value="{{:orderId}}" class="checkbox-medium single"/></span></td>
   	  <td>{{:chlIdPage}}</td>
-      <td>{{:orderTypePage}}</td>
+      <td>{{:translateTypePage}}</td>
       <td><a href="../order/orderdetails?mod=edit&orderId={{:orderId}}">{{:orderId}}</a></td>
  	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
       <td>{{:userName}}</td>

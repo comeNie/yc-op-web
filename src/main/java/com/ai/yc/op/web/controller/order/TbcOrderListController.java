@@ -119,15 +119,15 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
                 		if(chldParam!=null){
                 			resParam.setChlIdPage(chldParam.getColumnDesc());
                 		}
-                		//翻译订单类型
+                		//翻译翻译类型
                 		paramCond = new SysParamSingleCond();
                 		paramCond.setTenantId(Constants.TENANT_ID);
-    					paramCond.setColumnValue(vo.getOrderType());
-    					paramCond.setTypeCode(Constants.TYPE_CODE);
-    					paramCond.setParamCode(Constants.ORDER_TYPE);
+                		paramCond.setColumnValue(vo.getTranslateType());
+        				paramCond.setTypeCode(Constants.TYPE_CODE);
+        				paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
                 		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
                 		if(orderTypeParam!=null){
-                			resParam.setOrderTypePage(orderTypeParam.getColumnDesc());
+                			resParam.setTranslateTypePage(orderTypeParam.getColumnDesc());
                 		}
                 		//翻译订单状态
                 		paramCond = new SysParamSingleCond();
@@ -245,9 +245,9 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 		        		//翻译订单类型
 		        		paramCond = new SysParamSingleCond();
 		        		paramCond.setTenantId(Constants.TENANT_ID);
-						paramCond.setColumnValue(vo.getOrderType());
+		        		paramCond.setColumnValue(vo.getTranslateType());
 						paramCond.setTypeCode(Constants.TYPE_CODE);
-						paramCond.setParamCode(Constants.ORDER_TYPE);
+						paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
 		        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
 		        		if(orderTypeParam!=null){
 		        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
@@ -309,9 +309,9 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 	        		//翻译订单类型
 	        		paramCond = new SysParamSingleCond();
 	        		paramCond.setTenantId(Constants.TENANT_ID);
-					paramCond.setColumnValue(vo.getOrderType());
+	        		paramCond.setColumnValue(vo.getTranslateType());
 					paramCond.setTypeCode(Constants.TYPE_CODE);
-					paramCond.setParamCode(Constants.ORDER_TYPE);
+					paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
 	        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
 	        		if(orderTypeParam!=null){
 	        			exOrder.setOrderType(orderTypeParam.getColumnDesc());

@@ -108,7 +108,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 			});
 		},
 		
-		// 下拉订单类型
+		// 下拉订单类型（对应库中的翻译类型）
 		_bindOrdTypeSelect:function() {
 			var this_=this;
 			$.ajax({
@@ -117,7 +117,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 				url : _base+ "/getSelect",
 				dataType : "json",
 				data : {
-					paramCode:"ORDER_TYPE",
+					paramCode:"TRANSLATE_TYPE",
 					typeCode:"ORD_ORDER"
 				},
 				message : "正在加载数据..",
@@ -186,14 +186,14 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var orderType=jQuery.trim($("#orderType option:selected").val());
+			var translateType=jQuery.trim($("#orderType option:selected").val());
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var updateTimeS=jQuery.trim($("#updateTimeBegin").val());
 			var updateTimeE=jQuery.trim($("#updateTimeEnd").val());
 			var updateOperName=jQuery.trim($("#updateName").val());
 			window.location.href=_base+'/exportWaitPayOrd?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+
-			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire
+			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire
 		+'&orderPageId='+orderPageId+'&updateTimeS='+updateTimeS+'&updateTimeE='+updateTimeE+'&updateOperName='+updateOperName;
 		},
 		_getSearchParams:function(){
@@ -204,7 +204,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     			"updateTimeE":jQuery.trim($("#updateTimeEnd").val()),
     			"userName":jQuery.trim($("#nickName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
-    			"orderType":jQuery.trim($("#orderType option:selected").val()),
+    			"translateType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
     			"orderPageId":jQuery.trim($("#orderId").val()),
     			"updateOperName":jQuery.trim($("#updateName").val())

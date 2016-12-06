@@ -7,7 +7,7 @@ import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 public class OrderPageResParam extends OrdOrderVo {
 	private static final long serialVersionUID = 1L;
 	private String chlIdPage;
-	private String orderTypePage;
+	private String translateTypePage;
 	private String payStylePage;
 	private String statePage;
 	private String totalFeePage;
@@ -30,12 +30,13 @@ public class OrderPageResParam extends OrdOrderVo {
 		this.chlIdPage = chlIdPage;
 	}
 
-	public String getOrderTypePage() {
-		return orderTypePage;
+	
+	public String getTranslateTypePage() {
+		return translateTypePage;
 	}
 
-	public void setOrderTypePage(String orderTypePage) {
-		this.orderTypePage = orderTypePage;
+	public void setTranslateTypePage(String translateTypePage) {
+		this.translateTypePage = translateTypePage;
 	}
 
 	public String getPayStylePage() {

@@ -173,7 +173,7 @@
 <script id="orderListTemple" type="text/template">
 	<tr>
   	  <td>{{:chlIdPage}}</td>
-      <td>{{:orderTypePage}}</td>
+      <td>{{:translateTypePage}}</td>
       <td><a href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">{{:orderId}}</a></td>
  	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
       <td>{{:userName}}</td>

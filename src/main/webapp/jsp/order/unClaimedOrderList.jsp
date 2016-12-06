@@ -174,7 +174,7 @@
    </div> 
 <script id="orderListTemple" type="text/template">
 	{{if levelSize>=extendSize && levelSize!=0 && extendSize!=0}}
-	{{for ordTransLevelList ~chlIdPage=chlIdPage ~orderTypePage=orderTypePage  ~orderId=orderId
+	{{for ordTransLevelList ~chlIdPage=chlIdPage ~translateTypePage=translateTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize
 		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
@@ -182,7 +182,7 @@
 		<tr>
 			{{if #index ==0}}
 				<td rowspan="{{:~levelSize}}">{{:~chlIdPage}}</td>
-				<td rowspan="{{:~levelSize}}">{{:~orderTypePage}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~translateTypePage}}</td>
 				<td rowspan="{{:~levelSize}}"><a href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">{{:~orderId}}</a></td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~orderTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~userName}}</td>
@@ -211,7 +211,7 @@
 	{{/for}}
 {{/if}}
 {{if levelSize<extendSize}}
-	{{for ordProdExtendList ~chlIdPage=chlIdPage ~orderTypePage=orderTypePage  ~orderId=orderId
+	{{for ordProdExtendList ~chlIdPage=chlIdPage ~translateTypePage=translateTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize
 		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
@@ -219,7 +219,7 @@
 		<tr>
 			{{if #index ==0}}
 				<td rowspan="{{:~extendSize}}">{{:~chlIdPage}}</td>
-				<td rowspan="{{:~extendSize}}">{{:~orderTypePage}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~translateTypePage}}</td>
 				<td rowspan="{{:~extendSize}}"><a href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">{{:~orderId}}</a></td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~orderTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~userName}}</td>
@@ -250,7 +250,7 @@
   {{if levelSize===0 && extendSize===0}}
 	<tr>
 	<td>{{:chlIdPage}}</td>
-	<td>{{:orderTypePage}}</td>
+	<td>{{:translateTypePage}}</td>
 	<td><a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}')">{{:orderId}}</a></td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
 	<td>{{:userName}}</td>

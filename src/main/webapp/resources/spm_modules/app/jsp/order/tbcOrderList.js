@@ -73,7 +73,7 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
 				}
 			});
 		},
-		// 下拉订单类型
+		// 下拉订单类型（对应库中的翻译类型）
 		_bindOrdTypeSelect:function() {
 			var this_=this;
 			$.ajax({
@@ -82,7 +82,7 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
 				url : _base+ "/getSelect",
 				dataType : "json",
 				data : {
-					paramCode:"ORDER_TYPE",
+					paramCode:"TRANSLATE_TYPE",
 					typeCode:"ORD_ORDER"
 				},
 				message : "正在加载数据..",
@@ -127,12 +127,12 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
 			var submitTimeE=jQuery.trim($("#stateTimeEnd").val());
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var orderType=jQuery.trim($("#orderType option:selected").val());
+			var translateType=jQuery.trim($("#orderType option:selected").val());
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var interperName = jQuery.trim($("#interperName").val());
 			window.location.href=_base+'/tbcExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&submitTimeS='+submitTimeS+
-			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+
+			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+
 		    '&orderPageId='+orderPageId+'&submitTimeE='+submitTimeE+'&interperName='+interperName;
 		},
 		_searchOrderList:function(){
@@ -170,7 +170,7 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
     			"userName":jQuery.trim($("#nickName").val()),
     			"interperName":jQuery.trim($("#interperName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
-    			"orderType":jQuery.trim($("#orderType option:selected").val()),
+    			"translateType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
     			"orderPageId":jQuery.trim($("#orderId").val())
     		}
