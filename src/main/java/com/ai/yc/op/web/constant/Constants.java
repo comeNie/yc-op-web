@@ -62,9 +62,17 @@ public final class Constants {
 		public static final String TRANSLTING_STATE = "23";
 		
 		/**
-		 * 待确认
+		 * 待审核
 		 */
 		public static final String REVIEW_STATE = "40";
+		/**
+		 * 审核通过
+		 */
+		public static final String CHECKED_STATE = "41";
+		/**
+		 * 审核失败
+		 */
+		public static final String REFUSE_STATE = "42";
 		
 		/**
 		 * 待确认

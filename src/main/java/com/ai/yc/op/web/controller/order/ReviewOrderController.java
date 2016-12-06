@@ -398,12 +398,12 @@ public class ReviewOrderController {
     
     @RequestMapping("/handReviewOrder")
 	@ResponseBody
-    public ResponseData<Boolean> handReviewOrder(OrderReviewRequest req,String orderIds){
+    public ResponseData<String> handReviewOrder(OrderReviewRequest req,String orderIds){
     	if(req==null){
-    		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "参数不能为空", null);
+    		return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "参数不能为空", null);
     	}
     	if(StringUtil.isBlank(orderIds)){
-    		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "订单ID不能为空", null);
+    		return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "订单ID不能为空", null);
     	}
     	String[] datas = orderIds.split(",");
     	List<Long> orderIdList = new ArrayList<Long>();
@@ -419,17 +419,22 @@ public class ReviewOrderController {
 			resp = iOrderReviewSV.handReviewOrder(req);
 		} catch (Exception e) {
 			logger.error("系统异常，请稍后重试", e);
-			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
 		if(resp==null){
 			logger.error("系统异常，请稍后重试");
-			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
 		if(!resp.getResponseHeader().isSuccess()){
 			logger.error(resp.getResponseHeader().getResultMessage());
-			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, resp.getResponseHeader().getResultMessage(), null);
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, resp.getResponseHeader().getResultMessage(), null);
 		}
-		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功", true);
+		if(Constants.State.CHECKED_STATE.equals(req.getState())){
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功", "00");
+		}else if(Constants.State.REFUSE_STATE.equals(req.getState())){
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功", "11");
+		}
+		return new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功", "");
     }
 
 }

@@ -307,8 +307,16 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				message: "保存数据中，请等待...",
 				url: _base + "/order/handReviewOrder",
 				data: param,
-				success: function (rs) {
-					_this._searchOrderList();
+				success: function (data) {
+					if(data.data=="00"){
+						//如果通过调到待确认列表
+						window.location.href=_base+"/toTbcOrderList";
+					}else if(data.data=="11"){
+						//如果通过调到翻译中列表
+						window.location.href=_base+"/toTranslateOrderList";
+					}else{
+						_this._searchOrderList();
+					}
 				}
 			});
 		},
