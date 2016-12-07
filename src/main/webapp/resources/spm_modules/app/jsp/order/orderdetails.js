@@ -89,8 +89,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var formValidator=_this._initValidate();
 			formValidator.form();
 			if(!$("#orderForm").valid()){
-				showErrorDialog("填写数据不合法，请耐心检查!");
-				return;
+				//showErrorDialog("填写数据不合法，请耐心检查!");
+				return false;
 			}
 			var param = $("#orderForm").serializeArray();
 			ajaxController.ajax({
@@ -516,22 +516,22 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				"setTypeFee":{
     					required:"请输入排版费用",
     					number:"费用格式不正确",
-    					min:"费用格式不正确"
+    					min:"费用不合法"
     				},
     				"descTypeFee":{
     					required:"请输入格式转换费用",
     					number:"费用格式不正确",
-    					min:"费用格式不正确"
+    					min:"费用不合法"
     				},
     				"urgentFee":{
     					required:"请输入加急费用",
     					number:"费用格式不正确",
-    					min:"费用格式不正确"
+    					min:"费用不合法"
     				},
     				"totalFee":{
     					required:"请输入加急费用",
     					number:"费用格式不正确",
-    					min:"费用格式不正确"
+    					min:"费用不合法"
     				},
     				"prod.meetingAddress":{
     					required:"请输入会议地址"

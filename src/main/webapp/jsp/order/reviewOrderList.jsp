@@ -91,7 +91,7 @@
 							                </li> 
 						            	</ul>
 			                    	</div>
-						           <div id="stateTimeDiv">
+						           <div id="lockTimeDiv">
 							           	<ul>
 							                <li class="col-md-6">
 							                    <p class="word">领取开始时间</p>
@@ -220,6 +220,19 @@
   </tr>                                                                       
 </script> 
   <script type="text/javascript">
+  <%-- 展示日历 --%>
+	$('#orderTimeDiv').delegate('.fa-calendar','click',function(){
+		var calInput = $(this).parent().prev();
+		var timeId = calInput.attr('id');
+		console.log("click calendar "+timeId);
+		WdatePicker({el:timeId,readOnly:true});
+	});
+	$('#lockTimeDiv').delegate('.fa-calendar','click',function(){
+		var calInput = $(this).parent().prev();
+		var timeId = calInput.attr('id');
+		console.log("click calendar "+timeId);
+		WdatePicker({el:timeId,readOnly:true});
+	});
 	var pager;
 	(function () {
 		seajs.use('app/jsp/order/reviewOrderList', function (ReviewOrdListPager) {
