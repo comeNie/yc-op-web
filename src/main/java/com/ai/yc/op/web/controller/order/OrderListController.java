@@ -71,16 +71,14 @@ public class OrderListController {
 					ordReq.setOrderId(0l);
 				}
 			}
-			String orderTimeBegin = queryRequest.getOrderTimeS();
-			if (!StringUtil.isBlank(orderTimeBegin)) {
-				orderTimeBegin = orderTimeBegin + " 00:00:00";
-				Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+			Long orderTimeBegin = queryRequest.getStart();
+			if (orderTimeBegin!=null) {
+				Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 				ordReq.setOrderTimeStart(orderTimeS);
 			}
-			String orderTimeEnd = queryRequest.getOrderTimeE();
-			if (!StringUtil.isBlank(orderTimeEnd)) {
-				orderTimeEnd = orderTimeEnd + " 23:59:59";
-				Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+			Long orderTimeEnd = queryRequest.getEnd();
+			if (orderTimeEnd!=null) {
+				Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
 			//支付时间

@@ -89,7 +89,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var formValidator=_this._initValidate();
 			formValidator.form();
 			if(!$("#orderForm").valid()){
-				//showErrorDialog("填写数据不合法，请耐心检查!");
 				return false;
 			}
 			var param = $("#orderForm").serializeArray();
@@ -150,14 +149,15 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			this._getOrderLevel(null);
 		},
 		_getOrderLevel:function(fee){
-			var translateType = $("#translateType").val();
-			if(translateType=='2'){
-				return;
-			}
 			var _this = this;
+			var formValidator=_this._initValidate();
+			formValidator.form();
+			if(!$("#orderForm").valid()){
+				return false;
+			}
+			var translateType = $("#translateType").val();
 			var totalFee = $("#totalFee").val();
 			var translateLevel = $("#translateLevel").val();
-			
 			var isUrgent = $("#isUrgent").val();
 			var param = {};
 			if(fee){
@@ -411,7 +411,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			});
 		},
        _initValidate:function(){
-    
     	   var formValidator = $("#orderForm").validate({
     			rules: {
     				"contacts.contactName":{

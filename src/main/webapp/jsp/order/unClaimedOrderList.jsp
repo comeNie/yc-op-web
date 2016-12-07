@@ -176,7 +176,7 @@
 	{{if levelSize>=extendSize && levelSize!=0 && extendSize!=0}}
 	{{for ordTransLevelList ~chlIdPage=chlIdPage ~translateTypePage=translateTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
-		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize
+		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~userName=userName
 		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
 	}}
 		<tr>
@@ -213,7 +213,7 @@
 {{if levelSize<extendSize}}
 	{{for ordProdExtendList ~chlIdPage=chlIdPage ~translateTypePage=translateTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
-		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize
+		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~userName=userName
 		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
 	}}
 		<tr>

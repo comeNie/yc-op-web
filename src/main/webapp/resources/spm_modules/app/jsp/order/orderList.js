@@ -245,9 +245,24 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 		},
 	
 		_getSearchParams:function(){
+			var start = $("#orderTimeBegin").val();
+			var end = $("#orderTimeEnd").val();
+			if(end=="" || end==null){
+				end=null;
+			}else{
+				end= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			if(start=="" || start==null){
+				start=null;
+			}else{
+				start= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
     		return {
-    			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
-    			"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
+    			
+    			"start": start,
+    			"end":end,
+    			//"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
+    			//"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
     			"payTimeS":jQuery.trim($("#payTimeBegin").val()),
     			"payTimeE":jQuery.trim($("#payTimeEnd").val()),
     			"userName":jQuery.trim($("#nickName").val()),

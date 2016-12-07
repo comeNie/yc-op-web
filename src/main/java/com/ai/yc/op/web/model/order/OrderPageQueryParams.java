@@ -7,6 +7,8 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 	private static final long serialVersionUID = 1L;
 
 	private String orderTimeS;
+	private Long start;
+	private Long end;
 	private String orderTimeE;
 	private String payTimeS;
 	private String payTimeE;
@@ -144,6 +146,22 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 
 	public void setSubmitTimeE(String submitTimeE) {
 		this.submitTimeE = submitTimeE;
+	}
+
+	public Long getStart() {
+		return start;
+	}
+
+	public void setStart(Long start) {
+		this.start = start;
+	}
+
+	public Long getEnd() {
+		return end;
+	}
+
+	public void setEnd(Long end) {
+		this.end = end;
 	}
 
 }
