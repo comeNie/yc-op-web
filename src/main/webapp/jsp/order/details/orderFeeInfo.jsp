@@ -256,7 +256,7 @@
 										</p>
 									</li>
 									<li class="col-md-6">
-										<p class="word">订单级别---口译：</p>
+										<p class="word">订单级别：</p>
 										<p>
 										   	<select id="orderLevelSel" name="orderLevelSel" class="select select-medium" disabled="disabled">
                                                 <option value="">请选择</option>
