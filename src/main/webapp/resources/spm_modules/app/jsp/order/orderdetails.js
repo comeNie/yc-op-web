@@ -84,6 +84,13 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			this._queryOrderDetails();
 			
 		},
+		_orderLevelSelOnChange:function(obj){
+			var _this = this;
+			var objVal = $(obj).val();
+			$("#orderLevel").val(objVal);
+			//
+			_this._getInterperLevel();
+		},
 		_save:function(){
 			var _this = this;
 			var formValidator=_this._initValidate();
@@ -196,6 +203,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				success: function (rs) {
 					$("#orderLevelSel").val(rs.data);
 					$("#orderLevel").val(rs.data);
+					//显示译员级别 20161208 zhangzd
+					_this._getInterperLevel();
 				}
 			});
 			
