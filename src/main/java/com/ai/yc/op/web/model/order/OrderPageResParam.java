@@ -12,6 +12,8 @@ public class OrderPageResParam extends OrdOrderVo {
 	private String statePage;
 	private String totalFeePage;
 	private String cancelTypePage;
+	
+	private String remainingTimePage;
 
 	private String orderLevelPage;
 	
@@ -101,6 +103,14 @@ public class OrderPageResParam extends OrdOrderVo {
 
 	public void setExtendSize(int extendSize) {
 		this.extendSize = extendSize;
+	}
+
+	public String getRemainingTimePage() {
+		return remainingTimePage;
+	}
+
+	public void setRemainingTimePage(String remainingTimePage) {
+		this.remainingTimePage = remainingTimePage;
 	}
 
 

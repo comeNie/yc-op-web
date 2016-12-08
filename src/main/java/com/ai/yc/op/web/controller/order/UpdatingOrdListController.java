@@ -105,6 +105,17 @@ private static final Logger logger = Logger.getLogger(UpdatingOrdListController.
 					for(OrdOrderVo vo:orderList){
 						OrderPageResParam resParam = new OrderPageResParam();
 						BeanUtils.copyProperties(resParam, vo);
+						//翻译剩余时间
+						Timestamp retime= vo.getRemainingTime();
+						if(retime!=null){
+							Long time= vo.getRemainingTime().getTime();
+							//获取天数、小时数、分钟
+							int day = (int)(time/(1000 * 60 * 60 * 24));
+							int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+							int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
+							String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
+							resParam.setRemainingTimePage(remaningPage);
+						}
 						//翻译订单来源
     					SysParamSingleCond	paramCond = new SysParamSingleCond();
     					paramCond.setTenantId(Constants.TENANT_ID);
@@ -283,7 +294,13 @@ private static final Logger logger = Logger.getLogger(UpdatingOrdListController.
 		        			exOrder.setLockTime(vo.getLockTime().toString());
 		        		}
 		        		if(vo.getRemainingTime()!=null){
-		        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
+		        			Long time= vo.getRemainingTime().getTime();
+							//获取天数、小时数、分钟
+							int day = (int)(time/(1000 * 60 * 60 * 24));
+							int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+							int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
+							String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
+		        			exOrder.setRemaningTime(remaningPage);
 		        		}
 		        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
 		        		exportList.add(exOrder);
@@ -347,7 +364,13 @@ private static final Logger logger = Logger.getLogger(UpdatingOrdListController.
 	        			exOrder.setLockTime(vo.getLockTime().toString());
 	        		}
 	        		if(vo.getRemainingTime()!=null){
-	        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
+	        			Long time= vo.getRemainingTime().getTime();
+						//获取天数、小时数、分钟
+						int day = (int)(time/(1000 * 60 * 60 * 24));
+						int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+						int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
+						String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
+	        			exOrder.setRemaningTime(remaningPage);
 	        		}
 	        		exOrder.setUserName(vo.getUserName());
 	        		exOrder.setOrderId(vo.getOrderId());

@@ -178,6 +178,7 @@
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~userName=userName
 		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
+		~remainingTimePage=remainingTimePage
 	}}
 		<tr>
 			{{if #index ==0}}
@@ -203,7 +204,7 @@
 				<td rowspan="{{:~levelSize}}">{{:~totalFeePage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~totalFeePage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~orderLevelPage}}</td>
-				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~remainingTime)}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~remainingTimePage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~statePage}}</td>
 				<td rowspan="{{:~levelSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
 			{{/if}}	
@@ -215,6 +216,7 @@
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~userName=userName
 		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
+		~remainingTimePage=remainingTimePage
 	}}
 		<tr>
 			{{if #index ==0}}
@@ -240,7 +242,7 @@
 				<td rowspan="{{:~extendSize}}">{{:~totalFeePage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~totalFeePage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~orderLevelPage}}</td>
-				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~remainingTime)}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~remainingTimePage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~statePage}}</td>
 				<td rowspan="{{:~extendSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
 			{{/if}}	
@@ -259,7 +261,7 @@
 	<td>{{:totalFeePage}}</td>
 	<td>{{:totalFeePage}}</td>
 	<td>{{:orderLevelPage}}</td>
-	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}</td>
+	<td>{{:remainingTimePage}}</td>
 	<td>{{:statePage}}</td>
 	<td><a  href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>	
 	</tr>			

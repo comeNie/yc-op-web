@@ -160,7 +160,8 @@
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
 		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
-	}}
+		~remainingTimePage=remainingTimePage	
+}}
 		<tr>
 			{{if #index ==0}}
 				<td rowspan="{{:~levelSize}}">{{:~chlIdPage}}</td>
@@ -199,6 +200,7 @@
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
 		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
+		~remainingTimePage=remainingTimePage
 	}}
 		<tr>
 			{{if #index ==0}}
