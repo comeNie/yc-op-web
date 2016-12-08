@@ -49,6 +49,7 @@ import com.ai.yc.ucenter.api.members.param.get.UcMembersGetResponse;
 import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
 import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
 import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
+import com.alibaba.fastjson.JSON;
 
 @Controller
 @RequestMapping("/order")
@@ -204,7 +205,9 @@ public class OrdOrderController {
 	@RequestMapping("/updateOrderInfo")
 	@ResponseBody
     public ResponseData<Boolean> updateOrderInfo(UpdateOrderRequest req,OrderDetailPagerRequest pager){
+		log.info("req1:"+JSON.toJSONString(req));
 		req = installUpdateOrderRequest(req,pager);
+		log.info("req2:"+JSON.toJSONString(req));
 		IUpdateOrderSV iUpdateOrderSV = DubboConsumerFactory.getService(IUpdateOrderSV.class);
 		UpdateOrderResponse resp = null;
 		try {

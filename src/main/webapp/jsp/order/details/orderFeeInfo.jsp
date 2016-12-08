@@ -149,13 +149,14 @@
 									<li class="col-md-6">
 										<p class="word">订单级别：</p>
 										<p>
-										   	<select id="orderLevel" name="orderLevel" class="select select-medium" disabled="disabled">
+										   	<select id="orderLevelSel" name="orderLevelSel" class="select select-medium" disabled="disabled">
 										   	    <option value="">请选择</option>
                                                 <option value="1" {{if orderLevel=='1'}}selected="selected"{{/if}}>V1</option>
 										   	    <option value="2" {{if orderLevel=='2'}}selected="selected"{{/if}}>V2</option>
                                                 <option value="3" {{if orderLevel=='3'}}selected="selected"{{/if}}>V3</option>
                                                 <option value="4" {{if orderLevel=='4'}}selected="selected"{{/if}}>V4</option>
 											</select>
+											<input id="orderLevel" name="orderLevel" type="hidden" value="{{:orderLevel}}"/>
 										</p>
 									</li>
 									<li class="col-md-6">
@@ -255,15 +256,16 @@
 										</p>
 									</li>
 									<li class="col-md-6">
-										<p class="word">订单级别：</p>
+										<p class="word">订单级别---口译：</p>
 										<p>
-										   	<select id="orderLevel" name="orderLevel" class="select select-medium" disabled="disabled">
+										   	<select id="orderLevelSel" name="orderLevelSel" class="select select-medium" disabled="disabled">
                                                 <option value="">请选择</option>
 										   	    <option value="1" {{if orderLevel=='1'}}selected="selected"{{/if}}>V1</option>
 										   	    <option value="2" {{if orderLevel=='2'}}selected="selected"{{/if}}>V2</option>
                                                 <option value="3" {{if orderLevel=='3'}}selected="selected"{{/if}}>V3</option>
                                                 <option value="4" {{if orderLevel=='4'}}selected="selected"{{/if}}>V4</option>
 											</select>
+											<input id="orderLevel" name="orderLevel" type="hidden" value="{{:orderLevel}}"/>
 										</p>
 									</li>
 									<li class="col-md-6">
