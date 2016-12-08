@@ -149,6 +149,27 @@ define('app/jsp/order/unClaimedOrderList', function (require, exports, module) {
 			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
 			var payTimeS=jQuery.trim($("#payTimeBegin").val());
 			var payTimeE=jQuery.trim($("#payTimeEnd").val());
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS="";
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE="";
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			//支付时间
+			if(payTimeS=="" || payTimeS==null){
+				payTimeS="";
+			}else{
+				payTimeS= new Date( Date.parse( $("#payTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(payTimeE=="" || payTimeE==null){
+				payTimeE="";
+			}else{
+				payTimeE= new Date( Date.parse( $("#payTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
 			var translateType=jQuery.trim($("#orderType option:selected").val());
@@ -186,11 +207,36 @@ define('app/jsp/order/unClaimedOrderList', function (require, exports, module) {
 		},
 	
 		_getSearchParams:function(){
+			var orderTimeS = $("#orderTimeBegin").val();
+			var orderTimeE = $("#orderTimeEnd").val();
+			var payTimeS =  $("#payTimeBegin").val();
+			var payTimeE =  $("#payTimeEnd").val();
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS=null;
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE=null;
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			//支付时间
+			if(payTimeS=="" || payTimeS==null){
+				payTimeS=null;
+			}else{
+				payTimeS= new Date( Date.parse( $("#payTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(payTimeE=="" || payTimeE==null){
+				payTimeE=null;
+			}else{
+				payTimeE= new Date( Date.parse( $("#payTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
     		return {
-    			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
-    			"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
-    			"payTimeS":jQuery.trim($("#payTimeBegin").val()),
-    			"payTimeE":jQuery.trim($("#payTimeEnd").val()),
+    			"orderTimeS":orderTimeS,
+    			"orderTimeE":orderTimeE,
+    			"payTimeS":payTimeS,
+    			"payTimeE":payTimeE,
     			"userName":jQuery.trim($("#nickName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
     			"translateType":jQuery.trim($("#orderType option:selected").val()),

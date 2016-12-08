@@ -77,29 +77,25 @@ public class WaitPayController {
 					ordReq.setOrderId(0l);
 				}
 			}
-			String orderTimeBegin = queryRequest.getOrderTimeS();
-			if (!StringUtil.isBlank(orderTimeBegin)) {
-				orderTimeBegin = orderTimeBegin + " 00:00:00";
-				Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+			Long orderTimeBegin = queryRequest.getOrderTimeS();
+			if (orderTimeBegin!=null) {
+				Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 				ordReq.setOrderTimeStart(orderTimeS);
 			}
-			String orderTimeEnd = queryRequest.getOrderTimeE();
-			if (!StringUtil.isBlank(orderTimeEnd)) {
-				orderTimeEnd = orderTimeEnd + " 23:59:59";
-				Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+			Long orderTimeEnd = queryRequest.getOrderTimeE();
+			if (orderTimeEnd!=null) {
+				Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
 			//报价时间
-			String updateTimeBegin = queryRequest.getUpdateTimeS();
-			if (!StringUtil.isBlank(updateTimeBegin)) {
-				updateTimeBegin = updateTimeBegin + " 00:00:00";
-				Timestamp updateTimeS = Timestamp.valueOf(updateTimeBegin);
+			Long updateTimeBegin = queryRequest.getUpdateTimeS();
+			if (updateTimeBegin!=null) {
+				Timestamp updateTimeS = new Timestamp(updateTimeBegin);
 				ordReq.setUpdateTimeStart(updateTimeS);
 			}
-			String updateTimeEnd = queryRequest.getUpdateTimeE();
-			if (!StringUtil.isBlank(updateTimeEnd)) {
-				updateTimeEnd = updateTimeEnd + " 23:59:59";
-				Timestamp updateTimeE = Timestamp.valueOf(updateTimeEnd);
+			Long updateTimeEnd = queryRequest.getUpdateTimeE();
+			if (updateTimeEnd!=null) {
+				Timestamp updateTimeE = new Timestamp(updateTimeEnd);
 				ordReq.setUpdateTimeEnd(updateTimeE);
 			}
 			ordReq.setState(Constants.State.WAIT_PAY_STATE);
@@ -201,29 +197,25 @@ public class WaitPayController {
 				ordReq.setOrderId(0l);
 			}
 		}
-		String orderTimeBegin = queryRequest.getOrderTimeS();
-		if (!StringUtil.isBlank(orderTimeBegin)) {
-			orderTimeBegin = orderTimeBegin + " 00:00:00";
-			Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+		Long orderTimeBegin = queryRequest.getOrderTimeS();
+		if (orderTimeBegin!=null) {
+			Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 			ordReq.setOrderTimeStart(orderTimeS);
 		}
-		String orderTimeEnd = queryRequest.getOrderTimeE();
-		if (!StringUtil.isBlank(orderTimeEnd)) {
-			orderTimeEnd = orderTimeEnd + " 23:59:59";
-			Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+		Long orderTimeEnd = queryRequest.getOrderTimeE();
+		if (orderTimeEnd!=null) {
+			Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 			ordReq.setOrderTimeEnd(orderTimeE);
 		}
 		//报价时间
-		String updateTimeBegin = queryRequest.getUpdateTimeS();
-		if (!StringUtil.isBlank(updateTimeBegin)) {
-			updateTimeBegin = updateTimeBegin + " 00:00:00";
-			Timestamp updateTimeS = Timestamp.valueOf(updateTimeBegin);
+		Long updateTimeBegin = queryRequest.getUpdateTimeS();
+		if (updateTimeBegin!=null) {
+			Timestamp updateTimeS = new Timestamp(updateTimeBegin);
 			ordReq.setUpdateTimeStart(updateTimeS);
 		}
-		String updateTimeEnd = queryRequest.getUpdateTimeE();
-		if (!StringUtil.isBlank(updateTimeEnd)) {
-			updateTimeEnd = updateTimeEnd + " 23:59:59";
-			Timestamp updateTimeE = Timestamp.valueOf(updateTimeEnd);
+		Long updateTimeEnd = queryRequest.getUpdateTimeE();
+		if (updateTimeEnd!=null) {
+			Timestamp updateTimeE = new Timestamp(updateTimeEnd);
 			ordReq.setUpdateTimeEnd(updateTimeE);
 		}
 		ordReq.setState(Constants.State.WAIT_PAY_STATE);

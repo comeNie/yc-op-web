@@ -70,28 +70,24 @@ public class CancelOrderListController {
 					ordReq.setOrderId(0l);
 				}
 			}
-			String orderTimeBegin = queryRequest.getOrderTimeS();
-			if (!StringUtil.isBlank(orderTimeBegin)) {
-				orderTimeBegin = orderTimeBegin + " 00:00:00";
-				Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+			Long orderTimeBegin = queryRequest.getOrderTimeS();
+			if (orderTimeBegin!=null) {
+				Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 				ordReq.setOrderTimeStart(orderTimeS);
 			}
-			String orderTimeEnd = queryRequest.getOrderTimeE();
-			if (!StringUtil.isBlank(orderTimeEnd)) {
-				orderTimeEnd = orderTimeEnd + " 23:59:59";
-				Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+			Long orderTimeEnd = queryRequest.getOrderTimeE();
+			if (orderTimeEnd!=null) {
+				Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
-			String cancelTimeBegin = queryRequest.getCancelTimeS();
-			if (!StringUtil.isBlank(cancelTimeBegin)) {
-				cancelTimeBegin = cancelTimeBegin + " 00:00:00";
-				Timestamp cancelTimeS = Timestamp.valueOf(cancelTimeBegin);
+			Long cancelTimeBegin = queryRequest.getCancelTimeS();
+			if (cancelTimeBegin!=null) {
+				Timestamp cancelTimeS = new Timestamp(cancelTimeBegin);
 				ordReq.setStateChgTimeStart(cancelTimeS);
 			}
-			String cancelTimeEnd = queryRequest.getCancelTimeE();
-			if (!StringUtil.isBlank(cancelTimeEnd)) {
-				cancelTimeEnd = cancelTimeEnd + " 23:59:59";
-				Timestamp cancelTimeE = Timestamp.valueOf(cancelTimeEnd);
+			Long cancelTimeEnd = queryRequest.getCancelTimeE();
+			if (cancelTimeEnd!=null) {
+				Timestamp cancelTimeE = new Timestamp(cancelTimeEnd);
 				ordReq.setStateChgTimeEnd(cancelTimeE);
 			}
 			ordReq.setState(Constants.State.CANCEL_STATE);
@@ -198,28 +194,24 @@ public class CancelOrderListController {
 				ordReq.setOrderId(0l);
 			}
 		}
-		String orderTimeBegin = queryRequest.getOrderTimeS();
-		if (!StringUtil.isBlank(orderTimeBegin)) {
-			orderTimeBegin = orderTimeBegin + " 00:00:00";
-			Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+    	Long orderTimeBegin = queryRequest.getOrderTimeS();
+		if (orderTimeBegin!=null) {
+			Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 			ordReq.setOrderTimeStart(orderTimeS);
 		}
-		String orderTimeEnd = queryRequest.getOrderTimeE();
-		if (!StringUtil.isBlank(orderTimeEnd)) {
-			orderTimeEnd = orderTimeEnd + " 23:59:59";
-			Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+		Long orderTimeEnd = queryRequest.getOrderTimeE();
+		if (orderTimeEnd!=null) {
+			Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 			ordReq.setOrderTimeEnd(orderTimeE);
 		}
-		String cancelTimeBegin = queryRequest.getCancelTimeS();
-		if (!StringUtil.isBlank(cancelTimeBegin)) {
-			cancelTimeBegin = cancelTimeBegin + " 00:00:00";
-			Timestamp cancelTimeS = Timestamp.valueOf(cancelTimeBegin);
+		Long cancelTimeBegin = queryRequest.getCancelTimeS();
+		if (cancelTimeBegin!=null) {
+			Timestamp cancelTimeS = new Timestamp(cancelTimeBegin);
 			ordReq.setStateChgTimeStart(cancelTimeS);
 		}
-		String cancelTimeEnd = queryRequest.getCancelTimeE();
-		if (!StringUtil.isBlank(cancelTimeEnd)) {
-			cancelTimeEnd = cancelTimeEnd + " 23:59:59";
-			Timestamp cancelTimeE = Timestamp.valueOf(cancelTimeEnd);
+		Long cancelTimeEnd = queryRequest.getCancelTimeE();
+		if (cancelTimeEnd!=null) {
+			Timestamp cancelTimeE = new Timestamp(cancelTimeEnd);
 			ordReq.setStateChgTimeEnd(cancelTimeE);
 		}
 		ordReq.setState(Constants.State.CANCEL_STATE);

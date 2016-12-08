@@ -71,27 +71,25 @@ public class OrderListController {
 					ordReq.setOrderId(0l);
 				}
 			}
-			Long orderTimeBegin = queryRequest.getStart();
+			Long orderTimeBegin = queryRequest.getOrderTimeS();
 			if (orderTimeBegin!=null) {
 				Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 				ordReq.setOrderTimeStart(orderTimeS);
 			}
-			Long orderTimeEnd = queryRequest.getEnd();
+			Long orderTimeEnd = queryRequest.getOrderTimeE();
 			if (orderTimeEnd!=null) {
 				Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
 			//支付时间
-			String payTimeBegin = queryRequest.getPayTimeS();
-			if (!StringUtil.isBlank(payTimeBegin)) {
-				payTimeBegin = payTimeBegin + " 00:00:00";
-				Timestamp payTimeS = Timestamp.valueOf(payTimeBegin);
+			Long payTimeBegin = queryRequest.getPayTimeS();
+			if (payTimeBegin!=null) {
+				Timestamp payTimeS = new Timestamp(payTimeBegin);
 				ordReq.setPayTimeStart(payTimeS);
 			}
-			String payTimeEnd = queryRequest.getPayTimeE();
-			if (!StringUtil.isBlank(payTimeEnd)) {
-				payTimeEnd = payTimeEnd + " 23:59:59";
-				Timestamp payTimeE = Timestamp.valueOf(payTimeEnd);
+			Long payTimeEnd = queryRequest.getPayTimeE();
+			if (payTimeEnd!=null) {
+				Timestamp payTimeE = new Timestamp(payTimeEnd);
 				ordReq.setPayTimeEnd(payTimeE);
 			}
 			String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
@@ -188,17 +186,26 @@ public class OrderListController {
 				ordReq.setOrderId(0l);
 			}
 		}
-		String orderTimeBegin = queryRequest.getOrderTimeS();
-		if (!StringUtil.isBlank(orderTimeBegin)) {
-			orderTimeBegin = orderTimeBegin + " 00:00:00";
-			Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+    	Long orderTimeBegin = queryRequest.getOrderTimeS();
+		if (orderTimeBegin!=null) {
+			Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 			ordReq.setOrderTimeStart(orderTimeS);
 		}
-		String orderTimeEnd = queryRequest.getOrderTimeE();
-		if (!StringUtil.isBlank(orderTimeEnd)) {
-			orderTimeEnd = orderTimeEnd + " 23:59:59";
-			Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+		Long orderTimeEnd = queryRequest.getOrderTimeE();
+		if (orderTimeEnd!=null) {
+			Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 			ordReq.setOrderTimeEnd(orderTimeE);
+		}
+		//支付时间
+		Long payTimeBegin = queryRequest.getPayTimeS();
+		if (payTimeBegin!=null) {
+			Timestamp payTimeS = new Timestamp(payTimeBegin);
+			ordReq.setPayTimeStart(payTimeS);
+		}
+		Long payTimeEnd = queryRequest.getPayTimeE();
+		if (payTimeEnd!=null) {
+			Timestamp payTimeE = new Timestamp(payTimeEnd);
+			ordReq.setPayTimeEnd(payTimeE);
 		}
 	    ordReq.setPageNo(1);
 	    try {

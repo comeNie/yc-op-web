@@ -68,29 +68,25 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 					ordReq.setOrderId(0l);
 				}
 			}
-			String orderTimeBegin = queryRequest.getOrderTimeS();
-			if (!StringUtil.isBlank(orderTimeBegin)) {
-				orderTimeBegin = orderTimeBegin + " 00:00:00";
-				Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+	    	Long orderTimeBegin = queryRequest.getOrderTimeS();
+			if (orderTimeBegin!=null) {
+				Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 				ordReq.setOrderTimeStart(orderTimeS);
 			}
-			String orderTimeEnd = queryRequest.getOrderTimeE();
-			if (!StringUtil.isBlank(orderTimeEnd)) {
-				orderTimeEnd = orderTimeEnd + " 23:59:59";
-				Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+			Long orderTimeEnd = queryRequest.getOrderTimeE();
+			if (orderTimeEnd!=null) {
+				Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
 			//提交时间
-			String submitTimeBegin = queryRequest.getSubmitTimeS();
-			if (!StringUtil.isBlank(submitTimeBegin)) {
-				submitTimeBegin = submitTimeBegin + " 00:00:00";
-				Timestamp submitTimeS = Timestamp.valueOf(submitTimeBegin);
+			Long submitTimeBegin = queryRequest.getSubmitTimeS();
+			if (submitTimeBegin!=null) {
+				Timestamp submitTimeS = new Timestamp(submitTimeBegin);
 				ordReq.setStateChgTimeStart(submitTimeS);
 			}
-			String submitTimeEnd = queryRequest.getSubmitTimeE();
-			if (!StringUtil.isBlank(submitTimeEnd)) {
-				submitTimeEnd = submitTimeEnd + " 23:59:59";
-				Timestamp submitTimeE = Timestamp.valueOf(submitTimeEnd);
+			Long submitTimeEnd = queryRequest.getSubmitTimeE();
+			if (submitTimeEnd!=null) {
+				Timestamp submitTimeE = new Timestamp(submitTimeEnd);
 				ordReq.setStateChgTimeEnd(submitTimeE);
 			}
 			ordReq.setState(Constants.State.TBC_STATE);
@@ -188,29 +184,25 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 				ordReq.setOrderId(0l);
 			}
 		}
-		String orderTimeBegin = queryRequest.getOrderTimeS();
-		if (!StringUtil.isBlank(orderTimeBegin)) {
-			orderTimeBegin = orderTimeBegin + " 00:00:00";
-			Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+    	Long orderTimeBegin = queryRequest.getOrderTimeS();
+		if (orderTimeBegin!=null) {
+			Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 			ordReq.setOrderTimeStart(orderTimeS);
 		}
-		String orderTimeEnd = queryRequest.getOrderTimeE();
-		if (!StringUtil.isBlank(orderTimeEnd)) {
-			orderTimeEnd = orderTimeEnd + " 23:59:59";
-			Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+		Long orderTimeEnd = queryRequest.getOrderTimeE();
+		if (orderTimeEnd!=null) {
+			Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 			ordReq.setOrderTimeEnd(orderTimeE);
 		}
 		//提交时间
-		String submitTimeBegin = queryRequest.getSubmitTimeS();
-		if (!StringUtil.isBlank(submitTimeBegin)) {
-			submitTimeBegin = submitTimeBegin + " 00:00:00";
-			Timestamp submitTimeS = Timestamp.valueOf(submitTimeBegin);
+		Long submitTimeBegin = queryRequest.getSubmitTimeS();
+		if (submitTimeBegin!=null) {
+			Timestamp submitTimeS = new Timestamp(submitTimeBegin);
 			ordReq.setStateChgTimeStart(submitTimeS);
 		}
-		String submitTimeEnd = queryRequest.getSubmitTimeE();
-		if (!StringUtil.isBlank(submitTimeEnd)) {
-			submitTimeEnd = submitTimeEnd + " 23:59:59";
-			Timestamp submitTimeE = Timestamp.valueOf(submitTimeEnd);
+		Long submitTimeEnd = queryRequest.getSubmitTimeE();
+		if (submitTimeEnd!=null) {
+			Timestamp submitTimeE = new Timestamp(submitTimeEnd);
 			ordReq.setStateChgTimeEnd(submitTimeE);
 		}
 		ordReq.setState(Constants.State.TBC_STATE);

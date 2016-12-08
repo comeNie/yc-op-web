@@ -191,17 +191,63 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var updateTimeS=jQuery.trim($("#updateTimeBegin").val());
 			var updateTimeE=jQuery.trim($("#updateTimeEnd").val());
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS="";
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE="";
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			//修改时间
+			if(updateTimeS=="" || updateTimeS==null){
+				updateTimeS="";
+			}else{
+				updateTimeS= new Date( Date.parse( $("#updateTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(updateTimeE=="" || updateTimeE==null){
+				updateTimeE="";
+			}else{
+				updateTimeE= new Date( Date.parse( $("#updateTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
 			var updateOperName=jQuery.trim($("#updateName").val());
 			window.location.href=_base+'/exportWaitPayOrd?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire
 		+'&orderPageId='+orderPageId+'&updateTimeS='+updateTimeS+'&updateTimeE='+updateTimeE+'&updateOperName='+updateOperName;
 		},
 		_getSearchParams:function(){
+			var orderTimeS = $("#orderTimeBegin").val();
+			var orderTimeE = $("#orderTimeEnd").val();
+			var updateTimeS =  $("#updateTimeBegin").val();
+			var updateTimeE =  $("#updateTimeEnd").val();
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS=null;
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE=null;
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			//修改时间
+			if(updateTimeS=="" || updateTimeS==null){
+				updateTimeS=null;
+			}else{
+				updateTimeS= new Date( Date.parse( $("#updateTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(updateTimeE=="" || updateTimeE==null){
+				updateTimeE=null;
+			}else{
+				updateTimeE= new Date( Date.parse( $("#updateTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
     		return {
-    			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
-    			"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
-    			"updateTimeS":jQuery.trim($("#updateTimeBegin").val()),
-    			"updateTimeE":jQuery.trim($("#updateTimeEnd").val()),
+    			"orderTimeS":orderTimeS,
+    			"orderTimeE":orderTimeE,
+    			"updateTimeS":updateTimeS,
+    			"updateTimeE":updateTimeE,
     			"userName":jQuery.trim($("#nickName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
     			"translateType":jQuery.trim($("#orderType option:selected").val()),
