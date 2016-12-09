@@ -58,6 +58,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			"change #totalFee":"_totalFeeChange",
 			"click #save":"_save",
 			"click #cancel":"_cancel",
+			"click #globalRome": "_setPattern",
 			"change #useCode":"_changeWordPrice",
 			"change #translateLevel":"_changeWordPrice"
 		},
@@ -91,6 +92,28 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			//
 			_this._getInterperLevel();
 		},
+		//国际编码
+        _globalRome:function(coutryCode) {
+            $.getJSON(_base + "/resources/spm_modules/app/jsp/order/globalRome.json",function(data){
+                $.each(data.row,function(rowIndex,row){
+                    var selObj = $("#globalRome");
+                    var text = row["COUNTRY_NAME_CN"];
+                    var coucode = row["COUNTRY_CODE"];
+                    var pattern=row["REGULAR_EXPRESSION"];
+                    if(coucode==coutryCode){
+                    	 $("#contactTel").attr('pattern',pattern);
+                    	selObj.append("<option selected='selected' value='"+coucode+"' code='"+row["COUNTRY_CODE"]+"' exp='" +row["REGULAR_EXPRESSION"]+"'>"+text+"   +"+row["COUNTRY_CODE"]+"</option>");
+                    }else{
+                    	selObj.append("<option  value='"+coucode+"' code='"+row["COUNTRY_CODE"]+"' exp='" +row["REGULAR_EXPRESSION"]+"'>"+text+"   +"+row["COUNTRY_CODE"]+"</option>");
+                    }
+                });
+            });
+        },
+      //根据国家设置号码匹配规则
+        _setPattern:function() {
+            var pattern = $("#saveContactDiv").find('option:selected').attr('exp');
+            $("#contactTel").attr('pattern',pattern);
+        },
 		_save:function(){
 			var _this = this;
 			var formValidator=_this._initValidate();
@@ -98,28 +121,34 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			if(!$("#orderForm").valid()){
 				return false;
 			}
+			//获取订单级别
+			_this._getOrderLevel(null);
 			var param = $("#orderForm").serializeArray();
-			
+			var paramCount = param.length-1;
 			var f = {};//声明一个对象
 			$.each(param,function(index,field){
-				f[field.name] = field.value;//通过变量，将属性值，属性一起放到对象中
+				//f[field.name] = field.value;//通过变量，将属性值，属性一起放到对象中
+				if(index!=paramCount){
+					f[field.name] = field.value;
+				}else{
+					var phone = $("#contactTel").val();
+					var countryCode =$("#globalRome").val();
+					f["contacts.contactTel"] ="+"+ countryCode+" "+phone;
+				}
+				
 			})
 			//等遍历结束，就会生成一个json对象了
 
 			//如果需要对象与字符串的转换
 			//这是从json对象 向 json 字符串转换
 			 var str = JSON.stringify(f);
-			 //alert(str);
-			 
-			 console.log(str);
-			 
 			 
 			ajaxController.ajax({
 				type: "post",
 				processing: true,
 				message: "保存数据中，请等待...",
 				url: _base + "/order/updateOrderInfo",
-				data: param,
+				data: f,
 				success: function (rs) {
 					showSuccessDialog(rs.statusInfo);
 				}
@@ -360,6 +389,17 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var orderInfoHtml = $("#orderInfoTempl").render(rs.data);
 			$("#date1").html(orderInfoHtml);
 			
+			//初始化数据
+			var tel = rs.data.contacts.contactTel.replace("+","");
+			var tels=tel.split(" ");
+			var councode = tels[0];
+			var phone = tels[1];
+			$("#contactTel").val(phone);
+			//将国家代码进行初始化
+			 _this._globalRome(councode);
+			
+			
+			
 			var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
 			$("#orderStateChgTable").html(orderStateChgHtml);
 			
@@ -436,14 +476,15 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			});
 		},
        _initValidate:function(){
+    	   var _this = this;
     	   var formValidator = $("#orderForm").validate({
     			rules: {
     				"contacts.contactName":{
     					required:true
     				},
     				"contacts.contactTel": {
-    					required:true,
-    					regexp:/(^(86){0,1}1\d{10}$)|(^(00){0,1}(1){1}\d{10,12}$)/
+    					required:true
+    					//regexp:/(^(86){0,1}1\d{10}$)|(^(00){0,1}(1){1}\d{10,12}$)/
     				},
     				"contacts.contactEmail":{
     					required:true,
@@ -519,7 +560,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"contacts.contactTel": {
     					required:"请输入联系人手机号",
-    					regexp:"手机号格式不正确"
+    					pattern:"手机号格式不正确"
     				},
     				"contacts.contactEmail":{
     					required:"请输入联系人邮箱",
@@ -593,7 +634,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     		});
     		
     	   return formValidator ;
-
     	}
 	});
 	module.exports = orderDetailsPager;
