@@ -86,12 +86,12 @@
                               </ul>
 							  <ul>
 								<div id="saveContactDiv">
-									<li class="col-md-12">
+									<li class="col-md-9">
 										<p class="word">联系人手机：</p>
 										<p>
                                              {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}
 											   
-									     		<select id="globalRome" name="gnCountryId" class="select int-in radius"></select>
+									     		<select id="globalRome" name="gnCountryId" class="select select-small"></select>
 												<input id="contactTel" name="contacts.contactTel" type="text" value="{{:contacts.contactTel}}" class="int-text int-medium" />
 												{{else}}
                                                {{:contacts.contactTel}}
