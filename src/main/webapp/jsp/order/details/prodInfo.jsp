@@ -59,7 +59,7 @@
 										<tr>
 											<th>文档类型</th>
 											<th>文件名称</th>
-											<th>提交时间</th>
+											<!--<th>提交时间</th>-->
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -90,7 +90,7 @@
                                             {{/if}}
 											
 											<td>{{:fileTranslateName}}</td>
-											<td>{{:~timesToFmatter(translateFileSubmitTime)}}</td>
+											<!--<td>{{:~timesToFmatter(translateFileSubmitTime)}}</td>-->
 											<td>
                                                 <input type="hidden" name="fileTranslateIds" value="{{:fileTranslateId}}"/>
                                                 <input type="hidden" name="fileTranslateNames" value="{{:fileTranslateName}}"/>
