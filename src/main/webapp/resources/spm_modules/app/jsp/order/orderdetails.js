@@ -125,22 +125,16 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var paramCount = param.length-1;
 			var f = {};//声明一个对象
 			$.each(param,function(index,field){
-				//f[field.name] = field.value;//通过变量，将属性值，属性一起放到对象中
-				if(index!=paramCount){
-					f[field.name] = field.value;
-				}else{
-					var phone = $("#contactTel").val();
-					var countryCode =$("#globalRome").val();
-					f["contacts.contactTel"] ="+"+ countryCode+" "+phone;
-				}
-				
+				f[field.name] = field.value;
+				var phone = $("#contactTel").val();
+				var countryCode =$("#globalRome").val();
+				f["contacts.contactTel"] ="+"+ countryCode+" "+phone;
 			})
 			//等遍历结束，就会生成一个json对象了
 
 			//如果需要对象与字符串的转换
 			//这是从json对象 向 json 字符串转换
 			 var str = JSON.stringify(f);
-			 
 			ajaxController.ajax({
 				type: "post",
 				processing: true,
