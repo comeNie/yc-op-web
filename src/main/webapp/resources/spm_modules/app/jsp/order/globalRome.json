@@ -57,20 +57,20 @@
         "REGULAR_EXPRESSION": "^0{0,1}[7,1](?:\\d{8}|\\d{9})$"
       },
       {
-        "ID": "8",
-        "COUNTRY_NAME_CN": "美国",
-        "COUNTRY_NAME_EN": "United States",
-        "COUNTRY_VALUE": "US",
-        "COUNTRY_CODE": "1",
-        "REGULAR_EXPRESSION": "^\\d{10,12}$"
-      },
-      {
         "ID": "9",
         "COUNTRY_NAME_CN": "加拿大",
         "COUNTRY_NAME_EN": "Canada",
         "COUNTRY_VALUE": "CA",
         "COUNTRY_CODE": "1",
         "REGULAR_EXPRESSION": "^\\d{10}$"
+      },
+      {
+        "ID": "8",
+        "COUNTRY_NAME_CN": "美国",
+        "COUNTRY_NAME_EN": "United States",
+        "COUNTRY_VALUE": "US",
+        "COUNTRY_CODE": "1",
+        "REGULAR_EXPRESSION": "^\\d{10,12}$"
       },
       {
         "ID": "10",
