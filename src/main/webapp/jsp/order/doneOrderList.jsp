@@ -160,7 +160,7 @@
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
 		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
-		~remainingTimePage=remainingTimePage	
+		~remainingTimePage=remainingTimePage ~userName=userName 
 }}
 		<tr>
 			{{if #index ==0}}
@@ -200,7 +200,7 @@
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
 		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
-		~remainingTimePage=remainingTimePage
+		~remainingTimePage=remainingTimePage ~userName=userName
 	}}
 		<tr>
 			{{if #index ==0}}
