@@ -121,8 +121,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			if(!$("#orderForm").valid()){
 				return false;
 			}
-			//获取订单级别
-			_this._getOrderLevel(null);
 			var param = $("#orderForm").serializeArray();
 			var paramCount = param.length-1;
 			var f = {};//声明一个对象

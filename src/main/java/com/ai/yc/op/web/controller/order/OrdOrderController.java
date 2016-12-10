@@ -269,7 +269,9 @@ public class OrdOrderController {
 			orderFee.setAdjustFee(orderFee.getTotalFee());
 			orderFee.setPaidFee(0l);
 			orderFee.setPayFee(0l);
-			orderFee.setUpdateOperId("10000");
+			
+			//orderFee.setUpdateOperId("10000");
+			orderFee.setUpdateOperId(loginUser.getUserId());
 			req.setOrderFee(orderFee);
 			
 		}
