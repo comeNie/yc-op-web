@@ -160,7 +160,7 @@
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
 		~ordProdExtendList=ordProdExtendList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
-		~remainingTimePage=remainingTimePage ~userName=userName 
+		~remainingTimePage=remainingTimePage ~userName=userName ~prodUpdateTime=prodUpdateTime
 }}
 		<tr>
 			{{if #index ==0}}
@@ -187,7 +187,7 @@
 				<td rowspan="{{:~levelSize}}">{{:~totalFeePage}}</td>
  				<td rowspan="{{:~levelSize}}">{{:~interperName}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~lockTime)}}</td>
-				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
+				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~prodUpdateTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~finishTime)}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~statePage}}</td>
 				<td rowspan="{{:~levelSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
@@ -200,7 +200,7 @@
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
 		~ordTransLevelList=ordTransLevelList ~extendSize=extendSize ~orderLevelPage=orderLevelPage
-		~remainingTimePage=remainingTimePage ~userName=userName
+		~remainingTimePage=remainingTimePage ~userName=userName ~prodUpdateTime=prodUpdateTime
 	}}
 		<tr>
 			{{if #index ==0}}
@@ -227,7 +227,7 @@
 				<td rowspan="{{:~extendSize}}">{{:~totalFeePage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~interperName}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~lockTime)}}</td>
-				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~endTime)}}</td>
+				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~prodUpdateTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', ~finishTime)}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~statePage}}</td>
 				<td rowspan="{{:~extendSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
@@ -248,7 +248,7 @@
 	<td>{{:totalFeePage}}</td>
 	<td>{{:interperName}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', lockTime)}}</td>
-	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', endTime)}}</td>
+	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', prodUpdateTime)}}</td>
 	<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', finishTime)}}</td>
 	<td>{{:statePage}}</td>
 	<td><a  href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>	

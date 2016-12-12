@@ -532,7 +532,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     					min:0
     				},
     				"prod.meetingAddress":{
-    					required:true
+    					required:true,
+    					maxlength:30
     				},
     				"prod.meetingSum":{
     					required:true,
@@ -609,7 +610,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     					min:"费用不合法"
     				},
     				"prod.meetingAddress":{
-    					required:"请输入会议地址"
+    					required:"请输入会议地址",
+    					maxlength:"会议地址不能超过30字"
     				},
     				"prod.meetingSum":{
     					required:"请输入会场数量",
