@@ -272,13 +272,11 @@
 	$('#orderTimeDiv').delegate('.fa-calendar','click',function(){
 		var calInput = $(this).parent().prev();
 		var timeId = calInput.attr('id');
-		console.log("click calendar "+timeId);
 		WdatePicker({el:timeId,readOnly:true});
 	});
 	$('#payTimeDiv').delegate('.fa-calendar','click',function(){
 		var calInput = $(this).parent().prev();
 		var timeId = calInput.attr('id');
-		console.log("click calendar "+timeId);
 		WdatePicker({el:timeId,readOnly:true});
 	});
 	var pager;
