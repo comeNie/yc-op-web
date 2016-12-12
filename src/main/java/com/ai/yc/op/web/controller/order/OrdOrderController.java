@@ -1,6 +1,7 @@
 package com.ai.yc.op.web.controller.order;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -291,14 +292,18 @@ public class OrdOrderController {
 			req.setProd(prod);
 		}
 		
-		if(!StringUtil.isBlank(pager.getStartTime())&&!StringUtil.isBlank(pager.getEndTime())){
+		if(pager.getStartTime()!=null&&pager.getEndTime()!=null){
 			UProdVo prod = req.getProd();
 			if(prod==null){
 				prod = new UProdVo();
 				req.setProd(prod);
 			}
-			prod.setStateTime(DateUtil.getTimestamp(pager.getStartTime(), "yyyy-MM-dd HH:mm:ss"));
-			prod.setEndTime(DateUtil.getTimestamp(pager.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+			Timestamp stateTime = new Timestamp(pager.getStartTime());
+			Timestamp endTime = new Timestamp(pager.getEndTime());
+			//prod.setStateTime(DateUtil.getTimestamp(pager.getStartTime(), "yyyy-MM-dd HH:mm:ss"));
+			//prod.setEndTime(DateUtil.getTimestamp(pager.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+			prod.setStateTime(stateTime);
+			prod.setEndTime(endTime);
 			req.setProd(prod);
 		}
 		

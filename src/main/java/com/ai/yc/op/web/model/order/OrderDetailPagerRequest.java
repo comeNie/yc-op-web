@@ -1,48 +1,46 @@
 package com.ai.yc.op.web.model.order;
 
 public class OrderDetailPagerRequest {
-	
 
-    /**
-     * 总费用(必填)
-     */
-    private String totalFee;
-    
-    /**
-     * 排版费用(必填)
-     */
-    private String setTypeFee;
-    
-    /**
-     * 加急费用(必填)
-     */
-    private String urgentFee;
-    
-    /**
-     * 转换格式费用(必填)
-     */
-    private String descTypeFee;
-    
-    /**
-     * 翻译级别
-     */
-    private String[] translateLevel;
-    
-    /**
-     * 内容附件
-     */
-    private String[] fileSaveIds;
-    
-    private String[] fileNames;
-    
-    private String[] fileTranslateIds;
-    
-    private String[] fileTranslateNames;
+	/**
+	 * 总费用(必填)
+	 */
+	private String totalFee;
 
-    
-    private String startTime;
-    
-    private String endTime;
+	/**
+	 * 排版费用(必填)
+	 */
+	private String setTypeFee;
+
+	/**
+	 * 加急费用(必填)
+	 */
+	private String urgentFee;
+
+	/**
+	 * 转换格式费用(必填)
+	 */
+	private String descTypeFee;
+
+	/**
+	 * 翻译级别
+	 */
+	private String[] translateLevel;
+
+	/**
+	 * 内容附件
+	 */
+	private String[] fileSaveIds;
+
+	private String[] fileNames;
+
+	private String[] fileTranslateIds;
+
+	private String[] fileTranslateNames;
+
+	private Long startTime;
+
+	private Long endTime;
 
 	public String getTotalFee() {
 		return totalFee;
@@ -59,8 +57,6 @@ public class OrderDetailPagerRequest {
 	public void setSetTypeFee(String setTypeFee) {
 		this.setTypeFee = setTypeFee;
 	}
-
-	
 
 	public String getUrgentFee() {
 		return urgentFee;
@@ -86,19 +82,19 @@ public class OrderDetailPagerRequest {
 		this.translateLevel = translateLevel;
 	}
 
-	public String getStartTime() {
+	public Long getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(String startTime) {
+	public void setStartTime(Long startTime) {
 		this.startTime = startTime;
 	}
 
-	public String getEndTime() {
+	public Long getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(String endTime) {
+	public void setEndTime(Long endTime) {
 		this.endTime = endTime;
 	}
 
@@ -133,7 +129,5 @@ public class OrderDetailPagerRequest {
 	public void setFileTranslateNames(String[] fileTranslateNames) {
 		this.fileTranslateNames = fileTranslateNames;
 	}
-    
-    
 
 }

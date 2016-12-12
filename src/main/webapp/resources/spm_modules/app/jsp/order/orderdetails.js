@@ -129,6 +129,22 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				var phone = $("#contactTel").val();
 				var countryCode =$("#globalRome").val();
 				f["contacts.contactTel"] ="+"+ countryCode+" "+phone;
+				
+				//获取开始，结束CMT时间
+				var startTime=$("#startTime").val();
+				var endTime=$("#endTime").val();
+				if(startTime!=null && startTime!=""){
+					 startTime= new Date( Date.parse( $("#startTime").val().replace(/-/g,"/")) ).getTime();
+				}else{
+					startTime="";
+				}
+				if(endTime!=null && endTime!=""){
+					endTime= new Date( Date.parse( $("#endTime").val().replace(/-/g,"/")) ).getTime();
+				}else{
+					endTime="";
+				}
+				f["startTime"] =startTime;
+				f["endTime"] =endTime;
 			})
 			//等遍历结束，就会生成一个json对象了
 
@@ -472,7 +488,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     	   var formValidator = $("#orderForm").validate({
     			rules: {
     				"contacts.contactName":{
-    					required:true
+    					required:true,
+    					maxlength:10
     				},
     				"contacts.contactTel": {
     					required:true
@@ -548,7 +565,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     			},
     			messages: {
     				"contacts.contactName":{
-    					required:"请输入联系人姓名"
+    					required:"请输入联系人姓名",
+    					maxlength:"联系人不能超过10字"
     				},
     				"contacts.contactTel": {
     					required:"请输入联系人手机号",
