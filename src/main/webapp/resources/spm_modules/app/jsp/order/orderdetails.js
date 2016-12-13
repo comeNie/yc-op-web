@@ -58,6 +58,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			"change #totalFee":"_totalFeeChange",
 			"click #save":"_save",
 			"click #cancel":"_cancel",
+			"click #globalRome": "_setPattern",
 			"change #useCode":"_changeWordPrice",
 			"change #translateLevel":"_changeWordPrice"
 		},
@@ -84,30 +85,88 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			this._queryOrderDetails();
 			
 		},
+		_orderLevelSelOnChange:function(obj){
+			var _this = this;
+			var objVal = $(obj).val();
+			$("#orderLevel").val(objVal);
+			//
+			_this._getInterperLevel();
+		},
+		//国际编码
+        _globalRome:function(coutryCode) {
+            $.getJSON(_base + "/resources/spm_modules/app/jsp/order/globalRome.json",function(data){
+                $.each(data.row,function(rowIndex,row){
+                    var selObj = $("#globalRome");
+                    var text = row["COUNTRY_NAME_CN"];
+                    var coucode = row["COUNTRY_CODE"];
+                    var pattern=row["REGULAR_EXPRESSION"];
+                    if(coucode==coutryCode){
+                    	 $("#contactTel").attr('pattern',pattern);
+                    	selObj.append("<option selected='selected' value='"+coucode+"' code='"+row["COUNTRY_CODE"]+"' exp='" +row["REGULAR_EXPRESSION"]+"'>"+text+"   +"+row["COUNTRY_CODE"]+"</option>");
+                    }else{
+                    	selObj.append("<option  value='"+coucode+"' code='"+row["COUNTRY_CODE"]+"' exp='" +row["REGULAR_EXPRESSION"]+"'>"+text+"   +"+row["COUNTRY_CODE"]+"</option>");
+                    }
+                });
+            });
+        },
+      //根据国家设置号码匹配规则
+        _setPattern:function() {
+            var pattern = $("#saveContactDiv").find('option:selected').attr('exp');
+            $("#contactTel").attr('pattern',pattern);
+        },
 		_save:function(){
 			var _this = this;
 			var formValidator=_this._initValidate();
 			formValidator.form();
 			if(!$("#orderForm").valid()){
-				showErrorDialog("填写数据不合法，请耐心检查!");
-				return;
+				return false;
 			}
 			var param = $("#orderForm").serializeArray();
+			var paramCount = param.length-1;
+			var f = {};//声明一个对象
+			$.each(param,function(index,field){
+				f[field.name] = field.value;
+				var phone = $("#contactTel").val();
+				var countryCode =$("#globalRome").val();
+				f["contacts.contactTel"] ="+"+ countryCode+" "+phone;
+				
+				//获取开始，结束CMT时间
+				var startTime=$("#startTime").val();
+				var endTime=$("#endTime").val();
+				if(startTime!=null && startTime!=""){
+					 startTime= new Date( Date.parse( $("#startTime").val().replace(/-/g,"/")) ).getTime();
+				}else{
+					startTime="";
+				}
+				if(endTime!=null && endTime!=""){
+					endTime= new Date( Date.parse( $("#endTime").val().replace(/-/g,"/")) ).getTime();
+				}else{
+					endTime="";
+				}
+				f["startTime"] =startTime;
+				f["endTime"] =endTime;
+			})
+			//等遍历结束，就会生成一个json对象了
+
+			//如果需要对象与字符串的转换
+			//这是从json对象 向 json 字符串转换
+			 var str = JSON.stringify(f);
 			ajaxController.ajax({
 				type: "post",
 				processing: true,
 				message: "保存数据中，请等待...",
 				url: _base + "/order/updateOrderInfo",
-				data: param,
+				data: f,
 				success: function (rs) {
 					showSuccessDialog(rs.statusInfo);
 				}
 			});
 		},
         _cancel:function(){
-        	if(cache){
+        	/*if(cache){
         		this._initView(cache);
-        	}
+        	}*/
+        	history.go(-1);
 		},
 		_getInterperLevel:function(){
 			var orderLevel = $("#orderLevel").val();
@@ -150,14 +209,15 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			this._getOrderLevel(null);
 		},
 		_getOrderLevel:function(fee){
-			var translateType = $("#translateType").val();
-			if(translateType=='2'){
-				return;
-			}
 			var _this = this;
+			var formValidator=_this._initValidate();
+			formValidator.form();
+			if(!$("#orderForm").valid()){
+				return false;
+			}
+			var translateType = $("#translateType").val();
 			var totalFee = $("#totalFee").val();
 			var translateLevel = $("#translateLevel").val();
-			
 			var isUrgent = $("#isUrgent").val();
 			var param = {};
 			if(fee){
@@ -179,7 +239,10 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				url: _base + "/order/getOrderLevel",
 				data: param,
 				success: function (rs) {
+					$("#orderLevelSel").val(rs.data);
 					$("#orderLevel").val(rs.data);
+					//显示译员级别 20161208 zhangzd
+					_this._getInterperLevel();
 				}
 			});
 			
@@ -335,6 +398,17 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var orderInfoHtml = $("#orderInfoTempl").render(rs.data);
 			$("#date1").html(orderInfoHtml);
 			
+			//初始化数据
+			var tel = rs.data.contacts.contactTel.replace("+","");
+			var tels=tel.split(" ");
+			var councode = tels[0];
+			var phone = tels[1];
+			$("#contactTel").val(phone);
+			//将国家代码进行初始化
+			 _this._globalRome(councode);
+			
+			
+			
 			var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
 			$("#orderStateChgTable").html(orderStateChgHtml);
 			
@@ -411,15 +485,16 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			});
 		},
        _initValidate:function(){
-    
+    	   var _this = this;
     	   var formValidator = $("#orderForm").validate({
     			rules: {
     				"contacts.contactName":{
-    					required:true
+    					required:true,
+    					maxlength:10
     				},
     				"contacts.contactTel": {
-    					required:true,
-    					regexp:/(^(86){0,1}1\d{10}$)|(^(00){0,1}(1){1}\d{10,12}$)/
+    					required:true
+    					//regexp:/(^(86){0,1}1\d{10}$)|(^(00){0,1}(1){1}\d{10,12}$)/
     				},
     				"contacts.contactEmail":{
     					required:true,
@@ -458,7 +533,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     					min:0
     				},
     				"prod.meetingAddress":{
-    					required:true
+    					required:true,
+    					maxlength:30
     				},
     				"prod.meetingSum":{
     					required:true,
@@ -491,11 +567,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     			},
     			messages: {
     				"contacts.contactName":{
-    					required:"请输入联系人姓名"
+    					required:"请输入联系人姓名",
+    					maxlength:"联系人不能超过10字"
     				},
     				"contacts.contactTel": {
     					required:"请输入联系人手机号",
-    					regexp:"手机号格式不正确"
+    					pattern:"手机号格式不正确"
     				},
     				"contacts.contactEmail":{
     					required:"请输入联系人邮箱",
@@ -516,25 +593,26 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				"setTypeFee":{
     					required:"请输入排版费用",
     					number:"费用格式不正确",
-    					min:"费用格式不正确"
+    					min:"费用不合法"
     				},
     				"descTypeFee":{
     					required:"请输入格式转换费用",
     					number:"费用格式不正确",
-    					min:"费用格式不正确"
+    					min:"费用不合法"
     				},
     				"urgentFee":{
     					required:"请输入加急费用",
     					number:"费用格式不正确",
-    					min:"费用格式不正确"
+    					min:"费用不合法"
     				},
     				"totalFee":{
     					required:"请输入加急费用",
     					number:"费用格式不正确",
-    					min:"费用格式不正确"
+    					min:"费用不合法"
     				},
     				"prod.meetingAddress":{
-    					required:"请输入会议地址"
+    					required:"请输入会议地址",
+    					maxlength:"会议地址不能超过30字"
     				},
     				"prod.meetingSum":{
     					required:"请输入会场数量",
@@ -569,7 +647,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     		});
     		
     	   return formValidator ;
-
     	}
 	});
 	module.exports = orderDetailsPager;
