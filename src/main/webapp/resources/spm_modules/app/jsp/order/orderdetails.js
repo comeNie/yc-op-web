@@ -163,9 +163,10 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			});
 		},
         _cancel:function(){
-        	if(cache){
+        	/*if(cache){
         		this._initView(cache);
-        	}
+        	}*/
+        	history.go(-1);
 		},
 		_getInterperLevel:function(){
 			var orderLevel = $("#orderLevel").val();
