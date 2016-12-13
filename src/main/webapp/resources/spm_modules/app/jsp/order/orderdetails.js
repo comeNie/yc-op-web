@@ -404,6 +404,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var councode = tels[0];
 			var phone = tels[1];
 			$("#contactTel").val(phone);
+			//初始化地址
+			var address = rs.data.prod.meetingAddress;
+			$("#meetingAddress").val(address);
 			//将国家代码进行初始化
 			 _this._globalRome(councode);
 			
@@ -532,10 +535,10 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     					number:true,
     					min:0
     				},
-    				"prod.meetingAddress":{
+    				/*"prod.meetingAddress":{
     					required:true,
     					maxlength:30
-    				},
+    				},*/
     				"prod.meetingSum":{
     					required:true,
     					digits:true,
@@ -610,10 +613,10 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     					number:"费用格式不正确",
     					min:"费用不合法"
     				},
-    				"prod.meetingAddress":{
+    				/*"prod.meetingAddress":{
     					required:"请输入会议地址",
     					maxlength:"会议地址不能超过30字"
-    				},
+    				},*/
     				"prod.meetingSum":{
     					required:"请输入会场数量",
     					digits:"会场数量必须为整数",
