@@ -52,7 +52,8 @@
                                     <li class="col-md-6">
 										<p class="word">预计翻译耗时：</p>
 										<p>
-                                            {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}
+                                           <!-- {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}  {{/if}}-->
+ 											{{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13')}}
 											  <input id="takeDay" name="prod.takeDay" type="text" value="{{:prod.takeDay==null?0:prod.takeDay}}" class="int-text int-minied" />天
                                               <input id="takeTime" name="prod.takeTime" type="text" value="{{:prod.takeTime==null?0:prod.takeTime}}" class="int-text int-minied" />小时
                                                &nbsp;<label id="takeDay-error" class="error" for="takeDay" style="display: none;"></label>
@@ -66,8 +67,9 @@
                                     <li class="col-md-6">
 										<p class="word">联系人姓名：</p>
 										<p> 
-                                            {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}
-											  <input id="contactName" name="contacts.contactName" type="text" value="{{:contacts.contactName}}" class="int-text int-medium" />
+                                            <!--{{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}} {{/if}}-->
+											{{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13')}}										  
+												<input id="contactName" name="contacts.contactName" type="text" value="{{:contacts.contactName}}" class="int-text int-medium" />
 										    {{else}}
                                                {{:contacts.contactName}}
                                             {{/if}}
@@ -76,7 +78,8 @@
 									<li class="col-md-6">
 										<p class="word">联系人邮箱：</p>
 										<p>
-                                            {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}
+                                           <!-- {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}  {{/if}}-->
+											{{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13')}}
 											  <input id="contactEmail" name="contacts.contactEmail" type="text" value="{{:contacts.contactEmail}}" class="int-text int-medium" />
                                             {{else}}
                                                {{:contacts.contactEmail}}
@@ -89,11 +92,11 @@
 									<li class="col-md-9">
 										<p class="word">联系人手机：</p>
 										<p>
-                                             {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}
-											   
+                                            <!-- {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}} {{/if}}-->
+											{{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13')}}
 									     		<select id="globalRome" name="gnCountryId" class="select select-small"></select>
 												<input id="contactTel" name="contacts.contactTel" type="text" value="{{:contacts.contactTel}}" class="int-text int-medium" />
-												{{else}}
+											{{else}}
                                                {{:contacts.contactTel}}
                                             {{/if}}
                                         </p>
