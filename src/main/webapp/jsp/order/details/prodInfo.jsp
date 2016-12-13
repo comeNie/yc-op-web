@@ -35,12 +35,12 @@
                                          {{/if}} 
 									</li>
 								</ul>
-								<ul>
+								<!--<ul>
 									<li class="col-md-12">
 										<p class="word">提交时间：</p>
 										<p>{{:~timesToFmatter(prod.updateTime)}}</p>
 									</li>
-								</ul>
+								</ul> -->
                             </div>
                           {{/if}}  
                           {{if translateType=='1'}}    
@@ -71,7 +71,7 @@
                                             {{/if}}
 											
 											<td>{{:fileName}}</td>
-											<td>{{:~timesToFmatter(fileSubmitTime)}}</td>
+											<!--<td>{{:~timesToFmatter(fileSubmitTime)}}</td> -->
 											<td>
                                                 <input type="hidden" name="fileSaveIds" value="{{:fileSaveId}}"/>
                                                 <input type="hidden" name="fileNames" value="{{:fileName}}"/>
