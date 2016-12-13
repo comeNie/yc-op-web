@@ -36,8 +36,8 @@
 						            			<option value="">全部</option>
 						            		</select>
 					            		</p>
-					            		<p>
-					            			高级搜索<a href="javascript:void(0);"><i class="fa fa-caret-down" id="showQuery"></i></a>
+					            		<p class="sos" id="showQuery">
+					            			<a href="javascript:void(0);">高级搜索<i class="fa fa-caret-down"></i></a>
 							         	</p>
 							         </li>
 		                    	</ul>

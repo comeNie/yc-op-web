@@ -39,8 +39,8 @@
 						            			<option value="">全部</option>
 						            		</select>
 					            		</p>
-					            		<p>
-					            			高级搜索<a href="javascript:void(0);"><i class="fa fa-caret-down" id="showQuery"></i></a>
+					            		<p class="sos" id="showQuery">
+					            			<a href="javascript:void(0);">高级搜索<i class="fa fa-caret-down"></i></a>
 							         	</p>
 							         </li>
 		                    	</ul>
@@ -185,7 +185,7 @@
 								                </li>
 								                <li>
 								                    <p class="word"><span>*</span>备注:</p>
-								                	<p><textarea id="remark" name="remark" rows="4" cols="25" class="int-text" maxlength="100"></textarea></p>
+								                	<p><textarea id="remark" name="remark" rows="4" cols="25" class="int-text"></textarea></p>
 								                </li>
 							            	</ul>
 									    </div>	

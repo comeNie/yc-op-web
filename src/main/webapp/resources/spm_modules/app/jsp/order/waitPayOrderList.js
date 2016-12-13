@@ -62,8 +62,9 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     					moneyNumber: true
     					},
 					remark: {
-    					required: true
-    					}
+    					required: true,
+    					maxlength:100
+    				}
     			},
     			messages: {
     				updateMoney: {
@@ -71,8 +72,9 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     					moneyNumber:"格式不对！"
     				},
     				remark: {
-    					required: "请输入备注!"
-    					}
+    					required: "请输入备注!",
+    					maxlength:"最大长度不能超过{0}"
+    				}
     			}
     		});
     		return formValidator;
