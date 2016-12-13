@@ -203,7 +203,8 @@
 									</li>
 									<li class="col-md-6">
 										<p class="word">会议地址：</p>
-											<p>
+										<p>{{:prod.meetingAddress}}</p>
+											<!--<p>
 												<select id="meetingAddress" name="prod.meetingAddress" class="select select-medium">
                                                 	<option value="北京">北京</option>
 										   	    	<option value="境外城市">境外城市</option>
@@ -212,7 +213,7 @@
 													<option value="Outside Beijing City">Outside Beijing City</option>
 													<option value="overseas">overseas</option>
 												</select>
-											</p>
+											</p>-->
 										<!--<p>
 										   <input id="meetingAddress" name="prod.meetingAddress" type="text" value="{{:prod.meetingAddress}}" class="int-text int-medium" />
 										</p> -->
