@@ -69,16 +69,14 @@ public class WaitPriceController {
 					ordReq.setOrderId(0l);
 				}
 			}
-			String orderTimeBegin = queryRequest.getOrderTimeS();
-			if (!StringUtil.isBlank(orderTimeBegin)) {
-				orderTimeBegin = orderTimeBegin + " 00:00:00";
-				Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+			Long orderTimeBegin = queryRequest.getOrderTimeS();
+			if (orderTimeBegin!=null) {
+				Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 				ordReq.setOrderTimeStart(orderTimeS);
 			}
-			String orderTimeEnd = queryRequest.getOrderTimeE();
-			if (!StringUtil.isBlank(orderTimeEnd)) {
-				orderTimeEnd = orderTimeEnd + " 23:59:59";
-				Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+			Long orderTimeEnd = queryRequest.getOrderTimeE();
+			if (orderTimeEnd!=null) {
+				Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
 
@@ -109,16 +107,16 @@ public class WaitPriceController {
 						if (chldParam != null) {
 							resParam.setChlIdPage(chldParam.getColumnDesc());
 						}
-						// 翻译订单类型
-						paramCond = new SysParamSingleCond();
-						paramCond.setTenantId(Constants.TENANT_ID);
-						paramCond.setColumnValue(vo.getOrderType());
-						paramCond.setTypeCode(Constants.TYPE_CODE);
-						paramCond.setParamCode(Constants.ORDER_TYPE);
-						SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
-						if (orderTypeParam != null) {
-							resParam.setOrderTypePage(orderTypeParam.getColumnDesc());
-						}
+						//翻译翻译类型
+                		paramCond = new SysParamSingleCond();
+                		paramCond.setTenantId(Constants.TENANT_ID);
+                		paramCond.setColumnValue(vo.getTranslateType());
+        				paramCond.setTypeCode(Constants.TYPE_CODE);
+        				paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
+                		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
+                		if(orderTypeParam!=null){
+                			resParam.setTranslateTypePage(orderTypeParam.getColumnDesc());
+                		}
 						// 翻译订单状态
 						paramCond = new SysParamSingleCond();
 						paramCond.setTenantId(Constants.TENANT_ID);
@@ -166,16 +164,14 @@ public class WaitPriceController {
 					ordReq.setOrderId(0l);
 				}
 			}
-			String orderTimeBegin = queryRequest.getOrderTimeS();
-			if (!StringUtil.isBlank(orderTimeBegin)) {
-				orderTimeBegin = orderTimeBegin + " 00:00:00";
-				Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+			Long orderTimeBegin = queryRequest.getOrderTimeS();
+			if (orderTimeBegin!=null) {
+				Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 				ordReq.setOrderTimeStart(orderTimeS);
 			}
-			String orderTimeEnd = queryRequest.getOrderTimeE();
-			if (!StringUtil.isBlank(orderTimeEnd)) {
-				orderTimeEnd = orderTimeEnd + " 23:59:59";
-				Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+			Long orderTimeEnd = queryRequest.getOrderTimeE();
+			if (orderTimeEnd!=null) {
+				Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 				ordReq.setOrderTimeEnd(orderTimeE);
 			}
 			ordReq.setState(Constants.State.WAIT_PRICE_STATE);
@@ -209,9 +205,9 @@ public class WaitPriceController {
 							// 翻译订单类型
 							paramCond = new SysParamSingleCond();
 							paramCond.setTenantId(Constants.TENANT_ID);
-							paramCond.setColumnValue(vo.getOrderType());
+							paramCond.setColumnValue(vo.getTranslateType());
 							paramCond.setTypeCode(Constants.TYPE_CODE);
-							paramCond.setParamCode(Constants.ORDER_TYPE);
+							paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
 							SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
 							if (orderTypeParam != null) {
 								exOrder.setOrderType(orderTypeParam.getColumnDesc());
@@ -250,9 +246,9 @@ public class WaitPriceController {
 						// 翻译订单类型
 						paramCond = new SysParamSingleCond();
 						paramCond.setTenantId(Constants.TENANT_ID);
-						paramCond.setColumnValue(vo.getOrderType());
+						paramCond.setColumnValue(vo.getTranslateType());
 						paramCond.setTypeCode(Constants.TYPE_CODE);
-						paramCond.setParamCode(Constants.ORDER_TYPE);
+						paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
 						SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
 						if (orderTypeParam != null) {
 							exOrder.setOrderType(orderTypeParam.getColumnDesc());

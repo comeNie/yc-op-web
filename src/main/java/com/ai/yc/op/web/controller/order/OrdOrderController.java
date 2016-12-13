@@ -1,6 +1,7 @@
 package com.ai.yc.op.web.controller.order;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,7 @@ import com.ai.yc.ucenter.api.members.param.get.UcMembersGetResponse;
 import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
 import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
 import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
+import com.alibaba.fastjson.JSON;
 
 @Controller
 @RequestMapping("/order")
@@ -204,7 +206,9 @@ public class OrdOrderController {
 	@RequestMapping("/updateOrderInfo")
 	@ResponseBody
     public ResponseData<Boolean> updateOrderInfo(UpdateOrderRequest req,OrderDetailPagerRequest pager){
+		log.info("req1:"+JSON.toJSONString(req));
 		req = installUpdateOrderRequest(req,pager);
+		log.info("req2:"+JSON.toJSONString(req));
 		IUpdateOrderSV iUpdateOrderSV = DubboConsumerFactory.getService(IUpdateOrderSV.class);
 		UpdateOrderResponse resp = null;
 		try {
@@ -266,7 +270,9 @@ public class OrdOrderController {
 			orderFee.setAdjustFee(orderFee.getTotalFee());
 			orderFee.setPaidFee(0l);
 			orderFee.setPayFee(0l);
-			orderFee.setUpdateOperId("10000");
+			
+			//orderFee.setUpdateOperId("10000");
+			orderFee.setUpdateOperId(loginUser.getUserId());
 			req.setOrderFee(orderFee);
 			
 		}
@@ -286,14 +292,18 @@ public class OrdOrderController {
 			req.setProd(prod);
 		}
 		
-		if(!StringUtil.isBlank(pager.getStartTime())&&!StringUtil.isBlank(pager.getEndTime())){
+		if(pager.getStartTime()!=null&&pager.getEndTime()!=null){
 			UProdVo prod = req.getProd();
 			if(prod==null){
 				prod = new UProdVo();
 				req.setProd(prod);
 			}
-			prod.setStateTime(DateUtil.getTimestamp(pager.getStartTime(), "yyyy-MM-dd HH:mm:ss"));
-			prod.setEndTime(DateUtil.getTimestamp(pager.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+			Timestamp stateTime = new Timestamp(pager.getStartTime());
+			Timestamp endTime = new Timestamp(pager.getEndTime());
+			//prod.setStateTime(DateUtil.getTimestamp(pager.getStartTime(), "yyyy-MM-dd HH:mm:ss"));
+			//prod.setEndTime(DateUtil.getTimestamp(pager.getEndTime(), "yyyy-MM-dd HH:mm:ss"));
+			prod.setStateTime(stateTime);
+			prod.setEndTime(endTime);
 			req.setProd(prod);
 		}
 		

@@ -72,29 +72,25 @@ public class ReviewOrderController {
 				ordReq.setOrderId(0l);
 			}
 		}
-		String orderTimeBegin = queryRequest.getOrderTimeS();
-		if (!StringUtil.isBlank(orderTimeBegin)) {
-			orderTimeBegin = orderTimeBegin + " 00:00:00";
-			Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+		Long orderTimeBegin = queryRequest.getOrderTimeS();
+		if (orderTimeBegin!=null) {
+			Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 			ordReq.setOrderTimeStart(orderTimeS);
 		}
-		String orderTimeEnd = queryRequest.getOrderTimeE();
-		if (!StringUtil.isBlank(orderTimeEnd)) {
-			orderTimeEnd = orderTimeEnd + " 23:59:59";
-			Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+		Long orderTimeEnd = queryRequest.getOrderTimeE();
+		if (orderTimeEnd!=null) {
+			Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 			ordReq.setOrderTimeEnd(orderTimeE);
 		}
 		//领取时间
-		String lockTimeBegin = queryRequest.getLockTimeS();
-		if (!StringUtil.isBlank(lockTimeBegin)) {
-			lockTimeBegin = lockTimeBegin + " 00:00:00";
-			Timestamp lockTimeS = Timestamp.valueOf(lockTimeBegin);
+		Long lockTimeBegin = queryRequest.getLockTimeS();
+		if (lockTimeBegin!=null) {
+			Timestamp lockTimeS = new Timestamp(lockTimeBegin);
 			ordReq.setLockTimeStart(lockTimeS);
 		}
-		String lockTimeEnd = queryRequest.getLockTimeE();
-		if (!StringUtil.isBlank(lockTimeEnd)) {
-			lockTimeEnd = lockTimeEnd + " 23:59:59";
-			Timestamp submitTimeE = Timestamp.valueOf(lockTimeEnd);
+		Long lockTimeEnd = queryRequest.getLockTimeE();
+		if (lockTimeEnd!=null) {
+			Timestamp submitTimeE = new Timestamp(lockTimeEnd);
 			ordReq.setLockTimeEnd(submitTimeE);
 		}
 		ordReq.setState(Constants.State.REVIEW_STATE);
@@ -126,6 +122,17 @@ public class ReviewOrderController {
 			for(OrdOrderVo vo:orderList){
 				OrderPageResParam resParam = new OrderPageResParam();
 				BeanUtils.copyProperties(resParam, vo);
+				//翻译剩余时间
+				Timestamp retime= vo.getRemainingTime();
+				if(retime!=null){
+					Long time= vo.getRemainingTime().getTime();
+					//获取天数、小时数、分钟
+					int day = (int)(time/(1000 * 60 * 60 * 24));
+					int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+					int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
+					String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
+					resParam.setRemainingTimePage(remaningPage);
+				}
 				//翻译订单来源
 				SysParamSingleCond	paramCond = new SysParamSingleCond();
 				paramCond.setTenantId(Constants.TENANT_ID);
@@ -136,15 +143,15 @@ public class ReviewOrderController {
         		if(chldParam!=null){
         			resParam.setChlIdPage(chldParam.getColumnDesc());
         		}
-        		//翻译订单类型
+        		//翻译翻译类型
         		paramCond = new SysParamSingleCond();
         		paramCond.setTenantId(Constants.TENANT_ID);
-				paramCond.setColumnValue(vo.getOrderType());
+        		paramCond.setColumnValue(vo.getTranslateType());
 				paramCond.setTypeCode(Constants.TYPE_CODE);
-				paramCond.setParamCode(Constants.ORDER_TYPE);
+				paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
         		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
         		if(orderTypeParam!=null){
-        			resParam.setOrderTypePage(orderTypeParam.getColumnDesc());
+        			resParam.setTranslateTypePage(orderTypeParam.getColumnDesc());
         		}
         		//翻译订单状态
         		paramCond = new SysParamSingleCond();
@@ -198,29 +205,25 @@ public class ReviewOrderController {
 				ordReq.setOrderId(0l);
 			}
 		}
-		String orderTimeBegin = queryRequest.getOrderTimeS();
-		if (!StringUtil.isBlank(orderTimeBegin)) {
-			orderTimeBegin = orderTimeBegin + " 00:00:00";
-			Timestamp orderTimeS = Timestamp.valueOf(orderTimeBegin);
+    	Long orderTimeBegin = queryRequest.getOrderTimeS();
+		if (orderTimeBegin!=null) {
+			Timestamp orderTimeS = new Timestamp(orderTimeBegin);
 			ordReq.setOrderTimeStart(orderTimeS);
 		}
-		String orderTimeEnd = queryRequest.getOrderTimeE();
-		if (!StringUtil.isBlank(orderTimeEnd)) {
-			orderTimeEnd = orderTimeEnd + " 23:59:59";
-			Timestamp orderTimeE = Timestamp.valueOf(orderTimeEnd);
+		Long orderTimeEnd = queryRequest.getOrderTimeE();
+		if (orderTimeEnd!=null) {
+			Timestamp orderTimeE = new Timestamp(orderTimeEnd);
 			ordReq.setOrderTimeEnd(orderTimeE);
 		}
 		//领取时间
-		String lockTimeBegin = queryRequest.getLockTimeS();
-		if (!StringUtil.isBlank(lockTimeBegin)) {
-			lockTimeBegin = lockTimeBegin + " 00:00:00";
-			Timestamp lockTimeS = Timestamp.valueOf(lockTimeBegin);
+		Long lockTimeBegin = queryRequest.getLockTimeS();
+		if (lockTimeBegin!=null) {
+			Timestamp lockTimeS = new Timestamp(lockTimeBegin);
 			ordReq.setLockTimeStart(lockTimeS);
 		}
-		String lockTimeEnd = queryRequest.getLockTimeE();
-		if (!StringUtil.isBlank(lockTimeEnd)) {
-			lockTimeEnd = lockTimeEnd + " 23:59:59";
-			Timestamp submitTimeE = Timestamp.valueOf(lockTimeEnd);
+		Long lockTimeEnd = queryRequest.getLockTimeE();
+		if (lockTimeEnd!=null) {
+			Timestamp submitTimeE = new Timestamp(lockTimeEnd);
 			ordReq.setLockTimeEnd(submitTimeE);
 		}
 		ordReq.setState(Constants.State.REVIEW_STATE);
@@ -255,9 +258,9 @@ public class ReviewOrderController {
 		        		//翻译订单类型
 		        		paramCond = new SysParamSingleCond();
 		        		paramCond.setTenantId(Constants.TENANT_ID);
-						paramCond.setColumnValue(vo.getOrderType());
+		        		paramCond.setColumnValue(vo.getTranslateType());
 						paramCond.setTypeCode(Constants.TYPE_CODE);
-						paramCond.setParamCode(Constants.ORDER_TYPE);
+						paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
 		        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
 		        		if(orderTypeParam!=null){
 		        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
@@ -299,7 +302,13 @@ public class ReviewOrderController {
 		        			exOrder.setSubmitTime(vo.getStateChgTime().toString());
 		        		}
 		        		if(vo.getRemainingTime()!=null){
-		        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
+		        			Long time= vo.getRemainingTime().getTime();
+							//获取天数、小时数、分钟
+							int day = (int)(time/(1000 * 60 * 60 * 24));
+							int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+							int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
+							String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
+		        			exOrder.setRemaningTime(remaningPage);
 		        		}
 		        		if(vo.getEndChgTime()!=null){
 		        			exOrder.setEndChgTime(vo.getEndChgTime().toString());
@@ -325,9 +334,9 @@ public class ReviewOrderController {
 	        		//翻译订单类型
 	        		paramCond = new SysParamSingleCond();
 	        		paramCond.setTenantId(Constants.TENANT_ID);
-					paramCond.setColumnValue(vo.getOrderType());
+	        		paramCond.setColumnValue(vo.getTranslateType());
 					paramCond.setTypeCode(Constants.TYPE_CODE);
-					paramCond.setParamCode(Constants.ORDER_TYPE);
+					paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
 	        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
 	        		if(orderTypeParam!=null){
 	        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
@@ -367,7 +376,13 @@ public class ReviewOrderController {
 	        			exOrder.setLockTime(vo.getLockTime().toString());
 	        		}
 	        		if(vo.getRemainingTime()!=null){
-	        			exOrder.setRemaningTime(vo.getRemainingTime().toString());
+	        			Long time= vo.getRemainingTime().getTime();
+						//获取天数、小时数、分钟
+						int day = (int)(time/(1000 * 60 * 60 * 24));
+						int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+						int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
+						String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
+	        			exOrder.setRemaningTime(remaningPage);
 	        		}
 	        		if(vo.getEndChgTime()!=null){
 	        			exOrder.setEndChgTime(vo.getEndChgTime().toString());
@@ -398,12 +413,12 @@ public class ReviewOrderController {
     
     @RequestMapping("/handReviewOrder")
 	@ResponseBody
-    public ResponseData<Boolean> handReviewOrder(OrderReviewRequest req,String orderIds){
+    public ResponseData<String> handReviewOrder(OrderReviewRequest req,String orderIds){
     	if(req==null){
-    		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "参数不能为空", null);
+    		return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "参数不能为空", null);
     	}
     	if(StringUtil.isBlank(orderIds)){
-    		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "订单ID不能为空", null);
+    		return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "订单ID不能为空", null);
     	}
     	String[] datas = orderIds.split(",");
     	List<Long> orderIdList = new ArrayList<Long>();
@@ -419,17 +434,22 @@ public class ReviewOrderController {
 			resp = iOrderReviewSV.handReviewOrder(req);
 		} catch (Exception e) {
 			logger.error("系统异常，请稍后重试", e);
-			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
 		if(resp==null){
 			logger.error("系统异常，请稍后重试");
-			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
 		if(!resp.getResponseHeader().isSuccess()){
 			logger.error(resp.getResponseHeader().getResultMessage());
-			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, resp.getResponseHeader().getResultMessage(), null);
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, resp.getResponseHeader().getResultMessage(), null);
 		}
-		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功", true);
+		if(Constants.State.CHECKED_STATE.equals(req.getState())){
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功", "00");
+		}else if(Constants.State.REFUSE_STATE.equals(req.getState())){
+			return new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功", "11");
+		}
+		return new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功", "");
     }
 
 }

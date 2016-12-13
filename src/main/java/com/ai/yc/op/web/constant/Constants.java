@@ -31,6 +31,18 @@ public final class Constants {
 	public static final String ZH_LANGE = "zh_CN";
 	/** 英文站*/
 	public static final String EN_LANGE = "1";
+	/**
+	 * 公共库语言对表中对应的翻译类型（笔译）
+	 */
+	public static final String TRANSLATE_TYPE_COMMON = "1";
+	/**
+	 * 查询条件语言对展示（笔译）
+	 */
+	public static final String TRANSLATE_TYPE_PEN = "笔译";
+	/**
+	 * 查询条件语言对展示（口译）
+	 */
+	public static final String TRANSLATE_TYPE_MOU = "口译";
 	
 	public static final class ExcelConstants{
     	private ExcelConstants(){}
@@ -62,9 +74,17 @@ public final class Constants {
 		public static final String TRANSLTING_STATE = "23";
 		
 		/**
-		 * 待确认
+		 * 待审核
 		 */
 		public static final String REVIEW_STATE = "40";
+		/**
+		 * 审核通过
+		 */
+		public static final String CHECKED_STATE = "41";
+		/**
+		 * 审核失败
+		 */
+		public static final String REFUSE_STATE = "42";
 		
 		/**
 		 * 待确认

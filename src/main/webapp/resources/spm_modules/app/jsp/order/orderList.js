@@ -109,7 +109,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				}
 			});
 		},
-		// 下拉订单类型
+		// 下拉订单类型（对应库中的翻译类型）
 		_bindOrdTypeSelect:function() {
 			var this_=this;
 			$.ajax({
@@ -118,7 +118,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				url : _base+ "/getSelect",
 				dataType : "json",
 				data : {
-					paramCode:"ORDER_TYPE",
+					paramCode:"TRANSLATE_TYPE",
 					typeCode:"ORD_ORDER"
 				},
 				message : "正在加载数据..",
@@ -207,15 +207,36 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
 			var payTimeS=jQuery.trim($("#payTimeBegin").val());
 			var payTimeE=jQuery.trim($("#payTimeEnd").val());
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE="";
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS="";
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			//支付时间
+			if(payTimeS=="" || payTimeS==null){
+				payTimeS="";
+			}else{
+				payTimeS= new Date( Date.parse( $("#payTimeBegin").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			if(payTimeE=="" || payTimeE==null){
+				payTimeE="";
+			}else{
+				payTimeE= new Date( Date.parse( $("#payTimeEnd").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var orderType=jQuery.trim($("#orderType option:selected").val());
+			var translateType=jQuery.trim($("#orderType option:selected").val());
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var state=jQuery.trim($("#searchOrderState").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var payStyle = jQuery.trim($("#payStyle option:selected").val());
 			window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
-			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+'&state='
+			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+'&state='
 		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle;
 		},
 		_searchOrderList:function(){
@@ -245,14 +266,39 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 		},
 	
 		_getSearchParams:function(){
+			var orderTimeS = $("#orderTimeBegin").val();
+			var orderTimeE = $("#orderTimeEnd").val();
+			var payTimeS = $("#payTimeBegin").val();
+			var payTimeE = $("#payTimeEnd").val();
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE=null;
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS=null;
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			//支付时间
+			if(payTimeS=="" || payTimeS==null){
+				payTimeS=null;
+			}else{
+				payTimeS= new Date( Date.parse( $("#payTimeBegin").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			if(payTimeE=="" || payTimeE==null){
+				payTimeE=null;
+			}else{
+				payTimeE= new Date( Date.parse( $("#payTimeEnd").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
     		return {
-    			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
-    			"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
-    			"payTimeS":jQuery.trim($("#payTimeBegin").val()),
-    			"payTimeE":jQuery.trim($("#payTimeEnd").val()),
+    			"orderTimeS":orderTimeS,
+    			"orderTimeE":orderTimeE,
+    			"payTimeS":payTimeS,
+    			"payTimeE":payTimeE,
     			"userName":jQuery.trim($("#nickName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
-    			"orderType":jQuery.trim($("#orderType option:selected").val()),
+    			"translateType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
     			"state":jQuery.trim($("#searchOrderState").val()),
     			"orderPageId":jQuery.trim($("#orderId").val()),

@@ -35,12 +35,12 @@
                                          {{/if}} 
 									</li>
 								</ul>
-								<ul>
+								<!--<ul>
 									<li class="col-md-12">
 										<p class="word">提交时间：</p>
 										<p>{{:~timesToFmatter(prod.updateTime)}}</p>
 									</li>
-								</ul>
+								</ul> -->
                             </div>
                           {{/if}}  
                           {{if translateType=='1'}}    
@@ -59,7 +59,7 @@
 										<tr>
 											<th>文档类型</th>
 											<th>文件名称</th>
-											<th>提交时间</th>
+											<!--<th>提交时间</th>-->
 											<th>操作</th>
 										</tr>
 									</thead>
@@ -71,7 +71,7 @@
                                             {{/if}}
 											
 											<td>{{:fileName}}</td>
-											<td>{{:~timesToFmatter(fileSubmitTime)}}</td>
+											<!--<td>{{:~timesToFmatter(fileSubmitTime)}}</td> -->
 											<td>
                                                 <input type="hidden" name="fileSaveIds" value="{{:fileSaveId}}"/>
                                                 <input type="hidden" name="fileNames" value="{{:fileName}}"/>
@@ -90,7 +90,7 @@
                                             {{/if}}
 											
 											<td>{{:fileTranslateName}}</td>
-											<td>{{:~timesToFmatter(translateFileSubmitTime)}}</td>
+											<!--<td>{{:~timesToFmatter(translateFileSubmitTime)}}</td>-->
 											<td>
                                                 <input type="hidden" name="fileTranslateIds" value="{{:fileTranslateId}}"/>
                                                 <input type="hidden" name="fileTranslateNames" value="{{:fileTranslateName}}"/>

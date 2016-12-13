@@ -91,7 +91,7 @@
 							                </li> 
 						            	</ul>
 			                    	</div>
-						           <div id="stateTimeDiv">
+						           <div id="lockTimeDiv">
 							           	<ul>
 							                <li class="col-md-6">
 							                    <p class="word">领取开始时间</p>
@@ -191,9 +191,9 @@
 	<tr>
       <td><span><input type="checkbox" value="{{:orderId}}" class="checkbox-medium single"/></span></td>
   	  <td>{{:chlIdPage}}</td>
-      <td>{{:orderTypePage}}</td>
-      <td><a href="../order/orderdetails?mod=edit&orderId={{:orderId}}">{{:orderId}}</a></td>
- 	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
+      <td>{{:translateTypePage}}</td>
+	  <td title="{{:orderId}}"><a href="../order/orderdetails?mod=edit&orderId={{:orderId}}">{{:~subStr(10,orderId)}}</a></td>	
+      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
       <td>{{:userName}}</td>
  	  <td>
       	 <table class="table close-border" width="100%">
@@ -214,12 +214,23 @@
       <td>{{:interperName}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', lockTime)}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', stateChgTime)}}</td>
-      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}</td>
+      <td>{{:remainingTimePage}}</td>
      <td>{{:statePage}}</td>
      <td><a href="../order/orderdetails?mod=edit&orderId={{:orderId}}">查看</a><a href="javascript:void(0);" class="adopt">通过</a><a href="javascript:void(0);" class="reject">驳回</a></td>
   </tr>                                                                       
 </script> 
   <script type="text/javascript">
+  <%-- 展示日历 --%>
+	$('#orderTimeDiv').delegate('.fa-calendar','click',function(){
+		var calInput = $(this).parent().prev();
+		var timeId = calInput.attr('id');
+		WdatePicker({el:timeId,readOnly:true});
+	});
+	$('#lockTimeDiv').delegate('.fa-calendar','click',function(){
+		var calInput = $(this).parent().prev();
+		var timeId = calInput.attr('id');
+		WdatePicker({el:timeId,readOnly:true});
+	});
 	var pager;
 	(function () {
 		seajs.use('app/jsp/order/reviewOrderList', function (ReviewOrdListPager) {

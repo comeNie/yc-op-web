@@ -74,7 +74,7 @@ define('app/jsp/order/translatingOrderList', function (require, exports, module)
 				}
 			});
 		},
-		// 下拉订单类型
+		// 下拉订单类型（对应库中的翻译类型）
 		_bindOrdTypeSelect:function() {
 			var this_=this;
 			$.ajax({
@@ -83,7 +83,7 @@ define('app/jsp/order/translatingOrderList', function (require, exports, module)
 				url : _base+ "/getSelect",
 				dataType : "json",
 				data : {
-					paramCode:"ORDER_TYPE",
+					paramCode:"TRANSLATE_TYPE",
 					typeCode:"ORD_ORDER"
 				},
 				message : "正在加载数据..",
@@ -149,15 +149,36 @@ define('app/jsp/order/translatingOrderList', function (require, exports, module)
 			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
 			var lockTimeS=jQuery.trim($("#lockTimeBegin").val());
 			var lockTimeE=jQuery.trim($("#lockTimeEnd").val());
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS="";
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE="";
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			//领取时间
+			if(lockTimeS=="" || lockTimeS==null){
+				lockTimeS="";
+			}else{
+				lockTimeS= new Date( Date.parse( $("#lockTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(lockTimeE=="" || lockTimeE==null){
+				lockTimeE="";
+			}else{
+				lockTimeE= new Date( Date.parse( $("#lockTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var orderType = jQuery.trim($("#orderType option:selected").val());
+			var translateType = jQuery.trim($("#orderType option:selected").val());
 			var langungePaire = jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var orderLevel = jQuery.trim($("#orderLevel option:selected").val());
 			var interperName = jQuery.trim($("#interperName").val());
 			window.location.href=_base+'/translatingExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&lockTimeS='+lockTimeS+
-			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire+
+			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+
 		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&orderLevel='+orderLevel+'&interperName='+interperName;
 		},
 		_searchOrderList:function(){
@@ -187,15 +208,40 @@ define('app/jsp/order/translatingOrderList', function (require, exports, module)
 		},
 	
 		_getSearchParams:function(){
+			var orderTimeS = $("#orderTimeBegin").val();
+			var orderTimeE = $("#orderTimeEnd").val();
+			var lockTimeS =  $("#lockTimeBegin").val();
+			var lockTimeE =  $("#lockTimeEnd").val();
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS=null;
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE=null;
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
+			//领取时间
+			if(lockTimeS=="" || lockTimeS==null){
+				lockTimeS=null;
+			}else{
+				lockTimeS= new Date( Date.parse( $("#lockTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(lockTimeE=="" || lockTimeE==null){
+				lockTimeE=null;
+			}else{
+				lockTimeE= new Date( Date.parse( $("#lockTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
     		return {
-    			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
-    			"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
-    			"lockTimeS":jQuery.trim($("#lockTimeBegin").val()),
-    			"lockTimeE":jQuery.trim($("#lockTimeEnd").val()),
+    			"orderTimeS":orderTimeS,
+    			"orderTimeE":orderTimeE,
+    			"lockTimeS":lockTimeS,
+    			"lockTimeE":lockTimeE,
     			"userName":jQuery.trim($("#nickName").val()),
     			"interperName":jQuery.trim($("#interperName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
-    			"orderType":jQuery.trim($("#orderType option:selected").val()),
+    			"translateType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
     			"orderPageId":jQuery.trim($("#orderId").val()),
     			"orderLevel":jQuery.trim($("#orderLevel option:selected").val())

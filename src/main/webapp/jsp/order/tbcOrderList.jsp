@@ -171,7 +171,7 @@
 <script id="orderListTemple" type="text/template">
 	<tr>
   	  <td>{{:chlIdPage}}</td>
-      <td>{{:orderTypePage}}</td>
+      <td>{{:translateTypePage}}</td>
       <td><a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}')">{{:orderId}}</a></td>
  	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
       <td>{{:userName}}</td>
@@ -191,7 +191,7 @@
  	  <td>{{:orderLevelPage}}</td>
       <td>{{:totalFeePage}}</td>
 	  <td>{{:interperName}}</td>
-      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}</td>
+      <td>{{:remainingTimePage}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', stateChgTime)}}</td>
      <td>{{:statePage}}</td>
      <td><a href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>
@@ -202,13 +202,11 @@
 	$('#orderTimeDiv').delegate('.fa-calendar','click',function(){
 		var calInput = $(this).parent().prev();
 		var timeId = calInput.attr('id');
-		console.log("click calendar "+timeId);
 		WdatePicker({el:timeId,readOnly:true});
 	});
 	$('#stateTimeDiv').delegate('.fa-calendar','click',function(){
 		var calInput = $(this).parent().prev();
 		var timeId = calInput.attr('id');
-		console.log("click calendar "+timeId);
 		WdatePicker({el:timeId,readOnly:true});
 	});
 	var pager;

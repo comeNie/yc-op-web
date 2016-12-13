@@ -74,17 +74,6 @@
                                         </p>
 									</li>
 									<li class="col-md-6">
-										<p class="word">联系人手机：</p>
-										<p>
-                                             {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}
-											   <input id="contactTel" name="contacts.contactTel" type="text" value="{{:contacts.contactTel}}" class="int-text int-medium" />
-									     	{{else}}
-                                               {{:contacts.contactTel}}
-                                            {{/if}}
-                                        </p>
-									</li>
-								
-									<li class="col-md-6">
 										<p class="word">联系人邮箱：</p>
 										<p>
                                             {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}
@@ -94,14 +83,31 @@
                                             {{/if}}
 										</p>
 									</li>
-
+                              </ul>
+							  <ul>
+								<div id="saveContactDiv">
+									<li class="col-md-9">
+										<p class="word">联系人手机：</p>
+										<p>
+                                             {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}
+											   
+									     		<select id="globalRome" name="gnCountryId" class="select select-small"></select>
+												<input id="contactTel" name="contacts.contactTel" type="text" value="{{:contacts.contactTel}}" class="int-text int-medium" />
+												{{else}}
+                                               {{:contacts.contactTel}}
+                                            {{/if}}
+                                        </p>
+									</li>
+								</div>
+							  </ul>
+							  <ul>
 									<li class="col-md-6">
 										<p class="word">客户留言：</p>
 										<p class="col-md-8">
 											{{:remark}}
 										</p>
-									</li>
-                              </ul>
+									</li>			
+							 </ul>
                               <ul>
 								  {{if subFlag==1&&orderFee.updateOperId!=null}}
                                     <li class="col-md-6">

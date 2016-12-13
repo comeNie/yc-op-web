@@ -73,7 +73,7 @@ define('app/jsp/order/waitPriceOrderList', function (require, exports, module) {
 				}
 			});
 		},
-		// 下拉订单类型
+		// 下拉订单类型（对应库中的翻译类型）
 		_bindOrdTypeSelect:function() {
 			var this_=this;
 			$.ajax({
@@ -82,7 +82,7 @@ define('app/jsp/order/waitPriceOrderList', function (require, exports, module) {
 				url : _base+ "/getSelect",
 				dataType : "json",
 				data : {
-					paramCode:"ORDER_TYPE",
+					paramCode:"TRANSLATE_TYPE",
 					typeCode:"ORD_ORDER"
 				},
 				message : "正在加载数据..",
@@ -149,22 +149,44 @@ define('app/jsp/order/waitPriceOrderList', function (require, exports, module) {
 			var _this=this;
 			var orderTimeS=jQuery.trim($("#orderTimeBegin").val());
 			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS="";
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE="";
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var orderType=jQuery.trim($("#orderType option:selected").val());
+			var translateType=jQuery.trim($("#orderType option:selected").val());
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			window.location.href=_base+'/waitpriceOrdExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+
-			'&userName='+userName+'&chlId='+chlId+'&orderType='+orderType+'&langungePaire='+langungePaire
+			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire
 		+'&orderPageId='+orderPageId;
 		},
 		_getSearchParams:function(){
+			var orderTimeS = $("#orderTimeBegin").val();
+			var orderTimeE = $("#orderTimeEnd").val();
+			if(orderTimeS=="" || orderTimeS==null){
+				orderTimeS=null;
+			}else{
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+			}
+			if(orderTimeE=="" || orderTimeE==null){
+				orderTimeE=null;
+			}else{
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+			}
     		return {
-    			"orderTimeS":jQuery.trim($("#orderTimeBegin").val()),
-    			"orderTimeE":jQuery.trim($("#orderTimeEnd").val()),
+    			"orderTimeS":orderTimeS,
+    			"orderTimeE":orderTimeE,
     			"userName":jQuery.trim($("#nickName").val()),
     			"chlId":jQuery.trim($("#orderSource option:selected").val()),
-    			"orderType":jQuery.trim($("#orderType option:selected").val()),
+    			"translateType":jQuery.trim($("#orderType option:selected").val()),
     			"langungePaire":jQuery.trim($("#langugePaire option:selected").val()),
     			"orderPageId":jQuery.trim($("#orderId").val())
     		}

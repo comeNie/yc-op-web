@@ -6,144 +6,117 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 
 	private static final long serialVersionUID = 1L;
 
-	private String orderTimeS;
-	private String orderTimeE;
-	private String payTimeS;
-	private String payTimeE;
+	
+	private Long orderTimeS;
+	private Long orderTimeE;
+	private Long payTimeS;
+	private Long payTimeE;
 	private String orderPageId;
 	private String langungePaire;
 
-	private String cancelTimeS;
-	private String cancelTimeE;
+	private Long cancelTimeS;
+	private Long cancelTimeE;
 	private String cancelType;
 
-	private String updateTimeS;
-	private String updateTimeE;
+	private Long updateTimeS;
+	private Long updateTimeE;
 
-	private String lockTimeS;
-	private String lockTimeE;
+	private Long lockTimeS;
+	private Long lockTimeE;
 
-	private String submitTimeS;
-	private String submitTimeE;
-
-	public String getOrderTimeS() {
+	private Long submitTimeS;
+	private Long submitTimeE;
+	public Long getOrderTimeS() {
 		return orderTimeS;
 	}
-
-	public void setOrderTimeS(String orderTimeS) {
+	public void setOrderTimeS(Long orderTimeS) {
 		this.orderTimeS = orderTimeS;
 	}
-
-	public String getOrderTimeE() {
+	public Long getOrderTimeE() {
 		return orderTimeE;
 	}
-
-	public void setOrderTimeE(String orderTimeE) {
+	public void setOrderTimeE(Long orderTimeE) {
 		this.orderTimeE = orderTimeE;
 	}
-
-	public String getPayTimeS() {
+	public Long getPayTimeS() {
 		return payTimeS;
 	}
-
-	public void setPayTimeS(String payTimeS) {
+	public void setPayTimeS(Long payTimeS) {
 		this.payTimeS = payTimeS;
 	}
-
-	public String getPayTimeE() {
+	public Long getPayTimeE() {
 		return payTimeE;
 	}
-
-	public void setPayTimeE(String payTimeE) {
+	public void setPayTimeE(Long payTimeE) {
 		this.payTimeE = payTimeE;
 	}
-
 	public String getOrderPageId() {
 		return orderPageId;
 	}
-
 	public void setOrderPageId(String orderPageId) {
 		this.orderPageId = orderPageId;
 	}
-
 	public String getLangungePaire() {
 		return langungePaire;
 	}
-
 	public void setLangungePaire(String langungePaire) {
 		this.langungePaire = langungePaire;
 	}
-
-	public String getCancelTimeS() {
+	public Long getCancelTimeS() {
 		return cancelTimeS;
 	}
-
-	public void setCancelTimeS(String cancelTimeS) {
+	public void setCancelTimeS(Long cancelTimeS) {
 		this.cancelTimeS = cancelTimeS;
 	}
-
-	public String getCancelTimeE() {
+	public Long getCancelTimeE() {
 		return cancelTimeE;
 	}
-
-	public void setCancelTimeE(String cancelTimeE) {
+	public void setCancelTimeE(Long cancelTimeE) {
 		this.cancelTimeE = cancelTimeE;
 	}
-
 	public String getCancelType() {
 		return cancelType;
 	}
-
 	public void setCancelType(String cancelType) {
 		this.cancelType = cancelType;
 	}
-
-	public String getUpdateTimeS() {
+	public Long getUpdateTimeS() {
 		return updateTimeS;
 	}
-
-	public void setUpdateTimeS(String updateTimeS) {
+	public void setUpdateTimeS(Long updateTimeS) {
 		this.updateTimeS = updateTimeS;
 	}
-
-	public String getUpdateTimeE() {
+	public Long getUpdateTimeE() {
 		return updateTimeE;
 	}
-
-	public void setUpdateTimeE(String updateTimeE) {
+	public void setUpdateTimeE(Long updateTimeE) {
 		this.updateTimeE = updateTimeE;
 	}
-
-	public String getLockTimeS() {
+	public Long getLockTimeS() {
 		return lockTimeS;
 	}
-
-	public void setLockTimeS(String lockTimeS) {
+	public void setLockTimeS(Long lockTimeS) {
 		this.lockTimeS = lockTimeS;
 	}
-
-	public String getLockTimeE() {
+	public Long getLockTimeE() {
 		return lockTimeE;
 	}
-
-	public void setLockTimeE(String lockTimeE) {
+	public void setLockTimeE(Long lockTimeE) {
 		this.lockTimeE = lockTimeE;
 	}
-
-	public String getSubmitTimeS() {
+	public Long getSubmitTimeS() {
 		return submitTimeS;
 	}
-
-	public void setSubmitTimeS(String submitTimeS) {
+	public void setSubmitTimeS(Long submitTimeS) {
 		this.submitTimeS = submitTimeS;
 	}
-
-	public String getSubmitTimeE() {
+	public Long getSubmitTimeE() {
 		return submitTimeE;
 	}
-
-	public void setSubmitTimeE(String submitTimeE) {
+	public void setSubmitTimeE(Long submitTimeE) {
 		this.submitTimeE = submitTimeE;
 	}
+
+	
 
 }

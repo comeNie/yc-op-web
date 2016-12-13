@@ -85,8 +85,13 @@ public class AttachmentController {
 	
 	@RequestMapping(value = "/download")
 	public void download(HttpServletResponse response,String fileId,String ext){
+		log.info("下载文件开始=====");
+		log.info("下载文件ID====="+fileId);
+		System.out.println("id="+fileId);
 		IDSSClient client = DSSClientFactory.getDSSClient(Constants.IPAAS_ORDER_FILE_DSS);
 		byte[] bs  = client.read(fileId);
+		log.info("数据"+bs);
+		System.out.println("data="+bs);
 		String fileName = System.currentTimeMillis()+ "." + ext;
 		OutputStream out = null;
 		try {

@@ -15,7 +15,6 @@ import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.common.api.cache.interfaces.ICacheSV;
 import com.ai.yc.common.api.cache.param.SysParam;
 import com.ai.yc.common.api.cache.param.SysParamMultiCond;
-import com.ai.yc.common.api.cache.param.SysParamSingleCond;
 import com.ai.yc.common.api.sysduad.interfaces.IQuerySysDuadSV;
 import com.ai.yc.common.api.sysduad.param.QuerySysDuadListReq;
 import com.ai.yc.common.api.sysduad.param.QuerySysDuadListRes;
@@ -54,7 +53,6 @@ public class SysParamController {
         try{
         	QuerySysDuadListReq request = new QuerySysDuadListReq();
         	IQuerySysDuadSV iQuerySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
-        	ICacheSV iCacheSV = DubboConsumerFactory.getService(ICacheSV.class);
         	QuerySysDuadListRes res = iQuerySysDuadSV.querySysDuadList(request);
         	List<SysDuadVo> infoList = res.getDuads();
         	List<SysDuadParam> resultList = new ArrayList<SysDuadParam>();
@@ -62,23 +60,26 @@ public class SysParamController {
         		for(SysDuadVo vo:infoList){
         			SysDuadParam param = new SysDuadParam();
         			BeanUtils.copyProperties(param, vo);
-        			/*if(!StringUtil.isBlank(vo.getLanguage())){
-        				if(Constants.ZH_LANGE.equals(vo.getLanguage())){
-        					param.setLanguaNmae("中文站");
-        				}else{
-        					param.setLanguaNmae("英文站");
-        				}
-        			}*/
         			//翻译类型
-        			SysParamSingleCond	paramCond = new SysParamSingleCond();
+        			/*SysParamSingleCond	paramCond = new SysParamSingleCond();
 					paramCond.setTenantId(Constants.TENANT_ID);
 					paramCond.setColumnValue(vo.getOrderType());
 					paramCond.setTypeCode(Constants.TYPE_CODE);
 					paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
-	        		SysParam typeParam = iCacheSV.getSysParamSingle(paramCond);
-	        		if(typeParam!=null){
+	        		SysParam typeParam = iCacheSV.getSysParamSingle(paramCond);*/
+	        		/*if(typeParam!=null){
+	        			if(Constants.TRANSLATE_TYPE_COMMON.equals(vo.getOrderType())){
+	        				param.setTransTypeName(typeParam.getColumnDesc());
+	        			}else{
+	        				
+	        			}
 	        			param.setTransTypeName(typeParam.getColumnDesc());
-	        		}
+	        		}*/
+        			if(Constants.TRANSLATE_TYPE_COMMON.equals(vo.getOrderType())){
+        				param.setTransTypeName(Constants.TRANSLATE_TYPE_PEN);
+        			}else{
+        				param.setTransTypeName(Constants.TRANSLATE_TYPE_MOU);
+        			}
         			resultList.add(param);
         		}
         	}
