@@ -146,11 +146,29 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				f["startTime"] =startTime;
 				f["endTime"] =endTime;
 			})
+			//
+			var fileSaveIds = [];
+			$("input[name=fileSaveIds]").each(function(){
+				fileSaveIds.push($(this).val());
+			});
+			var replaceSaveIds = fileSaveIds;
+			
+			f["fileSaveIds"] = replaceSaveIds.join(",");
+			//
+			var fileNames = [];
+			$("input[name=fileNames]").each(function(){
+				fileNames.push($(this).val());
+			});
+			var replaceNames = fileNames;
+			
+			f["fileNames"] = replaceNames.join(",");
+				
 			//等遍历结束，就会生成一个json对象了
 
 			//如果需要对象与字符串的转换
 			//这是从json对象 向 json 字符串转换
 			 var str = JSON.stringify(f);
+			console.log(str);
 			ajaxController.ajax({
 				type: "post",
 				processing: true,
