@@ -26,6 +26,10 @@ public class OrderDetailPagerRequest {
 	 * 翻译级别
 	 */
 	private String[] translateLevel;
+	/**
+	 * 币种
+	 */
+	private String currencytUnit;
 
 	/**
 	 * 内容附件
@@ -128,6 +132,14 @@ public class OrderDetailPagerRequest {
 
 	public void setFileTranslateNames(String[] fileTranslateNames) {
 		this.fileTranslateNames = fileTranslateNames;
+	}
+
+	public String getCurrencytUnit() {
+		return currencytUnit;
+	}
+
+	public void setCurrencytUnit(String currencytUnit) {
+		this.currencytUnit = currencytUnit;
 	}
 
 }

@@ -309,7 +309,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 						}
 					}
 				});
-			  
 			
 			}
 			
@@ -364,7 +363,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 					var parent = $("#"+id).parent();
 					var fileId = parent.find("input").eq(0);
 					var fileName = parent.find("input").eq(1);
-					var prev2 = parent.prev().prev();
+					var prev2 = parent.prev();
 					if(resp.statusCode=='1'){
 						fileId.val(resp.data.fileId);
 						fileName.val(resp.data.fileName);
@@ -422,9 +421,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var councode = tels[0];
 			var phone = tels[1];
 			$("#contactTel").val(phone);
-			//初始化地址
-			var address = rs.data.prod.meetingAddress;
-			$("#meetingAddress").val(address);
 			//将国家代码进行初始化
 			 _this._globalRome(councode);
 			

@@ -29,7 +29,7 @@
 						     <li menuAttr="menu"><a href="${_base}/toTranslateOrderList" target="mainFrame">翻译中订单</a></li>
 						     <li menuAttr="menu"><a href="${_base}/order/toReviewOrderList" target="mainFrame">待审核订单</a></li>
 						     <li menuAttr="menu"><a href="${_base}/toTbcOrderList" target="mainFrame">待确认订单</a></li>
-						     <li menuAttr="menu"><a href="${_base}/toUpdateOrderList" target="mainFrame">修改中订单</a></li>
+						     <!-- <li menuAttr="menu"><a href="${_base}/toUpdateOrderList" target="mainFrame">修改中订单</a></li> -->
 						     <li menuAttr="menu"><a href="${_base}/toDoneOrderList" target="mainFrame">已完成订单</a></li>
 						</ul> <!--二级菜单结束--></li>
   

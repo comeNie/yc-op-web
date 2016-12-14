@@ -12,7 +12,11 @@
 							      <li class="col-md-6">
 									  <p class="word">订单总价：</p>
 									  <p>
+										{{if orderFee.currencyUnit=='1' }}
 										  {{:~liToYuan(orderFee.totalFee)}}
+										{{else}}
+											{{:orderFee.totalFee}}
+										{{/if}}
 										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
 									  </p>
 								  </li>
@@ -34,7 +38,11 @@
 								   <li class="col-md-6">
 									  <p class="word">应付金额：</p>
 									  <p>
+										{{if orderFee.currencyUnit=='1' }}
 										  {{:~liToYuan(orderFee.adjustFee)}}
+										{{else}}
+											{{:orderFee.adjustFee}}
+										{{/if}}
 										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
 									  </p>
 								  </li>
@@ -43,11 +51,14 @@
 								  <li class="col-md-6">
 									  <p class="word">实付金额：</p>
 									  <p>
+										{{if orderFee.currencyUnit=='1' }}
 										  {{:~liToYuan(orderFee.paidFee)}}
+										{{else}}
+											{{:orderFee.paidFee}}
+										{{/if}}
 										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
 									  </p>
 								  </li>
-								   
 							   </ul>
 							</div>
 					{{/if}}

@@ -155,14 +155,14 @@ public class WaitPayController {
 						if (stateParam != null) {
 							resParam.setStatePage(stateParam.getColumnDesc());
 						}
-						//转换金额格式
-                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
-                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				resParam.setTotalFeePage(vo.getTotalFee()+"USD $");
-                			}else{
-                				resParam.setTotalFeePage(AmountUtil.LiToYuan(vo.getTotalFee())+"CNY ¥");
-                			}
-                		}
+						// 转换金额格式
+						if (!StringUtil.isBlank(vo.getCurrencyUnit())) {
+							if (Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())) {
+								resParam.setTotalFeePage("$"+vo.getTotalFee());
+							} else {
+								resParam.setTotalFeePage("¥"+AmountUtil.LiToYuan(vo.getTotalFee()) );
+							}
+						}
 						resultList.add(resParam);
 					}
 				}
@@ -270,9 +270,9 @@ public class WaitPayController {
 		        		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				exOrder.setTotalFee(vo.getTotalFee()+"$");
+                				exOrder.setTotalFee("$"+vo.getTotalFee());
                 			}else{
-                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+                				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
                 			}
                 		}
                 		//下单时间
@@ -334,9 +334,9 @@ public class WaitPayController {
 	        		//转换金额格式
             		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
             			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-            				exOrder.setTotalFee(vo.getTotalFee()+"$");
+            				exOrder.setTotalFee("$"+vo.getTotalFee());
             			}else{
-            				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+            				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
             			}
             		}
             		if(vo.getOrderTime()!=null){
@@ -410,7 +410,7 @@ public class WaitPayController {
 		
 		feeVo.setAdjustFee(0L);
 		feeVo.setDiscountFee(0L);
-		feeVo.setPaidFee(0L);
+		feeVo.setPaidFee(feeVo.getTotalFee());
 		feeVo.setPayFee(0L);
 		feeVo.setOperDiscountFee(0L);
 		feeVo.setPayStyle(payStyle);
