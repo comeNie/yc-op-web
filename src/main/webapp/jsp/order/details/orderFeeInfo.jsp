@@ -2,8 +2,10 @@
 
 <script id="orderFeeTempl" type="text/x-jsrender">
                           <input id="currencyUnit" type="hidden" value="{{:orderFee.currencyUnit}}"/>
-                          <input type="hidden" name="currencytUnit" id="unitID" value="{{:orderFee.currencyUnit}}">  
-						 <div class="nav-tplist-title bd-bottom pb-10  pt-15">
+                          <input type="hidden" name="currencytUnit" id="unitID" value="{{:orderFee.currencyUnit}}">
+ 						 <input type="hidden" id="typeDesc" value="{{:typeDesc}}">    
+						 
+					<div class="nav-tplist-title bd-bottom pb-10  pt-15">
 								<ul>
 									<li>订单属性及金额信息</li>
 								</ul>
