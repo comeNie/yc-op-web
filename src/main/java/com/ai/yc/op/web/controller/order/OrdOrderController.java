@@ -19,7 +19,6 @@ import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
-import com.ai.yc.op.web.constant.Constants;
 import com.ai.yc.op.web.model.order.OrdOrderDetails;
 import com.ai.yc.op.web.model.order.OrderDetailPagerRequest;
 import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
@@ -245,41 +244,25 @@ public class OrdOrderController {
 			if(StringUtil.isBlank(pager.getTotalFee())){
 				orderFee.setTotalFee(0l);
 			}else{
-				if(orderFee.getCurrencyUnit()!=null && Constants.CURRENCY_UNIT_R.equals(orderFee.getCurrencyUnit())){
-					orderFee.setTotalFee(yuanToli(pager.getTotalFee()));
-				}else{
-					orderFee.setTotalFee(Long.valueOf(pager.getTotalFee()));
-				}
+				orderFee.setTotalFee(yuanToli(pager.getTotalFee()));
 			}
 			
 			if(StringUtil.isBlank(pager.getSetTypeFee())){
 				orderFee.setSetTypeFee(0l);
 			}else{
-				if(orderFee.getCurrencyUnit()!=null && Constants.CURRENCY_UNIT_R.equals(orderFee.getCurrencyUnit())){
-					orderFee.setSetTypeFee(yuanToli(pager.getSetTypeFee()));
-				}else{
-					orderFee.setSetTypeFee(Long.valueOf(pager.getSetTypeFee()));
-				}
+				orderFee.setSetTypeFee(yuanToli(pager.getSetTypeFee()));
 			}
 			
 			if(StringUtil.isBlank(pager.getUrgentFee())){
 				orderFee.setUrgentFee(0l);
 			}else{
-				if(orderFee.getCurrencyUnit()!=null && Constants.CURRENCY_UNIT_R.equals(orderFee.getCurrencyUnit())){
-					orderFee.setUrgentFee(yuanToli(pager.getUrgentFee()));
-				}else{
-					orderFee.setUrgentFee(Long.valueOf(pager.getUrgentFee()));
-				}
+				orderFee.setUrgentFee(yuanToli(pager.getUrgentFee()));
 			}
 			
 			if(StringUtil.isBlank(pager.getDescTypeFee())){
 				orderFee.setDescTypeFee(0l);
 			}else{
-				if(orderFee.getCurrencyUnit()!=null && Constants.CURRENCY_UNIT_R.equals(orderFee.getCurrencyUnit())){
-					orderFee.setDescTypeFee(yuanToli(pager.getDescTypeFee()));
-				}else{
-					orderFee.setDescTypeFee(Long.valueOf(pager.getDescTypeFee()));
-				}
+				orderFee.setDescTypeFee(yuanToli(pager.getDescTypeFee()));
 			}
 			orderFee.setDiscountFee(0l);
 			orderFee.setOperDiscountFee(0l);

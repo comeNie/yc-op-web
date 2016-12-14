@@ -90,15 +90,8 @@
                                         <input name="orderFee.currencyUnit" type="hidden" value="{{:orderFee.currencyUnit}}"/>
 										<p class="word">排版费用：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-												<input id="setTypeFee" name="setTypeFee" type="text" value="{{:~liToYuan3(orderFee.setTypeFee)}}" class="int-text int-small price" />
-											{{/if}}
-											{{if orderFee.currencyUnit=='2'}}
-												<input id="setTypeFee" name="setTypeFee" type="text" value="{{:orderFee.setTypeFee}}" class="int-text int-small price" />
-											{{/if}}			
-											{{:~getMoneyUnit(orderFee.currencyUnit)}}										   	
-											<!--<input id="setTypeFee" name="setTypeFee" type="text" value="{{:~liToYuan3(orderFee.setTypeFee)}}" class="int-text int-small price" />
-                                            {{:~getMoneyUnit(orderFee.currencyUnit)}}-->
+											<input id="setTypeFee" name="setTypeFee" type="text" value="{{:~liToYuan3(orderFee.setTypeFee)}}" class="int-text int-small price" />
+                                            {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="setTypeFee-error" class="error" for="setTypeFee" style="display: none;"></label>
 										</p>
 									</li>
@@ -117,13 +110,7 @@
 									<li class="col-md-6">
 										<p class="word">转换费用：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-												<input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small price"/>	
-											{{/if}}
-											{{if orderFee.currencyUnit=='2'}}
-												<input id="descTypeFee" name="descTypeFee" type="text" value="{{:orderFee.descTypeFee}}" class="int-text int-small price" />
-											{{/if}}
-										   <!--<input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small price"/>-->
+										    <input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small price"/>
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="descTypeFee-error" class="error" for="descTypeFee" style="display: none;"></label>
 										</p>
@@ -147,13 +134,7 @@
                                     <li class="col-md-6">
 										<p class="word">加急费用：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-												 <input id="urGentFee" name="urgentFee" type="text" data-describedby="messages" value="{{:~liToYuan3(orderFee.urgentFee)}}" class="int-text int-small price" />
-											{{/if}}
-
-											{{if orderFee.currencyUnit=='2'}}
-												 <input id="urGentFee" name="urgentFee" type="text" data-describedby="messages" value="{{:orderFee.urgentFee}}" class="int-text int-small price" />
-											{{/if}}
+											<input id="urGentFee" name="urgentFee" type="text" data-describedby="messages" value="{{:~liToYuan3(orderFee.urgentFee)}}" class="int-text int-small price" />
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="urGentFee-error" class="error" for="urGentFee" style="display: none;"></label>
 										</p>
@@ -161,16 +142,8 @@
 									<li class="col-md-6">
 										<p class="word">订单总价：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-												 <input id="totalFee" name="totalFee" type="text" value="{{:~liToYuan3(orderFee.totalFee)}}" class="int-text int-small" />
-										    	{{:~getMoneyUnit(orderFee.currencyUnit)}}
-											{{/if}}
-											{{if orderFee.currencyUnit=='2'}}
-												<input id="totalFee" name="totalFee" type="text" value="{{:orderFee.totalFee}}" class="int-text int-small" />
-										      {{:~getMoneyUnit(orderFee.currencyUnit)}}
-											{{/if}}
-										   <!--<input id="totalFee" name="totalFee" type="text" value="{{:~liToYuan3(orderFee.totalFee)}}" class="int-text int-small" />
-										    {{:~getMoneyUnit(orderFee.currencyUnit)}}-->
+										    <input id="totalFee" name="totalFee" type="text" value="{{:~liToYuan3(orderFee.totalFee)}}" class="int-text int-small" />
+										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="totalFee-error" class="error" for="totalFee" style="display: none;"></label>
 										</p>
 									</li>
@@ -277,17 +250,8 @@
                                         <input name="orderFee.currencyUnit" type="hidden" value="{{:orderFee.currencyUnit}}"/>
 										<p class="word">订单总价：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-												 <input id="totalFee" name="totalFee" type="text" value="{{:~liToYuan3(orderFee.totalFee)}}" class="int-text int-small" />
-										    	{{:~getMoneyUnit(orderFee.currencyUnit)}}
-											{{/if}}
-											{{if orderFee.currencyUnit=='2'}}
-												<input id="totalFee" name="totalFee" type="text" value="{{:orderFee.totalFee}}" class="int-text int-small" />
-										      {{:~getMoneyUnit(orderFee.currencyUnit)}}
-											{{/if}}
-
-										   <!--<input id="totalFee" name="totalFee" type="text" value="{{:~liToYuan3(orderFee.totalFee)}}" class="int-text int-small" />
-										    {{:~getMoneyUnit(orderFee.currencyUnit)}}-->
+										   <input id="totalFee" name="totalFee" type="text" value="{{:~liToYuan3(orderFee.totalFee)}}" class="int-text int-small" />
+										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             <label id="totalFee-error" class="error" for="totalFee" style="display: none;"></label>
 										</p>
 									</li>
@@ -382,12 +346,7 @@
 									<li class="col-md-6">
 										<p class="word">排版费用：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-										   		{{:~liToYuan3(orderFee.setTypeFee)}}
-											{{/if}}
-											{{if orderFee.currencyUnit=='2'}}
-												{{:orderFee.setTypeFee}}
-											{{/if}}
+										   	{{:~liToYuan3(orderFee.setTypeFee)}}
 										   {{:~getMoneyUnit(orderFee.currencyUnit)}}
 										</p>
 									</li>
@@ -406,12 +365,7 @@
 									<li class="col-md-6">
 										<p class="word">转换费用：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-										    	{{:~liToYuan3(orderFee.descTypeFee)}}
-											{{/if}}
-											{{if orderFee.currencyUnit=='2'}}
-												{{:orderFee.descTypeFee}}
-											{{/if}}
+										    {{:~liToYuan3(orderFee.descTypeFee)}}
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
 										</p>
 									</li>
@@ -430,25 +384,14 @@
                                     <li class="col-md-6">
 										<p class="word">加急费用：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-												 {{:~liToYuan3(orderFee.urgentFee)}}
-											{{/if}}
-											{{if orderFee.currencyUnit=='2'}}
-												 {{:orderFee.urgentFee}}
-											{{/if}}
+											{{:~liToYuan3(orderFee.urgentFee)}}
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
 										</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">订单总价：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-												{{:~liToYuan3(orderFee.totalFee)}}
-											{{/if}}
-											{{if orderFee.currencyUnit=='2'}}
-												{{:orderFee.totalFee}}
-											{{/if}}
-										   <!-- {{:~liToYuan3(orderFee.totalFee)}}-->
+										    {{:~liToYuan3(orderFee.totalFee)}}
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
 										</p>
 									</li>
@@ -535,13 +478,7 @@
 									<li class="col-md-6">
 										<p class="word">订单总价：</p>
 										<p>
-											{{if orderFee.currencyUnit=='1'}}
-												{{:~liToYuan3(orderFee.totalFee)}}
-											{{/if}}
-											{{if orderFee.currencyUnit=='2'}}
-												{{:orderFee.totalFee}}
-											{{/if}}
-										    <!--{{:~liToYuan3(orderFee.totalFee)}}-->
+										    {{:~liToYuan3(orderFee.totalFee)}}
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
 										</p>
 									</li>

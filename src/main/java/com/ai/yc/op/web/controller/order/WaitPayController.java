@@ -158,7 +158,7 @@ public class WaitPayController {
 						// 转换金额格式
 						if (!StringUtil.isBlank(vo.getCurrencyUnit())) {
 							if (Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())) {
-								resParam.setTotalFeePage("$"+vo.getTotalFee());
+								resParam.setTotalFeePage("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
 							} else {
 								resParam.setTotalFeePage("¥"+AmountUtil.LiToYuan(vo.getTotalFee()) );
 							}
@@ -270,7 +270,7 @@ public class WaitPayController {
 		        		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				exOrder.setTotalFee("$"+vo.getTotalFee());
+                				exOrder.setTotalFee("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
                 			}else{
                 				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
                 			}
@@ -334,7 +334,7 @@ public class WaitPayController {
 	        		//转换金额格式
             		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
             			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-            				exOrder.setTotalFee("$"+vo.getTotalFee());
+            				exOrder.setTotalFee("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
             			}else{
             				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
             			}
@@ -404,7 +404,7 @@ public class WaitPayController {
 				//将元转换为厘
 				feeVo.setTotalFee(AmountUtil.YToLi(updateFee));
 			}else{
-				feeVo.setTotalFee(Long.valueOf(updateFee));
+				feeVo.setTotalFee(AmountUtil.YToLi(updateFee));
 			}
 		}
 		

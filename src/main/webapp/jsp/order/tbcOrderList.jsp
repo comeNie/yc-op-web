@@ -192,7 +192,7 @@
       <td>{{:totalFeePage}}</td>
 	  <td>{{:interperName}}</td>
       <td>{{:remainingTimePage}}</td>
-      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', stateChgTime)}}</td>
+      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', prodUpdateTime)}}</td>
      <td>{{:statePage}}</td>
      <td><a href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>
   </tr>                                                                       
