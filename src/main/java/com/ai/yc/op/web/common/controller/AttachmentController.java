@@ -82,31 +82,32 @@ public class AttachmentController {
 		return new ResponseData<List<Attachment>>(
 				ResponseData.AJAX_STATUS_SUCCESS, "上传成功", attachments);
 	}
-	
+
 	@RequestMapping(value = "/download")
-	public void download(HttpServletResponse response,String fileId,String ext){
-		log.info("下载文件开始=====");
-		log.info("下载文件ID====="+fileId);
-		System.out.println("id="+fileId);
-		IDSSClient client = DSSClientFactory.getDSSClient(Constants.IPAAS_ORDER_FILE_DSS);
-		byte[] bs  = client.read(fileId);
-		log.info("数据"+bs);
-		System.out.println("data="+bs);
-		String fileName = System.currentTimeMillis()+ "." + ext;
+	public void download(HttpServletResponse response, String fileId, String ext) {
+
+		System.out.println("id=" + fileId);
+		IDSSClient client = DSSClientFactory
+				.getDSSClient(Constants.IPAAS_ORDER_FILE_DSS);
+		byte[] bs = client.read(fileId);
+		System.out.println("data=" + bs);
+		String fileName = System.currentTimeMillis() + "." + ext;
 		OutputStream out = null;
 		try {
 			out = response.getOutputStream();
-		    response.setHeader("content-disposition", "attachment;fileName=" + URLEncoder.encode(fileName, "UTF-8"));  
-		    out.write(bs);
+			response.setContentType("multipart/form-data");
+			response.setHeader("content-disposition", "attachment;fileName="+ URLEncoder.encode(fileName, "UTF-8"));
+			response.setHeader("Content-Length", String.valueOf(bs.length));
+			out.write(bs);
 		} catch (IOException e) {
-			 log.error("下载文件失败", e); 
-		}finally{
-			 try {
-				if(out!=null){
+			log.error("下载文件失败", e);
+		} finally {
+			try {
+				if (out != null) {
 					out.close();
 				}
 			} catch (IOException e) {
-				log.error("关闭流失败", e); 
+				log.error("关闭流失败", e);
 			}
 		}
 	}
