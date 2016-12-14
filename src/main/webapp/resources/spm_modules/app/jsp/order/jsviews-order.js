@@ -107,6 +107,18 @@ define(function (require, exports, module) {
 	        if(newState=='211'){
 	        	return "分配订单";
 	        }
+	        if(newState=='91'){
+	        	return "取消订单";
+	        }
+	        if(orgState=='40'){
+	        	return "审核订单";
+	        }
+	        if(orgState=='52'){
+	        	return "评价订单";
+	        }
+	        if(orgState=='50'&&(newState=='52'||newState=='90')){
+	        	return "确认订单";
+	        }
 	        return newState;
 		 }
 	});
