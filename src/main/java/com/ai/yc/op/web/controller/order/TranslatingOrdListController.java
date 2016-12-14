@@ -156,14 +156,14 @@ private static final Logger logger = Logger.getLogger(TranslatingOrdListControll
                 		if(levelParam!=null){
                 			resParam.setOrderLevelPage(levelParam.getColumnDesc());
                 		}
-                		//转换金额格式
-                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
-                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				resParam.setTotalFeePage(vo.getTotalFee()+"$");
-                			}else{
-                				resParam.setTotalFeePage(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
-                			}
-                		}
+                		// 转换金额格式
+						if (!StringUtil.isBlank(vo.getCurrencyUnit())) {
+							if (Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())) {
+								resParam.setTotalFeePage("$"+vo.getTotalFee());
+							} else {
+								resParam.setTotalFeePage("¥"+AmountUtil.LiToYuan(vo.getTotalFee()) );
+							}
+						}
 						resultList.add(resParam);
 					}
 				}
@@ -279,11 +279,11 @@ private static final Logger logger = Logger.getLogger(TranslatingOrdListControll
 		        		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				exOrder.setRealFee(vo.getTotalFee()+"$");
-                				exOrder.setTotalFee(vo.getTotalFee()+"$");
+                				exOrder.setRealFee("$"+vo.getTotalFee());
+                				exOrder.setTotalFee("$"+vo.getTotalFee());
                 			}else{
-                				exOrder.setRealFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
-                				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+                				exOrder.setRealFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
+                				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
                 			}
                 		}
                 		if(vo.getOrderTime()!=null){
@@ -351,11 +351,11 @@ private static final Logger logger = Logger.getLogger(TranslatingOrdListControll
 	        		//转换金额格式
             		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
             			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-            				exOrder.setRealFee(vo.getTotalFee()+"$");
-            				exOrder.setTotalFee(vo.getTotalFee()+"$");
+            				exOrder.setRealFee("$"+vo.getTotalFee());
+            				exOrder.setTotalFee("$"+vo.getTotalFee());
             			}else{
-            				exOrder.setRealFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
-            				exOrder.setTotalFee(AmountUtil.LiToYuan(vo.getTotalFee())+"¥");
+            				exOrder.setRealFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
+            				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
             			}
             		}
             		if(vo.getOrderTime()!=null){

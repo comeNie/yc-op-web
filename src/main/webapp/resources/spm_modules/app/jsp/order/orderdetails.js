@@ -291,7 +291,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 						}
 					}
 				});
-			  
 			
 			}
 			
@@ -404,9 +403,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var councode = tels[0];
 			var phone = tels[1];
 			$("#contactTel").val(phone);
-			//初始化地址
-			var address = rs.data.prod.meetingAddress;
-			$("#meetingAddress").val(address);
 			//将国家代码进行初始化
 			 _this._globalRome(councode);
 			
