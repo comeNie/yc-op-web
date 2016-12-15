@@ -27,6 +27,7 @@ import com.ai.yc.order.api.autooffer.interfaces.IQueryAutoOfferSV;
 import com.ai.yc.order.api.autooffer.param.QueryAutoOfferReq;
 import com.ai.yc.order.api.autooffer.param.QueryAutoOfferRes;
 import com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV;
+import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsRequest;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
 import com.ai.yc.order.api.orderlevel.interfaces.IOrderLevelSV;
 import com.ai.yc.order.api.orderlevel.param.OrderLevelRequest;
@@ -72,8 +73,10 @@ public class OrdOrderController {
 	public ResponseData<OrdOrderDetails> queryOrderDetails(Long orderId){
 		IQueryOrderDetailsSV iQueryOrderDetailsSV = DubboConsumerFactory.getService(IQueryOrderDetailsSV.class);
 		QueryOrderDetailsResponse resp = null;
+		QueryOrderDetailsRequest request = new QueryOrderDetailsRequest();
+		request.setOrderId(orderId);
 		try {
-			resp =iQueryOrderDetailsSV.queryOrderDetails(orderId,"");
+			resp =iQueryOrderDetailsSV.queryOrderDetails(request);
 		} catch (Exception e) {
 			log.error("系统异常，请稍后重试", e);
 			return new ResponseData<OrdOrderDetails>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
