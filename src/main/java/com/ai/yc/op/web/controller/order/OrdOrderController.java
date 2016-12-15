@@ -73,7 +73,7 @@ public class OrdOrderController {
 		IQueryOrderDetailsSV iQueryOrderDetailsSV = DubboConsumerFactory.getService(IQueryOrderDetailsSV.class);
 		QueryOrderDetailsResponse resp = null;
 		try {
-			resp =iQueryOrderDetailsSV.queryOrderDetails(orderId);
+			resp =iQueryOrderDetailsSV.queryOrderDetails(orderId,"");
 		} catch (Exception e) {
 			log.error("系统异常，请稍后重试", e);
 			return new ResponseData<OrdOrderDetails>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
