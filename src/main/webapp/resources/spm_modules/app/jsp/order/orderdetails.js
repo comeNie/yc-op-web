@@ -198,15 +198,35 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
             	$("#interperLevel").html("V4级(lsp)译员");
             }
 		},
+		_changeSetType:function(){
+			var isSetType = $("#isSetType").val();//是否排版
+			if(isSetType=='N'){
+				$("#setTypeFee").val("0.00");
+			}
+		},
+		_changeUrgent:function(){
+			var isUrgent = $("#isUrgent").val();//是否加急
+			if(isUrgent=='N'){
+				$("#urGentFee").val("0.00");
+			}
+		},
 		_getTotalPrice:function(){
 			var wordPrice = $("#wordPrice").val();
 			var translateSum = $("#translateSum").val();//字数
 			var isSetType = $("#isSetType").val();//是否排版
 			var setTypeFee = $("#setTypeFee").val();//排版费用
+			var typedDesc = $("#typeDesc").val();
 			var descTypeFee = $("#descTypeFee").val();//转换格式费用
 			var isUrgent = $("#isUrgent").val();//是否加急
 			var urGentFee = $("#urGentFee").val();//加急费用
 			var totalFee = 0;
+			//级联修改费用信息
+			this._changeSetType();
+			this._changeUrgent();
+			if(typedDesc=="" || typedDesc==null){
+				$("#descTypeFee").val("0.00");
+			}
+			
 			if(translateSum!=''){
 				totalFee = totalFee + (parseFloat(wordPrice)*parseInt(translateSum));
 			}
@@ -397,6 +417,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				this._getWordPrice(useCode,cache.data.prodExtends[0].langungePair,translateLevel,false);
 			}
 		},
+		
 		_initView:function(rs){
 			var _this = this;
 			var model = $("#mod").val();

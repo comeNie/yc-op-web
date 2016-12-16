@@ -19,7 +19,6 @@ import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
-import com.ai.yc.op.web.constant.Constants;
 import com.ai.yc.op.web.model.order.OrdOrderDetails;
 import com.ai.yc.op.web.model.order.OrderDetailPagerRequest;
 import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
@@ -28,6 +27,7 @@ import com.ai.yc.order.api.autooffer.interfaces.IQueryAutoOfferSV;
 import com.ai.yc.order.api.autooffer.param.QueryAutoOfferReq;
 import com.ai.yc.order.api.autooffer.param.QueryAutoOfferRes;
 import com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV;
+import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsRequest;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
 import com.ai.yc.order.api.orderlevel.interfaces.IOrderLevelSV;
 import com.ai.yc.order.api.orderlevel.param.OrderLevelRequest;
@@ -73,8 +73,10 @@ public class OrdOrderController {
 	public ResponseData<OrdOrderDetails> queryOrderDetails(Long orderId){
 		IQueryOrderDetailsSV iQueryOrderDetailsSV = DubboConsumerFactory.getService(IQueryOrderDetailsSV.class);
 		QueryOrderDetailsResponse resp = null;
+		QueryOrderDetailsRequest request = new QueryOrderDetailsRequest();
+		request.setOrderId(orderId);
 		try {
-			resp =iQueryOrderDetailsSV.queryOrderDetails(orderId);
+			resp =iQueryOrderDetailsSV.queryOrderDetails(request);
 		} catch (Exception e) {
 			log.error("系统异常，请稍后重试", e);
 			return new ResponseData<OrdOrderDetails>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
@@ -245,41 +247,25 @@ public class OrdOrderController {
 			if(StringUtil.isBlank(pager.getTotalFee())){
 				orderFee.setTotalFee(0l);
 			}else{
-				if(orderFee.getCurrencyUnit()!=null && Constants.CURRENCY_UNIT_R.equals(orderFee.getCurrencyUnit())){
-					orderFee.setTotalFee(yuanToli(pager.getTotalFee()));
-				}else{
-					orderFee.setTotalFee(Long.valueOf(pager.getTotalFee()));
-				}
+				orderFee.setTotalFee(yuanToli(pager.getTotalFee()));
 			}
 			
 			if(StringUtil.isBlank(pager.getSetTypeFee())){
 				orderFee.setSetTypeFee(0l);
 			}else{
-				if(orderFee.getCurrencyUnit()!=null && Constants.CURRENCY_UNIT_R.equals(orderFee.getCurrencyUnit())){
-					orderFee.setSetTypeFee(yuanToli(pager.getSetTypeFee()));
-				}else{
-					orderFee.setSetTypeFee(Long.valueOf(pager.getSetTypeFee()));
-				}
+				orderFee.setSetTypeFee(yuanToli(pager.getSetTypeFee()));
 			}
 			
 			if(StringUtil.isBlank(pager.getUrgentFee())){
 				orderFee.setUrgentFee(0l);
 			}else{
-				if(orderFee.getCurrencyUnit()!=null && Constants.CURRENCY_UNIT_R.equals(orderFee.getCurrencyUnit())){
-					orderFee.setUrgentFee(yuanToli(pager.getUrgentFee()));
-				}else{
-					orderFee.setUrgentFee(Long.valueOf(pager.getUrgentFee()));
-				}
+				orderFee.setUrgentFee(yuanToli(pager.getUrgentFee()));
 			}
 			
 			if(StringUtil.isBlank(pager.getDescTypeFee())){
 				orderFee.setDescTypeFee(0l);
 			}else{
-				if(orderFee.getCurrencyUnit()!=null && Constants.CURRENCY_UNIT_R.equals(orderFee.getCurrencyUnit())){
-					orderFee.setDescTypeFee(yuanToli(pager.getDescTypeFee()));
-				}else{
-					orderFee.setDescTypeFee(Long.valueOf(pager.getDescTypeFee()));
-				}
+				orderFee.setDescTypeFee(yuanToli(pager.getDescTypeFee()));
 			}
 			orderFee.setDiscountFee(0l);
 			orderFee.setOperDiscountFee(0l);

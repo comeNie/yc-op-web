@@ -159,7 +159,7 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
                 		// 转换金额格式
 						if (!StringUtil.isBlank(vo.getCurrencyUnit())) {
 							if (Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())) {
-								resParam.setTotalFeePage("$"+vo.getTotalFee());
+								resParam.setTotalFeePage("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
 							} else {
 								resParam.setTotalFeePage("¥"+AmountUtil.LiToYuan(vo.getTotalFee()) );
 							}
@@ -278,7 +278,7 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 		        		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				exOrder.setTotalFee("$"+vo.getTotalFee());
+                				exOrder.setTotalFee("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
                 			}else{
                 				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
                 			}
@@ -348,7 +348,7 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 	        		//转换金额格式
             		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
             			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-            				exOrder.setTotalFee("$"+vo.getTotalFee());
+            				exOrder.setTotalFee("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
             			}else{
             				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
             			}

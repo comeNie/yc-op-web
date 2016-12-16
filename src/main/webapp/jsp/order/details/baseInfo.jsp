@@ -53,15 +53,15 @@
 										<p class="word">预计翻译耗时：</p>
 										<p>
                                            <!-- {{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13'||displayFlag=='23'||displayFlag=='50')}}  {{/if}}-->
- 											{{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13')}}
+ 											{{if mod=='edit'&&(displayFlag=='11'||displayFlag=='13') && translateType!='2'}}
 											  <input id="takeDay" name="prod.takeDay" type="text" value="{{:prod.takeDay==null?0:prod.takeDay}}" class="int-text int-minied" />天
                                               <input id="takeTime" name="prod.takeTime" type="text" value="{{:prod.takeTime==null?0:prod.takeTime}}" class="int-text int-minied" />小时
                                                &nbsp;<label id="takeDay-error" class="error" for="takeDay" style="display: none;"></label>
                                                &nbsp;<label id="takeTime-error" class="error" for="takeTime" style="display: none;"></label>
 										    {{else}}
-                                               {{:prod.takeDay}}天{{:prod.takeTime}}小时</p>
-                                            {{/if}}
-
+                                               0天0小时
+ 											{{/if}}
+										</p>
 									</li>
 
                                     <li class="col-md-6">
