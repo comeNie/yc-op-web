@@ -12,9 +12,11 @@ import com.ai.opt.base.exception.SystemException;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV;
+import com.ai.yc.common.api.sysdomain.param.QuerySysDomainListReq;
 import com.ai.yc.common.api.sysdomain.param.QuerySysDomainListRes;
 import com.ai.yc.common.api.sysdomain.param.SysDomainVo;
 import com.ai.yc.common.api.syspurpose.interfaces.IQuerySysPurposeSV;
+import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeListReq;
 import com.ai.yc.common.api.syspurpose.param.QuerySysPurposeListRes;
 import com.ai.yc.common.api.syspurpose.param.SysPurposeVo;
 import com.ai.yc.op.web.controller.order.OrdOrderController;
@@ -31,8 +33,10 @@ public class SysCommonController {
 	public ResponseData<List<SysDomainVo>>  querySysDomainList(){
 		IQuerySysDomainSV iQuerySysDomainSV  = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
 		QuerySysDomainListRes res = null;
+		QuerySysDomainListReq req = new QuerySysDomainListReq();
 		try {
-			res = iQuerySysDomainSV.querySysDomainList();
+			req.setLanguage("zh_CN");
+			res =iQuerySysDomainSV.querySysDomainList(req);
 		} catch (SystemException e) {
 			log.error("系统错误，请稍后重试", e);
 			return new ResponseData<List<SysDomainVo>>(
@@ -59,8 +63,10 @@ public class SysCommonController {
 	public ResponseData<List<SysPurposeVo>>  querySysPurposeList(){
 		IQuerySysPurposeSV iQuerySysPurposeSV  = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
 		QuerySysPurposeListRes res = null;
+		QuerySysPurposeListReq req = new QuerySysPurposeListReq();
 		try {
-			res = iQuerySysPurposeSV.querySysPurposeList();
+			req.setLanguage("zh_CN");
+			res = iQuerySysPurposeSV.querySysPurposeList(req);
 		} catch (SystemException e) {
 			log.error("系统错误，请稍后重试", e);
 			return new ResponseData<List<SysPurposeVo>>(
