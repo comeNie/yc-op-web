@@ -38,6 +38,7 @@ import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
 import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
 import com.ai.yc.op.web.utils.AmountUtil;
+import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -277,13 +278,13 @@ public class WaitPayController {
                 		}
                 		//下单时间
                 		if(vo.getOrderTime()!=null){
-                			exOrder.setOrderTime(vo.getOrderTime().toString());
+                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
                 		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
 		        		//报价时间
 		        		if(vo.getUpdateTime()!=null){
-		        			exOrder.setUpdateTime(vo.getUpdateTime().toString());
+		        			exOrder.setUpdateTime(TimeZoneTimeUtil.getTimes(vo.getUpdateTime()));
 		        		}
 		        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
 		        		//翻译订单级别
@@ -340,13 +341,13 @@ public class WaitPayController {
             			}
             		}
             		if(vo.getOrderTime()!=null){
-            			exOrder.setOrderTime(vo.getOrderTime().toString());
+            			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
             		}
 	        		
 	        		exOrder.setUserName(vo.getUserName());
 	        		//报价时间
 	        		if(vo.getUpdateTime()!=null){
-	        			exOrder.setUpdateTime(vo.getUpdateTime().toString());
+	        			exOrder.setUpdateTime(TimeZoneTimeUtil.getTimes(vo.getUpdateTime()));
 	        		}
 	        		exOrder.setOrderId(vo.getOrderId());
 	        		//翻译订单级别

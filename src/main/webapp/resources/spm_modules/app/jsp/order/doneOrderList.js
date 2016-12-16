@@ -141,7 +141,7 @@ define('app/jsp/order/doneOrderList', function (require, exports, module) {
 			var interperName = jQuery.trim($("#interperName").val());
 			window.location.href=_base+'/doneExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+
-		    '&orderPageId='+orderPageId+'&interperName='+interperName;
+		    '&orderPageId='+orderPageId+'&interperName='+interperName+"&offset="+today.stdTimezoneOffset();
 		},
 		_searchOrderList:function(){
 			var _this=this;

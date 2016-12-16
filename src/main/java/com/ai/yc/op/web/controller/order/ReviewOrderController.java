@@ -37,6 +37,7 @@ import com.ai.yc.op.web.model.order.OrderPageResParam;
 import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
 import com.ai.yc.op.web.utils.AmountUtil;
 import com.ai.yc.op.web.utils.LoginUtil;
+import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -245,6 +246,7 @@ public class ReviewOrderController {
 				if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList())){
 					for(int i=0;i<vo.getOrdProdExtendList().size();i++){
 						ExAllOrder exOrder = new ExAllOrder();
+						exOrder.setInterperName(vo.getInterperName());
 						////翻译订单来源
 						SysParamSingleCond	paramCond = new SysParamSingleCond();
 						paramCond.setTenantId(Constants.TENANT_ID);
@@ -294,12 +296,15 @@ public class ReviewOrderController {
                 			}
                 		}
                 		if(vo.getOrderTime()!=null){
-                			exOrder.setOrderTime(vo.getOrderTime().toString());
+                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
                 		}
+                		if(vo.getLockTime()!=null){
+    	        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
+    	        		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
 		        		if(vo.getStateChgTime()!=null){
-		        			exOrder.setSubmitTime(vo.getStateChgTime().toString());
+		        			exOrder.setSubmitTime(TimeZoneTimeUtil.getTimes(vo.getStateChgTime()));
 		        		}
 		        		if(vo.getRemainingTime()!=null){
 		        			Long time= vo.getRemainingTime().getTime();
@@ -311,10 +316,7 @@ public class ReviewOrderController {
 		        			exOrder.setRemaningTime(remaningPage);
 		        		}
 		        		if(vo.getEndChgTime()!=null){
-		        			exOrder.setEndChgTime(vo.getEndChgTime().toString());
-		        		}
-		        		if(vo.getStateChgTime()!=null){
-		        			exOrder.setSubmitTime(vo.getStateChgTime().toString());
+		        			exOrder.setEndChgTime(TimeZoneTimeUtil.getTimes(vo.getEndChgTime()));
 		        		}
 		        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
 		        		exportList.add(exOrder);
@@ -370,10 +372,10 @@ public class ReviewOrderController {
             			}
             		}
             		if(vo.getOrderTime()!=null){
-            			exOrder.setOrderTime(vo.getOrderTime().toString());
+            			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
             		}
             		if(vo.getLockTime()!=null){
-	        			exOrder.setLockTime(vo.getLockTime().toString());
+	        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
 	        		}
 	        		if(vo.getRemainingTime()!=null){
 	        			Long time= vo.getRemainingTime().getTime();
@@ -385,10 +387,10 @@ public class ReviewOrderController {
 	        			exOrder.setRemaningTime(remaningPage);
 	        		}
 	        		if(vo.getEndChgTime()!=null){
-	        			exOrder.setEndChgTime(vo.getEndChgTime().toString());
+	        			exOrder.setEndChgTime(TimeZoneTimeUtil.getTimes(vo.getEndChgTime()));
 	        		}
 	        		if(vo.getStateChgTime()!=null){
-	        			exOrder.setSubmitTime(vo.getStateChgTime().toString());
+	        			exOrder.setSubmitTime(TimeZoneTimeUtil.getTimes(vo.getStateChgTime()));
 	        		}
 	        		exOrder.setUserName(vo.getUserName());
 	        		exOrder.setOrderId(vo.getOrderId());

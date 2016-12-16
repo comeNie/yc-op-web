@@ -1,10 +1,14 @@
 package com.ai.yc.op.web.model.order;
 
+import java.sql.Timestamp;
+
 public class ExAllOrder {
 	private String chlId;
 	private String orderType;
 	private Long orderId;
 	private String orderTime;
+	
+	private Timestamp time;
 	private String userName;
 	private String langire;
 	private String totalFee;
@@ -29,18 +33,18 @@ public class ExAllOrder {
 	private String translateLevel;
 	
 	
-	private String InterperName;
+	private String interperName;
 	
 	private String endChgTime;
 	
 	
 	
 	public String getInterperName() {
-		return InterperName;
+		return interperName;
 	}
 
 	public void setInterperName(String interperName) {
-		InterperName = interperName;
+		this.interperName = interperName;
 	}
 
 	public String getChlId() {
@@ -217,6 +221,14 @@ public class ExAllOrder {
 
 	public void setEndChgTime(String endChgTime) {
 		this.endChgTime = endChgTime;
+	}
+
+	public Timestamp getTime() {
+		return time;
+	}
+
+	public void setTime(Timestamp time) {
+		this.time = time;
 	}
 	
 	

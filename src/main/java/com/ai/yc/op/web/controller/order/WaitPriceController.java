@@ -33,6 +33,7 @@ import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
+import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -224,7 +225,7 @@ public class WaitPriceController {
 							}
 							// 下单时间
 							if (vo.getOrderTime() != null) {
-								exOrder.setOrderTime(vo.getOrderTime().toString());
+								exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 							}
 							exOrder.setUserName(vo.getUserName());
 							exOrder.setOrderId(vo.getOrderId());
@@ -265,7 +266,7 @@ public class WaitPriceController {
 						}
 						// 下单时间
 						if (vo.getOrderTime() != null) {
-							exOrder.setOrderTime(vo.getOrderTime().toString());
+							exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 						}
 						exOrder.setUserName(vo.getUserName());
 						exOrder.setOrderId(vo.getOrderId());

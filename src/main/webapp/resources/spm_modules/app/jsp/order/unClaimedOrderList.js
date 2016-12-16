@@ -176,9 +176,9 @@ define('app/jsp/order/unClaimedOrderList', function (require, exports, module) {
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var orderLevel = jQuery.trim($("#orderLevel option:selected").val());
-			window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
+			window.location.href=_base+'/exportUnclaimOrd?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+
-		    '&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&orderLevel='+orderLevel;
+		    '&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&orderLevel='+orderLevel+"&offset="+today.stdTimezoneOffset();
 		},
 		_searchOrderList:function(){
 			var _this=this;

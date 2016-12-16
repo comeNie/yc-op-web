@@ -166,7 +166,7 @@ define('app/jsp/order/waitPriceOrderList', function (require, exports, module) {
 			var orderPageId=jQuery.trim($("#orderId").val());
 			window.location.href=_base+'/waitpriceOrdExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire
-		+'&orderPageId='+orderPageId;
+		+'&orderPageId='+orderPageId+"&offset="+today.stdTimezoneOffset();
 		},
 		_getSearchParams:function(){
 			var orderTimeS = $("#orderTimeBegin").val();

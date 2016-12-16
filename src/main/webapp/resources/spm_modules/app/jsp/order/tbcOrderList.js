@@ -154,7 +154,7 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
 			var interperName = jQuery.trim($("#interperName").val());
 			window.location.href=_base+'/tbcExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&submitTimeS='+submitTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+
-		    '&orderPageId='+orderPageId+'&submitTimeE='+submitTimeE+'&interperName='+interperName;
+		    '&orderPageId='+orderPageId+'&submitTimeE='+submitTimeE+'&interperName='+interperName+"&offset="+today.stdTimezoneOffset();
 		},
 		_searchOrderList:function(){
 			var _this=this;

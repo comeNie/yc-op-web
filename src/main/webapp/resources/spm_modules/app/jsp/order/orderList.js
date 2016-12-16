@@ -237,7 +237,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 			var payStyle = jQuery.trim($("#payStyle option:selected").val());
 			window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+'&state='
-		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle;
+		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle+"&offset="+today.stdTimezoneOffset();
 		},
 		_searchOrderList:function(){
 			var _this=this;

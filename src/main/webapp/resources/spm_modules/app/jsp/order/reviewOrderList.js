@@ -259,7 +259,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 			var orderLevel = jQuery.trim($("#orderLevel option:selected").val());
 			window.location.href=_base+'/order/exportReviewOrderList?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&lockTimeS='+lockTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+
-		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&interperName='+interperName+'&orderLevel='+orderLevel;
+		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&interperName='+interperName+'&orderLevel='+orderLevel+"&offset="+today.stdTimezoneOffset();
 		},
 		_batchAdoptReviewOrder:function(){
 			var _this = this;

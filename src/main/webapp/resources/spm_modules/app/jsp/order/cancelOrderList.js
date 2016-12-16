@@ -204,7 +204,7 @@ define('app/jsp/order/cancelOrderList', function (require, exports, module) {
 			var cancelType = jQuery.trim($("#cancelType option:selected").val());
 			window.location.href=_base+'/cancelOrdExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&cancelTimeS='+cancelTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+'&cancelType='
-		+cancelType+'&orderPageId='+orderPageId+'&cancelTimeE='+cancelTimeE;
+		+cancelType+'&orderPageId='+orderPageId+'&cancelTimeE='+cancelTimeE+"&offset="+today.stdTimezoneOffset();
 		},
 		_getSearchParams:function(){
 			var orderTimeS=jQuery.trim($("#orderTimeBegin").val());

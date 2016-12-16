@@ -179,7 +179,7 @@ define('app/jsp/order/translatingOrderList', function (require, exports, module)
 			var interperName = jQuery.trim($("#interperName").val());
 			window.location.href=_base+'/translatingExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&lockTimeS='+lockTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+
-		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&orderLevel='+orderLevel+'&interperName='+interperName;
+		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&orderLevel='+orderLevel+'&interperName='+interperName+"&offset="+today.stdTimezoneOffset();
 		},
 		_searchOrderList:function(){
 			var _this=this;

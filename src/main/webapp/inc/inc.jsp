@@ -31,9 +31,23 @@
     var slp_uac_host="${slp_uac_host}";
     var ssoLoginUrl="${ssoLoginUrl}";
     var uedroot="${uedroot}";
+    Date.prototype.stdTimezoneOffset = function() {
+        var jan = new Date(this.getFullYear(), 0, 1);
+        var jul = new Date(this.getFullYear(), 6, 1);
+        return Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+        };
+
+    //get timezone
+    Date.prototype.dst = function() {
+        return this.getTimezoneOffset() < this.stdTimezoneOffset();
+    }
+    var today = new Date();
+	//send to the back
+	//$.post(_base+"/timezone.htm?offset="+today.stdTimezoneOffset());
+
+    
 </script>
 
-<!-- <link rel="stylesheet" type="text/css" href="${_base}/resources/slpmall/styles/bootstrap.css"> -->
 
 <link rel="stylesheet" type="text/css" href="${uedroot}/css/bootstrap/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="${uedroot}/css/bootstrap/font-awesome.css"/>

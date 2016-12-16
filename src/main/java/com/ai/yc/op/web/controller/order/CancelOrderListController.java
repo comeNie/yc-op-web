@@ -34,6 +34,7 @@ import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
 import com.ai.yc.op.web.utils.AmountUtil;
+import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -288,12 +289,12 @@ public class CancelOrderListController {
                 		}
                 		//下单时间
                 		if(vo.getOrderTime()!=null){
-                			exOrder.setOrderTime(vo.getOrderTime().toString());
+                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
                 		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
 		        		if(vo.getStateChgTime()!=null){
-		        			exOrder.setCancelTime(vo.getStateChgTime().toString());
+		        			exOrder.setCancelTime(TimeZoneTimeUtil.getTimes(vo.getStateChgTime()));
 		        		}
 		        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
 		        		exportList.add(exOrder);
@@ -348,12 +349,12 @@ public class CancelOrderListController {
             		}
             		//下单时间
             		if(vo.getOrderTime()!=null){
-            			exOrder.setOrderTime(vo.getOrderTime().toString());
+            			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
             		}
 	        		exOrder.setUserName(vo.getUserName());
 	        		//取消时间
 	        		if(vo.getStateChgTime()!=null){
-	        			exOrder.setCancelTime(vo.getStateChgTime().toString());
+	        			exOrder.setCancelTime(TimeZoneTimeUtil.getTimes(vo.getStateChgTime()));
 	        		}
 	        		exOrder.setOrderId(vo.getOrderId());
 	        		exportList.add(exOrder);

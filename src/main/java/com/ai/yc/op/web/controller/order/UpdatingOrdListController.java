@@ -34,6 +34,7 @@ import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
 import com.ai.yc.op.web.utils.AmountUtil;
+import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -286,12 +287,12 @@ private static final Logger logger = Logger.getLogger(UpdatingOrdListController.
                 			}
                 		}
                 		if(vo.getOrderTime()!=null){
-                			exOrder.setOrderTime(vo.getOrderTime().toString());
+                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
                 		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
 		        		if(vo.getLockTime()!=null){
-		        			exOrder.setLockTime(vo.getLockTime().toString());
+		        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
 		        		}
 		        		if(vo.getRemainingTime()!=null){
 		        			Long time= vo.getRemainingTime().getTime();
@@ -358,10 +359,10 @@ private static final Logger logger = Logger.getLogger(UpdatingOrdListController.
             			}
             		}
             		if(vo.getOrderTime()!=null){
-            			exOrder.setOrderTime(vo.getOrderTime().toString());
+            			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
             		}
             		if(vo.getLockTime()!=null){
-	        			exOrder.setLockTime(vo.getLockTime().toString());
+	        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
 	        		}
 	        		if(vo.getRemainingTime()!=null){
 	        			Long time= vo.getRemainingTime().getTime();

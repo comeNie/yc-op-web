@@ -35,6 +35,7 @@ import com.ai.yc.op.web.model.order.OrdTransLevelVo;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
 import com.ai.yc.op.web.utils.AmountUtil;
+import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.OrdProdLevelVo;
@@ -290,12 +291,15 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 	                			}
 	                		}
 	                		if(vo.getOrderTime()!=null){
-	                			exOrder.setOrderTime(vo.getOrderTime().toString());
+	                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 	                		}
 			        		exOrder.setUserName(vo.getUserName());
 			        		exOrder.setOrderId(vo.getOrderId());
 			        		if(vo.getFinishTime()!=null){
-			        			exOrder.setFinishTime(vo.getFinishTime().toString());
+			        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
+			        		}
+			        		if(vo.getLockTime()!=null){
+			        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
 			        		}
 			        		if(vo.getRemainingTime()!=null){
 			        			Long time= vo.getRemainingTime().getTime();
@@ -306,7 +310,18 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 								String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
 			        			exOrder.setRemaningTime(remaningPage);
 			        		}
+			        		//翻译翻译级别
+                			paramCond = new SysParamSingleCond();
+                    		paramCond.setTenantId(Constants.TENANT_ID);
+        					paramCond.setColumnValue(vo.getOrdProdLevelList().get(i).getTranslateLevel());
+        					paramCond.setTypeCode(Constants.TYPE_CODE);
+        					paramCond.setParamCode(Constants.ORD_TRANSLATE_LEVEL);
+                    		SysParam transLevelParam = iCacheSV.getSysParamSingle(paramCond);
+                    		if(transLevelParam!=null){
+                    			exOrder.setTranslateLevel(transLevelParam.getColumnDesc());
+                    		}
 			        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
+			        		exOrder.setInterperName(vo.getInterperName());
 			        		exportList.add(exOrder);
 						}
 					}else{
@@ -361,12 +376,16 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 		                			}
 		                		}
 		                		if(vo.getOrderTime()!=null){
-		                			exOrder.setOrderTime(vo.getOrderTime().toString());
+		                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 		                		}
+		                		if(vo.getLockTime()!=null){
+				        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
+				        		}
 				        		exOrder.setUserName(vo.getUserName());
+				        		exOrder.setInterperName(vo.getInterperName());
 				        		exOrder.setOrderId(vo.getOrderId());
 				        		if(vo.getFinishTime()!=null){
-				        			exOrder.setFinishTime(vo.getFinishTime().toString());
+				        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
 				        		}
 				        		if(vo.getRemainingTime()!=null){
 				        			Long time= vo.getRemainingTime().getTime();
@@ -387,6 +406,7 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
                         		if(transLevelParam!=null){
                         			exOrder.setTranslateLevel(transLevelParam.getColumnDesc());
                         		}
+                        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
 				        		exportList.add(exOrder);
 						}
 					}
@@ -442,12 +462,16 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
                 			}
                 		}
 	            		if(vo.getOrderTime()!=null){
-	            			exOrder.setOrderTime(vo.getOrderTime().toString());
+	            			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 	            		}
+	            		if(vo.getLockTime()!=null){
+		        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
+		        		}
 		        		exOrder.setUserName(vo.getUserName());
+		        		exOrder.setInterperName(vo.getInterperName());
 		        		exOrder.setOrderId(vo.getOrderId());
 		        		if(vo.getFinishTime()!=null){
-		        			exOrder.setFinishTime(vo.getFinishTime().toString());
+		        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
 		        		}
 		        		if(vo.getRemainingTime()!=null){
 		        			Long time= vo.getRemainingTime().getTime();
@@ -513,12 +537,16 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 	                			}
 	                		}
 	                		if(vo.getOrderTime()!=null){
-	                			exOrder.setOrderTime(vo.getOrderTime().toString());
+	                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 	                		}
+	                		if(vo.getLockTime()!=null){
+			        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
+			        		}
 			        		exOrder.setUserName(vo.getUserName());
+			        		exOrder.setInterperName(vo.getInterperName());
 			        		exOrder.setOrderId(vo.getOrderId());
 			        		if(vo.getFinishTime()!=null){
-			        			exOrder.setFinishTime(vo.getFinishTime().toString());
+			        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
 			        		}
 			        		if(vo.getRemainingTime()!=null){
 			        			Long time= vo.getRemainingTime().getTime();
@@ -592,12 +620,16 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
                 			}
                 		}
                 		if(vo.getOrderTime()!=null){
-                			exOrder.setOrderTime(vo.getOrderTime().toString());
+                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
                 		}
+                		if(vo.getLockTime()!=null){
+		        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
+		        		}
 		        		exOrder.setUserName(vo.getUserName());
+		        		exOrder.setInterperName(vo.getInterperName());
 		        		exOrder.setOrderId(vo.getOrderId());
 		        		if(vo.getFinishTime()!=null){
-		        			exOrder.setFinishTime(vo.getFinishTime().toString());
+		        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
 		        		}
 		        		if(vo.getRemainingTime()!=null){
 		        			Long time= vo.getRemainingTime().getTime();
@@ -616,9 +648,9 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 			response.reset();// 清空输出流
             response.setContentType("application/msexcel");// 定义输出类型
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
-            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","翻译级别","订单级别","订单金额","领取时间","提交时间","确认时间","订单状态"};
+            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","翻译级别","订单级别","订单金额","译员昵称","领取时间","提交时间","确认时间","订单状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
-    				"userName", "langire","translateLevel","orderLevel","totalFee","lockTime","finishTime","remaningTime","state"};
+    				"userName", "langire","translateLevel","orderLevel","totalFee","interperName","lockTime","finishTime","remaningTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
              excelHelper.writeExcel(outputStream, "订单信息"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {

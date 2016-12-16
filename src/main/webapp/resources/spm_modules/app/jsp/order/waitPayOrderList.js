@@ -217,7 +217,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 			var updateOperName=jQuery.trim($("#updateName").val());
 			window.location.href=_base+'/exportWaitPayOrd?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire
-		+'&orderPageId='+orderPageId+'&updateTimeS='+updateTimeS+'&updateTimeE='+updateTimeE+'&updateOperName='+updateOperName;
+		+'&orderPageId='+orderPageId+'&updateTimeS='+updateTimeS+'&updateTimeE='+updateTimeE+'&updateOperName='+updateOperName+"&offset="+today.stdTimezoneOffset();
 		},
 		_getSearchParams:function(){
 			var orderTimeS = $("#orderTimeBegin").val();

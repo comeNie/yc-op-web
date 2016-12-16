@@ -35,6 +35,7 @@ import com.ai.yc.op.web.model.order.OrdTransLevelVo;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
 import com.ai.yc.op.web.utils.AmountUtil;
+import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.OrdProdLevelVo;
@@ -310,12 +311,12 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 	                			}
 	                		}
 	                		if(vo.getOrderTime()!=null){
-	                			exOrder.setOrderTime(vo.getOrderTime().toString());
+	                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 	                		}
 			        		exOrder.setUserName(vo.getUserName());
 			        		exOrder.setOrderId(vo.getOrderId());
 			        		if(vo.getFinishTime()!=null){
-			        			exOrder.setFinishTime(vo.getFinishTime().toString());
+			        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
 			        		}
 			        		if(vo.getRemainingTime()!=null){
 			        			Long time= vo.getRemainingTime().getTime();
@@ -327,6 +328,16 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 			        			exOrder.setRemaningTime(remaningPage);
 			        		}
 			        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
+			        		//翻译翻译级别
+                			paramCond = new SysParamSingleCond();
+                    		paramCond.setTenantId(Constants.TENANT_ID);
+        					paramCond.setColumnValue(vo.getOrdProdLevelList().get(i).getTranslateLevel());
+        					paramCond.setTypeCode(Constants.TYPE_CODE);
+        					paramCond.setParamCode(Constants.ORD_TRANSLATE_LEVEL);
+                    		SysParam transLevelParam = iCacheSV.getSysParamSingle(paramCond);
+                    		if(transLevelParam!=null){
+                    			exOrder.setTranslateLevel(transLevelParam.getColumnDesc());
+                    		}
 			        		exportList.add(exOrder);
 						}
 					}else{
@@ -381,8 +392,11 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 		                			}
 		                		}
 		                		if(vo.getOrderTime()!=null){
-		                			exOrder.setOrderTime(vo.getOrderTime().toString());
+		                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 		                		}
+		                		if(vo.getFinishTime()!=null){
+				        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
+				        		}
 				        		exOrder.setUserName(vo.getUserName());
 				        		exOrder.setOrderId(vo.getOrderId());
 				        		if(vo.getRemainingTime()!=null){
@@ -404,6 +418,7 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
                         		if(transLevelParam!=null){
                         			exOrder.setTranslateLevel(transLevelParam.getColumnDesc());
                         		}
+                        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
 				        		exportList.add(exOrder);
 						}
 					}
@@ -459,7 +474,7 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 	            			}
 	            		}
 	            		if(vo.getOrderTime()!=null){
-	            			exOrder.setOrderTime(vo.getOrderTime().toString());
+	            			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 	            		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
@@ -527,7 +542,7 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 	                			}
 	                		}
 	                		if(vo.getOrderTime()!=null){
-	                			exOrder.setOrderTime(vo.getOrderTime().toString());
+	                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 	                		}
 			        		exOrder.setUserName(vo.getUserName());
 			        		exOrder.setOrderId(vo.getOrderId());
@@ -603,7 +618,7 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
                 			}
                 		}
                 		if(vo.getOrderTime()!=null){
-                			exOrder.setOrderTime(vo.getOrderTime().toString());
+                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
                 		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());

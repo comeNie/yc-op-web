@@ -34,6 +34,7 @@ import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
 import com.ai.yc.op.web.utils.AmountUtil;
+import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
@@ -284,12 +285,13 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
                 			}
                 		}
                 		if(vo.getOrderTime()!=null){
-                			exOrder.setOrderTime(vo.getOrderTime().toString());
+                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
                 		}
 		        		exOrder.setUserName(vo.getUserName());
+		        		exOrder.setInterperName(vo.getInterperName());
 		        		exOrder.setOrderId(vo.getOrderId());
 		        		if(vo.getStateChgTime()!=null){
-		        			exOrder.setSubmitTime(vo.getStateChgTime().toString());
+		        			exOrder.setSubmitTime(TimeZoneTimeUtil.getTimes(vo.getStateChgTime()));
 		        		}
 		        		if(vo.getRemainingTime()!=null){
 		        			Long time= vo.getRemainingTime().getTime();
@@ -354,10 +356,10 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
             			}
             		}
             		if(vo.getOrderTime()!=null){
-            			exOrder.setOrderTime(vo.getOrderTime().toString());
+            			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
             		}
             		if(vo.getStateChgTime()!=null){
-	        			exOrder.setSubmitTime(vo.getStateChgTime().toString());
+	        			exOrder.setSubmitTime(TimeZoneTimeUtil.getTimes(vo.getStateChgTime()));
 	        		}
 	        		if(vo.getRemainingTime()!=null){
 	        			Long time= vo.getRemainingTime().getTime();
@@ -369,6 +371,7 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 	        			exOrder.setRemaningTime(remaningPage);
 	        		}
 	        		exOrder.setUserName(vo.getUserName());
+	        		exOrder.setInterperName(vo.getInterperName());
 	        		exOrder.setOrderId(vo.getOrderId());
 	        		exportList.add(exOrder);
 				}
@@ -378,9 +381,9 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 			response.reset();// 清空输出流
             response.setContentType("application/msexcel");// 定义输出类型
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
-            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单级别","订单金额","确认剩余时间","译员提交时间","订单状态"};
+            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单级别","订单金额","译员昵称","确认剩余时间","译员提交时间","订单状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
-    				"userName", "langire","orderLevel","totalFee","remaningTime","submitTime","state"};
+    				"userName", "langire","orderLevel","totalFee","interperName","remaningTime","submitTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
              excelHelper.writeExcel(outputStream, "订单信息"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {

@@ -178,7 +178,7 @@ define('app/jsp/order/updatingOrderList', function (require, exports, module) {
 			var orderLevel = jQuery.trim($("#orderLevel option:selected").val());
 			window.location.href=_base+'/updatingExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&lockTimeS='+lockTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+
-		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&orderLevel='+orderLevel;
+		    '&orderPageId='+orderPageId+'&lockTimeE='+lockTimeE+'&orderLevel='+orderLevel+"&offset="+today.stdTimezoneOffset();
 		},
 		_searchOrderList:function(){
 			var _this=this;
