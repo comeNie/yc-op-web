@@ -405,7 +405,7 @@ public class ReviewOrderController {
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
             String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单级别","订单金额","实付金额","译员昵称","译员领取时间","译员提交时间","交稿剩余时间","订单状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
-    				"userName", "langire","orderLevel","totalFee","totalFee","interperName","lockTime","submitTime","remainingTime","state"};
+    				"userName", "langire","orderLevel","totalFee","totalFee","interperName","lockTime","submitTime","remaningTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
              excelHelper.writeExcel(outputStream, "订单信息"+System.currentTimeMillis(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {

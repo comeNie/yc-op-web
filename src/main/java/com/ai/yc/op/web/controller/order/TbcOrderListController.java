@@ -22,6 +22,7 @@ import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.paas.ipaas.ccs.IConfigClient;
@@ -109,7 +110,8 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 						//翻译剩余时间
 						Timestamp retime= vo.getRemainingTime();
 						if(retime!=null){
-							Long time= vo.getRemainingTime().getTime();
+							//Long time= vo.getRemainingTime().getTime();
+							Long time = vo.getEndChgTime().getTime()-DateUtil.getCurrentTimeMillis();
 							//获取天数、小时数、分钟
 							int day = (int)(time/(1000 * 60 * 60 * 24));
 							int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
@@ -294,7 +296,8 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 		        			exOrder.setSubmitTime(TimeZoneTimeUtil.getTimes(vo.getStateChgTime()));
 		        		}
 		        		if(vo.getRemainingTime()!=null){
-		        			Long time= vo.getRemainingTime().getTime();
+		        			//Long time= vo.getRemainingTime().getTime();
+		        			Long time = vo.getEndChgTime().getTime()-DateUtil.getCurrentTimeMillis();
 							//获取天数、小时数、分钟
 							int day = (int)(time/(1000 * 60 * 60 * 24));
 							int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
@@ -362,7 +365,8 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 	        			exOrder.setSubmitTime(TimeZoneTimeUtil.getTimes(vo.getStateChgTime()));
 	        		}
 	        		if(vo.getRemainingTime()!=null){
-	        			Long time= vo.getRemainingTime().getTime();
+	        			//Long time= vo.getRemainingTime().getTime();
+	        			Long time = vo.getEndChgTime().getTime()-DateUtil.getCurrentTimeMillis();
 						//获取天数、小时数、分钟
 						int day = (int)(time/(1000 * 60 * 60 * 24));
 						int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);

@@ -261,89 +261,9 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 				if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList()) && !CollectionUtil.isEmpty(vo.getOrdProdLevelList())){
 					if(vo.getOrdProdExtendList().size()>vo.getOrdProdLevelList().size()){
 						for(int i=0;i<vo.getOrdProdExtendList().size();i++){
-							ExAllOrder exOrder = new ExAllOrder();
-							//翻译订单来源
-							SysParamSingleCond	paramCond = new SysParamSingleCond();
-							paramCond.setTenantId(Constants.TENANT_ID);
-							paramCond.setColumnValue(vo.getChlId());
-							paramCond.setTypeCode(Constants.TYPE_CODE);
-							paramCond.setParamCode(Constants.ORD_CHL_ID);
-			        		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
-			        		if(chldParam!=null){
-			        			exOrder.setChlId(chldParam.getColumnDesc());
-			        		}
-			        		//翻译订单类型
-			        		paramCond = new SysParamSingleCond();
-			        		paramCond.setTenantId(Constants.TENANT_ID);
-			        		paramCond.setColumnValue(vo.getTranslateType());
-							paramCond.setTypeCode(Constants.TYPE_CODE);
-							paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
-			        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
-			        		if(orderTypeParam!=null){
-			        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
-			        		}
-			        		//翻译订单状态
-			        		paramCond = new SysParamSingleCond();
-			        		paramCond.setTenantId(Constants.TENANT_ID);
-							paramCond.setColumnValue(vo.getState());
-							paramCond.setTypeCode(Constants.TYPE_CODE);
-							paramCond.setParamCode(Constants.ORD_STATE);
-			        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
-			        		if(stateParam!=null){
-			        			exOrder.setState(stateParam.getColumnDesc());
-			        		}
-			        		//翻译订单级别
-	                		paramCond = new SysParamSingleCond();
-	                		paramCond.setTenantId(Constants.TENANT_ID);
-	    					paramCond.setColumnValue(vo.getOrderLevel());
-	    					paramCond.setTypeCode(Constants.TYPE_CODE);
-	    					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
-	                		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
-	                		if(levelParam!=null){
-	                			exOrder.setOrderLevel(levelParam.getColumnDesc());
-	                		}
-			        		//转换金额格式
-	                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
-	                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-	                				exOrder.setTotalFee("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
-	                			}else{
-	                				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
-	                			}
-	                		}
-	                		if(vo.getOrderTime()!=null){
-	                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
-	                		}
-			        		exOrder.setUserName(vo.getUserName());
-			        		exOrder.setOrderId(vo.getOrderId());
-			        		if(vo.getFinishTime()!=null){
-			        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
-			        		}
-			        		if(vo.getRemainingTime()!=null){
-			        			Long time= vo.getRemainingTime().getTime();
-								//获取天数、小时数、分钟
-								int day = (int)(time/(1000 * 60 * 60 * 24));
-								int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-								int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
-								String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
-			        			exOrder.setRemaningTime(remaningPage);
-			        		}
-			        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
-			        		//翻译翻译级别
-                			paramCond = new SysParamSingleCond();
-                    		paramCond.setTenantId(Constants.TENANT_ID);
-        					paramCond.setColumnValue(vo.getOrdProdLevelList().get(i).getTranslateLevel());
-        					paramCond.setTypeCode(Constants.TYPE_CODE);
-        					paramCond.setParamCode(Constants.ORD_TRANSLATE_LEVEL);
-                    		SysParam transLevelParam = iCacheSV.getSysParamSingle(paramCond);
-                    		if(transLevelParam!=null){
-                    			exOrder.setTranslateLevel(transLevelParam.getColumnDesc());
-                    		}
-			        		exportList.add(exOrder);
-						}
-					}else{
-						for(int i=0;i<vo.getOrdProdLevelList().size();i++){
-							ExAllOrder exOrder = new ExAllOrder();
-							////翻译订单来源
+							for(int j=0; j<vo.getOrdProdLevelList().size();j++){
+								ExAllOrder exOrder = new ExAllOrder();
+								//翻译订单来源
 								SysParamSingleCond	paramCond = new SysParamSingleCond();
 								paramCond.setTenantId(Constants.TENANT_ID);
 								paramCond.setColumnValue(vo.getChlId());
@@ -394,11 +314,11 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 		                		if(vo.getOrderTime()!=null){
 		                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
 		                		}
-		                		if(vo.getFinishTime()!=null){
-				        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
-				        		}
 				        		exOrder.setUserName(vo.getUserName());
 				        		exOrder.setOrderId(vo.getOrderId());
+				        		if(vo.getFinishTime()!=null){
+				        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
+				        		}
 				        		if(vo.getRemainingTime()!=null){
 				        			Long time= vo.getRemainingTime().getTime();
 									//获取天数、小时数、分钟
@@ -411,15 +331,99 @@ private static final Logger logger = Logger.getLogger(unClaimedOrdListController
 				        		//翻译翻译级别
                     			paramCond = new SysParamSingleCond();
                         		paramCond.setTenantId(Constants.TENANT_ID);
-            					paramCond.setColumnValue(vo.getOrdProdLevelList().get(i).getTranslateLevel());
+            					paramCond.setColumnValue(vo.getOrdProdLevelList().get(j).getTranslateLevel());
             					paramCond.setTypeCode(Constants.TYPE_CODE);
             					paramCond.setParamCode(Constants.ORD_TRANSLATE_LEVEL);
                         		SysParam transLevelParam = iCacheSV.getSysParamSingle(paramCond);
                         		if(transLevelParam!=null){
                         			exOrder.setTranslateLevel(transLevelParam.getColumnDesc());
                         		}
-                        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
+				        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
 				        		exportList.add(exOrder);
+							}
+						}
+					}else{
+						for(int i=0;i<vo.getOrdProdLevelList().size();i++){
+							for(int j=0;j<vo.getOrdProdExtendList().size();j++){
+								ExAllOrder exOrder = new ExAllOrder();
+								////翻译订单来源
+									SysParamSingleCond	paramCond = new SysParamSingleCond();
+									paramCond.setTenantId(Constants.TENANT_ID);
+									paramCond.setColumnValue(vo.getChlId());
+									paramCond.setTypeCode(Constants.TYPE_CODE);
+									paramCond.setParamCode(Constants.ORD_CHL_ID);
+					        		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
+					        		if(chldParam!=null){
+					        			exOrder.setChlId(chldParam.getColumnDesc());
+					        		}
+					        		//翻译订单类型
+					        		paramCond = new SysParamSingleCond();
+					        		paramCond.setTenantId(Constants.TENANT_ID);
+					        		paramCond.setColumnValue(vo.getTranslateType());
+									paramCond.setTypeCode(Constants.TYPE_CODE);
+									paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
+					        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
+					        		if(orderTypeParam!=null){
+					        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
+					        		}
+					        		//翻译订单状态
+					        		paramCond = new SysParamSingleCond();
+					        		paramCond.setTenantId(Constants.TENANT_ID);
+									paramCond.setColumnValue(vo.getState());
+									paramCond.setTypeCode(Constants.TYPE_CODE);
+									paramCond.setParamCode(Constants.ORD_STATE);
+					        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
+					        		if(stateParam!=null){
+					        			exOrder.setState(stateParam.getColumnDesc());
+					        		}
+					        		//翻译订单级别
+			                		paramCond = new SysParamSingleCond();
+			                		paramCond.setTenantId(Constants.TENANT_ID);
+			    					paramCond.setColumnValue(vo.getOrderLevel());
+			    					paramCond.setTypeCode(Constants.TYPE_CODE);
+			    					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+			                		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+			                		if(levelParam!=null){
+			                			exOrder.setOrderLevel(levelParam.getColumnDesc());
+			                		}
+					        		//转换金额格式
+			                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
+			                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
+			                				exOrder.setTotalFee("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
+			                			}else{
+			                				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
+			                			}
+			                		}
+			                		if(vo.getOrderTime()!=null){
+			                			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
+			                		}
+			                		if(vo.getFinishTime()!=null){
+					        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
+					        		}
+					        		exOrder.setUserName(vo.getUserName());
+					        		exOrder.setOrderId(vo.getOrderId());
+					        		if(vo.getRemainingTime()!=null){
+					        			Long time= vo.getRemainingTime().getTime();
+										//获取天数、小时数、分钟
+										int day = (int)(time/(1000 * 60 * 60 * 24));
+										int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+										int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
+										String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
+					        			exOrder.setRemaningTime(remaningPage);
+					        		}
+					        		//翻译翻译级别
+	                    			paramCond = new SysParamSingleCond();
+	                        		paramCond.setTenantId(Constants.TENANT_ID);
+	            					paramCond.setColumnValue(vo.getOrdProdLevelList().get(i).getTranslateLevel());
+	            					paramCond.setTypeCode(Constants.TYPE_CODE);
+	            					paramCond.setParamCode(Constants.ORD_TRANSLATE_LEVEL);
+	                        		SysParam transLevelParam = iCacheSV.getSysParamSingle(paramCond);
+	                        		if(transLevelParam!=null){
+	                        			exOrder.setTranslateLevel(transLevelParam.getColumnDesc());
+	                        		}
+	                        		exOrder.setLangire(vo.getOrdProdExtendList().get(j).getLangungePairChName());
+					        		exportList.add(exOrder);
+							}
 						}
 					}
 				}else if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList()) && CollectionUtil.isEmpty(vo.getOrdProdLevelList())){
