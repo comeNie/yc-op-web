@@ -302,14 +302,8 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 				        		if(vo.getLockTime()!=null){
 				        			exOrder.setLockTime(TimeZoneTimeUtil.getTimes(vo.getLockTime()));
 				        		}
-				        		if(vo.getRemainingTime()!=null){
-				        			Long time= vo.getRemainingTime().getTime();
-									//获取天数、小时数、分钟
-									int day = (int)(time/(1000 * 60 * 60 * 24));
-									int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-									int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
-									String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
-				        			exOrder.setRemaningTime(remaningPage);
+				        		if(vo.getProdUpdateTime()!=null){
+				        			exOrder.setProdUpdateTime(TimeZoneTimeUtil.getTimes(vo.getProdUpdateTime()));
 				        		}
 				        		//翻译翻译级别
 	                			paramCond = new SysParamSingleCond();
@@ -390,14 +384,8 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 					        		if(vo.getFinishTime()!=null){
 					        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
 					        		}
-					        		if(vo.getRemainingTime()!=null){
-					        			Long time= vo.getRemainingTime().getTime();
-										//获取天数、小时数、分钟
-										int day = (int)(time/(1000 * 60 * 60 * 24));
-										int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-										int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
-										String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
-					        			exOrder.setRemaningTime(remaningPage);
+					        		if(vo.getProdUpdateTime()!=null){
+					        			exOrder.setProdUpdateTime(TimeZoneTimeUtil.getTimes(vo.getProdUpdateTime()));
 					        		}
 					        		//翻译翻译级别
 	                    			paramCond = new SysParamSingleCond();
@@ -477,14 +465,8 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 		        		if(vo.getFinishTime()!=null){
 		        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
 		        		}
-		        		if(vo.getRemainingTime()!=null){
-		        			Long time= vo.getRemainingTime().getTime();
-							//获取天数、小时数、分钟
-							int day = (int)(time/(1000 * 60 * 60 * 24));
-							int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-							int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
-							String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
-		        			exOrder.setRemaningTime(remaningPage);
+		        		if(vo.getProdUpdateTime()!=null){
+		        			exOrder.setProdUpdateTime(TimeZoneTimeUtil.getTimes(vo.getProdUpdateTime()));
 		        		}
 		        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
 		        		exportList.add(exOrder);
@@ -552,14 +534,8 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 			        		if(vo.getFinishTime()!=null){
 			        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
 			        		}
-			        		if(vo.getRemainingTime()!=null){
-			        			Long time= vo.getRemainingTime().getTime();
-								//获取天数、小时数、分钟
-								int day = (int)(time/(1000 * 60 * 60 * 24));
-								int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-								int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
-								String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
-			        			exOrder.setRemaningTime(remaningPage);
+			        		if(vo.getProdUpdateTime()!=null){
+			        			exOrder.setProdUpdateTime(TimeZoneTimeUtil.getTimes(vo.getProdUpdateTime()));
 			        		}
 			        		//翻译翻译级别
                 			paramCond = new SysParamSingleCond();
@@ -635,14 +611,8 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
 		        		if(vo.getFinishTime()!=null){
 		        			exOrder.setFinishTime(TimeZoneTimeUtil.getTimes(vo.getFinishTime()));
 		        		}
-		        		if(vo.getRemainingTime()!=null){
-		        			Long time= vo.getRemainingTime().getTime();
-							//获取天数、小时数、分钟
-							int day = (int)(time/(1000 * 60 * 60 * 24));
-							int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
-							int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
-							String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
-		        			exOrder.setRemaningTime(remaningPage);
+		        		if(vo.getProdUpdateTime()!=null){
+		        			exOrder.setProdUpdateTime(TimeZoneTimeUtil.getTimes(vo.getProdUpdateTime()));
 		        		}
 		        		exportList.add(exOrder);
 				}
@@ -654,7 +624,7 @@ private static final Logger logger = Logger.getLogger(DoneOrderListController.cl
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
             String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","翻译级别","订单级别","订单金额","译员昵称","领取时间","提交时间","确认时间","订单状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
-    				"userName", "langire","translateLevel","orderLevel","totalFee","interperName","lockTime","finishTime","remaningTime","state"};
+    				"userName", "langire","translateLevel","orderLevel","totalFee","interperName","lockTime","prodUpdateTime","finishTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
              excelHelper.writeExcel(outputStream, "订单信息"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {
