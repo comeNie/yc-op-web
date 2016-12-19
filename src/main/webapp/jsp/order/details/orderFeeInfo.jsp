@@ -15,6 +15,7 @@
                            <div id="penTraslateDiv" class="form-label">
 							    <ul>
 									<li class="col-md-6">
+                                        <input type="hidden" id="duadId" value="{{:prodExtends[0].langungePair}}"/>
 										<p class="word">语言对：</p>
 										<p>
 											{{:prodExtends[0].langungePairName}}
@@ -31,7 +32,7 @@
 									<li class="col-md-6">
 										<p class="word">翻译级别：</p>
 										<p>
-											<select id="translateLevel" name="translateLevel" class="select select-medium">
+											<select id="translateLevel" name="translateLevel" class="select select-medium requestP">
 											   <option value="100210" {{if prodLevels[0].translateLevel=='100210'}}selected="selected"{{/if}}>标准级</option>
 											   <option value="100220" {{if prodLevels[0].translateLevel=='100220'}}selected="selected"{{/if}}>专业级</option>
 											   <option value="100230" {{if prodLevels[0].translateLevel=='100230'}}selected="selected"{{/if}}>出版级</option>
@@ -42,7 +43,7 @@
                                     <li class="col-md-6">
 										<p class="word">用途：</p>
 										<p>
-	                                       <select id="useCode" name="prod.useCode" class="select select-medium">
+	                                       <select id="useCode" name="prod.useCode" class="select select-medium requestP">
                                            </select>
 										</p>
 									</li>
@@ -59,13 +60,13 @@
 										<p class="word">订单字数：</p>
 										<p>
 										   	<input id="translateSum" name="prod.translateSum" 
-                                                type="text" value="{{:prod.translateSum==null?0:prod.translateSum}}" class="int-text int-medium price"/>
+                                                type="text" value="{{:prod.translateSum==null?0:prod.translateSum}}" class="int-text int-medium requestP"/>
 										</p>
 									</li>
                                  </ul>
                                  <ul>
 									<li class="col-md-6">
-                                        <input id="wordPrice" type="hidden" />
+                                        <input id="basePrice" type="hidden" />
 										<p class="word">单价：</p>
 										<p id="priceShow">
                                                
@@ -74,7 +75,7 @@
 									<li class="col-md-6">
 										<p class="word">是否排版：</p>
 										<p>
-										   	<select id="isSetType" name="prod.isSetType" class="select select-medium price">
+										   	<select id="isSetType" name="prod.isSetType" class="select select-medium changeP">
 										   	  {{if prod.isSetType=='Y'}}
 										   	       <option value="N">否</option>
 										   	       <option value="Y" selected="selected">是</option>
@@ -92,7 +93,7 @@
                                         <input name="orderFee.currencyUnit" type="hidden" value="{{:orderFee.currencyUnit}}"/>
 										<p class="word">排版费用：</p>
 										<p>
-											<input id="setTypeFee" name="setTypeFee" type="text" value="{{:~liToYuan3(orderFee.setTypeFee)}}" class="int-text int-small price" />
+											<input id="setTypeFee" name="setTypeFee" type="text" value="{{:~liToYuan3(orderFee.setTypeFee)}}" class="int-text int-small changeP" />
                                             {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="setTypeFee-error" class="error" for="setTypeFee" style="display: none;"></label>
 										</p>
@@ -112,7 +113,7 @@
 									<li class="col-md-6">
 										<p class="word">转换费用：</p>
 										<p>
-										    <input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small price"/>
+										    <input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small changeP" {{if typeDesc==null}}readonly="readonly"{{/if}}/>
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="descTypeFee-error" class="error" for="descTypeFee" style="display: none;"></label>
 										</p>
@@ -120,7 +121,7 @@
 									<li class="col-md-6">
 										<p class="word">是否加急：</p>
 										<p>
-										   	<select id="isUrgent" name="prod.isUrgent" class="select select-medium price">
+										   	<select id="isUrgent" name="prod.isUrgent" class="select select-medium requestP">
 										   	   {{if prod.isUrgent=='Y'}}
 										   	       <option value="N">否</option>
 										   	       <option value="Y" selected="selected">是</option>
@@ -136,7 +137,7 @@
                                     <li class="col-md-6">
 										<p class="word">加急费用：</p>
 										<p>
-											<input id="urGentFee" name="urgentFee" type="text" data-describedby="messages" value="{{:~liToYuan3(orderFee.urgentFee)}}" class="int-text int-small price" />
+											<input id="urGentFee" name="urgentFee" type="text" data-describedby="messages" value="{{:~liToYuan3(orderFee.urgentFee)}}" class="int-text int-small changeP" />
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="urGentFee-error" class="error" for="urGentFee" style="display: none;"></label>
 										</p>

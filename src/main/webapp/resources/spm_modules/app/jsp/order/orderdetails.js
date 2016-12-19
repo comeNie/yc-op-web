@@ -46,7 +46,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 	var orderDetailsPager = Widget.extend({
 
 		attrs : {
-			clickId:""
+			
 		},
 		Statics : {
 			
@@ -54,13 +54,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		// 事件代理
 		events : {
 			"change #orderLevel":"_getInterperLevel",
-			"change .price":"_getTotalPrice",
+			"change .requestP":"_requestTotalPrice",
+			"change .changeP":"_changeTotalPrice",
 			"change #totalFee":"_totalFeeChange",
 			"click #save":"_save",
 			"click #cancel":"_cancel",
-			"click #globalRome": "_setPattern",
-			"change #useCode":"_changeWordPrice",
-			"change #translateLevel":"_changeWordPrice"
+			"click #globalRome": "_setPattern"
 		},
 		// 重写父类
 		setup : function() {
@@ -82,6 +81,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				var ext = fileName.substring(fileName.indexOf('.')+1);
 				location.href = _base + '/attachment/download?fileId='+fileId+'&ext='+ext;
 			});
+			
 			this._queryOrderDetails();
 			
 		},
@@ -145,8 +145,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				}
 				f["startTime"] =startTime;
 				f["endTime"] =endTime;
-			})
-			//
+			});
 			var fileSaveIds = [];
 			$("input[name=fileSaveIds]").each(function(){
 				fileSaveIds.push($(this).val());
@@ -154,7 +153,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var replaceSaveIds = fileSaveIds;
 			
 			f["fileSaveIds"] = replaceSaveIds.join(",");
-			//
+			
 			var fileNames = [];
 			$("input[name=fileNames]").each(function(){
 				fileNames.push($(this).val());
@@ -168,7 +167,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			//如果需要对象与字符串的转换
 			//这是从json对象 向 json 字符串转换
 			 var str = JSON.stringify(f);
-			console.log(str);
+			
 			ajaxController.ajax({
 				type: "post",
 				processing: true,
@@ -181,9 +180,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			});
 		},
         _cancel:function(){
-        	/*if(cache){
-        		this._initView(cache);
-        	}*/
         	history.go(-1);
 		},
 		_getInterperLevel:function(){
@@ -198,19 +194,17 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
             	$("#interperLevel").html("V4级(lsp)译员");
             }
 		},
-		_changeSetType:function(){
-			var isSetType = $("#isSetType").val();//是否排版
-			if(isSetType=='N'){
-				$("#setTypeFee").val("0.00");
-			}
+		
+		_requestTotalPrice:function(){
+			this._requestOrderPrice(true);
 		},
-		_changeUrgent:function(){
-			var isUrgent = $("#isUrgent").val();//是否加急
-			if(isUrgent=='N'){
-				$("#urGentFee").val("0.00");
-			}
+		_changeTotalPrice:function(){
+			this._requestOrderPrice(false);
 		},
-		_getTotalPrice:function(){
+		_initTotalPrice:function(basePrice){
+			if(!basePrice&&basePrice!=0){
+				return;
+			}
 			var wordPrice = $("#wordPrice").val();
 			var translateSum = $("#translateSum").val();//字数
 			var isSetType = $("#isSetType").val();//是否排版
@@ -219,28 +213,99 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var descTypeFee = $("#descTypeFee").val();//转换格式费用
 			var isUrgent = $("#isUrgent").val();//是否加急
 			var urGentFee = $("#urGentFee").val();//加急费用
-			var totalFee = 0;
-			//级联修改费用信息
-			this._changeSetType();
-			this._changeUrgent();
-			if(typedDesc=="" || typedDesc==null){
-				$("#descTypeFee").val("0.00");
-			}
+			var useCode = $("#useCode").val();//用途
+			var translateLevel = $("#translateLevel").val();//翻译级别
+			var duadId = $("#duadId").val();//用途
 			
-			if(translateSum!=''){
-				totalFee = totalFee + (parseFloat(wordPrice)*parseInt(translateSum));
+			if(translateSum==''){
+				translateSum = 0;
 			}
+			var totalFee = basePrice;
+			
 			if(isSetType=='Y'){
 				totalFee = totalFee + parseFloat(setTypeFee);
+				$('#setTypeFee').removeAttr("disabled");
+			}else{
+				$("#setTypeFee").val("0.00");
+				$("#setTypeFee").attr("disabled","disabled");
 			}
 			totalFee = totalFee + parseFloat(descTypeFee);
 			if(isUrgent=='Y'){
 				totalFee = totalFee + parseFloat(urGentFee);
+				$('#urGentFee').removeAttr("readonly");
+			}else{
+				
+				$("#urGentFee").val("0.00");
+				$("#urGentFee").attr("readonly","readonly");
 			}
+			
 			if(totalFee){
 				$("#totalFee").val(totalFee);
 				this._getOrderLevel(totalFee);
 			}
+			
+		},
+		_requestOrderPrice:function(_request){
+			var _this = this;
+			var translateSum = $("#translateSum").val();//字数
+			var isUrgent = $("#isUrgent").val();//是否加急
+			var useCode = $("#useCode").val();//用途
+			var translateLevel = $("#translateLevel").val();//翻译级别
+			var duadId = $("#duadId").val();//用途
+			if(!_request){
+				var basePrice = $("#basePrice").val();
+				_this._initTotalPrice(parseFloat(basePrice));
+				return;
+			}
+			
+			var priceShow = $("#priceShow");
+			 var param = {};
+			    if(!translateSum||translateSum==0){
+			    	param.wordNum = 1;
+			    }else{
+			    	param.wordNum = parseInt(translateSum);
+			    }
+				param.duadId = duadId;
+				param.purposeId = useCode;
+				param.translateLevel = translateLevel;
+				param.isUrgent = isUrgent;
+				var unit = $("#currencyUnit").val();
+				if('2'==unit){
+					param.language = "us_EN"
+				}else{
+					param.language = "zh_CN"
+				}
+				ajaxController.ajax({
+					type: "post",
+					processing: false,
+					message: "加载数据中，请等待...",
+					url: _base + "/order/queryAutoOffer",
+					data: param,
+					success: function (rs) {
+						var li = parseInt(rs.data.price);	
+						var valuationWay = rs.data.valuationWay;
+						if(li>0){	
+							var currencyUnit = "元";
+							if(rs.data.currencyUnit=='2'){
+								currencyUnit = "美元";
+					        }
+							if("1"==valuationWay){
+								priceShow.html(_this.fmoney(li/1000, 2) + currencyUnit+"/份");
+							}else if("0"==valuationWay){
+								priceShow.html( _this.fmoney(li/param.wordNum, 2)+currencyUnit+"/1000字"); 
+							}
+							var base = li/1000;
+							if(!translateSum||translateSum==0){
+								 base = 0.00;
+							}
+							$("#basePrice").val(base);
+							_this._initTotalPrice(base);
+						}
+						
+						
+					}
+				});
+			
 			
 		},
 		_totalFeeChange:function(){
@@ -265,11 +330,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			}
 			param.translateLevel = translateLevel;
 			param.translateType = translateType;
-			if(isUrgent){
-				param.isUrgent = 'N';
-			}else{
-				param.isUrgent = 'Y';
-			}
+			param.isUrgent = isUrgent;
 			ajaxController.ajax({
 				type: "post",
 				processing: false,
@@ -283,54 +344,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 					_this._getInterperLevel();
 				}
 			});
-			
-		},
-		_getWordPrice:function(useCode, duadId, translateLevel,changeTotalPrice){
-			if(!useCode||!duadId){
-				return;
-			}
-			var _this = this;
-			var priceShow = $("#priceShow");
-			var wordPrice = $("#wordPrice");
-			if(priceShow&&wordPrice){
-			  var param = {};
-				param.wordNum = 1;
-				param.duadId = duadId;
-				param.purposeId = useCode;
-				param.translateLevel = translateLevel;
-				param.isUrgent = false;
-				var unit = $("#currencyUnit").val();
-				if('2'==unit){
-					param.language = "us_EN"
-				}else{
-					param.language = "zh_CN"
-				}
-				ajaxController.ajax({
-					type: "post",
-					processing: false,
-					message: "加载数据中，请等待...",
-					url: _base + "/order/queryAutoOffer",
-					data: param,
-					success: function (rs) {
-						var li = rs.data.price;	
-						if(li>0){
-							
-							var yuan = _this.fmoney(parseInt(li)/1000, 2);
-							
-							wordPrice.val(yuan);
-							var currencyUnit = "元";
-							if(rs.data.currencyUnit=='2'){
-								currencyUnit = "美元";
-					        }
-							priceShow.html( _this.fmoney(yuan*1000, 2)+currencyUnit+"/1000字"); 
-							if(changeTotalPrice){
-								_this._getTotalPrice();
-							}
-						}
-					}
-				});
-			
-			}
 			
 		},
 		fmoney:function(s, n) {
@@ -466,9 +479,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				}
 			}
 			
-			//初始化单价
-			_this._getWordPrice(rs.data.prod.useCode,rs.data.prodExtends[0].langungePair,rs.data.prodLevels[0].translateLevel,false);
-			
 			_this._initUploaderBtn();
 			
 			var formValidator =_this._initValidate();
@@ -500,6 +510,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			});
 		},
 		initPurposeSelect:function(id,defaultVal){
+			var _this = this;
 			var select = $("#"+id);
 			var param = {};
 			ajaxController.ajax({
@@ -511,6 +522,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				success: function (rs) {
 					var list = rs.data;
 					var options = "";
+					var k = 0;
 					for(var i=0;i<list.length;i++){
 						if(defaultVal&&list[i].purposeId==defaultVal){
 							options = options + "<option value='"+list[i].purposeId+"' selected='selected'>"+list[i].purposeCn+"</option>";
@@ -519,6 +531,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 						}
 					}
 					select.append(options);
+					//初始化费用
+					_this._requestOrderPrice(true);
 				}
 			});
 		},
