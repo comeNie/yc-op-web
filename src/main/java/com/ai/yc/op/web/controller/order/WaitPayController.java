@@ -401,17 +401,11 @@ public class WaitPayController {
 			responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "修改失败：货币不能为空");
 			return responseData;
 		}else{
-			if(Constants.CURRENCY_UNIT_R.equals(currencyUnit)){
-				//将元转换为厘
-				feeVo.setTotalFee(AmountUtil.YToLi(updateFee));
-			}else{
-				feeVo.setTotalFee(AmountUtil.YToLi(updateFee));
-			}
+			feeVo.setPaidFee(Long.valueOf(updateFee));
+			
 		}
-		
 		feeVo.setAdjustFee(0L);
 		feeVo.setDiscountFee(0L);
-		feeVo.setPaidFee(feeVo.getTotalFee());
 		feeVo.setPayFee(0L);
 		feeVo.setOperDiscountFee(0L);
 		feeVo.setPayStyle(payStyle);

@@ -57,20 +57,12 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     	_initValidate:function(){
     		var formValidator=$("#dataForm").validate({
     			rules: {
-    				updateMoney: {
-    					required: true,
-    					moneyNumber: true
-    					},
 					remark: {
     					required: true,
     					maxlength:100
     				}
     			},
     			messages: {
-    				updateMoney: {
-    					required:"请输入修改金额!",
-    					moneyNumber:"格式不对！"
-    				},
     				remark: {
     					required: "请输入备注!",
     					maxlength:"最大长度不能超过{0}"
@@ -259,11 +251,12 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     		}
     	},
     	//弹出框
-    	_popUp:function(orderId,payStylePage,currencyUnit,payStyle){
+    	_popUp:function(orderId,payStylePage,currencyUnit,payStyle,updateMoney,realMoney){
     		var _this= this;
     		$("#orderIdUpdate").val("");
     		$("#payStyleUpdate").val("");
     		$("#currencyUnitUpdate").val("");
+    		$("#updateMoney").val("");
     		//赋值支付方式
     		//$("#payStyle").val(payStylePage);
 			//弹出框展示
@@ -272,6 +265,8 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 			$("#orderIdUpdate").val(orderId);
 			$("#payStyleUpdate").val(payStyle);
 			$("#currencyUnitUpdate").val(currencyUnit);
+			$("#updateMoney").val(updateMoney);
+			$("#realmoney").val(realMoney);
     	},
     	_updatePayState:function(){
     		var _this= this;
@@ -281,7 +276,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 				return false;
 			}
     		var orderId = $("#orderIdUpdate").val();
-    		var money = $("#updateMoney").val();
+    		var money = $("#realmoney").val();
     		var remak = $("#remark").val();
     		var payStyle="HK";
     		var currencyUnit=$("#currencyUnitUpdate").val();
