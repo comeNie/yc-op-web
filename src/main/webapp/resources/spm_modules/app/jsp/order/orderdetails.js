@@ -488,6 +488,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		},
 		initDomainSelect:function(id,defaultVal){
 			var select = $("#"+id);
+			if(!select){
+				return;
+			}
 			var param = {};
 			ajaxController.ajax({
 				type: "post",
@@ -512,6 +515,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		initPurposeSelect:function(id,defaultVal){
 			var _this = this;
 			var select = $("#"+id);
+			if(!select){
+				return;
+			}
 			var param = {};
 			ajaxController.ajax({
 				type: "post",
