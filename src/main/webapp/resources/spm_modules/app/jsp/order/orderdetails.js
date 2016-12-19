@@ -452,8 +452,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			
 			//初始化用途 领域下拉选择框
 			if (rs.data.displayFlag=='11'||rs.data.displayFlag=='13'){
-				_this.initDomainSelect('fieldCode',rs.data.prod.useCode);
-				_this.initPurposeSelect('useCode',rs.data.prod.fieldCode);
+				_this.initDomainSelect('fieldCode',rs.data.prod.fieldCode);
+				_this.initPurposeSelect('useCode',rs.data.prod.useCode);
 			}
 			_this._getInterperLevel();
 			
