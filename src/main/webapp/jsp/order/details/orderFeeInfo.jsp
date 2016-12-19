@@ -101,8 +101,8 @@
 									<li class="col-md-6">
 										<p class="word">格式转化：</p>
 										<p>
-										   	{{if typeDesc!=null}}
-										     	{{:typeDesc}}
+										   	{{if prod.typeDesc!=null}}
+										     	{{:prod.typeDesc}}
                                             {{else}}
                                                                                                                                                不需要
                                             {{/if}}
@@ -357,7 +357,7 @@
 										<p class="word">格式转化：</p>
 										<p>
                                             {{if typeDesc!=null}}
-										     	{{:typeDesc}}
+										     	{{:typeDesc}} 
                                             {{else}}
                                                                                                                                                不需要
                                             {{/if}}
