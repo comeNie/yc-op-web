@@ -189,12 +189,12 @@ define('app/jsp/order/cancelOrderList', function (require, exports, module) {
 			if(cancelTimeS=="" || cancelTimeS==null){
 				cancelTimeS="";
 			}else{
-				cancelTimeS= new Date( Date.parse( $("#cancelTimeBegin").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				cancelTimeS= new Date( Date.parse( $("#cancelTimeBegin").val().replace(/-/g,"/")+" 00:00:00") ).getTime(); 
 			}
 			if(cancelTimeE=="" || cancelTimeE==null){
 				cancelTimeE="";
 			}else{
-				cancelTimeE= new Date( Date.parse( $("#cancelTimeEnd").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				cancelTimeE= new Date( Date.parse( $("#cancelTimeEnd").val().replace(/-/g,"/")+" 23:59:59") ).getTime();
 			}			
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
@@ -225,12 +225,12 @@ define('app/jsp/order/cancelOrderList', function (require, exports, module) {
 			if(cancelTimeS=="" || cancelTimeS==null){
 				cancelTimeS=null;
 			}else{
-				cancelTimeS= new Date( Date.parse( $("#cancelTimeBegin").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				cancelTimeS= new Date( Date.parse( $("#cancelTimeBegin").val().replace(/-/g,"/")+" 00:00:00") ).getTime();
 			}
 			if(cancelTimeE=="" || cancelTimeE==null){
 				cancelTimeE=null;
 			}else{
-				cancelTimeE= new Date( Date.parse( $("#cancelTimeEnd").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				cancelTimeE= new Date( Date.parse( $("#cancelTimeEnd").val().replace(/-/g,"/")+" 23:59:59") ).getTime();
 			}
 			
     		return {
