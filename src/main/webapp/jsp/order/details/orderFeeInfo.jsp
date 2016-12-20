@@ -113,7 +113,7 @@
 									<li class="col-md-6">
 										<p class="word">转换费用：</p>
 										<p>
-										    <input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small changeP" {{if typeDesc==null}}readonly="readonly"{{/if}}/>
+										    <input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small changeP" {{if prod.typeDesc==null}}readonly="readonly"{{/if}}/>
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="descTypeFee-error" class="error" for="descTypeFee" style="display: none;"></label>
 										</p>
