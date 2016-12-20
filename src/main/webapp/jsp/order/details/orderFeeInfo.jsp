@@ -327,32 +327,24 @@
                                  </ul>
                                  <ul>
 									<li class="col-md-6">
-										<input id="wordPrice" type="hidden" />
-										<p class="word">单价：</p>
-										<p id="priceShow">
-                                               
-										</p>
-									</li>
-									<li class="col-md-6">
 										<p class="word">是否排版：</p>
 										<p>
 										    {{if prod.isSetType=='Y'}}
 										   	                   是
 										   	{{else}}
 										   	                   否
-										   	{{/if}}
-											 
+										   	{{/if}} 
 										</p>
 									</li>
-                                 </ul>
-                                 <ul>
-									<li class="col-md-6">
+                                    <li class="col-md-6">
 										<p class="word">排版费用：</p>
 										<p>
 										   	{{:~liToYuan3(orderFee.setTypeFee)}}
 										   {{:~getMoneyUnit(orderFee.currencyUnit)}}
 										</p>
 									</li>
+                                 </ul>
+                                 <ul>
 									<li class="col-md-6">
 										<p class="word">格式转化：</p>
 										<p>
@@ -363,15 +355,16 @@
                                             {{/if}}
 										</p>
 									</li>
-                                 </ul>
-                                 <ul>
-									<li class="col-md-6">
+                                    <li class="col-md-6">
 										<p class="word">转换费用：</p>
 										<p>
 										    {{:~liToYuan3(orderFee.descTypeFee)}}
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
 										</p>
 									</li>
+                                 </ul>
+                                 <ul>
+									
 									<li class="col-md-6">
 										<p class="word">是否加急：</p>
 										<p>
@@ -382,8 +375,6 @@
 										   	{{/if}}
 										</p>
 									</li>
-                                 </ul>
-                                 <ul>
                                     <li class="col-md-6">
 										<p class="word">加急费用：</p>
 										<p>
@@ -391,6 +382,8 @@
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
 										</p>
 									</li>
+                                 </ul>
+                                 <ul>
 									<li class="col-md-6">
 										<p class="word">订单总价：</p>
 										<p>
