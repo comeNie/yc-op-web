@@ -317,6 +317,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var totalFee = $("#totalFee").val();
 			var translateLevel = $("#translateLevel").val();
 			var isUrgent = $("#isUrgent").val();
+			if(!isUrgent){
+				isUrgent = "N";
+			}
 			var param = {};
 			if(fee){
 				param.fee = fee;
@@ -326,8 +329,14 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				}
 				param.fee = totalFee;
 			}
-			param.translateLevel = translateLevel;
+			if(translateLevel  instanceof Array){
+				param.translateLevel = translateLevel[0];
+			}else{
+				param.translateLevel = translateLevel;
+			}
+			
 			param.translateType = translateType;
+			
 			param.isUrgent = isUrgent;
 			ajaxController.ajax({
 				type: "post",
@@ -462,7 +471,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			$("#orderStateChgTable").html(orderStateChgHtml);
 			
 			//初始化用途 领域下拉选择框
-			if (rs.data.displayFlag=='11'||rs.data.displayFlag=='13'){
+			if (rs.data.translateType!='2'&&(rs.data.displayFlag=='11'||rs.data.displayFlag=='13')){
 				_this.initDomainSelect('fieldCode',rs.data.prod.fieldCode);
 				_this.initPurposeSelect('useCode',rs.data.prod.useCode);
 			}
