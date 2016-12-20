@@ -383,7 +383,8 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 		}
 			ServletOutputStream outputStream = response.getOutputStream();
 			response.reset();// 清空输出流
-            response.setContentType("application/msexcel");// 定义输出类型
+			response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/vnd.ms-excel;charset=UTF-8");// 定义输出类型
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
             String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单级别","订单金额","译员昵称","确认剩余时间","译员提交时间","订单状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",

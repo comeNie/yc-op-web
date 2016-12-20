@@ -152,9 +152,10 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var interperName = jQuery.trim($("#interperName").val());
-			window.location.href=_base+'/tbcExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&submitTimeS='+submitTimeS+
+			var url = _base+'/tbcExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&submitTimeS='+submitTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+
 		    '&orderPageId='+orderPageId+'&submitTimeE='+submitTimeE+'&interperName='+interperName+"&offset="+today.stdTimezoneOffset();
+			window.location.href=encodeURI(url);
 		},
 		_searchOrderList:function(){
 			var _this=this;
