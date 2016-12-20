@@ -181,7 +181,7 @@
 								                 <li>
 								                    <p class="word">金额:</p>
 								                    <p>
-								                    	<input type="text" class="int-text int-small" id="updateMoney" name="updateMoney"  readonly>
+								                    	<input type="text" class="int-text int-small" id="updateMoney"  readonly>
 								                    	<input type="hidden"  id="realmoney">
 								                    </p>
 								                 	<p id="errorMessage"></p>

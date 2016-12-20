@@ -257,6 +257,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     		$("#payStyleUpdate").val("");
     		$("#currencyUnitUpdate").val("");
     		$("#updateMoney").val("");
+    		$("#realmoney").val("");
     		//赋值支付方式
     		//$("#payStyle").val(payStylePage);
 			//弹出框展示
