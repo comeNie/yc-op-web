@@ -371,7 +371,7 @@ public class CancelOrderListController {
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
     				"userName", "langire","totalFee","cancelTime","cancelType","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
-             excelHelper.writeExcel(outputStream, "订单信息"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
+             excelHelper.writeExcel(outputStream, "order"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

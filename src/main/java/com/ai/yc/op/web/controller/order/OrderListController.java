@@ -362,7 +362,7 @@ public class OrderListController {
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
     				"userName", "langire","totalFee","realFee","payStyle","payTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
-             excelHelper.writeExcel(outputStream, "订单信息"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
+             excelHelper.writeExcel(outputStream, "order"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
