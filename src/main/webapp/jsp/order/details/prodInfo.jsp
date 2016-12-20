@@ -75,6 +75,7 @@
 											<td>
                                                 <input type="hidden" name="fileSaveIds" value="{{:fileSaveId}}"/>
                                                 <input type="hidden" name="fileNames" value="{{:fileName}}"/>
+                                                  <a id="upload_{{:fileSaveId}}" class="biu-btn upload "><i class="icon-upload-alt"> </i>上传 </a> 
                                                 {{if mod=='edit'&&(state=='24'||state=='25'||state=='40'||state=='41'||state=='42'||state=='50')}}
 											      <a id="upload_{{:fileSaveId}}" class="biu-btn upload "><i class="icon-upload-alt"> </i>上传 </a> 
                                                {{/if}}

@@ -42,6 +42,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		});
 		d.showModal();
     }
+	
+	
     
 	var orderDetailsPager = Widget.extend({
 
@@ -377,6 +379,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		},
 		_bindUploader:function(id){
 			
+			var processingDialog = Dialog({
+		    	closeIconShow:false,
+		    	icon:"loading",
+		        content: "<div class='word'>正在上传中，请稍候..</div>"
+		    });
+			
 			var uploader = WebUploader.create({
 		    	  swf : _base+"/resources/spm_modules/webuploader/Uploader.swf",
 		          server: _base + '/attachment/upload/one',
@@ -397,18 +405,23 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 	         });
 			
 			 uploader.on("fileQueued",function(file){
-		          
+				 processingDialog.show();
 		     });
 			
 			 uploader.on('uploadError', function(file) {
+				 processingDialog.close();
 				 showErrorDialog("上传文件失败");
 	         });
 			  
 			  uploader.on('uploadSuccess',function(file, resp) {
+				    
 					var parent = $("#"+id).parent();
 					var fileId = parent.find("input").eq(0);
 					var fileName = parent.find("input").eq(1);
 					var prev2 = parent.prev();
+					
+					processingDialog.close();
+					
 					if(resp.statusCode=='1'){
 						fileId.val(resp.data.fileId);
 						fileName.val(resp.data.fileName);
@@ -416,6 +429,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 					}else{
 						showErrorDialog(resp.statusInfo);
 					}
+					
 		      });
 		},
 		_queryOrderDetails:function(){
