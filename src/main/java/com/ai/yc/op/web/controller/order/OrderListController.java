@@ -356,7 +356,7 @@ public class OrderListController {
 		
 			ServletOutputStream outputStream = response.getOutputStream();
 			response.reset();// 清空输出流
-            response.setContentType("application/msexcel");// 定义输出类型
+            response.setContentType("application/vnd.ms-excel;charset=UTF-8");// 定义输出类型
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
             String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单金额","实付金额","支付方式","支付时间","状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
