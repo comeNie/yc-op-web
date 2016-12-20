@@ -313,11 +313,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		},
 		_getOrderLevel:function(fee){
 			var _this = this;
-			var formValidator=_this._initValidate();
-			formValidator.form();
-			if(!$("#orderForm").valid()){
-				return false;
-			}
 			var translateType = $("#translateType").val();
 			var totalFee = $("#totalFee").val();
 			var translateLevel = $("#translateLevel").val();
@@ -326,6 +321,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			if(fee){
 				param.fee = fee;
 			}else{
+				if(totalFee==""){
+					return;
+				}
 				param.fee = totalFee;
 			}
 			param.translateLevel = translateLevel;
