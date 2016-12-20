@@ -3,7 +3,7 @@
 <script id="orderFeeTempl" type="text/x-jsrender">
                           <input id="currencyUnit" type="hidden" value="{{:orderFee.currencyUnit}}"/>
                           <input type="hidden" name="currencytUnit" id="unitID" value="{{:orderFee.currencyUnit}}">
- 						 <input type="hidden" id="typeDesc" value="{{:typeDesc}}">    
+ 						 <input type="hidden" id="typeDesc" value="{{:prod.typeDesc}}">    
 						 
 					<div class="nav-tplist-title bd-bottom pb-10  pt-15">
 								<ul>
@@ -101,8 +101,8 @@
 									<li class="col-md-6">
 										<p class="word">格式转化：</p>
 										<p>
-										   	{{if typeDesc!=null}}
-										     	{{:typeDesc}}
+										   	{{if prod.typeDesc!=null}}
+										     	{{:prod.typeDesc}}
                                             {{else}}
                                                                                                                                                不需要
                                             {{/if}}
@@ -356,8 +356,8 @@
 									<li class="col-md-6">
 										<p class="word">格式转化：</p>
 										<p>
-                                            {{if typeDesc!=null}}
-										     	{{:typeDesc}}
+                                            {{if prod.typeDesc!=null}}
+										     	{{:prod.typeDesc}}
                                             {{else}}
                                                                                                                                                不需要
                                             {{/if}}
