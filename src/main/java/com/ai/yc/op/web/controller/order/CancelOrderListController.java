@@ -373,7 +373,7 @@ public class CancelOrderListController {
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
              excelHelper.writeExcel(outputStream, "order"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("导出订单列表失败："+e.getMessage(), e);
 		}
 	}
 }
