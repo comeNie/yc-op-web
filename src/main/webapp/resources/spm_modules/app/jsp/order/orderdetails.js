@@ -198,12 +198,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		},
 		
 		_requestTotalPrice:function(){
-			this._requestOrderPrice(true);
+			this._requestOrderPrice(true,true);
 		},
 		_changeTotalPrice:function(){
-			this._requestOrderPrice(false);
+			this._requestOrderPrice(false,true);
 		},
-		_initTotalPrice:function(basePrice){
+		_initTotalPrice:function(basePrice,setTotalFee){
 			if(!basePrice&&basePrice!=0){
 				return;
 			}
@@ -240,14 +240,18 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				$("#urGentFee").val("0.00");
 				$("#urGentFee").attr("readonly","readonly");
 			}
-			
-			if(totalFee){
-				$("#totalFee").val(totalFee);
-				this._getOrderLevel(totalFee);
+			if(setTotalFee){
+				if(totalFee){
+					$("#totalFee").val(totalFee);
+					this._getOrderLevel(totalFee);
+				}
+			}else{
+				this._getOrderLevel(null);
 			}
 			
+			
 		},
-		_requestOrderPrice:function(_request){
+		_requestOrderPrice:function(_request,setTotalFee){
 			var _this = this;
 			var translateSum = $("#translateSum").val();//字数
 			var isUrgent = $("#isUrgent").val();//是否加急
@@ -256,7 +260,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var duadId = $("#duadId").val();//用途
 			if(!_request){
 				var basePrice = $("#basePrice").val();
-				_this._initTotalPrice(parseFloat(basePrice));
+				_this._initTotalPrice(parseFloat(basePrice),setTotalFee);
 				return;
 			}
 			
@@ -270,7 +274,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				param.duadId = duadId;
 				param.purposeId = useCode;
 				param.translateLevel = translateLevel;
-				param.isUrgent = isUrgent;
+				if(isUrgent=='Y'){
+					param.isUrgent = true;
+				}else{
+					param.isUrgent = false;
+				}
+				
 				var unit = $("#currencyUnit").val();
 				if('2'==unit){
 					param.language = "us_EN"
@@ -301,7 +310,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 								 base = 0.00;
 							}
 							$("#basePrice").val(base);
-							_this._initTotalPrice(base);
+							_this._initTotalPrice(base,setTotalFee);
 						}
 						
 						
@@ -564,7 +573,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 					}
 					select.append(options);
 					//初始化费用
-					_this._requestOrderPrice(true);
+					_this._requestOrderPrice(true,false);
 				}
 			});
 		},
