@@ -282,10 +282,10 @@ public class WaitPriceController {
 			String[] fieldNames = new String[] { "chlId", "orderType", "orderId", "orderTime", "userName", "langire",
 					"state" };
 			AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
-			excelHelper.writeExcel(outputStream, "订单信息" + new Date().getTime(), ExAllOrder.class, exportList,
+			excelHelper.writeExcel(outputStream, "order" + new Date().getTime(), ExAllOrder.class, exportList,
 					fieldNames, titles);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("导出订单列表失败："+e.getMessage(), e);
 		}
 
 	}

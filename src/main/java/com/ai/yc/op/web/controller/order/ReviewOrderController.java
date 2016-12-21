@@ -407,9 +407,9 @@ public class ReviewOrderController {
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
     				"userName", "langire","orderLevel","totalFee","totalFee","interperName","lockTime","submitTime","remaningTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
-             excelHelper.writeExcel(outputStream, "订单信息"+System.currentTimeMillis(), ExAllOrder.class, exportList,fieldNames, titles);
+             excelHelper.writeExcel(outputStream, "order"+System.currentTimeMillis(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("导出订单列表失败："+e.getMessage(), e);
 		}
 	}
     
