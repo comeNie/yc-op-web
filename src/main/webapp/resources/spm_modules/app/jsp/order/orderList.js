@@ -326,7 +326,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				return false;
 			}
     		var orderId = $("#orderIdUpdate").val();
-    		var money = $("#updateMoney").val();
+    		var money = $("#realmoney").val();
     		var remak = $("#remark").val();
     		var payStyle="HK";
     		var currencyUnit=$("#currencyUnitUpdate").val();
@@ -346,7 +346,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				success : function(data) {
 					if(data.statusCode==1){
 						//跳到列表页面
-						window.location.href=_base+"/toOrderList";
+						window.location.href=_base+"/order/toOrderList";
 					}else{
 						var d = Dialog({
 							title: '消息',
