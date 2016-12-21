@@ -176,6 +176,7 @@ public class OrderListController {
     @RequestMapping("/export")
     @ResponseBody
     public void  export(HttpServletRequest request, HttpServletResponse response, OrderPageQueryParams queryRequest) {
+    	logger.error("进入导出方法>>>>");
     	QueryOrderRequest ordReq = new QueryOrderRequest();
     	BeanUtils.copyProperties(ordReq, queryRequest);
     	String pgeOrderId = queryRequest.getOrderPageId();
@@ -211,17 +212,20 @@ public class OrderListController {
 	    ordReq.setPageNo(1);
 	    try {
 	  //获取配置中的导出最大数值
+	    	logger.error("获取导出最大条数配置>>>>");
 	    IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
         String maxRow =  configClient.get(ExcelConstants.EXCEL_OUTPUT_MAX_ROW);
         int excelMaxRow = Integer.valueOf(maxRow);
 	    ordReq.setPageSize(excelMaxRow);
 	    IOrderQuerySV orderQuerySV = DubboConsumerFactory.getService(IOrderQuerySV.class);
 	    ICacheSV iCacheSV = DubboConsumerFactory.getService(ICacheSV.class);
+	    logger.error("调用查询方法>>>>");
 	    QueryOrderRsponse orderListResponse = orderQuerySV.queryOrder(ordReq);
 	    PageInfo<OrdOrderVo> pageInfo = orderListResponse.getPageInfo();
 		List<OrdOrderVo> orderList = pageInfo.getResult();
 		List<ExAllOrder> exportList = new ArrayList<ExAllOrder>();
 		if(!CollectionUtil.isEmpty(orderList)){
+			logger.error("查询数据非空进行数据整合>>>>");
 			for(OrdOrderVo vo:orderList){
 				if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList())){
 					for(int i=0;i<vo.getOrdProdExtendList().size();i++){
@@ -351,18 +355,20 @@ public class OrderListController {
 	        		exportList.add(exOrder);
 				}
 			}
+		}else{
+			logger.error("查询数据为空>>>>");
 		}
-		
-		
+			logger.error("获取输出流>>>>");
 			ServletOutputStream outputStream = response.getOutputStream();
 			response.reset();// 清空输出流
-            response.setContentType("application/vnd.ms-excel;charset=UTF-8");// 定义输出类型
+            response.setContentType("application/msexcel");// 定义输出类型
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
             String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单金额","实付金额","支付方式","支付时间","状态"};
     		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
     				"userName", "langire","totalFee","realFee","payStyle","payTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
-             excelHelper.writeExcel(outputStream, "order"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
+			 logger.error("写入数据到excel>>>>");
+			 excelHelper.writeExcel(outputStream, "order"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
 		} catch (Exception e) {
 			logger.error("导出订单列表失败："+e.getMessage(), e);
 		}
