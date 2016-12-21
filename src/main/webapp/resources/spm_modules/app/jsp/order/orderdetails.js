@@ -274,12 +274,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				param.duadId = duadId;
 				param.purposeId = useCode;
 				param.translateLevel = translateLevel;
-				if(isUrgent=='Y'){
-					param.isUrgent = true;
-				}else{
-					param.isUrgent = false;
-				}
-				
+				param.urgent = isUrgent;
 				var unit = $("#currencyUnit").val();
 				if('2'==unit){
 					param.language = "us_EN"

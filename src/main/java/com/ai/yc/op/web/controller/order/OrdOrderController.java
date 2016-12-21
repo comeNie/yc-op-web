@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -154,10 +156,25 @@ public class OrdOrderController {
 	 */
 	@RequestMapping("/queryAutoOffer")
 	@ResponseBody
-    public ResponseData<QueryAutoOfferRes> queryAutoOffer(QueryAutoOfferReq req){
+    public ResponseData<QueryAutoOfferRes> queryAutoOffer(HttpServletRequest request){
 		IQueryAutoOfferSV iQueryAutoOfferSV = DubboConsumerFactory.getService(IQueryAutoOfferSV.class);
 		QueryAutoOfferRes resp = null;
+		QueryAutoOfferReq req = new QueryAutoOfferReq();
+		req.setDuadId(request.getParameter("duadId"));
+		req.setLanguage(request.getParameter("language"));
+		req.setPurposeId(request.getParameter("purposeId"));
+		req.setTranslateLevel(request.getParameter("translateLevel"));
+		String wordNum = request.getParameter("wordNum");
+		if(!StringUtil.isBlank(wordNum)){
+			req.setWordNum(Integer.valueOf(wordNum));
+		}
+		String urgent = request.getParameter("urgent");
+		if(!StringUtil.isBlank(urgent)){
+			req.setUrgent("Y".equals(urgent));
+		}
+		
 		try {
+            
 			resp = iQueryAutoOfferSV.queryAutoOffer(req);
 		} catch (Exception e) {
 			log.error("系统异常，请稍后重试", e);
