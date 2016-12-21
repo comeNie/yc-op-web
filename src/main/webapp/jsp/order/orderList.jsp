@@ -191,8 +191,11 @@
 								                    <p><input type="text" id="payStyle" class="int-text int-small"value="银行汇款/转账" readonly ></p>
 								                </li>
 								                 <li>
-								                    <p class="word"><span>*</span>金额:</p>
-								                    <p><input type="text" class="int-text int-small" id="updateMoney" name="updateMoney"></p>
+								                    <p class="word">金额:</p>
+								                    <p>
+								                    	<input type="text" class="int-text int-small" id="updateMoney" readonly>
+								                    	<input type="hidden"  id="realmoney">
+								                    </p>
 								                    <p id="errorMessage"></p>
 								                </li>
 								                <li>
@@ -247,7 +250,7 @@
      <td>
 		<a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">查看</a>
  		{{if state==11}}
-			<a href="javascript:void(0);" onclick="pager._popUp('{{:orderId}}','{{:payStylePage}}','{{:currencyUnit}}','{{:payStyle}}')">修改支付状态</a>
+			<a href="javascript:void(0);" onclick="pager._popUp('{{:orderId}}','{{:payStylePage}}','{{:currencyUnit}}','{{:payStyle}}','{{:totalFeePage}}','{{:totalFee}}')">修改支付状态</a>
 		{{/if}}	
 	</td>
   </tr>                                                                       
