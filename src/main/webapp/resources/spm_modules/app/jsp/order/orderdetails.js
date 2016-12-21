@@ -330,7 +330,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			if(fee){
 				param.fee = fee;
 			}else{
-				if(totalFee==""){
+				if(totalFee==""||parseFloat(totalFee)==0){
 					return;
 				}
 				param.fee = totalFee;
