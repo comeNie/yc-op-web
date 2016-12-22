@@ -55,6 +55,64 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				formValidator.element(this);
 			});
     	},
+    	
+    	_rejectReviewOrder:function(orderId){
+    		var param = {};
+			var _this = this;
+			var d = Dialog({
+				content:'<textarea id="reasonDesc" style="width:200px;" class="int-text"></textarea>',
+				padding: 0,
+				okValue: '驳回',
+				title: '驳回原因:',
+				ok:function(){
+					param.reasonDesc = $("#reasonDesc").val();
+					param.state = '42';
+					param.orderIds = orderId;
+					_this.handReviewOrder(param);
+				},
+				cancelValue: '取消',
+			    cancel: function () {}
+			});
+			d.showModal();
+		},
+		_adoptReviewOrder:function(orderId){
+			var _this = this;
+			var param = {};
+			var d = Dialog({
+				content:"是否审核通过该订单？",
+				okValue: '通过',
+				title: '审核',
+				ok:function(){
+					param.state = '41';
+					param.orderIds = orderId;
+					_this.handReviewOrder(param);
+				},
+				cancelValue: '取消',
+			    cancel: function () {}
+			});
+			d.showModal();
+		},
+		handReviewOrder:function(param){
+			var _this=this;
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: _base + "/order/handReviewOrder",
+				data: param,
+				success: function (data) {
+					if(data.data=="00"){
+						//如果通过调到待确认列表
+						window.location.href=_base+"/toTbcOrderList";
+					}else if(data.data=="11"){
+						//如果通过调到翻译中列表
+						window.location.href=_base+"/toTranslateOrderList";
+					}else{
+						_this._searchOrderList();
+					}
+				}
+			});
+		},
     	_initValidate:function(){
     		var formValidator=$("#dataForm").validate({
     			rules: {

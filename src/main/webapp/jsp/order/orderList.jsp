@@ -251,7 +251,12 @@
 		<a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">查看</a>
  		{{if state==11}}
 			<a href="javascript:void(0);" onclick="pager._popUp('{{:orderId}}','{{:payStylePage}}','{{:currencyUnit}}','{{:payStyle}}','{{:totalFeePage}}','{{:totalFee}}')">修改支付状态</a>
+		{{/if}}
+		{{if state==40}}
+			<a href="javascript:void(0);" class="adopt" onclick="pager._adoptReviewOrder('{{:orderId}}')">通过</a>
+			<a href="javascript:void(0);" class="reject" onclick="pager._rejectReviewOrder('{{:orderId}}')">驳回</a>
 		{{/if}}	
+		
 	</td>
   </tr>                                                                       
 </script> 
