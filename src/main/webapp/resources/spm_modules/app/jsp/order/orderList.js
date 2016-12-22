@@ -60,7 +60,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     		var param = {};
 			var _this = this;
 			var d = Dialog({
-				content:'<textarea id="reasonDesc" style="width:200px;" class="int-text"></textarea>',
+				content:'<textarea id="reasonDesc" style="width:200px;" class="int-text" maxlength="100"></textarea>',
 				padding: 0,
 				okValue: '驳回',
 				title: '驳回原因:',
