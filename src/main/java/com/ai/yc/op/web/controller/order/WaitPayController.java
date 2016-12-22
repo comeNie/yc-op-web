@@ -412,7 +412,7 @@ public class WaitPayController {
 		payRequest.setOrderFee(feeVo);
 		BaseResponse response = iUpdatePayStatusSV.updatePayStatus(payRequest);
 		ResponseHeader header = response.getResponseHeader();
-		if (header!=null && !header.isSuccess()){
+		if (null != header && !header.isSuccess()){
             responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "修改失败:"+header.getResultMessage());
         }else{
         	responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "修改成功"+header.getResultMessage());
