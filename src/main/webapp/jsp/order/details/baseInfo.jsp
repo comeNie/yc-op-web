@@ -59,7 +59,7 @@
                                                &nbsp;<label id="takeDay-error" class="error" for="takeDay" style="display: none;"></label>
                                                &nbsp;<label id="takeTime-error" class="error" for="takeTime" style="display: none;"></label>
 										    {{else}}
-                                               0天0小时
+												{{:prod.takeDay==null?0:prod.takeDay}}天{{:prod.takeTime==null?0:prod.takeTime}}小时
  											{{/if}}
 										</p>
 									</li>
