@@ -22,6 +22,7 @@ import com.ai.paas.ipaas.dss.base.interfaces.IDSSClient;
 import com.ai.yc.op.web.constant.Constants;
 import com.ai.yc.op.web.controller.order.OrdOrderController;
 import com.ai.yc.op.web.model.common.Attachment;
+import com.alibaba.fastjson.JSON;
 
 @Controller
 @RequestMapping("/attachment")
@@ -90,7 +91,7 @@ public class AttachmentController {
 		IDSSClient client = DSSClientFactory
 				.getDSSClient(Constants.IPAAS_ORDER_FILE_DSS);
 		byte[] bs = client.read(fileId);
-		log.info("data=" + bs);
+		log.info("data=" + JSON.toJSONString(bs));
 		String fileName = System.currentTimeMillis() + "." + ext;
 		OutputStream out = null;
 		try {
