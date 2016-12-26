@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.logging.log4j.LogManager;
@@ -13,9 +12,9 @@ import org.apache.logging.log4j.Logger;
 import com.ai.opt.base.exception.BusinessException;
 
 public class MapBeanUtils {
-	public static Logger log = LogManager.getLogger(MapBeanUtils.class);
+	public static final Logger log = LogManager.getLogger(MapBeanUtils.class);
 			
-	public static Map<String, String> bean2map(Object javaBean) {
+	public static Map<String, String> bean2map(Object javaBean) throws Exception{
 		Map<String, String> result = new HashMap<String, String>();
 		Method[] methods = javaBean.getClass().getDeclaredMethods();
 		for (Method method : methods) {
@@ -42,7 +41,7 @@ public class MapBeanUtils {
 	 * @Date 2016年3月19日 下午4:20:27
 	 * @Describtion 普通getter and setter方式 根据类型判断转换相应的属性信息
 	 */
-	public static void map2bean(Object javabean, Map<String, String> map) {
+	public static void map2bean(Object javabean, Map<String, String> map) throws Exception{
 //		for (Entry<String, String> entry : System.getenv().entrySet()) {
 //		  log.info("---->"+entry.getKey() + ": " + entry.getValue());
 //		}
