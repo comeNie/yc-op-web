@@ -5,6 +5,9 @@ import java.sql.Timestamp;
 import com.ai.paas.ipaas.i18n.ZoneContextHolder;
 
 public class TimeZoneTimeUtil {
+	private TimeZoneTimeUtil() {
+		// TODO Auto-generated constructor stub
+	}
 	public static String getTimes(Timestamp timeReq){
 		String zone = ZoneContextHolder.getZone();
 		int time = 0;

@@ -62,7 +62,7 @@ public class WaitPayController {
 	@RequestMapping("/getWaitPayOrderData")
 	@ResponseBody
 	public ResponseData<PageInfo<OrderPageResParam>> getgetWaitPayList(HttpServletRequest request,
-			OrderPageQueryParams queryRequest) {
+			OrderPageQueryParams queryRequest) throws Exception{
 		ResponseData<PageInfo<OrderPageResParam>> responseData = null;
 		List<OrderPageResParam> resultList = new ArrayList<OrderPageResParam>();
 		PageInfo<OrderPageResParam> resultPageInfo = new PageInfo<OrderPageResParam>();

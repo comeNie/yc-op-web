@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ import com.ai.yc.op.web.model.order.SysDuadParam;
 
 @RestController
 public class SysParamController {
+	private static final Logger logger = Logger.getLogger(SysParamController.class);
     /**
      * 获取下拉选项
      * @param param
@@ -56,7 +58,7 @@ public class SysParamController {
         	QuerySysDuadListRes res = iQuerySysDuadSV.querySysDuadList(request);
         	List<SysDuadVo> infoList = res.getDuads();
         	List<SysDuadParam> resultList = new ArrayList<SysDuadParam>();
-        	if(res.getResponseHeader().isSuccess()==true){
+        	if(true==res.getResponseHeader().isSuccess()){
         		for(SysDuadVo vo:infoList){
         			SysDuadParam param = new SysDuadParam();
         			BeanUtils.copyProperties(param, vo);
@@ -85,6 +87,7 @@ public class SysParamController {
         	}
             responseData=new ResponseData<List<SysDuadParam>>(ResponseData.AJAX_STATUS_SUCCESS,"获取数据成功",resultList);
         }catch(Exception e){
+        	logger.error("获取语言对数据失败", e);
             responseData=new ResponseData<List<SysDuadParam>>(ResponseData.AJAX_STATUS_FAILURE,"获取数据失败",null);
         }
         return responseData;

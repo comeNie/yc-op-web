@@ -55,7 +55,7 @@ public class CancelOrderListController {
 	@RequestMapping("/getCancelOrderData")
 	@ResponseBody
 	public ResponseData<PageInfo<OrderPageResParam>> getCancelList(HttpServletRequest request,
-			OrderPageQueryParams queryRequest) {
+			OrderPageQueryParams queryRequest) throws Exception{
 		ResponseData<PageInfo<OrderPageResParam>> responseData = null;
 		List<OrderPageResParam> resultList = new ArrayList<OrderPageResParam>();
 		PageInfo<OrderPageResParam> resultPageInfo = new PageInfo<OrderPageResParam>();

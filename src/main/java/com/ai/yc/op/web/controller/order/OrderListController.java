@@ -56,7 +56,7 @@ public class OrderListController {
      */
     @RequestMapping("/getOrderPageData")
     @ResponseBody
-    public ResponseData<PageInfo<OrderPageResParam>> getList(HttpServletRequest request,OrderPageQueryParams queryRequest){
+    public ResponseData<PageInfo<OrderPageResParam>> getList(HttpServletRequest request,OrderPageQueryParams queryRequest)throws Exception{
     	ResponseData<PageInfo<OrderPageResParam>> responseData = null;
     	List<OrderPageResParam> resultList = new ArrayList<OrderPageResParam>();
     	PageInfo<OrderPageResParam> resultPageInfo  = new PageInfo<OrderPageResParam>();

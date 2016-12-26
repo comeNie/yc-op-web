@@ -11,6 +11,9 @@ import java.util.Map;
  */
 public class OrderCodeUtils {
 	
+	private OrderCodeUtils() {
+		
+	}
 	/**
 	 * 订单状态(后厂)
 	 */
