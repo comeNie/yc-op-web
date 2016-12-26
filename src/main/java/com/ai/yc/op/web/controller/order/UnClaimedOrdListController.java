@@ -42,8 +42,8 @@ import com.ai.yc.order.api.orderquery.param.OrdProdLevelVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
 @Controller
-public class unClaimedOrdListController {
-private static final Logger logger = Logger.getLogger(unClaimedOrdListController.class);
+public class UnClaimedOrdListController {
+private static final Logger logger = Logger.getLogger(UnClaimedOrdListController.class);
 	
 	@RequestMapping("/toUnclaimOrderList")
 	public ModelAndView toAlertOrder(HttpServletRequest request) {

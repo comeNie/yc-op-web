@@ -414,8 +414,9 @@ public class WaitPayController {
 		ResponseHeader header = response.getResponseHeader();
 		if (null != header && !header.isSuccess()){
             responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "修改失败:"+header.getResultMessage());
+            logger.error("修改支付状态失败："+header.getResultMessage());
         }else{
-        	responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "修改成功"+header.getResultMessage());
+        	responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "修改成功");
         }
         return responseData;
 	}
