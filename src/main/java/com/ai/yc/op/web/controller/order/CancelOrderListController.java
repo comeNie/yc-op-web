@@ -156,9 +156,9 @@ public class CancelOrderListController {
 						// 转换金额格式
 						if (!StringUtil.isBlank(vo.getCurrencyUnit())) {
 							if (Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())) {
-								resParam.setTotalFeePage("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
+								resParam.setTotalFeePage("$"+AmountUtil.liToYuan(vo.getTotalFee()));
 							} else {
-								resParam.setTotalFeePage("¥"+AmountUtil.LiToYuan(vo.getTotalFee()) );
+								resParam.setTotalFeePage("¥"+AmountUtil.liToYuan(vo.getTotalFee()) );
 							}
 						}
 						resultList.add(resParam);
@@ -282,9 +282,9 @@ public class CancelOrderListController {
 		        		//转换金额格式
                 		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
                 			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				exOrder.setTotalFee("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
+                				exOrder.setTotalFee("$"+AmountUtil.liToYuan(vo.getTotalFee()));
                 			}else{
-                				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
+                				exOrder.setTotalFee("¥"+AmountUtil.liToYuan(vo.getTotalFee()));
                 			}
                 		}
                 		//下单时间
@@ -342,9 +342,9 @@ public class CancelOrderListController {
 	        		//转换金额格式
             		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
             			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-            				exOrder.setTotalFee("$"+AmountUtil.LiToYuan(vo.getTotalFee()));
+            				exOrder.setTotalFee("$"+AmountUtil.liToYuan(vo.getTotalFee()));
             			}else{
-            				exOrder.setTotalFee("¥"+AmountUtil.LiToYuan(vo.getTotalFee()));
+            				exOrder.setTotalFee("¥"+AmountUtil.liToYuan(vo.getTotalFee()));
             			}
             		}
             		//下单时间

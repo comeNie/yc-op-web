@@ -6,13 +6,15 @@ import java.text.DecimalFormat;
 import com.ai.opt.sdk.util.StringUtil;
 
 public class AmountUtil {
-  
+	private AmountUtil() {
+		// TODO Auto-generated constructor stub
+	}
     
     /** 
      * 将厘为单位的转换为元 （除1000）  
      * 
      */
-    public static String LiToYuan(Long amount){
+    public static String liToYuan(Long amount){
         if(amount == null || amount == 0){
             return "0.00";
         }
@@ -23,7 +25,7 @@ public class AmountUtil {
      * 将元为单位的转换为里 （乘1000）  
      * 
      */
-    public static Long YuanToLi(Long amount){
+    public static Long yuanToLi(Long amount){
         if(amount == null || amount == 0){
             return 0L;
         }
@@ -35,7 +37,7 @@ public class AmountUtil {
      * 将元为单位的转换为里 （乘1000）  
      * 
      */
-    public static Long YToLi(String amount){
+    public static Long yToLi(String amount){
         if(StringUtil.isBlank(amount)){
             return 0L;
         }
@@ -47,7 +49,7 @@ public class AmountUtil {
      * 将元为单位的转换为分 （乘100）  
      * 
      */
-    public static Long YToFen(String amount){
+    public static Long yToFen(String amount){
         if(StringUtil.isBlank(amount)){
             return 0L;
         }
@@ -60,7 +62,7 @@ public class AmountUtil {
      * 将元为单位的转换为分 （乘100）  
      * 
      */
-    public static String YToSFen(String amount){
+    public static String yToSFen(String amount){
     	if(StringUtil.isBlank(amount)){
     		return "0";
     	}
@@ -72,7 +74,7 @@ public class AmountUtil {
      * 将分为单位的转换为里 （乘10）  
      * 
      */
-    public static Long FToL(String amount){
+    public static Long fToL(String amount){
     	if(StringUtil.isBlank(amount)){
     		return 0L;
     	}

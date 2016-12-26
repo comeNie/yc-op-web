@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class DataValidate {
 
-	public DataValidate() {
+	private DataValidate() {
 		// TODO Auto-generated constructor stub
 	}
 
