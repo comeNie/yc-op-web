@@ -60,14 +60,12 @@
 			                    		<ul>
 							                <li class="col-md-6">
 							                    <p class="word">下单开始时间</p>
-							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="orderTimeBegin" name="orderTimeBegin"/>
-							                   <span class="time"> <i class="fa  fa-calendar" ></i></span>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeBegin" name="orderTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'orderTimeEnd\')}'});"/>
 							                    </p>
 							                </li>
 							                <li class="col-md-6">
 							                    <p class="word">下单结束时间</p>
-							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="orderTimeEnd" name="orderTimeEnd"/>
-							                     <span class="time"><i class="fa  fa-calendar" ></i></span>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeEnd" name="orderTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'orderTimeBegin\')}'});"/>
 							                    </p>
 							                </li> 
 						            	</ul>
@@ -76,14 +74,12 @@
 							           	<ul>
 							                <li class="col-md-6">
 							                    <p class="word">提交开始时间</p>
-							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="stateTimeBegin" name="stateTimeBegin"/>
-							                   <span class="time"> <i class="fa  fa-calendar" ></i></span>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="stateTimeBegin" name="stateTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'stateTimeEnd\')}'});"/>
 							                    </p>
 							                </li>
 							                <li class="col-md-6">
 							                    <p class="word">提交结束时间</p>
-							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="stateTimeEnd" name="stateTimeEnd"/>
-							                     <span class="time"><i class="fa  fa-calendar" ></i></span>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="stateTimeEnd" name="stateTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'stateTimeBegin\')}'});"/>
 							                    </p>
 							                </li> 
 							            </ul> 
@@ -198,17 +194,6 @@
   </tr>                                                                       
 </script> 
   <script type="text/javascript">
-  <%-- 展示日历 --%>
-	$('#orderTimeDiv').delegate('.fa-calendar','click',function(){
-		var calInput = $(this).parent().prev();
-		var timeId = calInput.attr('id');
-		WdatePicker({el:timeId,readOnly:true});
-	});
-	$('#stateTimeDiv').delegate('.fa-calendar','click',function(){
-		var calInput = $(this).parent().prev();
-		var timeId = calInput.attr('id');
-		WdatePicker({el:timeId,readOnly:true});
-	});
 	var pager;
 	(function () {
 		seajs.use('app/jsp/order/tbcOrderList', function (TbcOrdListPager) {
