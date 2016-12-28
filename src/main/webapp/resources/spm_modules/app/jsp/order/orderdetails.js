@@ -587,7 +587,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"contacts.contactEmail":{
     					required:true,
-    					email:true
+    					email:true,
+    					maxlength:60
     				},
     				"translateLevel":{
     					required:true
@@ -657,7 +658,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     			messages: {
     				"contacts.contactName":{
     					required:"请输入联系人姓名",
-    					maxlength:"联系人不能超过10字"
+    					maxlength:"联系人不能超过10字符"
     				},
     				"contacts.contactTel": {
     					required:"请输入联系人手机号",
@@ -665,7 +666,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"contacts.contactEmail":{
     					required:"请输入联系人邮箱",
-    					email:"邮箱格式不正确"
+    					email:"邮箱格式不正确",
+    					maxlength:"邮箱不能超过60字符"
     				},
     				"translateLevel":{
     					required:"请选择口译类型"
