@@ -2,10 +2,10 @@ package com.ai.yc.op.web.common.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -85,19 +85,25 @@ public class AttachmentController {
 	}
 
 	@RequestMapping(value = "/download")
-	public void download(HttpServletResponse response, String fileId, String ext) {
+	public void download(HttpServletResponse response, HttpServletRequest request,String fileId,String fileName) {
 
 		log.info("id=" + fileId);
 		IDSSClient client = DSSClientFactory
 				.getDSSClient(Constants.IPAAS_ORDER_FILE_DSS);
 		byte[] bs = client.read(fileId);
 		log.info("data=" + JSON.toJSONString(bs));
-		String fileName = System.currentTimeMillis() + "." + ext;
 		OutputStream out = null;
 		try {
+			String agent = request.getHeader("User-Agent");
+	         //不是ie
+	         if (agent.indexOf("MSIE") == -1 && agent.indexOf("like Gecko")== -1) {
+	             //空格、（、）、；、@、#、&
+	             String newFileName = java.net.URLDecoder.decode(fileName,"utf-8");
+	             fileName = new String(newFileName.getBytes("utf-8"), "ISO-8859-1");
+	         }
 			out = response.getOutputStream();
 			response.setContentType("multipart/form-data");
-			response.setHeader("content-disposition", "attachment;fileName="+ URLEncoder.encode(fileName, "UTF-8"));
+			response.setHeader("Content-Disposition", "attachment;fileName=\"" + fileName +"\"");
 			response.setHeader("Content-Length", String.valueOf(bs.length));
 			out.write(bs);
 		} catch (IOException e) {
