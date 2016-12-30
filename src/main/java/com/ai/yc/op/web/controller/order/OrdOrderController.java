@@ -21,6 +21,7 @@ import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
+import com.ai.yc.op.web.constant.Constants;
 import com.ai.yc.op.web.model.order.OrdOrderDetails;
 import com.ai.yc.op.web.model.order.OrderDetailPagerRequest;
 import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
@@ -63,13 +64,40 @@ public class OrdOrderController {
 	public final static String ORDER_DETAILS_PAGE = "jsp/order/orderDetails";
 	
 	 @RequestMapping("/orderdetails")
-	 public ModelAndView toOrderDetailsPage(@RequestParam(value="mod",defaultValue="view")String mod,Long orderId) {
+	 public ModelAndView toOrderDetailsPage(@RequestParam(value="mod",defaultValue="view")String mod,Long orderId,String isAll) {
 		 ModelAndView view = new ModelAndView(ORDER_DETAILS_PAGE);
 		 view.addObject("model", mod);
 		 view.addObject("orderId", orderId);
+		 view.addObject("isAll", isAll);
 	     return view;
 	 } 
-	
+	 @RequestMapping("/back")
+	 public ModelAndView backPage(String state,String isAll) {
+		 if(StringUtil.isBlank(isAll)){
+			 if(!StringUtil.isBlank(state)){
+				 if(Constants.State.DONE_STATE.equals(state)){
+					 return new ModelAndView("jsp/order/doneOrderList");
+				}else if(Constants.State.WAIT_PAY_STATE.equals(state)){
+					return new ModelAndView("jsp/order/waitPayOrderList");	
+				}else if(Constants.State.UN_CLAIM_STATE.equals(state)){
+					return new ModelAndView("jsp/order/unClaimedOrderList");
+				}else if(Constants.State.TBC_STATE.equals(state)){
+					return new ModelAndView("jsp/order/tbcOrderList");
+				}else if(Constants.State.TRANSLTING_STATE.equals(state)){
+					return new ModelAndView("jsp/order/translatingOrderList");
+				}else if(Constants.State.CANCEL_STATE.equals(state)){
+					return new ModelAndView("jsp/order/cancelOrderList");
+				}else if(Constants.State.REVIEW_STATE.equals(state)){
+					return new ModelAndView("jsp/order/reviewOrderList");
+				}else if(Constants.State.UPDATING_STATE.equals(state)){
+					return new ModelAndView("jsp/order/updatingOrderList");
+				}else if(Constants.State.WAIT_PRICE_STATE.equals(state)){
+					return new ModelAndView("jsp/order/waitPriceOrderList");
+				}
+			 } 
+		 }
+		 return new ModelAndView("jsp/order/orderList");
+	 } 
 	@RequestMapping("/queryOrderDetails")
 	@ResponseBody
 	public ResponseData<OrdOrderDetails> queryOrderDetails(Long orderId){

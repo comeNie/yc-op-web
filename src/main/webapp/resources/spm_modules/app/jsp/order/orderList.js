@@ -425,9 +425,9 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     		$('#eject-mask').fadeOut(100);
     		$('#add-samll').slideUp(150);
     	},
-    	_detailPage:function(orderId,state){
+    	_detailPage:function(orderId){
 			window.location.href = _base+"/order/orderdetails?orderId="
-            + orderId+'&mod=edit';
+            + orderId+'&mod=edit'+'&isAll=all';
 		}
     });
     

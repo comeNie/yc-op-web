@@ -18,6 +18,7 @@
     <input id="mod" type="hidden" value="${model}"/>
     <form id="orderForm">
     <input id="orderId" name="orderId" type="hidden" value="${orderId}"/>
+     <input id="isAll" name="isAll" type="hidden" value="${isAll}"/>
 	 <div class="row">
 	 
 		<!--内侧框架-->
