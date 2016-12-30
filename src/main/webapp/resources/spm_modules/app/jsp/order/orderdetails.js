@@ -129,10 +129,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var f = {};//声明一个对象
 			$.each(param,function(index,field){
 				f[field.name] = field.value;
-				var phone = $("#contactTel").val();
-				var countryCode =$("#globalRome").val();
-				f["contacts.contactTel"] ="+"+ countryCode+" "+phone;
-				
+				var state =$("#state").val();
+				if(state=='11' || state=='13'){
+					var phone = $("#contactTel").val();
+					var countryCode =$("#globalRome").val();
+					f["contacts.contactTel"] ="+"+ countryCode+" "+phone;
+				}
 				//获取开始，结束CMT时间
 				var startTime=$("#startTime").val();
 				var endTime=$("#endTime").val();

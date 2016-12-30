@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <script id="baseInfoTempl" type="text/x-jsrender">
+  						<input id="state" type="hidden" value="{{:state}}"/>
                             <div class="nav-tplist-title bd-bottom pb-10  pt-15">
 								<ul>
 									<li>基本信息</li>
