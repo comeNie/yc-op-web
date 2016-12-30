@@ -590,7 +590,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				"contacts.contactEmail":{
     					required:true,
     					email:true,
-    					maxlength:60
+    					maxlength:64
     				},
     				"translateLevel":{
     					required:true
@@ -669,7 +669,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				"contacts.contactEmail":{
     					required:"请输入联系人邮箱",
     					email:"邮箱格式不正确",
-    					maxlength:"邮箱不能超过60字符"
+    					maxlength:"邮箱不能超过64字符"
     				},
     				"translateLevel":{
     					required:"请选择口译类型"
