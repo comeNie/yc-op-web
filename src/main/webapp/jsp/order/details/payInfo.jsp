@@ -31,15 +31,6 @@
 										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
 									  </p>
 								  </li>
-								   <li class="col-md-6">
-									  <p class="word">应付金额：</p>
-									  <p>
-										  {{:~liToYuan(orderFee.adjustFee)}}
-										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
-									  </p>
-								  </li>
-							   </ul>
-							    <ul>
 								  <li class="col-md-6">
 									  <p class="word">实付金额：</p>
 									  <p>
@@ -47,7 +38,23 @@
 										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
 									  </p>
 								  </li>
+								   <!--<li class="col-md-6">
+									  <p class="word">应付金额：</p>
+									  <p>
+										  {{:~liToYuan(orderFee.adjustFee)}}
+										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
+									  </p>
+								  </li>-->
 							   </ul>
+							    <!--<ul>
+								  <li class="col-md-6">
+									  <p class="word">实付金额：</p>
+									  <p>
+										  {{:~liToYuan(orderFee.paidFee)}}
+										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
+									  </p>
+								  </li>
+							   </ul>-->
 							</div>
 					{{/if}}
 </script>
