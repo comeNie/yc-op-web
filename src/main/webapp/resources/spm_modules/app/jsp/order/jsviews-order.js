@@ -119,6 +119,9 @@ define(function (require, exports, module) {
 	        if(orgState=='50'&&(newState=='52'||newState=='90')){
 	        	return "确认订单";
 	        }
+	        if(orgState=='23' && newState=='50'){
+	        	return "翻译完成";
+	        }
 	        if(newState=='23'){
 	        	return "订单翻译";
 	        }
