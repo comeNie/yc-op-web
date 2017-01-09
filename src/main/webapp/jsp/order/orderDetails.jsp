@@ -86,13 +86,13 @@
     </div>                       
 </script>
 <script id="orderStateChgTempl" type="text/x-jsrender">
-  {{for orderStateChgs}}
+  {{for orderStateChgs  ~subFlag=subFlag}}
    <tr>
      <td>{{if operName==null}}{{:operId}}{{else}}{{:operName}}{{/if}}</td>
-     <td>{{:~getOrderOperName(subFlag,orgState,newState)}}</td>
+     <td>{{:~getOrderOperName(~subFlag,orgState,newState)}} </td>
      <td>{{:~timesToFmatter(stateChgTime)}}</td>
      <td>{{:~getStateName(newState)}}</td>
-     <td style="text-align: left;">&nbsp;&nbsp;{{:chgDesc}}</td>
+     <td style="text-align: left;">&nbsp;&nbsp;{{:chgDesc}} </td>
    </tr>
   {{/for}}
 </script>
