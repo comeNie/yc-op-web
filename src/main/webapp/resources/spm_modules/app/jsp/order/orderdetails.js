@@ -229,7 +229,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				translateSum = 0;
 			}
 			var totalFee = basePrice;
-			
+			if(typedDesc=="" || typedDesc==null){
+				$("#descTypeFee").val("0.00");
+				$("#descTypeFee").attr("disabled","disabled");
+			}else{
+				$('#descTypeFee').removeAttr("disabled");
+			}
 			if(isSetType=='Y'){
 				totalFee = totalFee + parseFloat(setTypeFee);
 				$('#setTypeFee').removeAttr("disabled");
@@ -625,7 +630,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				"totalFee":{
     					required:true,
     					number:true,
-    					min:0
+    					min:0,
+    					max:999999
+    						
     				},
     				/*"prod.meetingAddress":{
     					required:true,
@@ -704,7 +711,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				"totalFee":{
     					required:"请输入加急费用",
     					number:"费用格式不正确",
-    					min:"费用不合法"
+    					min:"费用不合法",
+    					max:"费用不可以大于{0}"
     				},
     				/*"prod.meetingAddress":{
     					required:"请输入会议地址",
