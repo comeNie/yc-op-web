@@ -198,9 +198,9 @@
 										<p>
 		                                      <input id="translateLevel" name="translateLevel" value="100110" type="checkbox" class="checkbox-100110">
 		                                      <label for="checkbox-100110">陪同翻译</label>&nbsp;&nbsp;
-                                              <input id="translateLevel" name="translateLevel" value="100130" type="checkbox" class="checkbox-100120">
+                                              <input id="translateLevel" name="translateLevel" value="100130" type="checkbox" class="checkbox-100130">
 		                                      <label id="translateLevel" name="translateLevel" for="checkbox-100130">同声传译</label>&nbsp;&nbsp;
-		                                      <input id="translateLevel" name="translateLevel" value="100120" type="checkbox" class="checkbox-100130">
+		                                      <input id="translateLevel" name="translateLevel" value="100120" type="checkbox" class="checkbox-100120">
 		                                      <label for="checkbox-100120">交替传译</label>
 	                                    </p>
                                         <label id="translateLevel-error" class="error" for="translateLevel"></label>

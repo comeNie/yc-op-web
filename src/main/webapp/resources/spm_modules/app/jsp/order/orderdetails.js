@@ -125,6 +125,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				return false;
 			}
 			var param = $("#orderForm").serializeArray();
+			console.log(param);
 			var paramCount = param.length-1;
 			var f = {};//声明一个对象
 			$.each(param,function(index,field){
@@ -151,6 +152,14 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				f["startTime"] =startTime;
 				f["endTime"] =endTime;
 			});
+			//添加翻译类型
+			var translateLeveles=[];
+			$("input[name=translateLevel]:checked").each(function(){
+					translateLeveles.push($(this).val());
+			});
+			var leveles = translateLeveles;
+			f["translateLevel"] = leveles.join(",");
+			
 			var fileSaveIds = [];
 			$("input[name=fileSaveIds]").each(function(){
 				fileSaveIds.push($(this).val());
