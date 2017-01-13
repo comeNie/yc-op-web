@@ -88,7 +88,7 @@
 <script id="orderStateChgTempl" type="text/x-jsrender">
   {{for orderStateChgs  ~subFlag=subFlag}}
    <tr>
-     <td>{{if operName==null}}{{:operId}}{{else}}{{:operName}}{{/if}}</td>
+     <td>{{if operName==null || operName==""}}{{:operId}}{{else}}{{:operName}}{{/if}}</td>
      <td>{{:~getOrderOperName(~subFlag,orgState,newState)}} </td>
      <td>{{:~timesToFmatter(stateChgTime)}}</td>
      <td>{{:~getStateName(newState)}}</td>
