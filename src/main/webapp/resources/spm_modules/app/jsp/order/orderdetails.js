@@ -623,23 +623,23 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"setTypeFee":{
     					required:true,
-    					number:true,
+    					moneyNumber:true,
     					min:0
     				},
     				"descTypeFee":{
     					required:true,
-    					number:true,
+    					moneyNumber:true,
     					min:0
     				},
     				"urgentFee":{
     					required:true,
-    					number:true,
+    					moneyNumber:true,
     					min:0
     				},
     				"totalFee":{
     					required:true,
-    					number:true,
-    					min:0,
+    					moneyNumber:true,
+    					min:0.00,
     					max:999999
     						
     				},
@@ -718,7 +718,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     					min:"费用不合法"
     				},
     				"totalFee":{
-    					required:"请输入加急费用",
+    					required:"请输入总费用",
     					number:"费用格式不正确",
     					min:"费用不合法",
     					max:"费用不可以大于{0}"
