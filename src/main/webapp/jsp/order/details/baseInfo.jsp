@@ -161,13 +161,13 @@
                                     <li class="col-md-6">
 										<p class="word">接单译员：</p>
 										<p>
-											{{:interperId}}
+											{{:interperName}}
 										</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">LSP名称：</p>
 										<p>
-											{{:lspId}}
+											{{:lspName}}
 										</p>
 									</li>
                                     <li class="col-md-6">

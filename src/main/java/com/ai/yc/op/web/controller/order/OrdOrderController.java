@@ -167,7 +167,7 @@ public class OrdOrderController {
 		}
 		if(!StringUtil.isBlank(details.getInterperId())){
 			SearchYCTranslatorRequest  translatorRequest = new SearchYCTranslatorRequest();
-			translatorRequest.setTranslatorId(details.getInterperId());
+			translatorRequest.setUserId(details.getInterperId());
 			try {
 				YCTranslatorInfoResponse  interper = iYCTranslatorServiceSV.searchYCTranslatorInfo(translatorRequest);
 				details.setInterperName(interper.getNickname());
