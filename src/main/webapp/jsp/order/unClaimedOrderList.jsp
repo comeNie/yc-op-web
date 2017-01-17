@@ -64,12 +64,12 @@
 			                    		<ul>
 							                <li class="col-md-6">
 							                    <p class="word">下单开始时间</p>
-							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="orderTimeBegin" name="orderTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'orderTimeEnd\')}'});"/>
+							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="orderTimeBegin" name="orderTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'orderTimeEnd\')}'});"/>
 							                    </p>
 							                </li>
 							                <li class="col-md-6">
 							                    <p class="word">下单结束时间</p>
-							                    <p><input readonly class="int-text int-medium " type="text"  id="orderTimeEnd" name="orderTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'orderTimeBegin\')}'});"/>
+							                    <p><input readonly class="int-text int-medium " type="text"  id="orderTimeEnd" name="orderTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'orderTimeBegin\')}'});"/>
 							                    </p>
 							                </li> 
 						            	</ul>
@@ -78,13 +78,13 @@
 							           	<ul>
 							                <li class="col-md-6">
 							                    <p class="word">支付开始时间</p>
-							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="payTimeBegin" name="payTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'payTimeEnd\')}'});"/>
+							                    <p><input name="control_date" readonly class="int-text int-medium " type="text"  id="payTimeBegin" name="payTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'payTimeEnd\')}'});"/>
 							                   <span class="time"> <i class="fa  fa-calendar" ></i></span>
 							                    </p>
 							                </li>
 							                <li class="col-md-6">
 							                    <p class="word">支付结束时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="payTimeEnd" name="payTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'payTimeBegin\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="payTimeEnd" name="payTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'payTimeBegin\')}'});"/>
 							                    </p>
 							                </li> 
 							            </ul> 

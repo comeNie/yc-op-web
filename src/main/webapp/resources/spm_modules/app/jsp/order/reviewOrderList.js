@@ -70,12 +70,12 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
     		$(document).on("click",".sos a",function () {	  
     			  $("#selectDiv").slideToggle(100); 
     		});
-    		//日期控件
+    		/*//日期控件
 			$(document).on("click",".fa-calendar",function(){
 				var calInput = $(this).parent().prev();
 				var timeId = calInput.attr('id');
 				WdatePicker({el:timeId,readOnly:true,dateFmt:'yyyy-MM-dd'});
-			});
+			});*/
 			
 			$("#data-table").on("change",".single",function(){	
 				if(this.checked){
@@ -232,23 +232,23 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 			if(orderTimeS=="" || orderTimeS==null){
 				orderTimeS="";
 			}else{
-				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(orderTimeE=="" || orderTimeE==null){
 				orderTimeE="";
 			}else{
-				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
 			//领取时间
 			if(lockTimeS=="" || lockTimeS==null){
 				lockTimeS="";
 			}else{
-				lockTimeS= new Date( Date.parse( $("#lockTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				lockTimeS= new Date( Date.parse( $("#lockTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(lockTimeE=="" || lockTimeE==null){
 				lockTimeE="";
 			}else{
-				lockTimeE= new Date( Date.parse( $("#lockTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				lockTimeE= new Date( Date.parse( $("#lockTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
@@ -374,25 +374,25 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 			var lockTimeS =  $("#lockTimeBegin").val();
 			var lockTimeE =  $("#lockTimeEnd").val();
 			if(orderTimeS=="" || orderTimeS==null){
-				orderTimeS=null;
+				orderTimeS="";
 			}else{
-				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(orderTimeE=="" || orderTimeE==null){
-				orderTimeE=null;
+				orderTimeE="";
 			}else{
-				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
 			//领取时间
 			if(lockTimeS=="" || lockTimeS==null){
-				lockTimeS=null;
+				lockTimeS="";
 			}else{
-				lockTimeS= new Date( Date.parse( $("#lockTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				lockTimeS= new Date( Date.parse( $("#lockTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(lockTimeE=="" || lockTimeE==null){
-				lockTimeE=null;
+				lockTimeE="";
 			}else{
-				lockTimeE= new Date( Date.parse( $("#lockTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				lockTimeE= new Date( Date.parse( $("#lockTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
 			
     		return {

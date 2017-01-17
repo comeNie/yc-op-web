@@ -128,23 +128,23 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
 			if(orderTimeS=="" || orderTimeS==null){
 				orderTimeS="";
 			}else{
-				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(orderTimeE=="" || orderTimeE==null){
 				orderTimeE="";
 			}else{
-				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
 			//提交时间
 			if(submitTimeS=="" || submitTimeS==null){
 				submitTimeS="";
 			}else{
-				submitTimeS= new Date( Date.parse( $("#stateTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				submitTimeS= new Date( Date.parse( $("#stateTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(submitTimeE=="" || submitTimeE==null){
 				submitTimeE="";
 			}else{
-				submitTimeE= new Date( Date.parse( $("#stateTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				submitTimeE= new Date( Date.parse( $("#stateTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
@@ -191,23 +191,23 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
 			if(orderTimeS=="" || orderTimeS==null){
 				orderTimeS=null;
 			}else{
-				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(orderTimeE=="" || orderTimeE==null){
-				orderTimeE=null;
+				orderTimeE="";
 			}else{
-				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
 			//提交时间
 			if(submitTimeS=="" || submitTimeS==null){
-				submitTimeS=null;
+				submitTimeS="";
 			}else{
-				submitTimeS= new Date( Date.parse( $("#stateTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				submitTimeS= new Date( Date.parse( $("#stateTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(submitTimeE=="" || submitTimeE==null){
-				submitTimeE=null;
+				submitTimeE="";
 			}else{
-				submitTimeE= new Date( Date.parse( $("#stateTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				submitTimeE= new Date( Date.parse( $("#stateTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
     		return {
     			"orderTimeS":orderTimeS,

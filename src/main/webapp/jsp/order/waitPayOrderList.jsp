@@ -49,12 +49,12 @@
 			                    		<ul>
 							                <li class="col-md-6">
 							                    <p class="word">下单开始时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeBegin" name="orderTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'orderTimeEnd\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeBegin" name="orderTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'orderTimeEnd\')}'});"/>
 							                    </p>
 							                </li>
 							                <li class="col-md-6">
 							                    <p class="word">下单结束时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeEnd" name="orderTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'orderTimeBegin\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeEnd" name="orderTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'orderTimeBegin\')}'});"/>
 							                    </p>
 							                </li> 
 						            	</ul>
@@ -63,12 +63,12 @@
 							           	<ul>
 							                <li class="col-md-6">
 							                    <p class="word">报价开始时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="updateTimeBegin" name="updateTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'updateTimeEnd\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="updateTimeBegin" name="updateTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'updateTimeEnd\')}'});"/>
 							                    </p>
 							                </li>
 							                <li class="col-md-6">
 							                    <p class="word">报价结束时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="updateTimeEnd" name="updateTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'updateTimeBegin\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="updateTimeEnd" name="updateTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'updateTimeBegin\')}'});"/>
 							                    </p>
 							                </li> 
 							            </ul> 

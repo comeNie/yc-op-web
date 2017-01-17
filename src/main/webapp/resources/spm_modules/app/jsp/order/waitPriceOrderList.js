@@ -152,12 +152,12 @@ define('app/jsp/order/waitPriceOrderList', function (require, exports, module) {
 			if(orderTimeS=="" || orderTimeS==null){
 				orderTimeS="";
 			}else{
-				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(orderTimeE=="" || orderTimeE==null){
 				orderTimeE="";
 			}else{
-				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
 			var userName=jQuery.trim($("#nickName").val());
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
@@ -172,14 +172,14 @@ define('app/jsp/order/waitPriceOrderList', function (require, exports, module) {
 			var orderTimeS = $("#orderTimeBegin").val();
 			var orderTimeE = $("#orderTimeEnd").val();
 			if(orderTimeS=="" || orderTimeS==null){
-				orderTimeS=null;
+				orderTimeS="";
 			}else{
-				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")+" 00:00:00" ) ).getTime();
+				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")) ).getTime();
 			}
 			if(orderTimeE=="" || orderTimeE==null){
-				orderTimeE=null;
+				orderTimeE="";
 			}else{
-				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")+" 23:59:59" ) ).getTime();
+				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")) ).getTime();
 			}
     		return {
     			"orderTimeS":orderTimeS,

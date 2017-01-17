@@ -60,12 +60,12 @@
 			                    		<ul>
 							                <li class="col-md-6">
 							                    <p class="word">下单开始时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeBegin" name="orderTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'orderTimeEnd\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeBegin" name="orderTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'orderTimeEnd\')}'});"/>
 							                    </p>
 							                </li>
 							                <li class="col-md-6">
 							                    <p class="word">下单结束时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeEnd" name="orderTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'orderTimeBegin\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="orderTimeEnd" name="orderTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'orderTimeBegin\')}'});"/>
 							                    </p>
 							                </li> 
 						            	</ul>
@@ -74,12 +74,12 @@
 							           	<ul>
 							                <li class="col-md-6">
 							                    <p class="word">提交开始时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="stateTimeBegin" name="stateTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'stateTimeEnd\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="stateTimeBegin" name="stateTimeBegin" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'stateTimeEnd\')}'});"/>
 							                    </p>
 							                </li>
 							                <li class="col-md-6">
 							                    <p class="word">提交结束时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="stateTimeEnd" name="stateTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'stateTimeBegin\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="stateTimeEnd" name="stateTimeEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'stateTimeBegin\')}'});"/>
 							                    </p>
 							                </li> 
 							            </ul> 
