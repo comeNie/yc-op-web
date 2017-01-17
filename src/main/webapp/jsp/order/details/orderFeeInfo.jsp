@@ -102,7 +102,7 @@
 										<p class="word">格式转化：</p>
 										<p>
 											<%--是否进行格式转换--%>
-											<select id="selectFormatConv"  class="select changeP">
+											<select id="selectFormatConv"  class="select select-mini">
 										   	 {{if prod.typeDesc!=null && prod.typeDesc!=""}}
 										   	       <option value="N">无格式转化</option>
 										   	       <option value="Y" selected="selected">格式转化</option>
@@ -112,8 +112,8 @@
 										   	  {{/if}}
 											</select>
 										</p>
-										<p class="ml-20"  id="inputFormatConvP" style="display: none;">
-											<input id="inputFormatConv" name="prod.typeDesc" maxlength="20" type="text" class="int-text int-small changeP"/>
+										<p class="ml-20"  id="inputFormatConvP" style="display: none; margin-left:2px;">
+											<input id="inputFormatConv" name="prod.typeDesc" style="width:75px;" maxlength="20" type="text" class="int-text int-mini"/>
 										</p>
 									</li>
                                  </ul>
@@ -121,7 +121,7 @@
 									<li class="col-md-6">
 										<p class="word">转换费用：</p>
 										<p>
-										    <input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small changeP" {{if prod.typeDesc==null}}readonly="readonly"{{/if}}/>
+										    <input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small changeP"/>
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="descTypeFee-error" class="error" for="descTypeFee" style="display: none;"></label>
 										</p>
@@ -354,20 +354,14 @@
                                  </ul>
                                  <ul>
 									<li class="col-md-6">
+										<p class="word">格式转化：</p>
 										<p>
 											<%--是否进行格式转换--%>
-											<select id="selectFormatConv"  class="select  changeP">
 										   	 {{if prod.typeDesc!=null && prod.typeDesc!=""}}
-										   	       <option value="N">无格式转化</option>
-										   	       <option value="Y" selected="selected">格式转化</option>
+										   	      {{:prod.typeDesc}}
 										   	  {{else}}
-										   	      <option value="N" selected="selected">无格式转化</option>
-										   	      <option value="Y">格式转化</option>
+										   	      	无格式转化
 										   	  {{/if}}
-											</select>
-										</p>
-										<p class="ml-20"  id="inputFormatConvP" style="display: none;">
-											<input id="inputFormatConv" name="prod.typeDesc" maxlength="20" type="text" class="int-text int-small changeP"/>
 										</p>
 									</li>
                                     <li class="col-md-6">

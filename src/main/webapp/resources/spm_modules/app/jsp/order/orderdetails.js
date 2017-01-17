@@ -247,11 +247,11 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				translateSum = 0;
 			}
 			var totalFee = basePrice;
-			if(typedDesc=="" || typedDesc==null){
+			if ("Y" == $("#selectFormatConv").val()) {
+				$('#descTypeFee').removeAttr("disabled");
+			}else{
 				$("#descTypeFee").val("0.00");
 				$("#descTypeFee").attr("disabled","disabled");
-			}else{
-				$('#descTypeFee').removeAttr("disabled");
 			}
 			if(isSetType=='Y'){
 				totalFee = totalFee + parseFloat(setTypeFee);
@@ -632,6 +632,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				"prod.fieldCode":{
     					required:true
     				},
+    				"prod.typeDesc":{
+    					required:"#selectFormatConv option[value=Y]:selected"
+    				},
     				"prod.translateSum":{
     					digits:true
     				},
@@ -709,6 +712,9 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
     				},
     				"prod.useCode":{
     					required:"请选择翻译用途"
+    				},
+    				"prod.typeDesc":{
+    					required:"请输入转化格式"
     				},
     				"prod.fieldCode":{
     					required:"请选择翻译领域"
