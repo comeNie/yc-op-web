@@ -27,9 +27,9 @@ define(function (require, exports, module) {
 	
 	//翻译类型
 	var translateTypeMap = new jMap();
-	translateTypeMap.put("0", "文本翻译");
-	translateTypeMap.put("1", "文档翻译");
-	translateTypeMap.put("2", "口译翻译");
+	translateTypeMap.put("0", "笔译-文本");
+	translateTypeMap.put("1", "笔译-附件");
+	translateTypeMap.put("2", "口译");
 	
 	//订单级别
 	var orderLevelMap = new jMap();
