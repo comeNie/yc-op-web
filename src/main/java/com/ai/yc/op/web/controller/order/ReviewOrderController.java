@@ -430,6 +430,7 @@ public class ReviewOrderController {
     	req.setOrderIdList(orderIdList);
     	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setOperId(loginUser.getUserId());
+    	req.setOperName(loginUser.getLoginName());
     	IOrderReviewSV iOrderReviewSV = DubboConsumerFactory.getService(IOrderReviewSV.class);
     	BaseResponse resp = null;
 		try {

@@ -62,7 +62,10 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			"click #save":"_save",
 			"click #cancel":"_cancel",
 			"click #globalRome": "_setPattern",
-			"change #selectFormatConv": "_formatControl"
+			"change #selectFormatConv": "_formatControl",
+			"change #isSetType": "_setTypeControl",
+			"change #isUrgent": "_urgeControl"
+			
 		},
 		// 重写父类
 		setup : function() {
@@ -99,9 +102,33 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 		_formatControl:function() {
 			if ("Y" == $("#selectFormatConv").val()) {
 				$("#inputFormatConvP").show();
+				$("#descTypeFeeInputId").show();
+				$("#descTypeFeeId").hide();
+				$('#descTypeFee').removeAttr("disabled");
 			} else {
 				$("#inputFormatConvP").hide();
 				$("#inputFormatConv").val("");
+				$("#descTypeFeeInputId").hide();
+				$("#descTypeFeeId").show();
+			}
+		},
+		//是否排版费用控制
+		_setTypeControl:function(){
+			if ("Y" == $("#isSetType").val()) {
+				$("#setTypeFeeInputId").show();
+				$("#setTypeFeeId").hide();
+			} else {
+				$("#setTypeFeeId").show();
+				$("#setTypeFeeInputId").hide();
+			}
+		},
+		_urgeControl:function(){
+			if ("Y" == $("#isUrgent").val()) {
+				$("#urGentFeeInputId").show();
+				$("#urGentFeeId").hide();
+			} else {
+				$("#urGentFeeInputId").hide();
+				$("#urGentFeeId").show();
 			}
 		},
 		//国际编码
@@ -247,25 +274,34 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				translateSum = 0;
 			}
 			var totalFee = basePrice;
+			//格式
 			if ("Y" == $("#selectFormatConv").val()) {
 				$('#descTypeFee').removeAttr("disabled");
+				$("#descTypeFeeInputId").show();
+				$("#descTypeFeeId").hide();
 			}else{
 				$("#descTypeFee").val("0.00");
 				$("#descTypeFee").attr("disabled","disabled");
+				$("#descTypeFeeInputId").hide();
+				$("#descTypeFeeId").show();
 			}
+			//是否排版
 			if(isSetType=='Y'){
 				totalFee = totalFee + parseFloat(setTypeFee);
 				$('#setTypeFee').removeAttr("disabled");
+				this._setTypeControl();
 			}else{
 				$("#setTypeFee").val("0.00");
 				$("#setTypeFee").attr("disabled","disabled");
+				this._setTypeControl();
 			}
 			totalFee = totalFee + parseFloat(descTypeFee);
 			if(isUrgent=='Y'){
 				totalFee = totalFee + parseFloat(urGentFee);
 				$('#urGentFee').removeAttr("readonly");
+				this._urgeControl();
 			}else{
-				
+				this._urgeControl();
 				$("#urGentFee").val("0.00");
 				$("#urGentFee").attr("readonly","readonly");
 			}
@@ -522,6 +558,11 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				$("#selectFormatConv").val("Y");
 				$("#inputFormatConvP").show();
 				$("#inputFormatConv").val($("#typeDesc").val());
+				$("#descTypeFeeInputId").show();
+				$("#descTypeFeeId").hide();
+			}else{
+				$("#descTypeFeeInputId").hide();
+				$("#descTypeFeeId").show();
 			}
 			
 			var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);

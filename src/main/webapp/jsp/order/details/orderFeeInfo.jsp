@@ -92,11 +92,12 @@
 									<li class="col-md-6">
                                         <input name="orderFee.currencyUnit" type="hidden" value="{{:orderFee.currencyUnit}}"/>
 										<p class="word">排版费用：</p>
-										<p>
+										<p id="setTypeFeeInputId">
 											<input id="setTypeFee" name="setTypeFee" type="text" value="{{:~liToYuan3(orderFee.setTypeFee)}}" class="int-text int-small changeP" />
                                             {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="setTypeFee-error" class="error" for="setTypeFee" style="display: none;"></label>
 										</p>
+										<p id="setTypeFeeId">{{:~liToYuan3(orderFee.setTypeFee)}}{{:~getMoneyUnit(orderFee.currencyUnit)}}</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">格式转化：</p>
@@ -120,11 +121,12 @@
                                  <ul>
 									<li class="col-md-6">
 										<p class="word">转换费用：</p>
-										<p>
+										<p id="descTypeFeeInputId">
 										    <input id="descTypeFee" name="descTypeFee" type="text" value="{{:~liToYuan3(orderFee.descTypeFee)}}" class="int-text int-small changeP"/>
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="descTypeFee-error" class="error" for="descTypeFee" style="display: none;"></label>
 										</p>
+										<p id="descTypeFeeId">{{:~liToYuan3(orderFee.descTypeFee)}}{{:~getMoneyUnit(orderFee.currencyUnit)}}</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">是否加急：</p>
@@ -144,11 +146,12 @@
                                  <ul>
                                     <li class="col-md-6">
 										<p class="word">加急费用：</p>
-										<p>
+										<p id="urGentFeeInputId">
 											<input id="urGentFee" name="urgentFee" type="text" data-describedby="messages" value="{{:~liToYuan3(orderFee.urgentFee)}}" class="int-text int-small changeP" />
 										    {{:~getMoneyUnit(orderFee.currencyUnit)}}
                                             &nbsp;<label id="urGentFee-error" class="error" for="urGentFee" style="display: none;"></label>
 										</p>
+										<p id="urGentFeeId">{{:~liToYuan3(orderFee.urgentFee)}}{{:~getMoneyUnit(orderFee.currencyUnit)}}</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">订单总价：</p>
