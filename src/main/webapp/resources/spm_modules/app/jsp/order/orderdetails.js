@@ -61,7 +61,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			"change #totalFee":"_totalFeeChange",
 			"click #save":"_save",
 			"click #cancel":"_cancel",
-			"click #globalRome": "_setPattern"
+			"click #globalRome": "_setPattern",
+			"change #selectFormatConv": "_formatControl"
 		},
 		// 重写父类
 		setup : function() {
@@ -84,7 +85,6 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				fileName = window.encodeURI(window.encodeURI(fileName));
 				location.href = _base + '/attachment/download?fileId='+fileId+'&fileName='+fileName;
 			});
-			
 			this._queryOrderDetails();
 			
 		},
@@ -94,6 +94,15 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			$("#orderLevel").val(objVal);
 			//
 			_this._getInterperLevel();
+		},
+		//input 格式转换控制
+		_formatControl:function() {
+			if ("Y" == $("#selectFormatConv").val()) {
+				$("#inputFormatConvP").show();
+			} else {
+				$("#inputFormatConvP").hide();
+				$("#inputFormatConv").val("");
+			}
 		},
 		//国际编码
         _globalRome:function(coutryCode) {
@@ -508,7 +517,12 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			//将国家代码进行初始化
 			 _this._globalRome(councode);
 			
-			
+			//格式转换
+			if ($("#typeDesc").val() != '') {
+				$("#selectFormatConv").val("Y");
+				$("#inputFormatConvP").show();
+				$("#inputFormatConv").val($("#typeDesc").val());
+			}
 			
 			var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
 			$("#orderStateChgTable").html(orderStateChgHtml);

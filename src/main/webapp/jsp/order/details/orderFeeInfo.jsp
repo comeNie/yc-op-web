@@ -101,11 +101,19 @@
 									<li class="col-md-6">
 										<p class="word">格式转化：</p>
 										<p>
-										   	{{if prod.typeDesc!=null && prod.typeDesc!=""}}
-										     	{{:prod.typeDesc}}
-                                            {{else}}
-                                                                                                                                               不需要
-                                            {{/if}}
+											<%--是否进行格式转换--%>
+											<select id="selectFormatConv"  class="select changeP">
+										   	 {{if prod.typeDesc!=null && prod.typeDesc!=""}}
+										   	       <option value="N">无格式转化</option>
+										   	       <option value="Y" selected="selected">格式转化</option>
+										   	  {{else}}
+										   	      <option value="N" selected="selected">无格式转化</option>
+										   	      <option value="Y">格式转化</option>
+										   	  {{/if}}
+											</select>
+										</p>
+										<p class="ml-20"  id="inputFormatConvP" style="display: none;">
+											<input id="inputFormatConv" name="prod.typeDesc" maxlength="20" type="text" class="int-text int-small changeP"/>
 										</p>
 									</li>
                                  </ul>
@@ -225,7 +233,7 @@
 										<p class="word">译员性别：</p>
 										<p>
 										   	<select id="interperGen" name="prod.interperGen" class="select select-medium">
-                                                <option value="">不限</option>
+                                                <option value="2">不限</option>
 										   	    <option value="0" {{if prod.interperGen=='0'}}selected="selected"{{/if}}>男</option>
 										   	    <option value="1" {{if prod.interperGen=='1'}}selected="selected"{{/if}}>女</option>
 											</select>
@@ -346,13 +354,20 @@
                                  </ul>
                                  <ul>
 									<li class="col-md-6">
-										<p class="word">格式转化：</p>
 										<p>
-                                            {{if prod.typeDesc!=null && prod.typeDesc!=""}}
-										     	{{:prod.typeDesc}}
-                                            {{else}}
-                                                                                                                                               不需要
-                                            {{/if}}
+											<%--是否进行格式转换--%>
+											<select id="selectFormatConv"  class="select  changeP">
+										   	 {{if prod.typeDesc!=null && prod.typeDesc!=""}}
+										   	       <option value="N">无格式转化</option>
+										   	       <option value="Y" selected="selected">格式转化</option>
+										   	  {{else}}
+										   	      <option value="N" selected="selected">无格式转化</option>
+										   	      <option value="Y">格式转化</option>
+										   	  {{/if}}
+											</select>
+										</p>
+										<p class="ml-20"  id="inputFormatConvP" style="display: none;">
+											<input id="inputFormatConv" name="prod.typeDesc" maxlength="20" type="text" class="int-text int-small changeP"/>
 										</p>
 									</li>
                                     <li class="col-md-6">
