@@ -393,6 +393,7 @@ public class WaitPayController {
 		UpdatePayStatusRequest payRequest  = new UpdatePayStatusRequest();
 		payRequest.setOperId(user.getUserId());
 		payRequest.setOrderId(Long.valueOf(orderId));
+		payRequest.setOperName(user.getLoginName());
 		OrderFeeVo feeVo = new OrderFeeVo();
 		feeVo.setCurrencyUnit(currencyUnit);
 		feeVo.setPayStyle(payStyle);
