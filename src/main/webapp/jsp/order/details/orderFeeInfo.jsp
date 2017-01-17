@@ -101,6 +101,7 @@
 									</li>
 									<li class="col-md-6">
 										<p class="word">格式转化：</p>
+										{{if translateType=='1'}}
 										<p>
 											<%--是否进行格式转换--%>
 											<select id="selectFormatConv"  class="select select-mini">
@@ -116,6 +117,9 @@
 										<p class="ml-20"  id="inputFormatConvP" style="display: none; margin-left:2px;">
 											<input id="inputFormatConv" name="prod.typeDesc" style="width:75px;" maxlength="20" type="text" class="int-text int-mini"/>
 										</p>
+									{{else}}
+										无格式转化			
+									{{/if}}
 									</li>
                                  </ul>
                                  <ul>
