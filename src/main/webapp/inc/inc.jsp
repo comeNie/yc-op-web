@@ -43,7 +43,7 @@
     }
     var today = new Date();
 	//send to the back
-	//$.post(_base+"/timezone.htm?offset="+today.stdTimezoneOffset());
+	$.post(_base+"/timezone.htm?offset="+today.stdTimezoneOffset());
 
     
 </script>
