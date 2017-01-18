@@ -101,15 +101,15 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				url: _base + "/order/handReviewOrder",
 				data: param,
 				success: function (data) {
-					if(data.data=="00"){
+					/*if(data.data=="00"){
 						//如果通过调到待确认列表
 						window.location.href=_base+"/toTbcOrderList";
 					}else if(data.data=="11"){
 						//如果通过调到翻译中列表
 						window.location.href=_base+"/toTranslateOrderList";
-					}else{
+					}else{*/
 						_this._searchOrderList();
-					}
+					//}
 				}
 			});
 		},

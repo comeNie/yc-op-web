@@ -86,7 +86,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				var fileId = parent.find("input").eq(0).val();
 				var fileName = parent.find("input").eq(1).val();
 				var ext = fileName.substring(fileName.indexOf('.')+1);
-				fileName = window.encodeURI(window.encodeURI(fileName));
+				//fileName = window.encodeURI(window.encodeURI(fileName));
+				fileName=encodeURIComponent(encodeURIComponent(fileName));
 				location.href = _base + '/attachment/download?fileId='+fileId+'&fileName='+fileName;
 			});
 			this._queryOrderDetails();
