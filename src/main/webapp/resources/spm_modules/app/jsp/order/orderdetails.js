@@ -234,7 +234,13 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				url: _base + "/order/updateOrderInfo",
 				data: f,
 				success: function (rs) {
-					showSuccessDialog(rs.statusInfo);
+					//showSuccessDialog(rs.statusInfo);
+					var state = $("#state").val();
+					if('11'==state){
+						window.location.href =_base+"/toWaitPayOrderList";
+					}else{
+						window.location.href =_base+"/toWaitPriceOrderList";
+					}
 				}
 			});
 		},
