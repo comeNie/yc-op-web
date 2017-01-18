@@ -206,6 +206,14 @@
 											</li>
 										</ul>
 								   {{/if}}
+									{{if state=='23'}}
+										<li class="col-md-6">
+											<p class="word">审核驳回原因：</p>
+											<p class="col-md-8">
+												{{:reasonDesc}}
+											</p>
+										</li>
+                                    {{/if}}
                                    {{if state=='25'}}
 									<li class="col-md-6">
 										<p class="word">重启订单备注：</p>

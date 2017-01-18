@@ -24,7 +24,7 @@ define('app/jsp/order/updatingOrderList', function (require, exports, module) {
     	attrs: {
     	},
     	Statics: {
-    		DEFAULT_PAGE_SIZE: 5
+    		DEFAULT_PAGE_SIZE: 10
     	},
     	//事件代理
     	events: {
