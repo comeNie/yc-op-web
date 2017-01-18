@@ -185,10 +185,17 @@
       		<tbody>
 				{{if ordProdExtendList!=null}}
 					{{for ordProdExtendList}}
+						{{if #index <1}}
       					<tr>
       						<td class="new-td bot-none">{{:langungePairChName}}</td>	
       					</tr>
+						{{/if}}
 					{{/for}}
+					{{if ordProdExtendList.length>1}}
+						<tr>
+      						<td class="new-td bot-none">...</td>	
+      					</tr>
+					{{/if}}
 				{{/if}}
       		</tbody>	
       	</table>

@@ -153,7 +153,8 @@
     	</div>
    </div> 
 <script id="orderListTemple" type="text/template">  
-{{if levelSize>=extendSize && levelSize!=0 && extendSize!=0}}
+{{if levelSize!=0 && extendSize!=0}}
+<!--{{if levelSize>=extendSize && levelSize!=0 && extendSize!=0}}{{/if}}-->
 	{{for ordTransLevelList ~chlIdPage=chlIdPage ~translateTypePage=translateTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
@@ -171,10 +172,15 @@
 					 <table width="100%" height="100%">
 							{{if ~ordProdExtendList!=null}}
 								{{for ~ordProdExtendList}}
+									{{if #index <1}}
       								<tr>
       									<td class="new-td bot-none">{{:langungePairChName}}</td>	
       								</tr>
+									{{/if}}
 								{{/for}}
+								{{if ~ordProdExtendList.length>1}}
+								<tr><td class="new-td bot-none">...</td></tr>
+								{{/if}}
 							{{/if}}
       				</table>
 				</td>	
@@ -193,7 +199,7 @@
 		</tr>		
 	{{/for}}
 {{/if}}
-{{if levelSize<extendSize}}
+<!--{{if levelSize<extendSize}}
 	{{for ordProdExtendList ~chlIdPage=chlIdPage ~translateTypePage=translateTypePage  ~orderId=orderId
 		~orderTime=orderTime ~totalFeePage=totalFeePage ~lockTime=lockTime ~finishTime=finishTime
 		 ~remainingTime=remainingTime  ~statePage=statePage  ~levelSize=levelSize ~interperName=interperName
@@ -232,7 +238,7 @@
 			{{/if}}	
 		</tr>		
 	{{/for}}
-{{/if}}
+{{/if}}-->
   {{if levelSize===0 && extendSize===0}}
 	<tr>
 	<td>{{:chlIdPage}}</td>

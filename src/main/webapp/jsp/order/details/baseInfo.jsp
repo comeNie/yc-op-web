@@ -40,7 +40,7 @@
 										<p>{{:timeZone}}</p>
 									</li>
 									<li class="col-md-6">
-										<p class="word">下单时间(北京)：</p>
+										<p class="word">下单时间：</p>
 										<p>{{:~timesToFmatter(orderTime)}}</p>
 									</li>
 								
