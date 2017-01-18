@@ -104,7 +104,7 @@
 										{{if translateType=='1'}}
 										<p>
 											<%--是否进行格式转换--%>
-											<select id="selectFormatConv"  class="select select-mini">
+											<select id="selectFormatConv"  class="select select-mini requestP">
 										   	 {{if prod.typeDesc!=null && prod.typeDesc!=""}}
 										   	       <option value="N">无格式转化</option>
 										   	       <option value="Y" selected="selected">格式转化</option>
