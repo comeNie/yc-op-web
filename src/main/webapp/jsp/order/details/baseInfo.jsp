@@ -201,7 +201,7 @@
 											<li class="col-md-6">
 												<p class="word">支付备注：</p>
 												<p class="col-md-8" title="{{:payRemark}}">
-													{{:~subStr(10,payRemark)}}
+													{{:~subStr(30,payRemark)}}
 												</p>
 											</li>
 										</ul>
@@ -210,7 +210,7 @@
 										<li class="col-md-6">
 											<p class="word">审核驳回原因：</p>
 											<p class="col-md-8">
-												{{:reasonDesc}}
+												{{:~subStr(30,reasonDesc)}}
 											</p>
 										</li>
                                     {{/if}}
