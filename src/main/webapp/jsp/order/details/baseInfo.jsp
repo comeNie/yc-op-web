@@ -209,7 +209,7 @@
 									{{if state=='23'}}
 										<li class="col-md-6">
 											<p class="word">审核驳回原因：</p>
-											<p class="col-md-8">
+											<p class="col-md-8" title="{{:reasonDesc}}">
 												{{:~subStr(30,reasonDesc)}}
 											</p>
 										</li>
