@@ -59,7 +59,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     			rules: {
 					remark: {
     					required: true,
-    					maxlength:100
+    					maxlength:30
     				}
     			},
     			messages: {

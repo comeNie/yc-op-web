@@ -238,8 +238,13 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 					var state = $("#state").val();
 					if('11'==state){
 						window.location.href =_base+"/toWaitPayOrderList";
-					}else{
+					}else if('13'==state){
 						window.location.href =_base+"/toWaitPriceOrderList";
+					}else if('40'==state){
+						//待审核
+						window.location.href =_base+"/order/toReviewOrderList";
+					}else{
+						window.location.href =_base+"/toTbcOrderList";
 					}
 				}
 			});

@@ -292,7 +292,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 		rejectReviewOrder:function(param){
 			var _this = this;
 			var d = Dialog({
-				content:'<textarea id="reasonDesc" style="width:200px;" class="int-text"  maxlength="100"></textarea>',
+				content:'<textarea id="reasonDesc" style="width:200px;" class="int-text"  maxlength="30"></textarea>',
 				padding: 0,
 				okValue: '驳回',
 				title: '驳回原因:',
