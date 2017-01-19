@@ -235,7 +235,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 				data: f,
 				success: function (rs) {
 					//showSuccessDialog(rs.statusInfo);
-					var state = $("#state").val();
+					/*var state = $("#state").val();
 					if('11'==state){
 						window.location.href =_base+"/toWaitPayOrderList";
 					}else if('13'==state){
@@ -245,7 +245,8 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 						window.location.href =_base+"/order/toReviewOrderList";
 					}else{
 						window.location.href =_base+"/toTbcOrderList";
-					}
+					}*/
+					_this._cancel();
 				}
 			});
 		},
