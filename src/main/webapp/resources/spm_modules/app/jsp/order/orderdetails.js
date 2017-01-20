@@ -220,6 +220,24 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
 			var replaceNames = fileNames;
 			
 			f["fileNames"] = replaceNames.join(",");
+			
+			//=======译文信息附件-开始==========
+			var fileTranslateIds = [];
+			$("input[name=fileTranslateIds]").each(function(){
+				fileTranslateIds.push($(this).val());
+			});
+			var replaceFileTranslateIds = fileTranslateIds;
+			
+			f["fileTranslateIds"] = replaceFileTranslateIds.join(",");
+			
+			var fileTranslateNames = [];
+			$("input[name=fileTranslateNames]").each(function(){
+				fileTranslateNames.push($(this).val());
+			});
+			var replaceFileTranslateNames = fileTranslateNames;
+			
+			f["fileTranslateNames"] = replaceFileTranslateNames.join(",");
+			//=======译文信息附件-结束==========
 				
 			//等遍历结束，就会生成一个json对象了
 
