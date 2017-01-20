@@ -78,7 +78,7 @@
             {{include tmpl="#prodInfoTempl" /}}
             <div class="bc-ang mb-12">
                <!--{{if mod=='edit'&&displayFlag!='52'&&displayFlag!='90'&&displayFlag!='91'&&displayFlag!='92'}} {{/if}} -->
-				{{if mod=='edit'&&state=='11' || state=='13' || state=='50' || state=='40'}}
+				{{if mod=='edit'&&state=='11' || state=='13'  || state=='40'|| (state=='50'&&translateType!=2)}}
                      <input id="save" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="保存" />
                {{/if}}
 			<input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />      
