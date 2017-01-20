@@ -359,7 +359,7 @@ public class OrdOrderController {
 				UProdFileVo prodFile = new UProdFileVo();
 				prodFile.setFileName(pager.getFileNames()[i]);
 				prodFile.setFileSaveId(pager.getFileSaveIds()[i]);
-				if(pager.getFileTranslateIds()!=null&&pager.getFileTranslateIds()[i]!=null){
+				if(pager.getFileTranslateIds()!=null&&pager.getFileTranslateIds().length>0&&pager.getFileTranslateIds()[i]!=null){
 					prodFile.setFileTranslateName(pager.getFileTranslateNames()[i]);
 					prodFile.setFileTranslateId(pager.getFileTranslateIds()[i]);
 				}
