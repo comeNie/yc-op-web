@@ -272,7 +272,7 @@ define('app/jsp/order/orderdetails', function(require, exports, module) {
         	var isAll =$("#isAll").val();
         	var state =$("#state").val();
         	window.location.href = _base+"/order/back?state="
-            + state+'&isAll='+isAll;
+            + state+'&isAll='+isAll+"&random="+Math.random();
 		},
 		_getInterperLevel:function(){
 			var orderLevel = $("#orderLevel").val();

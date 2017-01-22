@@ -193,7 +193,7 @@ define('app/jsp/order/waitPriceOrderList', function (require, exports, module) {
     	},
     	_detailPage:function(orderId){
 			window.location.href = _base+"/order/orderdetails?orderId="
-            + orderId+'&mod=edit';
+            + orderId+'&mod=edit'+"&random="+Math.random();
     	}
 		
     });

@@ -108,7 +108,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 						//如果通过调到翻译中列表
 						window.location.href=_base+"/toTranslateOrderList";
 					}else{*/
-					window.location.href=_base+"/order/toOrderList";
+					window.location.href=_base+"/order/toOrderList?random="+Math.random();
 					//}
 				}
 			});
@@ -404,7 +404,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 				success : function(data) {
 					if(data.statusCode==1){
 						//跳到列表页面
-						window.location.href=_base+"/order/toOrderList";
+						window.location.href=_base+"/order/toOrderList?random="+Math.random();
 					}else{
 						var d = Dialog({
 							title: '消息',
@@ -427,7 +427,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     	},
     	_detailPage:function(orderId){
 			window.location.href = _base+"/order/orderdetails?orderId="
-            + orderId+'&mod=edit'+'&isAll=all';
+            + orderId+'&mod=edit'+'&isAll=all'+"&random="+Math.random();
 		}
     });
     

@@ -337,7 +337,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 						//如果通过调到翻译中列表
 						window.location.href=_base+"/toTranslateOrderList";
 					}else{*/
-						window.location.href=_base+"/order/toReviewOrderList";
+						window.location.href=_base+"/order/toReviewOrderList?random="+Math.random();
 					//}
 				}
 			});

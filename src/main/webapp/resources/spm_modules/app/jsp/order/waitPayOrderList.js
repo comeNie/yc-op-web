@@ -297,7 +297,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
 				success : function(data) {
 					if(data.statusCode==1){
 						//跳到列表页面
-						window.location.href=_base+"/toWaitPayOrderList";
+						window.location.href=_base+"/toWaitPayOrderList?random="+Math.random();
 					}else{
 						var d = Dialog({
 							title: '消息',
@@ -320,7 +320,7 @@ define('app/jsp/order/waitPayOrderList', function (require, exports, module) {
     	},
     	_detailPage:function(orderId){
     		window.location.href = _base+"/order/orderdetails?orderId="
-            + orderId+'&mod=edit';
+            + orderId+'&mod=edit'+"&random="+Math.random();
 		}
     });
     
