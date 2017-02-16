@@ -98,6 +98,15 @@ public final class Constants {
 		 * 已完成
 		 */
 		public static final String DONE_STATE = "90";
+		/**
+		 * 已评价
+		 */
+		public static final String EVALUATE_STATE = "53";
+		/**
+		 * 已退款
+		 */
+		public static final String REFUND_STATE = "92";
+		
 		
 		
 	}

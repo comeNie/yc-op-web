@@ -26,6 +26,9 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 
 	private Long submitTimeS;
 	private Long submitTimeE;
+	
+	private Long evaluateTimeS;
+	private Long evaluateTimeE;
 	public Long getOrderTimeS() {
 		return orderTimeS;
 	}
@@ -115,6 +118,18 @@ public class OrderPageQueryParams extends QueryOrderRequest {
 	}
 	public void setSubmitTimeE(Long submitTimeE) {
 		this.submitTimeE = submitTimeE;
+	}
+	public Long getEvaluateTimeS() {
+		return evaluateTimeS;
+	}
+	public void setEvaluateTimeS(Long evaluateTimeS) {
+		this.evaluateTimeS = evaluateTimeS;
+	}
+	public Long getEvaluateTimeE() {
+		return evaluateTimeE;
+	}
+	public void setEvaluateTimeE(Long evaluateTimeE) {
+		this.evaluateTimeE = evaluateTimeE;
 	}
 
 	
