@@ -32,6 +32,10 @@ public final class Constants {
 	/** 英文站*/
 	public static final String EN_LANGE = "1";
 	/**
+	 * 业务类型（退费单）
+	 */
+	public static final String REFUND_BUSI_TYPE = "2";
+	/**
 	 * 公共库语言对表中对应的翻译类型（笔译）
 	 */
 	public static final String TRANSLATE_TYPE_COMMON = "1";

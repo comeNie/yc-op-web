@@ -73,6 +73,7 @@ public class OrdOrderController {
 	 } 
 	 @RequestMapping("/back")
 	 public ModelAndView backPage(String state,String isAll) {
+		 
 		 if(StringUtil.isBlank(isAll)){
 			 if(!StringUtil.isBlank(state)){
 				 if(Constants.State.DONE_STATE.equals(state)){
@@ -93,6 +94,8 @@ public class OrdOrderController {
 					return new ModelAndView("jsp/order/updatingOrderList");
 				}else if(Constants.State.WAIT_PRICE_STATE.equals(state)){
 					return new ModelAndView("jsp/order/waitPriceOrderList");
+				}else if(Constants.State.REFUND_STATE.equals(state)){
+					return new ModelAndView("jsp/order/refundOrderList");
 				}
 			 } 
 		 }
