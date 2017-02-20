@@ -179,7 +179,7 @@ public class RefundOrderListController {
      */
     @RequestMapping("/refundExport")
     @ResponseBody
-    public void  export(HttpServletRequest request, HttpServletResponse response, OrderPageQueryParams queryRequest) {
+    public void  export(HttpServletRequest request, HttpServletResponse response, OrderPageQueryParams queryRequest,String stateFlag) {
     	logger.error("进入导出方法>>>>");
     	QueryOrderRequest ordReq = new QueryOrderRequest();
     	BeanUtils.copyProperties(ordReq, queryRequest);
@@ -213,7 +213,14 @@ public class RefundOrderListController {
 			Timestamp payTimeE = new Timestamp(payTimeEnd);
 			ordReq.setPayTimeEnd(payTimeE);
 		}
-		ordReq.setState(Constants.State.REFUND_STATE);
+		if(!StringUtil.isBlank(stateFlag)){
+			if(Constants.State.REFUND_STATE.equals(stateFlag)){
+				ordReq.setState(Constants.State.REFUND_STATE);
+			}else{
+				ordReq.setBusiType(Constants.REFUND_BUSI_TYPE);
+				ordReq.setState(Constants.State.REVIEW_STATE);
+			}
+		}
 	    ordReq.setPageNo(1);
 	    try {
 	  //获取配置中的导出最大数值
@@ -290,6 +297,7 @@ public class RefundOrderListController {
                 		}
 		        		exOrder.setUserName(vo.getUserName());
 		        		exOrder.setOrderId(vo.getOrderId());
+		        		exOrder.setParentOrderId(vo.getParentOrderId());
 		        		if(vo.getPayTime()!=null){
 		        			exOrder.setPayTime(TimeZoneTimeUtil.getTimes(vo.getPayTime()));
 		        		}
@@ -308,6 +316,7 @@ public class RefundOrderListController {
 	        		if(chldParam!=null){
 	        			exOrder.setChlId(chldParam.getColumnDesc());
 	        		}
+	        		exOrder.setParentOrderId(vo.getParentOrderId());
 	        		//翻译订单类型
 	        		paramCond = new SysParamSingleCond();
 	        		paramCond.setTenantId(Constants.TENANT_ID);
@@ -368,8 +377,8 @@ public class RefundOrderListController {
 			response.reset();// 清空输出流
             response.setContentType("application/msexcel");// 定义输出类型
             response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
-            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单金额","实付金额","支付方式","支付时间","状态"};
-    		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
+            String[] titles = new String[]{"服务单号","订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单金额","实付金额","支付方式","支付时间","订单状态"};
+    		String[] fieldNames = new String[]{"parentOrderId","chlId", "orderType", "orderId", "orderTime",
     				"userName", "langire","totalFee","realFee","payStyle","payTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
 			 logger.error("写入数据到excel>>>>");

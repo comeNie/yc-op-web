@@ -171,7 +171,7 @@ define('app/jsp/order/evaluateOrderList', function (require, exports, module) {
     		}
     	},
     	_detailPage:function(orderId){
-    			window.location.href = _base+"/order/orderdetails?orderId="
+    			window.location.href = _base+"/toEvaluteOrdDetail?orderId="
 	            + orderId+"&mod=edit&random="+Math.random();
 		}
 		

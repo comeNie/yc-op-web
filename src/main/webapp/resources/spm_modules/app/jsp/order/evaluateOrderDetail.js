@@ -1,4 +1,4 @@
-define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
+define('app/jsp/order/evaluateOrderDetail', function(require, exports, module) {
 	'use strict';
 	var $ = require('jquery');
 	var Widget = require('arale-widget/1.2.0/widget');
@@ -18,7 +18,7 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
 	var cache = null;
 	
     
-	var refundOrderDetailsPager = Widget.extend({
+	var evaluteOrderDetailsPager = Widget.extend({
 
 		attrs : {
 			
@@ -33,7 +33,7 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
 		// 重写父类
 		setup : function() {
 			var _this = this;
-			refundOrderDetailsPager.superclass.setup.call(this);
+			evaluteOrderDetailsPager.superclass.setup.call(this);
 			
 			this._queryOrderDetails();
 			
@@ -55,7 +55,7 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
 				type: "post",
 				processing: true,
 				message: "加载数据中，请等待...",
-				url: _base + "/orderDetail/refundOrdDetails",
+				url: _base + "/evaluteOrdDetail",
 				data: param,
 				success: function (rs) {
 					var orderInfoHtml = $("#orderInfoTempl").render(rs.data);
@@ -67,5 +67,5 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
 		}
 		
 	});
-	module.exports = refundOrderDetailsPager;
+	module.exports = evaluteOrderDetailsPager;
 });

@@ -96,6 +96,8 @@ public class OrdOrderController {
 					return new ModelAndView("jsp/order/waitPriceOrderList");
 				}else if(Constants.State.REFUND_STATE.equals(state)){
 					return new ModelAndView("jsp/order/refundOrderList");
+				}else if(Constants.State.EVALUATE_STATE.equals(state)){
+					return new ModelAndView("jsp/order/evaluateOrderList");
 				}
 			 } 
 		 }

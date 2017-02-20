@@ -179,6 +179,14 @@ define('app/jsp/order/refundOrderList', function (require, exports, module) {
 			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
 			var payTimeS=jQuery.trim($("#payTimeBegin").val());
 			var payTimeE=jQuery.trim($("#payTimeEnd").val());
+			var wait = $('#waitHandle').attr('class');
+			var refund = $('#refundId').attr('class');
+			var stateFlag="";
+			if(wait="current" && wait!=""){
+				 stateFlag = "40";
+			}else if(refund="current" && refund!=""){
+				stateFlag="92";//待审核
+			}
 			if(orderTimeE=="" || orderTimeE==null){
 				orderTimeE="";
 			}else{
@@ -209,7 +217,8 @@ define('app/jsp/order/refundOrderList', function (require, exports, module) {
 			var payStyle = jQuery.trim($("#payStyle option:selected").val());
 			window.location.href=_base+'/refundExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
 			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+'&state='
-		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle+"&offset="+today.stdTimezoneOffset();
+		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle+
+		"&stateFlag="+stateFlag+"&offset="+today.stdTimezoneOffset();
 		},
 		_searchOrderList:function(){
 			var _this=this;
@@ -240,14 +249,12 @@ define('app/jsp/order/refundOrderList', function (require, exports, module) {
 	
 		_getSearchParams:function(){
 			var stateFlag="";
-			var info= $("#waitHandle").is(":hidden"); //是否隐藏
-			var info2= $("#refundId").is(":hidden");
-			var ss = $('#waitHandle').attr('class');
-			var ss1 = $('#refundId').attr('class');
-			if(ss="current" && ss!=""){
-				 stateFlag = "92";
-			}else if(ss1="current" && ss1!=""){
-				stateFlag="40";//待审核
+			var wait = $('#waitHandle').attr('class');
+			var refund = $('#refundId').attr('class');
+			if(wait="current" && wait!=""){
+				 stateFlag = "40";
+			}else if(refund="current" && refund!=""){
+				stateFlag="92";//待审核
 			}
 			var orderTimeS = $("#orderTimeBegin").val();
 			var orderTimeE = $("#orderTimeEnd").val();

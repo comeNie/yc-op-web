@@ -4,6 +4,7 @@ public class ExAllOrder {
 	private String chlId;
 	private String orderType;
 	private Long orderId;
+	private String parentOrderId;
 	private String orderTime;
 
 	private String userName;
@@ -226,5 +227,15 @@ public class ExAllOrder {
 	public void setProdUpdateTime(String prodUpdateTime) {
 		this.prodUpdateTime = prodUpdateTime;
 	}
+
+	public String getParentOrderId() {
+		return parentOrderId;
+	}
+
+	public void setParentOrderId(String parentOrderId) {
+		this.parentOrderId = parentOrderId;
+	}
+
+	
 
 }

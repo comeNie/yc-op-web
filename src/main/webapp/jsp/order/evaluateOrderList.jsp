@@ -186,9 +186,9 @@
       <td>{{:serveManner}}</td>
 	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', evaluateTime)}}</td>
       <td>{{:interperName}}</td>
-	  <td>译员级别</td>
+	  <td>{{:interperLevel}}</td>
 	  <td>{{:lspName}}</td>
-	 <td>{{:state}}</td>
+	 <td>{{:evaluateState}}</td>
      <td><a href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>
   </tr>                             
 </script> 

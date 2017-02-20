@@ -5,7 +5,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>退款订单详情</title>
+<title>已评论订单详情</title>
 <%@include file="/inc/inc.jsp"%>
 <style type="text/css">
     .btn-ext{
@@ -75,83 +75,31 @@
                   <div class="form-label">
 								<ul>
 									<li class="col-md-6">
-										<p class="word">订单号：</p>
+										<p class="word">订单编号：</p>
 										<p>{{:orderId}}</p>
-									</li>
-									<li class="col-md-6">
-										<p class="word">订单状态：</p>
-										<p>{{:~getStateName(state)}}</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">订单来源：</p>
 										<p>{{:~getChlIdName(chlId)}}</p>
 									</li>
 									<li class="col-md-6">
+										<p class="word">订单级别：</p>
+										<p>{{:orderLevel}}</p>
+									</li>
+									<li class="col-md-6">
 										<p class="word">订单类型：</p>
 										<p>{{:~getTranslateTypeName(translateType)}}</p>
 									</li>
 									<li class="col-md-6">
-										<p class="word">用户昵称：</p>
+										<p class="word">会员昵称：</p>
 										<p>{{:usernick}}</p>
 									</li>
                                     <li class="col-md-6">
 										<p class="word">时区：</p>
 										<p>{{:timeZone}}</p>
 									</li>
-									<li class="col-md-6">
-										<p class="word">下单时间：</p>
-										<p>{{:~timesToFmatter(orderTime)}}</p>
-									</li>
-								
-                                    <li class="col-md-6">
-										<p class="word">联系人姓名：</p>
-										<p> 
-                                           {{:contacts.contactName}}
-                                        </p>
-									</li>
-									<li class="col-md-6">
-										<p class="word">联系人手机：</p>
-										<p>
-                                              {{:contacts.contactTel}}
-                                        </p>
-									</li>
-									<li class="col-md-6">
-										<p class="word">联系人邮箱：</p>
-										<p>
-                                            {{:contacts.contactEmail}}
-										</p>
-									</li>
-									<li class="col-md-6">
-										<p class="word">支付方式：</p>
-										<p>{{:~getPayStyleName(orderFee.payStyle)}}</p>
-									</li>
-									<li class="col-md-6">
-										<p class="word">支付时间：</p>
-										<p>{{:~timesToFmatter(orderFee.payTime)}}</p>
-									</li>
-									<li class="col-md-6">
-									  <p class="word">订单金额：</p>
-									  <p>
-										  {{:~liToYuan(orderFee.totalFee)}}
-										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
-									  </p>
-								    </li>
-									<li class="col-md-6">
-									  <p class="word">实付金额：</p>
-									  <p>
-										  {{:~liToYuan(orderFee.paidFee)}}
-										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
-									  </p>
-								    </li>
-									<li class="col-md-6">
-									  <p class="word">优惠金额：</p>
-									  <p>
-										  {{:~liToYuan(orderFee.discountFee)}}
-										  {{:~getMoneyUnit(orderFee.currencyUnit)}}
-									  </p>
-								    </li>
 									<li class="col-md-12">
-										<p class="word">语言对：</p>
+										<p class="word">语种方向：</p>
 										<p>
 										   {{for prodExtends}}
 										      {{:langungePairName}}
@@ -159,17 +107,21 @@
 										</p>
 									</li>
 									<li class="col-md-6">
-										<p class="word">客户留言：</p>
-										<p class="col-md-8">
-											{{:remark}}
-										</p>
+										<p class="word">评论时间：</p>
+										<p>{{:~timesToFmatter(orderTime)}}</p>
 									</li>
 									<li class="col-md-6">
-										<p class="word">退款留言：</p>
-										<p class="col-md-8">
-											{{:reasonDesc}}
-										</p>
-									</li>			
+										<p class="word">译员昵称：</p>
+										<p>{{:interperName}}</p>
+									</li>
+                                    <li class="col-md-6">
+										<p class="word">译员级别：</p>
+										<p>{{:interperLevel}}</p>
+									</li>
+									<li class="col-md-6">
+										<p class="word">lsp名称：</p>
+										<p>{{:lspName}}</p>
+									</li>
 							 </ul>
 							</div>
 				</script>				
@@ -200,8 +152,8 @@
 <script type="text/javascript">
     var pager;
     (function () {
-        seajs.use('app/jsp/order/refundOrderDetail', function (refudnOrderDetailsPager) {
-            pager = new refudnOrderDetailsPager({element: document.body});
+        seajs.use('app/jsp/order/evaluateOrderDetail', function (evaluteOrderDetailsPager) {
+            pager = new evaluteOrderDetailsPager({element: document.body});
             pager.render();
 
         });

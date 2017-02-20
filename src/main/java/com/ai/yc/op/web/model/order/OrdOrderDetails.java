@@ -25,6 +25,10 @@ public class OrdOrderDetails extends QueryOrderDetailsResponse{
      * lsp
      */
     private String lspName;
+    /**
+     * 译员级别
+     */
+    private String interperLevel;
 
 	public String getUsername() {
 		return username;
@@ -56,6 +60,14 @@ public class OrdOrderDetails extends QueryOrderDetailsResponse{
 
 	public void setLspName(String lspName) {
 		this.lspName = lspName;
+	}
+
+	public String getInterperLevel() {
+		return interperLevel;
+	}
+
+	public void setInterperLevel(String interperLevel) {
+		this.interperLevel = interperLevel;
 	}
     
     

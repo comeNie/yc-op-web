@@ -139,6 +139,7 @@
                                     <table class="table table-hover table-border table-bordered ">
                                         <thead>
                                             <tr>
+                                            	<th>服务单号</th>
                                             	<th>订单来源</th>
                                                 <th>订单类型</th>
                                                 <th>订单编号</th>
@@ -175,6 +176,7 @@
    </div> 
 <script id="orderListTemple" type="text/template">
 	<tr>
+		<td>{{:parentOrderId}}</td>
   	  <td>{{:chlIdPage}}</td>
       <td>{{:translateTypePage}}</td>
       <td><a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">{{:orderId}}</a></td>
