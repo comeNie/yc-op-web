@@ -17,6 +17,10 @@ public final class Constants {
 	public static final String ORD_CHL_ID = "CHL_ID";
 	/** 订单级别*/
 	public static final String ORD_ORDER_LEVEL = "ORDER_LEVEL";
+	/**
+	 * 评论状态
+	 */
+	public static final String ORD_EVALUATE_STATE = "EVALUATE_STATE";
 	/** 支付方式*/
 	public static final String ORD_PAY_STYLE = "PAY_STYLE";
 	/** 翻译类型*/

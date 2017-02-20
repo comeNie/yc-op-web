@@ -30,7 +30,8 @@ define('app/jsp/order/evaluateOrderList', function (require, exports, module) {
     	events: {
     		 "click #showQuery":"_showQueryInfo",
     		//查询
-            "click #search":"_searchOrderList"
+            "click #search":"_searchOrderList",
+            "click #export":"_export"
             
         },
     	//重写父类
@@ -118,7 +119,32 @@ define('app/jsp/order/evaluateOrderList', function (require, exports, module) {
 				}
 			});
 		},
-		
+		_export:function(){
+			var _this=this;
+			var evaluteTimeS=jQuery.trim($("#evaluatTimeBegin").val());
+			var evaluteTimeE=jQuery.trim($("#evaluatEnd").val());
+			if(evaluteTimeE=="" || evaluteTimeE==null){
+				evaluteTimeE="";
+			}else{
+				evaluteTimeE= new Date( Date.parse( $("#evaluatEnd").val().replace(/-/g,"/")) ).getTime();
+			}
+			if(evaluteTimeS=="" || evaluteTimeS==null){
+				evaluteTimeS="";
+			}else{
+				evaluteTimeS= new Date( Date.parse( $("#evaluatTimeBegin").val().replace(/-/g,"/")) ).getTime();
+			}
+			var userName=jQuery.trim($("#nickName").val());
+			var lspName = jQuery.trim($("#lspName").val());
+			var interperName = jQuery.trim($("#interperName").val());
+			var chlId=jQuery.trim($("#orderSource option:selected").val());
+			var translateType=jQuery.trim($("#orderType option:selected").val());
+			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
+			var orderPageId=jQuery.trim($("#orderId").val());
+			window.location.href=_base+'/evaluateExport?evaluateTimeE='+evaluteTimeE+'&evaluateTimeS='+evaluteTimeS+
+			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire
+		    +'&orderPageId='+orderPageId+'&lspName='+lspName+'&interperName='+interperName+
+		    "&offset="+today.stdTimezoneOffset();
+		},
 		_searchOrderList:function(){
 			var _this=this;
 			var url = _base+"/getEvluateOrdPageData";

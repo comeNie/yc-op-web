@@ -36,6 +36,20 @@ public class ExAllOrder {
 
 	private String prodUpdateTime;
 
+	private String evaluateState;
+
+	private String lspName;
+
+	private String interperLevel;
+	
+	private String evaluateTime;
+	
+	private String speed;
+	private String manner;
+	private String quality;
+	
+	
+
 	public String getInterperName() {
 		return interperName;
 	}
@@ -236,6 +250,60 @@ public class ExAllOrder {
 		this.parentOrderId = parentOrderId;
 	}
 
-	
+	public String getEvaluateState() {
+		return evaluateState;
+	}
+
+	public void setEvaluateState(String evaluateState) {
+		this.evaluateState = evaluateState;
+	}
+
+	public String getLspName() {
+		return lspName;
+	}
+
+	public void setLspName(String lspName) {
+		this.lspName = lspName;
+	}
+
+	public String getInterperLevel() {
+		return interperLevel;
+	}
+
+	public void setInterperLevel(String interperLevel) {
+		this.interperLevel = interperLevel;
+	}
+
+	public String getEvaluateTime() {
+		return evaluateTime;
+	}
+
+	public void setEvaluateTime(String evaluateTime) {
+		this.evaluateTime = evaluateTime;
+	}
+
+	public String getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(String speed) {
+		this.speed = speed;
+	}
+
+	public String getManner() {
+		return manner;
+	}
+
+	public void setManner(String manner) {
+		this.manner = manner;
+	}
+
+	public String getQuality() {
+		return quality;
+	}
+
+	public void setQuality(String quality) {
+		this.quality = quality;
+	}
 
 }

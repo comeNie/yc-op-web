@@ -212,12 +212,11 @@ define('app/jsp/order/refundOrderList', function (require, exports, module) {
 			var chlId=jQuery.trim($("#orderSource option:selected").val());
 			var translateType=jQuery.trim($("#orderType option:selected").val());
 			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
-			var state=jQuery.trim($("#searchOrderState").val());
 			var orderPageId=jQuery.trim($("#orderId").val());
 			var payStyle = jQuery.trim($("#payStyle option:selected").val());
 			window.location.href=_base+'/refundExport?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
-			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+'&state='
-		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle+
+			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire
+		     +'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle+
 		"&stateFlag="+stateFlag+"&offset="+today.stdTimezoneOffset();
 		},
 		_searchOrderList:function(){
