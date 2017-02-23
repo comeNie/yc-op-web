@@ -95,6 +95,7 @@ dependencies {
 	compile 'com.ai.yc.order:orderlevel:1.0-SNAPSHOT'
 	compile 'com.ai.yc.order:paystatus:1.0-SNAPSHOT'
 	compile 'com.ai.yc.order:orderreview:1.0.1-SNAPSHOT'
+	compile 'com.ai.yc.order:orderevaluation:1.0-SNAPSHOT'
 	/********************公共中心*************************/
 	compile 'com.ai.yc.common:cache:1.0-SNAPSHOT'
 	compile 'com.ai.yc.common:syspurpose:1.0-SNAPSHOT'

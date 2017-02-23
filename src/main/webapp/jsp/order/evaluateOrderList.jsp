@@ -188,7 +188,7 @@
       <td>{{:interperName}}</td>
 	  <td>{{:interperLevel}}</td>
 	  <td>{{:lspName}}</td>
-	 <td>{{:evaluateState}}</td>
+	 <td>{{:statePage}}</td>
      <td><a href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>
   </tr>                             
 </script> 

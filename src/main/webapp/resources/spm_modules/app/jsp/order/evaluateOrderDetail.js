@@ -28,7 +28,8 @@ define('app/jsp/order/evaluateOrderDetail', function(require, exports, module) {
 		},
 		// 事件代理
 		events : {
-			"click #cancel":"_cancel"
+			"click #cancel":"_cancel",
+			"click #save":"_update"
 		},
 		// 重写父类
 		setup : function() {
@@ -45,7 +46,27 @@ define('app/jsp/order/evaluateOrderDetail', function(require, exports, module) {
         	window.location.href = _base+"/order/back?state="
             + state+"&random="+Math.random();
 		},
-		
+		_update:function(){
+			var _this=this;
+			var orderId = $("#orderId").val();
+			var remark = $("#remark").val();
+			var state = $('input:radio:checked').val();
+			$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/updateEvaluate",
+				dataType : "json",
+				data : {
+					orderId:orderId,
+					state:state,
+					remark:remark
+				},
+				message : "正在加载数据..",
+				success : function(data) {
+					_this._cancel();
+				}
+			});
+		},
 		
 		_queryOrderDetails:function(){
 			var _this = this;
@@ -62,6 +83,14 @@ define('app/jsp/order/evaluateOrderDetail', function(require, exports, module) {
 					$("#date1").html(orderInfoHtml);
 					var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
 					$("#orderStateChgTable").html(orderStateChgHtml);
+					//状态赋值
+					var state = rs.data.evaluateVo.state;
+					if(state=='0'){
+						//隐藏
+						$("#hiddenId").attr('checked', 'checked');
+					}else{
+						$("#showId").attr('checked', 'checked');
+					}
 				}
 			});
 		}

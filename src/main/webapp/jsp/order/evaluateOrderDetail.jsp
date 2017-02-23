@@ -84,7 +84,7 @@
 									</li>
 									<li class="col-md-6">
 										<p class="word">订单级别：</p>
-										<p>{{:orderLevel}}</p>
+										<p>{{:~getOrderLevelName(orderLevel)}}</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">订单类型：</p>
@@ -123,9 +123,143 @@
 										<p>{{:lspName}}</p>
 									</li>
 							 </ul>
-							</div>
+							<ul>
+								<li class="col-md-6">
+									<p class="word">服务质量：</p>
+									{{if evaluateVo.serveQuality==8)}}										  
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{else evaluateVo.serveQuality==16}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{else evaluateVo.serveQuality==24}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star3" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									 {{else evaluateVo.serveQuality==32}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star3" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star4" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{else evaluateVo.serveQuality==40}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star3" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star4" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star5" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{/if}}
+								</li>	
+							</ul>
+							<ul>
+								<li class="col-md-6">
+									<p class="word">服务速度：</p>
+									{{if evaluateVo.serveSpeed==6)}}										  
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{else evaluateVo.serveSpeed==12}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{else evaluateVo.serveSpeed==18}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star3" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									 {{else evaluateVo.serveSpeed==24}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star3" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star4" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{else evaluateVo.serveSpeed==30}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star3" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star4" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star5" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{/if}}
+								</li>	
+							</ul>
+							<ul>
+								<li class="col-md-6">
+									<p class="word">服务态度：</p>
+									{{if evaluateVo.serveManner==6)}}										  
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{else evaluateVo.serveManner==12}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{else evaluateVo.serveManner==18}}
+										<p >
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star3" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									 {{else evaluateVo.serveManner==24}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star3" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star4" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{else evaluateVo.serveManner==30}}
+										<p>
+                                			<span><img class="star" name="star1" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star2" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star3" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star4" src="${uedroot}/images/xx-01.jpg"></span>
+                                			<span><img class="star" name="star5" src="${uedroot}/images/xx-01.jpg"></span>
+                            			</p>
+									{{/if}}
+								</li>	
+							</ul>
+							<ul>
+									<li class="col-md-6">
+										<p class="word">内容：</p>
+										<p>{{:evaluateVo.evaluateContent}}</p>
+									</li>
+							</ul>
+							<ul>
+								<li class="word">状态:</li>
+								<li>
+									<input type="radio" id="showId" name="demo-radio1" value="1">
+	    							<label for="radio-1" calss="ml-10">显示</label>
+	    							<input type="radio" id="hiddenId" name="demo-radio1" value="0">
+									<label for="radio-1">隐藏</label>
+ 								</li>
+							</ul>
+							<ul>
+								<li class="col-md-6">
+										<p class="word">备注：</p>
+										<p>
+										<textarea class="int-text" maxlength="100" id="remark">
+											{{:evaluateVo.remark}}
+										</textarea>
+										</p>
+									</li>
+							</ul>
+						</div>
 				</script>				
             <div class="bc-ang mb-12">
+            	 <input id="save" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="提交" />
 				<input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />      
 			</div>
     </div>                       

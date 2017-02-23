@@ -33,7 +33,6 @@ import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
-import com.ai.yc.op.web.utils.AmountUtil;
 import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
@@ -125,13 +124,13 @@ public class EvaluateOrderListController {
                 		if(orderTypeParam!=null){
                 			resParam.setTranslateTypePage(orderTypeParam.getColumnDesc());
                 		}
-                		//翻译订单状态
-                		paramCond = new SysParamSingleCond();
-                		paramCond.setTenantId(Constants.TENANT_ID);
-    					paramCond.setColumnValue(vo.getState());
-    					paramCond.setTypeCode(Constants.TYPE_CODE);
-    					paramCond.setParamCode(Constants.ORD_STATE);
-                		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
+                		//翻译评论状态
+		        		paramCond = new SysParamSingleCond();
+		        		paramCond.setTenantId(Constants.TENANT_ID);
+						paramCond.setColumnValue(vo.getEvaluateState());
+						paramCond.setTypeCode(Constants.TYPE_CODE);
+						paramCond.setParamCode(Constants.ORD_EVALUATE_STATE);
+		        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
                 		if(stateParam!=null){
                 			resParam.setStatePage(stateParam.getColumnDesc());
                 		}
