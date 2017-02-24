@@ -72,7 +72,7 @@ public class OrdOrderController {
 	     return view;
 	 } 
 	 @RequestMapping("/back")
-	 public ModelAndView backPage(String state,String isAll) {
+	 public ModelAndView backPage(String state,String isAll,String busiType) {
 		 
 		 if(StringUtil.isBlank(isAll)){
 			 if(!StringUtil.isBlank(state)){
@@ -88,7 +88,7 @@ public class OrdOrderController {
 					return new ModelAndView("jsp/order/translatingOrderList");
 				}else if(Constants.State.CANCEL_STATE.equals(state)){
 					return new ModelAndView("jsp/order/cancelOrderList");
-				}else if(Constants.State.REVIEW_STATE.equals(state)){
+				}else if(Constants.State.REVIEW_STATE.equals(state) && (!"2".equals(busiType))){
 					return new ModelAndView("jsp/order/reviewOrderList");
 				}else if(Constants.State.UPDATING_STATE.equals(state)){
 					return new ModelAndView("jsp/order/updatingOrderList");
@@ -98,6 +98,8 @@ public class OrdOrderController {
 					return new ModelAndView("jsp/order/refundOrderList");
 				}else if(Constants.State.EVALUATE_STATE.equals(state)){
 					return new ModelAndView("jsp/order/evaluateOrderList");
+				}else if(Constants.State.REVIEW_STATE.equals(state) && "2".equals(busiType)){
+					return new ModelAndView("jsp/order/refundOrderList");
 				}
 			 } 
 		 }

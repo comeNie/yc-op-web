@@ -137,6 +137,7 @@ public class EvaluteOrdDetailController {
 			req = new UpdateOrdEvaluateRequest();
 			req.setOrderId(Long.valueOf(orderId));
 			req.setState(state);
+			req.setRemark(remark);
 			resp = iOrderEvaluationSV.updateEvaluateByOrdId(req);
 		} catch (Exception e) {
 			log.error("系统异常，请稍后重试", e);

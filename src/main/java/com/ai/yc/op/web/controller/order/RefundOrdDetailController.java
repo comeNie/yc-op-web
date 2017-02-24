@@ -28,11 +28,12 @@ public class RefundOrdDetailController {
 	private static final Logger log = LoggerFactory.getLogger(OrdOrderController.class);
 	public final static String ORDER_DETAILS_PAGE = "jsp/order/refundOrderDetail";
 	@RequestMapping("/toOrderDetail")
-	 public ModelAndView toOrderDetailsPage(@RequestParam(value="mod",defaultValue="view")String mod,Long orderId,String isAll) {
+	 public ModelAndView toOrderDetailsPage(@RequestParam(value="mod",defaultValue="view")String mod,Long orderId,String isAll,String stateCheck) {
 		 ModelAndView view = new ModelAndView(ORDER_DETAILS_PAGE);
 		 view.addObject("model", mod);
 		 view.addObject("orderId", orderId);
 		 view.addObject("isAll", isAll);
+		 view.addObject("stateCheck", stateCheck);
 	     return view;
 	 } 
 	@RequestMapping("/refundOrdDetails")
@@ -59,7 +60,7 @@ public class RefundOrdDetailController {
 		OrdOrderDetails details = new OrdOrderDetails();
 		BeanUtils.copyProperties(details, resp);
 		//调用用户中心
-		//installUserInfo(details);
+		installUserInfo(details);
 		return new ResponseData<OrdOrderDetails>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功", details);
 		
 	}

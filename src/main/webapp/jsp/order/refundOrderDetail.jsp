@@ -18,6 +18,7 @@
     <input id="mod" type="hidden" value="${model}"/>
     <form id="orderForm">
     <input id="orderId" name="orderId" type="hidden" value="${orderId}"/>
+    <input id="stateCheck" name="stateCheck" type="hidden" value="${stateCheck}"/>
      <input id="isAll" name="isAll" type="hidden" value="${isAll}"/>
 	 <div class="row">
 	 
@@ -171,9 +172,21 @@
 										</p>
 									</li>			
 							 </ul>
-							</div>
+							<ul>
+								<li class="word">审核备注:</li>
+								<li>
+									<textarea class="int-text textarea-large" id="checkRemark" maxlength="100"></textarea>
+								</li>
+							</ul>
+						</div>
 				</script>				
             <div class="bc-ang mb-12">
+            <c:if test="${stateCheck=='41'}">
+            	 <input id="passId" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="确认" />
+            </c:if>	
+            <c:if test="${stateCheck=='42'}">
+            	 <input id="refuseId" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="锁定" />
+            </c:if>
 				<input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />      
 			</div>
     </div>                       

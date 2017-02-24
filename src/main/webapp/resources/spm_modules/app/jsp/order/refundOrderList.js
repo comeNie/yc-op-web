@@ -297,6 +297,10 @@ define('app/jsp/order/refundOrderList', function (require, exports, module) {
     	_detailPage:function(orderId){
 			window.location.href = _base+"/orderDetail/toOrderDetail?orderId="
             + orderId+'&mod=edit'+"&random="+Math.random();
+		},
+		_check:function(orderId,stateCheck){
+			window.location.href = _base+"/orderDetail/toOrderDetail?orderId="
+            + orderId+'&stateCheck='+stateCheck+'&mod=edit'+"&random="+Math.random();
 		}
     });
     

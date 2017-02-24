@@ -209,6 +209,10 @@
      <td>{{:statePage}}</td>
      <td>
 		<a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">查看</a>
+		{{if state==40}}
+			<a href="javascript:void(0);" class="adopt" onclick="pager._check('{{:orderId}}','41')">确认</a>
+			<a href="javascript:void(0);" class="reject" onclick="pager._check('{{:orderId}}','42')">锁定</a>
+		{{/if}}	
 	</td>
   </tr>                                                                       
 </script> 

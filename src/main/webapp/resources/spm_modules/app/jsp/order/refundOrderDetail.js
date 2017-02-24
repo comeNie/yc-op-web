@@ -28,7 +28,10 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
 		},
 		// 事件代理
 		events : {
-			"click #cancel":"_cancel"
+			"click #cancel":"_cancel",
+			"click #passId":"_handReviewOrder",
+			"click #refuseId":"_handReviewOrder"
+			
 		},
 		// 重写父类
 		setup : function() {
@@ -43,9 +46,28 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
         	var isAll =$("#isAll").val();
         	var state =$("#state").val();
         	window.location.href = _base+"/order/back?state="
-            + state+"&random="+Math.random();
+            + state+"&busiType="+"2"+"&random="+Math.random();
 		},
-		
+		_handReviewOrder:function(){
+			var _this=this;
+			var state=$("#stateCheck").val();
+			var orderId = $("#orderId").val();
+			var reasonDesc=$("#checkRemark").val();
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: _base + "/order/updateOrderInfo",
+				data: {
+					state:state,
+					orderId:orderId,
+					reasonDesc:reasonDesc
+				},
+				success: function (data) {
+					_this._cancel();
+				}
+			});
+		},
 		
 		_queryOrderDetails:function(){
 			var _this = this;
@@ -62,6 +84,7 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
 					$("#date1").html(orderInfoHtml);
 					var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
 					$("#orderStateChgTable").html(orderStateChgHtml);
+					//初始化按钮展示
 				}
 			});
 		}
