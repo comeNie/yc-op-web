@@ -46,7 +46,7 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
         	var isAll =$("#isAll").val();
         	var state =$("#state").val();
         	window.location.href = _base+"/order/back?state="
-            + state+"&busiType="+"2"+"&random="+Math.random();
+            + state+"&busiType="+"2"+'&isAll='+isAll+"&random="+Math.random();
 		},
 		_handReviewOrder:function(){
 			var _this=this;
@@ -57,11 +57,12 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
 				type: "post",
 				processing: true,
 				message: "保存数据中，请等待...",
-				url: _base + "/order/updateOrderInfo",
+				url: _base + "/refundCheck",
 				data: {
 					state:state,
 					orderId:orderId,
-					reasonDesc:reasonDesc
+					reasonDesc:reasonDesc,
+					displayFlag:state
 				},
 				success: function (data) {
 					_this._cancel();
@@ -77,7 +78,7 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
 				type: "post",
 				processing: true,
 				message: "加载数据中，请等待...",
-				url: _base + "/orderDetail/refundOrdDetails",
+				url: _base + "/refundOrdDetails",
 				data: param,
 				success: function (rs) {
 					var orderInfoHtml = $("#orderInfoTempl").render(rs.data);

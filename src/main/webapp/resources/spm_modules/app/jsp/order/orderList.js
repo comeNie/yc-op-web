@@ -428,6 +428,18 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     	_detailPage:function(orderId){
 			window.location.href = _base+"/order/orderdetails?orderId="
             + orderId+'&mod=edit'+'&isAll=all'+"&random="+Math.random();
+		},
+		_check:function(orderId,stateCheck){
+			window.location.href = _base+"/toRefundOrderDetail?orderId="
+            + orderId+'&stateCheck='+stateCheck+'&isAll=all'+'&mod=edit'+"&random="+Math.random();
+		},
+		_refundDetail:function(orderId){
+			window.location.href = _base+"/toRefundOrderDetail?orderId="
+            + orderId+'&isAll=all'+'&mod=edit'+"&random="+Math.random();
+		},
+		_jugedDetail:function(orderId){
+			window.location.href = _base+"/toEvaluteOrdDetail?orderId="
+            + orderId+'&isAll=all'+"&mod=edit&random="+Math.random();
 		}
     });
     

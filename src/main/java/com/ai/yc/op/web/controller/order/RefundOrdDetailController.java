@@ -13,9 +13,14 @@ import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.op.web.model.order.OrdOrderDetails;
+import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
+import com.ai.yc.op.web.utils.LoginUtil;
 import com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsRequest;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
+import com.ai.yc.order.api.orderrefund.interfaces.IOrderRefundSV;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
 import com.ai.yc.ucenter.api.members.interfaces.IUcMembersSV;
 import com.ai.yc.ucenter.api.members.param.get.UcMembersGetRequest;
 import com.ai.yc.ucenter.api.members.param.get.UcMembersGetResponse;
@@ -23,11 +28,10 @@ import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
 import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
 import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
 @Controller
-@RequestMapping("/orderDetail")
 public class RefundOrdDetailController {
 	private static final Logger log = LoggerFactory.getLogger(OrdOrderController.class);
 	public final static String ORDER_DETAILS_PAGE = "jsp/order/refundOrderDetail";
-	@RequestMapping("/toOrderDetail")
+	@RequestMapping("/toRefundOrderDetail")
 	 public ModelAndView toOrderDetailsPage(@RequestParam(value="mod",defaultValue="view")String mod,Long orderId,String isAll,String stateCheck) {
 		 ModelAndView view = new ModelAndView(ORDER_DETAILS_PAGE);
 		 view.addObject("model", mod);
@@ -87,6 +91,34 @@ public class RefundOrdDetailController {
 				log.error("获取用户名称信息失败", e);
 			}
 		}
+		
+	}
+	/**
+	 * 退款审核订单
+	 */
+	@RequestMapping("/refundCheck")
+	@ResponseBody
+    public ResponseData<Boolean> updateOrderInfo(OrderRefundRequest req){
+		IOrderRefundSV orderRefundSV = DubboConsumerFactory.getService(IOrderRefundSV.class);
+		OrderRefundResponse resp = null;
+		try {
+			GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+			req.setOperId(loginUser.getUserId());
+			req.setOperName(loginUser.getLoginName());
+			resp = orderRefundSV.refund(req);
+		} catch (Exception e) {
+			log.error("系统异常，请稍后重试", e);
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		if(resp==null){
+			log.error("系统异常，请稍后重试");
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		if(!resp.getResponseHeader().isSuccess()){
+			log.error(resp.getResponseHeader().getResultMessage());
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, resp.getResponseHeader().getResultMessage(), null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "修改订单成功", true);
 		
 	}
 }

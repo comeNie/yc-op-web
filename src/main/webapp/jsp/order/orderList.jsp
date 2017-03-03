@@ -251,13 +251,28 @@
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', payTime)}}</td>
      <td>{{:statePage}}</td>
      <td>
-		<a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">查看</a>
- 		{{if state==11}}
+		{{if state==40 && busiType=='2'}}
+			<a href="javascript:void(0);" onclick="pager._refundDetail('{{:orderId}}')">查看</a>
+		{{/if}}
+		{{if state==92}}
+			<a href="javascript:void(0);" onclick="pager._refundDetail('{{:orderId}}')">查看</a>
+		{{/if}}
+		{{if state==53}}
+			<a href="javascript:void(0);" onclick="pager._jugedDetail('{{:orderId}}')">查看</a>
+		{{/if}}
+		{{if busiType!='2' && state!=53}}
+			<a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">查看</a>
+		{{/if}} 		
+		{{if state==11}}
 			<a href="javascript:void(0);" onclick="pager._popUp('{{:orderId}}','{{:payStylePage}}','{{:currencyUnit}}','{{:payStyle}}','{{:totalFeePage}}','{{:totalFee}}')">修改支付状态</a>
 		{{/if}}
-		{{if state==40}}
+		{{if state==40 && busiType=='1'}}
 			<a href="javascript:void(0);" class="adopt" onclick="pager._adoptReviewOrder('{{:orderId}}')">通过</a>
 			<a href="javascript:void(0);" class="reject" onclick="pager._rejectReviewOrder('{{:orderId}}')">驳回</a>
+		{{/if}}	
+		{{if state==40 && busiType=='2'}}
+			<a href="javascript:void(0);" class="adopt" onclick="pager._check('{{:orderId}}','92')">确认</a>
+			<a href="javascript:void(0);" class="reject" onclick="pager._check('{{:orderId}}','42')">锁定</a>
 		{{/if}}	
 		
 	</td>

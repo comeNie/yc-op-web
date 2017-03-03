@@ -44,7 +44,7 @@ define('app/jsp/order/evaluateOrderDetail', function(require, exports, module) {
         	var isAll =$("#isAll").val();
         	var state =$("#state").val();
         	window.location.href = _base+"/order/back?state="
-            + state+"&random="+Math.random();
+            + state+'&isAll='+isAll+"&random="+Math.random();
 		},
 		_update:function(){
 			var _this=this;

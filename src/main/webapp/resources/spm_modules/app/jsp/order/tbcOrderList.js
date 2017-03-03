@@ -42,6 +42,16 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
     		this._bindChlIdSelect();
     		this._bindOrdTypeSelect();
     		this._bindLanguageSelect();
+    		//退款按钮事件
+    		var _this = this;
+    		$("#orderListData").on("click",".adopt",function(){
+    			var $this = $(this);
+    			var $tr = $this.parent("td").parent("tr");
+    			var param = {};
+    			var $tds = $tr.find("td");
+    			param.orderId = $tds.eq(0).find("input").eq(0).val();
+    			_this.rejectReviewOrder(param);
+    		});
     	},
     	_showQueryInfo: function(){
 			//展示查询条件
@@ -225,7 +235,38 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
     	_detailPage:function(orderId){
 			window.location.href = _base+"/order/orderdetails?orderId="
             + orderId+'&mod=edit'+"&random="+Math.random();
-    	}
+    	},
+    	rejectReviewOrder:function(param){
+			var _this = this;
+			var d = Dialog({
+				content:'<textarea id="reasonDesc" style="width:200px;" class="int-text"  maxlength="100"></textarea>',
+				padding: 0,
+				okValue: '退款',
+				title: '退款原因:',
+				ok:function(){
+					param.busiType='2';
+					param.reasonDesc = $("#reasonDesc").val();
+					param.state = '50';
+					_this._handReviewOrder(param);
+				},
+				cancelValue: '取消',
+			    cancel: function () {}
+			});
+			d.showModal();
+		},
+    	_handReviewOrder:function(param){
+			var _this=this;
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: _base + "/refundCheck",
+				data: param,
+				success: function (data) {
+					window.location.href=_base+"/toTbcOrderList";
+				}
+			});
+		}
 		
     });
     
