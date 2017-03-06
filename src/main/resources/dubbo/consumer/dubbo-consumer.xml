@@ -83,6 +83,9 @@
 		
 	<dubbo:reference id="ucMembersSV"
 		interface="com.ai.yc.ucenter.api.members.interfaces.IUcMembersSV"
-		registry="baasRegistry" />	
+		registry="baasRegistry" />
+	<!--译员账单-->
+	<dubbo:reference id="iBillGenerateSV"
+					 interface="com.ai.slp.balance.api.translatorbill.interfaces.IBillGenerateSV" />
 
 </beans>
