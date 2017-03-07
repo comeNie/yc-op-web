@@ -132,6 +132,30 @@ public class TranslatorBillListController {
 
 
 	/**
+	 * 账单结算
+	 */
+	@RequestMapping("/settleBill")
+	@ResponseBody
+	public ResponseData<Boolean> settleBill(SettleParam param)throws Exception{
+		IBillGenerateSV billGenerateSV = DubboConsumerFactory.getService(IBillGenerateSV.class);
+		String billId=null;
+		try {
+			billId = billGenerateSV.settleBill(param);
+		}catch (Exception e){
+			logger.error("系统异常，请稍后重试", e);
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		if(billId==null){
+			logger.error("系统异常，请稍后重试");
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		if (!param.getBillID().equals(billId)){
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "账单结算成功", true);
+	}
+
+	/**
      * 订单信息导出
      */
     @RequestMapping("/export")

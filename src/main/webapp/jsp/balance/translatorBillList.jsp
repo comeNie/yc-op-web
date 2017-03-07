@@ -8,7 +8,7 @@
 <title>译员账单</title>
 <%@include file="/inc/inc.jsp" %>
 <input type="hidden" id="billIdUpdate"/>
-<input type="hidden" id="payStyleUpdate"/>
+<input type="hidden" id="billState"/>
 <input type="hidden" id="accountAmoutUpdate"/>
 <input type="hidden" id="settleAccountUpdate"/>
 </head>
@@ -221,7 +221,7 @@
 		  {{if  state == '1'}}
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:billId}}')">明细</a>
 		  {{else }}
-		  <a href="javascript:void(0);" onclick="pager._popUp('{{:billId}}','{{:accountAmout}}')">结算</a>
+		  <a href="javascript:void(0);" onclick="pager._popUp('{{:billId}}','{{:state}}','{{:accountAmout}}')">结算</a>
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:billId}}')">明细</a>
 		  {{/if}}
 	  </td>

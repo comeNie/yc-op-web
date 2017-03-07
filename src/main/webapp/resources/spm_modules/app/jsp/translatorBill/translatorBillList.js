@@ -184,7 +184,7 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
     		}
     	},
     	//弹出框
-    	_popUp:function(billId,accountAmout){
+    	_popUp:function(billId,state,accountAmout){
     		var _this= this;
     		$("#updateMoney").val("");
     		$("#payStyle").val("");
@@ -195,6 +195,8 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
 			$('#eject-mask').fadeIn(100);
 			$('#add-samll').slideDown(200);
 			$("#updateMoney").val(accountAmout);
+			$("#billIdUpdate").val(billId);
+			$("#billState").val(state);
 			// $("#payStyle").val(accountType);
     	},
     	_updatePayState:function(){
@@ -204,28 +206,28 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
 			if(!$("#dataForm").valid()){
 				return false;
 			}
-    		var billId = $("#orderIdUpdate").val();
-    		var money = $("#realmoney").val();
-    		var remak = $("#remark").val();
-    		var payStyle="HK";
-    		var currencyUnit=$("#currencyUnitUpdate").val();
+    		var billId = $("#billIdUpdate").val();
+    		var money = $("#updateMoney").val();
+    		var payStyle=jQuery.trim($("#payStyle option:selected").val());
+			var settleAccount = $("#account").val();
+			var billState = $("#billState").val();
     		$.ajax({
 				type : "post",
 				processing : false,
-				url : _base+ "/updatePayState",
+				url : _base+ "/balance/settleBill",
 				dataType : "json",
 				data : {
-					orderId:orderId,
-					remark:remak,
-					updateFee:money,
-					currencyUnit:currencyUnit,
-					payStyle:payStyle
+					state:billState,
+					billID:billId,
+					accountType:payStyle,
+					accountAmount:money,
+					settleAccount:settleAccount
 				},
 				message : "正在加载数据..",
 				success : function(data) {
 					if(data.statusCode==1){
 						//跳到列表页面
-						window.location.href=_base+"/order/toOrderList?random="+Math.random();
+						window.location.href=_base+"/balance/toTranslatorBillList?random="+Math.random();
 					}else{
 						var d = Dialog({
 							title: '消息',
