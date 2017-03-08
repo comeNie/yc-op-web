@@ -249,7 +249,7 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
     		$('#add-samll').slideUp(150);
     	},
     	_detailPage:function(billId){
-			window.location.href = _base+"/balance/toTranslatorDetailBillList?billID=" + billId;
+			window.location.href = _base+"/balance/toTranslatorDetailBillList?billID="+billId;
 		}
     });
     

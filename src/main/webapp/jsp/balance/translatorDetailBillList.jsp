@@ -32,10 +32,9 @@
 												<th>语种方向</th>
 												<th>订单金额</th>
 												<th>平台费用</th>
-												<th>译员支出</th>
-												<th>LSP结余</th>
+												<th>译员结余</th>
 												<th>译员昵称</th>
-												<th>译员用户名</th>
+												<th>LSP团队</th>
 												<th>订单状态</th>
 											</tr>
                                         </thead>
@@ -61,7 +60,7 @@
    </div> 
 <script id="billDetailListTemple" type="text/template">
 	<tr>
-  	  <td>序号</td>
+  	  <td>{{:id}}</td>
       <td>{{:orderId}}</td>
       <td>{{:nickname}}</td>
  	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
@@ -80,9 +79,8 @@
 		  PayPal
 		  {{/if}}
 	  </td>--%>
-	  <td>LSP结余</td>
 	  <td>{{:nickname2}}</td>
-	  <td>译员用户名</td>
+	  <td>{{:lspName}}</td>
 	  <td>
 		  {{if  state == '10'}}
 		  提交

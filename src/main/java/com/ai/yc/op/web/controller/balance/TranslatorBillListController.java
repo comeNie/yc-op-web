@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ai.slp.balance.api.translatorbill.interfaces.IBillGenerateSV;
 import com.ai.slp.balance.api.translatorbill.param.*;
+import com.ai.yc.op.web.model.bill.BillDetailResponse;
+import com.ai.yc.translator.api.translatorservice.interfaces.IYCTranslatorServiceSV;
+import com.ai.yc.translator.api.translatorservice.param.YCLSPInfoReponse;
+import com.ai.yc.translator.api.translatorservice.param.searchYCLSPInfoRequest;
+import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,29 +108,43 @@ public class TranslatorBillListController {
 	 */
 	@RequestMapping("/getBillDetailData")
 	@ResponseBody
-	public ResponseData<PageInfo<FunAccountDetailResponse>> getDetailList(HttpServletRequest request,String billId)throws Exception{
+	public ResponseData<PageInfo<BillDetailResponse>> getDetailList(HttpServletRequest request,String billId)throws Exception{
 		FunAccountDetailQueryRequest funAccountDetailQueryRequest = new FunAccountDetailQueryRequest();
 		funAccountDetailQueryRequest.setBillID(billId);
-		ResponseData<PageInfo<FunAccountDetailResponse>> responseData = null;
-		List<FunAccountDetailResponse> resultList = new ArrayList<FunAccountDetailResponse>();
-		PageInfo<FunAccountDetailResponse> resultPageInfo  = new PageInfo<FunAccountDetailResponse>();
+		ResponseData<PageInfo<BillDetailResponse>> responseData = null;
+		List<BillDetailResponse> resultList = new ArrayList<BillDetailResponse>();
+		PageInfo<BillDetailResponse> resultPageInfo  = new PageInfo<BillDetailResponse>();
 		
 		try{
 			IBillGenerateSV billGenerateSV = DubboConsumerFactory.getService(IBillGenerateSV.class);
+			IYCTranslatorServiceSV translatorServiceSV = DubboConsumerFactory.getService(IYCTranslatorServiceSV.class);
 			FunAccountDetailPageResponse funAccountDetailPageResponse = billGenerateSV.queryFunAccountDetail(funAccountDetailQueryRequest);
 			if (funAccountDetailPageResponse.getResponseHeader().isSuccess()) {
 				PageInfo<FunAccountDetailResponse> pageInfo = funAccountDetailPageResponse.getPageInfo();
 				BeanUtils.copyProperties(resultPageInfo, pageInfo);
 				List<FunAccountDetailResponse> result = pageInfo.getResult();
-				resultPageInfo.setResult(result);
-				responseData = new ResponseData<PageInfo<FunAccountDetailResponse>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
+				for (int i=0;i<result.size();i++){
+					Integer id = i+1;
+					String lspID = result.get(i).getLspId();
+					searchYCLSPInfoRequest searchLSPParams = new searchYCLSPInfoRequest();
+					searchLSPParams.setLspId(lspID);
+					YCLSPInfoReponse yclspInfoReponse = translatorServiceSV.searchLSPInfo(searchLSPParams);
+					String lspName = yclspInfoReponse.getLspName();
+					BillDetailResponse billDetailResponse = new BillDetailResponse();
+					billDetailResponse.setId(id);
+					billDetailResponse.setLspName(lspName);
+					BeanUtils.copyProperties(billDetailResponse,result.get(i));
+					resultList.add(billDetailResponse);
+				}
+				resultPageInfo.setResult(resultList);
+				responseData = new ResponseData<PageInfo<BillDetailResponse>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
 			}else {
-				responseData = new ResponseData<PageInfo<FunAccountDetailResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);
+				responseData = new ResponseData<PageInfo<BillDetailResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);
 			}
 
 		} catch (Exception e) {
 			logger.error("查询账单列表失败：", e);
-			responseData = new ResponseData<PageInfo<FunAccountDetailResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
+			responseData = new ResponseData<PageInfo<BillDetailResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
 		}
 		return responseData;
 	}

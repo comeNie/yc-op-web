@@ -67,7 +67,7 @@ define('app/jsp/translatorBill/translatorDetailBill', function (require, exports
 
 		_getSearchParams:function(){
 			return {
-				"billID":jQuery.trim($("#billID").val()),
+				"billId":jQuery.trim($("#billID").val()),
 			}
 		},
 	});
