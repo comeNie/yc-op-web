@@ -192,9 +192,30 @@
       <td>{{:targetName}}</td>
  	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', startAccountTime)}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', endAccountTime)}}</td>
-      <td>{{:billFee}}</td>
-      <td>{{:platFee}}</td>
-      <td>{{:accountAmout}}</td>
+      <td>
+		  {{if  flag == '0'}}
+		  ¥
+		  {{else flag == '1'}}
+		  $
+		  {{/if}}
+		  {{:billFee}}
+	  </td>
+      <td>
+		  {{if  flag == '0'}}
+		  ¥
+		  {{else flag == '1'}}
+		  $
+		  {{/if}}
+		  {{:platFee}}
+	  </td>
+      <td>
+		  {{if  flag == '0'}}
+		  ¥
+		  {{else flag == '1'}}
+		  $
+		  {{/if}}
+		  {{:accountAmout}}
+	  </td>
       <td>1个月</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}</td>
 	  <td>

@@ -65,9 +65,30 @@
       <td>{{:nickname}}</td>
  	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
       <td>{{:langungePairName}}</td>
-      <td>{{:totalFee}}</td>
-      <td>{{:platFee}}</td>
-      <td>{{:interperFee)}}</td>
+      <td>
+		  {{if  currencyUnit == '1'}}
+		  ¥
+		  {{else currencyUnit == '2'}}
+		  $
+		  {{/if}}
+		  {{:totalFee}}
+	  </td>
+      <td>
+		  {{if  currencyUnit == '1'}}
+		  ¥
+		  {{else currencyUnit == '2'}}
+		  $
+		  {{/if}}
+		  {{:platFee}}
+	  </td>
+      <td>
+		  {{if  currencyUnit == '1'}}
+		  ¥
+		  {{else currencyUnit == '2'}}
+		  $
+		  {{/if}}
+		  {{:interperFee)}}
+	  </td>
 	 <%-- <td>
 		  {{if  accountType == '1'}}
 		  支付宝
