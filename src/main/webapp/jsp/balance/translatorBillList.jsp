@@ -22,6 +22,14 @@
 	                    <div class="main-box clearfix"><!--白色背景-->
 	                    	<div class="form-label">
 		                    	<!--查询条件-->
+								<div class="main-box-body clearfix">
+									<div class="bill-list-table">
+										<ul>
+											<li ><a href="#" id="domestic" class="current" >中文站账单</a></li>
+											<li ><a href="#"  id="foreign" >英文站账单</a></li>
+										</ul>
+									</div>
+								</div>
 		                    	<div id="selectDiv">
 			                    	<ul>
 										<li class="col-md-6">
@@ -256,6 +264,12 @@
 			pager.render();
 		});
 	})();
+	$(".bill-list-table ul li a").click(function () {
+		$(".bill-list-table ul li a").each(function () {
+			$(this).removeClass("current");
+		});
+		$(this).addClass("current");
+	});
  </script>  
 </body>
 

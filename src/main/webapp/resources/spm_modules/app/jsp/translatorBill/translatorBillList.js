@@ -35,7 +35,9 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
 			"click #waitHandle":"_searchBillList",
 			"click #refundId":"_searchBillList",
 			"click #showQuery":"_showQueryInfo",
-    		//查询
+			"click #domestic":"_searchBillList",
+			"click #foreign":"_searchBillList",
+			//查询
             "click #search":"_searchBillList",
             "click #update":"_updatePayState",
             "click #export":"_export",
@@ -166,16 +168,26 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
 		
 		_getSearchParams:function(){
 			var stateBill="";
+			var flag="";
 			var orderTimeS = $("#billTimeBegin").val();
 			var orderTimeE = $("#billTimeEnd").val();
 			var wait = $('#waitHandle').attr('class');
 			var refund = $('#refundId').attr('class');
+			var domestic = $('#domestic').attr('class');
+			var foreign = $('#foreign').attr('class');
+
+			if(domestic="current1" && domestic!=""){
+				flag = 0;
+			}else if(foreign="current1" && foreign!=""){
+				flag=  1;//待审核
+			}
 			if(wait="current" && wait!=""){
 				stateBill = 2;
 			}else if(refund="current" && refund!=""){
 				stateBill=  1;//待审核
 			}
     		return {
+				"flag":flag,
     			"beginDate":orderTimeS,
     			"endDate":orderTimeE,
     			"nickName":jQuery.trim($("#nickName").val()),
