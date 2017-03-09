@@ -115,6 +115,16 @@
 .relation-table-div ul li .m-left{float:left;margin-right:10px}
 .relation-table-div ul li  p{float:left;margin-right:10px}
 
+/*账单*/
+.bill-list-table{ width:100%;display:inline-block;padding-bottom:10px;border-bottom:1px solid #e4e4e4;padding-bottom:px;margin-top:25px;}
+.bill-list-table ul{ width:100%; float:left;}
+.bill-list-table ul li{ float:left;border-right:1px solid #ccc;padding:0 10px 0 10px;}
+.bill-list-table ul li a{ font-size:14px; color:#333;padding:0 10px 0 10px;}
+.bill-list-table ul li a:hover,.order-list-table ul p a:hover{ color:#1598f5;}
+.bill-list-table ul li .current{color:#1598f5;border-bottom:2px solid #1598f5;padding-bottom:11px;}
+.bill-list-table ul li .current a{}
+
+
 /**选项卡**/
 .order-list-table{ width:100%;display:inline-block;padding-bottom:10px;border-bottom:1px solid #e4e4e4;padding-bottom:px;margin-top:25px;}
 .order-list-table ul{ width:100%; float:left;}
