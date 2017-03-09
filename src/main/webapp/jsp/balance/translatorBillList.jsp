@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -274,7 +274,7 @@
  </script>  
 </body>
 
-=======
+
 <%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -550,5 +550,5 @@
  </script>  
 </body>
 
->>>>>>> branch 'master' of https://github.com/AI-OPT/yc-op-web.git
+
 </html>
