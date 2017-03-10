@@ -206,7 +206,7 @@
 		  {{else flag == '1'}}
 		  $
 		  {{/if}}
-		  {{:billFee}}
+		  {{:~liToYuan(billFee)}}
 	  </td>
       <td>
 		  {{if  flag == '0'}}
@@ -214,7 +214,7 @@
 		  {{else flag == '1'}}
 		  $
 		  {{/if}}
-		  {{:platFee}}
+		  {{:~liToYuan(platFee)}}
 	  </td>
       <td>
 		  {{if  flag == '0'}}
@@ -222,7 +222,7 @@
 		  {{else flag == '1'}}
 		  $
 		  {{/if}}
-		  {{:accountAmout}}
+		  {{:~liToYuan(accountAmout)}}
 	  </td>
       <td>1个月</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}</td>

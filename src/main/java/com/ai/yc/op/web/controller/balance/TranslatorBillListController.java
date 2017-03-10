@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ai.slp.balance.api.translatorbill.interfaces.IBillGenerateSV;
 import com.ai.slp.balance.api.translatorbill.param.*;
 import com.ai.yc.op.web.model.bill.BillDetailResponse;
+import com.ai.yc.op.web.model.bill.ExAllBill;
 import com.ai.yc.translator.api.translatorservice.interfaces.IYCTranslatorServiceSV;
 import com.ai.yc.translator.api.translatorservice.param.YCLSPInfoReponse;
 import com.ai.yc.translator.api.translatorservice.param.searchYCLSPInfoRequest;
@@ -179,185 +180,94 @@ public class TranslatorBillListController {
      */
     @RequestMapping("/export")
     @ResponseBody
-    public void  export(HttpServletRequest request, HttpServletResponse response, OrderPageQueryParams queryRequest) {
+    public void  export(HttpServletRequest request, HttpServletResponse response, FunAccountQueryRequest funAccountQueryRequest) {
     	logger.error("进入导出方法>>>>");
-    	QueryOrderRequest ordReq = new QueryOrderRequest();
-    	BeanUtils.copyProperties(ordReq, queryRequest);
-    	String pgeOrderId = queryRequest.getOrderPageId();
-    	if(!StringUtil.isBlank(pgeOrderId)) {
-			boolean isNum = pgeOrderId.matches("[0-9]+");
-			if(isNum) {
-				ordReq.setOrderId(Long.parseLong(pgeOrderId));
-			}else {
-				ordReq.setOrderId(0l);
-			}
-		}
-    	Long orderTimeBegin = queryRequest.getOrderTimeS();
-		if (orderTimeBegin!=null) {
-			Timestamp orderTimeS = new Timestamp(orderTimeBegin);
-			ordReq.setOrderTimeStart(orderTimeS);
-		}
-		Long orderTimeEnd = queryRequest.getOrderTimeE();
-		if (orderTimeEnd!=null) {
-			Timestamp orderTimeE = new Timestamp(orderTimeEnd);
-			ordReq.setOrderTimeEnd(orderTimeE);
-		}
-		//支付时间
-		Long payTimeBegin = queryRequest.getPayTimeS();
-		if (payTimeBegin!=null) {
-			Timestamp payTimeS = new Timestamp(payTimeBegin);
-			ordReq.setPayTimeStart(payTimeS);
-		}
-		Long payTimeEnd = queryRequest.getPayTimeE();
-		if (payTimeEnd!=null) {
-			Timestamp payTimeE = new Timestamp(payTimeEnd);
-			ordReq.setPayTimeEnd(payTimeE);
-		}
-	    ordReq.setPageNo(1);
+		List<ExAllBill> exAllBills = new ArrayList<ExAllBill>();
+		PageInfo<FunAccountResponse> resultPageInfo  = new PageInfo<FunAccountResponse>();
 	    try {
 	  //获取配置中的导出最大数值
 	    	logger.error("获取导出最大条数配置>>>>");
 	    IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
         String maxRow =  configClient.get(ExcelConstants.EXCEL_OUTPUT_MAX_ROW);
         int excelMaxRow = Integer.valueOf(maxRow);
-	    ordReq.setPageSize(excelMaxRow);
-	    IOrderQuerySV orderQuerySV = DubboConsumerFactory.getService(IOrderQuerySV.class);
-	    ICacheSV iCacheSV = DubboConsumerFactory.getService(ICacheSV.class);
+		resultPageInfo.setPageSize(excelMaxRow);
+		resultPageInfo.setPageNo(1);
+		funAccountQueryRequest.setPageInfo(resultPageInfo);
+		IBillGenerateSV billGenerateSV = DubboConsumerFactory.getService(IBillGenerateSV.class);
 	    logger.error("调用查询方法>>>>");
-	    QueryOrderRsponse orderListResponse = orderQuerySV.queryOrder(ordReq);
-	    PageInfo<OrdOrderVo> pageInfo = orderListResponse.getPageInfo();
-		List<OrdOrderVo> orderList = pageInfo.getResult();
-		List<ExAllOrder> exportList = new ArrayList<ExAllOrder>();
-		if(!CollectionUtil.isEmpty(orderList)){
-			logger.error("查询数据非空进行数据整合>>>>");
-			for(OrdOrderVo vo:orderList){
-				if(!CollectionUtil.isEmpty(vo.getOrdProdExtendList())){
-					for(int i=0;i<vo.getOrdProdExtendList().size();i++){
-						ExAllOrder exOrder = new ExAllOrder();
-						////翻译订单来源
-						SysParamSingleCond	paramCond = new SysParamSingleCond();
-						paramCond.setTenantId(Constants.TENANT_ID);
-						paramCond.setColumnValue(vo.getChlId());
-						paramCond.setTypeCode(Constants.TYPE_CODE);
-						paramCond.setParamCode(Constants.ORD_CHL_ID);
-		        		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
-		        		if(chldParam!=null){
-		        			exOrder.setChlId(chldParam.getColumnDesc());
-		        		}
-		        		//翻译订单类型
-		        		paramCond = new SysParamSingleCond();
-		        		paramCond.setTenantId(Constants.TENANT_ID);
-						paramCond.setColumnValue(vo.getTranslateType());
-						paramCond.setTypeCode(Constants.TYPE_CODE);
-						paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
-		        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
-		        		if(orderTypeParam!=null){
-		        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
-		        		}
-		        		//翻译支付方式
-		        		paramCond = new SysParamSingleCond();
-		        		paramCond.setTenantId(Constants.TENANT_ID);
-						paramCond.setColumnValue(vo.getPayStyle());
-						paramCond.setTypeCode(Constants.TYPE_CODE);
-						paramCond.setParamCode(Constants.ORD_PAY_STYLE);
-		        		SysParam payStyleParam = iCacheSV.getSysParamSingle(paramCond);
-		        		if(payStyleParam!=null){
-		        			exOrder.setPayStyle(payStyleParam.getColumnDesc());
-		        		}
-		        		//翻译订单状态
-		        		paramCond = new SysParamSingleCond();
-		        		paramCond.setTenantId(Constants.TENANT_ID);
-						paramCond.setColumnValue(vo.getState());
-						paramCond.setTypeCode(Constants.TYPE_CODE);
-						paramCond.setParamCode(Constants.ORD_STATE);
-		        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
-		        		if(stateParam!=null){
-		        			exOrder.setState(stateParam.getColumnDesc());
-		        		}
-		        		//转换金额格式
-                		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
-                			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-                				exOrder.setRealFee("$"+AmountUtil.liToYuan(vo.getTotalFee()));
-                				exOrder.setTotalFee("$"+AmountUtil.liToYuan(vo.getTotalFee()));
-                			}else{
-                				exOrder.setRealFee("¥"+AmountUtil.liToYuan(vo.getTotalFee()));
-                				exOrder.setTotalFee("¥"+AmountUtil.liToYuan(vo.getTotalFee()));
-                			}
-                		}
-                		if(vo.getOrderTime()!=null){
-		        			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
-                		}
-		        		exOrder.setUserName(vo.getUserName());
-		        		exOrder.setOrderId(vo.getOrderId());
-		        		if(vo.getPayTime()!=null){
-		        			exOrder.setPayTime(TimeZoneTimeUtil.getTimes(vo.getPayTime()));
-		        		}
-		        		exOrder.setLangire(vo.getOrdProdExtendList().get(i).getLangungePairChName());
-		        		exportList.add(exOrder);
-					}
-				}else{
-					ExAllOrder exOrder = new ExAllOrder();
-					////翻译订单来源
-					SysParamSingleCond	paramCond = new SysParamSingleCond();
-					paramCond.setTenantId(Constants.TENANT_ID);
-					paramCond.setColumnValue(vo.getChlId());
-					paramCond.setTypeCode(Constants.TYPE_CODE);
-					paramCond.setParamCode(Constants.ORD_CHL_ID);
-	        		SysParam chldParam = iCacheSV.getSysParamSingle(paramCond);
-	        		if(chldParam!=null){
-	        			exOrder.setChlId(chldParam.getColumnDesc());
-	        		}
-	        		//翻译订单类型
-	        		paramCond = new SysParamSingleCond();
-	        		paramCond.setTenantId(Constants.TENANT_ID);
-	        		paramCond.setColumnValue(vo.getTranslateType());
-					paramCond.setTypeCode(Constants.TYPE_CODE);
-					paramCond.setParamCode(Constants.ORD_TRANSLATE_TYPE);
-	        		SysParam orderTypeParam = iCacheSV.getSysParamSingle(paramCond);
-	        		if(orderTypeParam!=null){
-	        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
-	        		}
-	        		//翻译支付方式
-	        		paramCond = new SysParamSingleCond();
-	        		paramCond.setTenantId(Constants.TENANT_ID);
-					paramCond.setColumnValue(vo.getPayStyle());
-					paramCond.setTypeCode(Constants.TYPE_CODE);
-					paramCond.setParamCode(Constants.ORD_PAY_STYLE);
-	        		SysParam payStyleParam = iCacheSV.getSysParamSingle(paramCond);
-	        		if(payStyleParam!=null){
-	        			exOrder.setPayStyle(payStyleParam.getColumnDesc());
-	        		}
-	        		//翻译订单状态
-	        		paramCond = new SysParamSingleCond();
-	        		paramCond.setTenantId(Constants.TENANT_ID);
-					paramCond.setColumnValue(vo.getState());
-					paramCond.setTypeCode(Constants.TYPE_CODE);
-					paramCond.setParamCode(Constants.ORD_STATE);
-	        		SysParam stateParam = iCacheSV.getSysParamSingle(paramCond);
-	        		if(stateParam!=null){
-	        			exOrder.setState(stateParam.getColumnDesc());
-	        		}
-	        		//转换金额格式
-            		if(!StringUtil.isBlank(vo.getCurrencyUnit())){
-            			if(Constants.CURRENCY_UNIT_S.equals(vo.getCurrencyUnit())){
-            				exOrder.setRealFee("$"+AmountUtil.liToYuan(vo.getTotalFee()));
-            				exOrder.setTotalFee("$"+AmountUtil.liToYuan(vo.getTotalFee()));
-            			}else{
-            				exOrder.setRealFee("¥"+AmountUtil.liToYuan(vo.getTotalFee()));
-            				exOrder.setTotalFee("¥"+AmountUtil.liToYuan(vo.getTotalFee()));
-            			}
-            		}
-            		if(vo.getOrderTime()!=null){
-            			exOrder.setOrderTime(TimeZoneTimeUtil.getTimes(vo.getOrderTime()));
-            		}
-	        		
-	        		exOrder.setUserName(vo.getUserName());
-	        		if(vo.getPayTime()!=null){
-	        			exOrder.setPayTime(TimeZoneTimeUtil.getTimes(vo.getPayTime()));
-	        		}
-	        		exOrder.setOrderId(vo.getOrderId());
-	        		exportList.add(exOrder);
+		FunAccountQueryResponse funAccountQueryResponse = billGenerateSV.queryFunAccount(funAccountQueryRequest);
+		PageInfo<FunAccountResponse> pageInfo = funAccountQueryResponse.getPageInfo();
+		List<FunAccountResponse> billList = pageInfo.getResult();
+		if(!CollectionUtil.isEmpty(billList)){
+			for (FunAccountResponse funAccountResponse:billList){
+				ExAllBill exAllBill = new ExAllBill();
+				//编号
+				exAllBill.setBillId(funAccountResponse.getBillId());
+				//昵称
+				exAllBill.setNickname(funAccountResponse.getNickname());
+				//用户名
+				exAllBill.setTargetName(funAccountResponse.getTargetName());
+				//开始时间
+				if (funAccountResponse.getStartAccountTime()!=null){
+					exAllBill.setStartAccountTime(funAccountResponse.getStartAccountTime().toString());
 				}
+				//结束时间
+				if (funAccountResponse.getEndAccountTime()!=null){
+					exAllBill.setEndAccountTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getEndAccountTime()));
+				}
+				//本期账单金额billFee
+				if (funAccountResponse.getFlag().equals("0")){
+					exAllBill.setBillFee("¥"+funAccountResponse.getBillFee());
+				}else {
+					exAllBill.setBillFee("$"+funAccountResponse.getBillFee());
+				}
+				//平台费用
+				if (funAccountResponse.getFlag().equals("0")){
+					exAllBill.setPlatFee("¥"+funAccountResponse.getPlatFee());
+				}else {
+					exAllBill.setPlatFee("$"+funAccountResponse.getPlatFee());
+				}
+				//应结金额
+				if (funAccountResponse.getFlag().equals("0")){
+					exAllBill.setAccountAmout("¥"+funAccountResponse.getAccountAmout());
+				}else {
+					exAllBill.setAccountAmout("$"+funAccountResponse.getAccountAmout());
+				}
+				//账单周期
+				exAllBill.setAccountPeriod(funAccountResponse.getAccountPeriod()+"个月");
+				//账单生成时间
+				if (funAccountResponse.getCreateTime()!=null){
+					exAllBill.setCreateTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getCreateTime()));
+				}
+				//结算方式
+				if (funAccountResponse.getAccountType()!=null){
+					if (funAccountResponse.getAccountType().equals("1")){
+						exAllBill.setAccountType("支付宝");
+					}else if (funAccountResponse.getAccountType().equals("2")){
+						exAllBill.setAccountType("微信");
+					}else if (funAccountResponse.getAccountType().equals("3")){
+						exAllBill.setAccountType("银行汇款/转账");
+					}else if(funAccountResponse.getAccountType().equals("4")){
+						exAllBill.setAccountType("PayPal");
+					}
+				}
+				//结算账户
+				if (funAccountResponse.getSettleAccount()!=null){
+					exAllBill.setSettleAccount(funAccountResponse.getSettleAccount());
+				}
+				//结算时间
+				if (funAccountResponse.getActAccountTime()!=null){
+					exAllBill.setActAccountTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getActAccountTime()));
+				}
+				//结算状态
+				if (funAccountResponse.getState()!=null){
+					if (funAccountResponse.getState()==1){
+						exAllBill.setState("已结算");
+					}else {
+						exAllBill.setState("未结算");
+					}
+				}
+				exAllBills.add(exAllBill);
 			}
 		}else{
 			logger.error("查询数据为空>>>>");
@@ -366,15 +276,16 @@ public class TranslatorBillListController {
 			ServletOutputStream outputStream = response.getOutputStream();
 			response.reset();// 清空输出流
             response.setContentType("application/msexcel");// 定义输出类型
-            response.setHeader("Content-disposition", "attachment; filename=order"+new Date().getTime()+".xls");// 设定输出文件头
-            String[] titles = new String[]{"订单来源", "订单类型", "订单编号", "下单时间", "昵称", "语种方向","订单金额","实付金额","支付方式","支付时间","状态"};
-    		String[] fieldNames = new String[]{"chlId", "orderType", "orderId", "orderTime",
-    				"userName", "langire","totalFee","realFee","payStyle","payTime","state"};
+            response.setHeader("Content-disposition", "attachment; filename=bill"+new Date().getTime()+".xls");// 设定输出文件头
+            String[] titles = new String[]{"编号", "昵称", "用户名", "开始时间", "结束时间", "本期账单金额","平台费用","应结金额","账单周期","账单生成时间","结算方式","结算账户","结算时间"
+											,"结算状态"};
+    		String[] fieldNames = new String[]{"billId", "nickname", "targetName", "startAccountTime",
+    				"endAccountTime", "billFee","platFee","accountAmout","accountPeriod","createTime","accountType","settleAccount","actAccountTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
 			 logger.error("写入数据到excel>>>>");
-			 excelHelper.writeExcel(outputStream, "order"+new Date().getTime(), ExAllOrder.class, exportList,fieldNames, titles);
+			 excelHelper.writeExcel(outputStream, "bill"+new Date().getTime(), ExAllBill.class, exAllBills,fieldNames, titles);
 		} catch (Exception e) {
-			logger.error("导出订单列表失败："+e.getMessage(), e);
+			logger.error("导出账单列表失败："+e.getMessage(), e);
 		}
 	}
 

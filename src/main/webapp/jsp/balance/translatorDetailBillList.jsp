@@ -71,7 +71,7 @@
 		  {{else currencyUnit == '2'}}
 		  $
 		  {{/if}}
-		  {{:totalFee}}
+		  {{:~liToYuan(totalFee)}}
 	  </td>
       <td>
 		  {{if  currencyUnit == '1'}}
@@ -79,7 +79,7 @@
 		  {{else currencyUnit == '2'}}
 		  $
 		  {{/if}}
-		  {{:platFee}}
+		  {{:~liToYuan(platFee)}}
 	  </td>
       <td>
 		  {{if  currencyUnit == '1'}}
@@ -87,7 +87,7 @@
 		  {{else currencyUnit == '2'}}
 		  $
 		  {{/if}}
-		  {{:interperFee)}}
+		  {{:~liToYuan(interperFee)}}
 	  </td>
 	 <%-- <td>
 		  {{if  accountType == '1'}}

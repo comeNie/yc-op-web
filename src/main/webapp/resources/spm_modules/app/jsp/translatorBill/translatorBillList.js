@@ -103,41 +103,28 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
 
 		_export:function(){
 			var _this=this;
-			var orderTimeS=jQuery.trim($("#orderTimeBegin").val());
-			var orderTimeE=jQuery.trim($("#orderTimeEnd").val());
-			var payTimeS=jQuery.trim($("#payTimeBegin").val());
-			var payTimeE=jQuery.trim($("#payTimeEnd").val());
-			if(orderTimeE=="" || orderTimeE==null){
-				orderTimeE="";
-			}else{
-				orderTimeE= new Date( Date.parse( $("#orderTimeEnd").val().replace(/-/g,"/")) ).getTime();
+			var stateBill="";
+			var flag="";
+			var orderTimeS = $("#billTimeBegin").val();
+			var orderTimeE = $("#billTimeEnd").val();
+			var wait = $('#waitHandle').attr('class');
+			var refund = $('#refundId').attr('class');
+			var domestic = $('#domestic').attr('class');
+			var foreign = $('#foreign').attr('class');
+			var nickName = jQuery.trim($("#nickName").val());
+			var acountType = jQuery.trim($("#accountType option:selected").val());
+			if(domestic="current1" && domestic!=""){
+				flag = 0;
+			}else if(foreign="current1" && foreign!=""){
+				flag=  1;//待审核
 			}
-			if(orderTimeS=="" || orderTimeS==null){
-				orderTimeS="";
-			}else{
-				orderTimeS= new Date( Date.parse( $("#orderTimeBegin").val().replace(/-/g,"/")) ).getTime();
+			if(wait="current" && wait!=""){
+				stateBill = 2;
+			}else if(refund="current" && refund!=""){
+				stateBill=  1;//待审核
 			}
-			//支付时间
-			if(payTimeS=="" || payTimeS==null){
-				payTimeS="";
-			}else{
-				payTimeS= new Date( Date.parse( $("#payTimeBegin").val().replace(/-/g,"/")) ).getTime();
-			}
-			if(payTimeE=="" || payTimeE==null){
-				payTimeE="";
-			}else{
-				payTimeE= new Date( Date.parse( $("#payTimeEnd").val().replace(/-/g,"/")) ).getTime();
-			}
-			var userName=jQuery.trim($("#nickName").val());
-			var chlId=jQuery.trim($("#orderSource option:selected").val());
-			var translateType=jQuery.trim($("#orderType option:selected").val());
-			var langungePaire=jQuery.trim($("#langugePaire option:selected").val());
-			var state=jQuery.trim($("#searchOrderState").val());
-			var orderPageId=jQuery.trim($("#orderId").val());
-			var payStyle = jQuery.trim($("#payStyle option:selected").val());
-			window.location.href=_base+'/order/export?orderTimeS='+orderTimeS+'&orderTimeE='+orderTimeE+'&payTimeS='+payTimeS+
-			'&userName='+userName+'&chlId='+chlId+'&translateType='+translateType+'&langungePaire='+langungePaire+'&state='
-		+state+'&orderPageId='+orderPageId+'&payTimeE='+payTimeE+'&payStyle='+payStyle+"&offset="+today.stdTimezoneOffset();
+			window.location.href=_base+'/balance/export?flag='+flag+'&beginDate='+orderTimeS+'&endDate='+orderTimeE+
+			'&nickName='+nickName+'&acountType='+acountType+'&state='+stateBill+"&offset="+today.stdTimezoneOffset();
 		},
 
 		_searchBillList:function(){
