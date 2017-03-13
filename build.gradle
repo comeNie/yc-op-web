@@ -109,6 +109,10 @@ dependencies {
 	compile 'com.ai.yc.ucenter:members:1.1.1-SNAPSHOT'
     /********************译员账单********************/
     compile 'com.ai.slp.balance:translatorbill:1.0.1-SNAPSHOT'
+    /********************优惠券模板********************/
+    compile 'com.ai.slp.balance:coupontemplate:1.0-SNAPSHOT'
+    /********************优惠券********************/
+    compile 'com.ai.slp.balance:sendcoupon:1.0-SNAPSHOT'
 	
 	
 }
