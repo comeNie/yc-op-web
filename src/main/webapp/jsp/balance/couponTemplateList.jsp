@@ -152,12 +152,11 @@
       <td>{{:couponName}}</td>
       <td>
 		  {{:faceValue}}
-		  {{if  flag == '1'}}
+		  {{if  currencyUnit == '1'}}
 		  CNY¥
-		  {{else flag == '2'}}
+		  {{else currencyUnit == '2'}}
 		  USD$
 		  {{/if}}
-		  {{:~liToYuan(currencyUnit)}}
 	  </td>
  	  <td>{{:couponUserId}}</td>
       <td>

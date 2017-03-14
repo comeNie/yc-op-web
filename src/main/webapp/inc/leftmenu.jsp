@@ -41,7 +41,7 @@
 						<ul class="submenu">
 							<li menuAttr="menu"><a href="${_base}/balance/toTranslatorBillList" target="mainFrame">译员账单</a></li>
 							<li menuAttr="menu"><a href="${_base}/lspBill/toLspBillList" target="mainFrame">LSP账单</a></li>
-							<li menuAttr="menu"><a href="${_base}/balance/toCouponTemplateList" target="mainFrame">券码管理</a></li>
+							<li menuAttr="menu"><a href="${_base}/coupon/toCouponTemplateList" target="mainFrame">券码管理</a></li>
 						</ul> <!--二级菜单结束--></li>
 
 				</ul>

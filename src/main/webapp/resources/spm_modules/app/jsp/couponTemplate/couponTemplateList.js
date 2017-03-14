@@ -32,8 +32,8 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
     	//事件代理
     	events: {
 			//查询
-            "click #search":"_searchCouponTemplateList"
-            /*"click #export":"_export",*/
+            "click #search":"_searchCouponTemplateList",
+            "click #export":"_export"
             
         },
     	//重写父类
@@ -48,35 +48,21 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
     	},
 
 
-		/*_export:function(){
+		_export:function(){
 			var _this=this;
-			var stateBill="";
-			var flag="";
-			var orderTimeS = $("#billTimeBegin").val();
-			var orderTimeE = $("#billTimeEnd").val();
-			var wait = $('#waitHandle').attr('class');
-			var refund = $('#refundId').attr('class');
-			var domestic = $('#domestic').attr('class');
-			var foreign = $('#foreign').attr('class');
-			var nickName = jQuery.trim($("#nickName").val());
-			var acountType = jQuery.trim($("#accountType option:selected").val());
-			if(domestic="current1" && domestic!=""){
-				flag = 0;
-			}else if(foreign="current1" && foreign!=""){
-				flag=  1;//待审核
-			}
-			if(wait="current" && wait!=""){
-				stateBill = 2;
-			}else if(refund="current" && refund!=""){
-				stateBill=  1;//待审核
-			}
-			window.location.href=_base+'/balance/export?flag='+flag+'&beginDate='+orderTimeS+'&endDate='+orderTimeE+
-			'&nickName='+nickName+'&acountType='+acountType+'&state='+stateBill+"&offset="+today.stdTimezoneOffset();
-		},*/
+			var couponName = jQuery.trim($("#couponName").val());
+			var faceValue = jQuery.trim($("#faceValue").val());
+			var usedScene = jQuery.trim($("#usedScene option:selected").val());
+			var status = jQuery.trim($("#status option:selected").val());
+			var currencyUnit = jQuery.trim($("#currencyUnit option:selected").val());
+			var createOperator = jQuery.trim($("#createOperator").val());
+			window.location.href=_base+'/coupon/export?couponName='+couponName+'&faceValue='+faceValue+'&usedScene='+usedScene+
+			'&status='+status+'&currencyUnit='+currencyUnit+'&createOperator='+createOperator+"&offset="+today.stdTimezoneOffset();
+		},
 
     	_searchCouponTemplateList:function(){
 			var _this=this;
-			var url = _base+"/balance/getCouponTemplatePageData";
+			var url = _base+"/coupon/getCouponTemplatePageData";
 			var queryData = this._getSearchParams();
 			$("#pagination").runnerPagination({
 				url:url,
@@ -99,27 +85,24 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
 				},
 			});
 		},
-		
+		_initValidate:function(){
+    		var formValidator=$("#dataForm").validate({
+    			rules: {
+    				couponName: {
+    					required: true,
+    					maxlength:30
+    					}
+    			},
+    			messages: {
+    				couponName: {
+    					required: "请输入名称!",
+    					maxlength:"最大长度不能超过{0}"
+    					}
+    			}
+    		});
+    		return formValidator;
+    	},
 		_getSearchParams:function(){
-			/*var stateBill="";
-			var flag="";
-			var orderTimeS = $("#billTimeBegin").val();
-			var orderTimeE = $("#billTimeEnd").val();
-			var wait = $('#waitHandle').attr('class');
-			var refund = $('#refundId').attr('class');
-			var domestic = $('#domestic').attr('class');
-			var foreign = $('#foreign').attr('class');
-
-			if(domestic="current1" && domestic!=""){
-				flag = 0;
-			}else if(foreign="current1" && foreign!=""){
-				flag=  1;//待审核
-			}
-			if(wait="current" && wait!=""){
-				stateBill = 2;
-			}else if(refund="current" && refund!=""){
-				stateBill=  1;//待审核
-			}*/
     		return {
     			"couponName":jQuery.trim($("#couponName").val()),
     			"faceValue":jQuery.trim($("#faceValue").val()),
