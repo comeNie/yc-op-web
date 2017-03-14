@@ -33,7 +33,8 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
     	events: {
 			//查询
             "click #search":"_searchCouponTemplateList",
-            "click #export":"_export"
+            "click #export":"_export",
+            "click #add":"_add"
             
         },
     	//重写父类
@@ -47,7 +48,21 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
 			});
     	},
 
-
+    	_add:function(){
+    		var _this= this;
+    		$("#couponName").val("");
+    		$("#couponDesc").val("");
+    		$("#maxCountIssue").val("");
+    		$("#currencyUnit").val("");
+    		$("#faceValue").val("");
+    		$("#useLimits").val("");
+    		$(".usedScene").val("");
+    		//$("#payStyle").val("");
+    		$("#couponUserId").val("");
+			//弹出框展示
+			$('#eject-mask').fadeIn(100);
+			$('#add-samll').show();
+    	},
 		_export:function(){
 			var _this=this;
 			var couponName = jQuery.trim($("#couponName").val());
