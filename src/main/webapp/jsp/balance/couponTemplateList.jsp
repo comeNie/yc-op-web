@@ -22,16 +22,16 @@
 			                    	<ul>
 										<li class="col-md-6">
 											<p class="word">名称</p>
-											<p><input class="int-text int-medium" id="nickName"  value="" type="text"></p>
+											<p><input class="int-text int-medium" id="couponName"  value="" type="text"></p>
 										</li>
 										<li class="col-md-6">
 											<p class="word">面值</p>
-											<p><input class="int-text int-medium" id="nickName"  value="" type="text"></p>
+											<p><input class="int-text int-medium" id="faceValue"  value="" type="text"></p>
 										</li>
 			                    		<li class="col-md-6">
 								           <p class="word">使用场景</p>
 						            		<p>
-							            		<select class="select select-medium" id="accountType">
+							            		<select class="select select-medium" id="usedScene">
 							            			<option value="" selected="selected">全部</option>
 													<!-- pc -->
 													<option value="1">pc</option>
@@ -45,7 +45,7 @@
 							            <li class="col-md-6">
 								           <p class="word">状态</p>
 						            		<p>
-							            		<select class="select select-medium" id="accountType">
+							            		<select class="select select-medium" id="status">
 							            			<option value="" selected="selected">全部</option>
 													<!-- 启用 -->
 													<option value="1">启用</option>
@@ -57,7 +57,7 @@
 							            <li class="col-md-6">
 								           <p class="word">币种单位</p>
 						            		<p>
-							            		<select class="select select-medium" id="accountType">
+							            		<select class="select select-medium" id="currencyUnit">
 							            			<option value="" selected="selected">全部</option>
 													<!-- CNY￥ -->
 													<option value="1">CNY¥</option>
@@ -68,7 +68,7 @@
 							            </li>
 							            <li class="col-md-6">
 											<p class="word">创建人</p>
-											<p><input class="int-text int-medium" id="nickName"  value="" type="text"></p>
+											<p><input class="int-text int-medium" id="createOperator"  value="" type="text"></p>
 										</li>
 			                    	</ul>
 		                    	</div> 
@@ -117,9 +117,9 @@
 												<th>有效期</th>
 												<th>使用场景</th>
 												<th>已使用/已领/总数</th>
+												<!-- <th></th>
 												<th></th>
-												<th></th>
-												<th></th>
+												<th></th> -->
 												<th>创建人</th>
 												<th>创建时间</th>
 												<th>状态</th>
@@ -161,10 +161,10 @@
 	  </td>
  	  <td>{{:couponUserId}}</td>
       <td>
-			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', receiveStartTime)}}————{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', receiveEndTime)}}
+			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', receiveStartTime)}}—{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', receiveEndTime)}}
 	  </td>
 	  <td>
-			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', effectiveStartTime)}}————{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', effectiveEndTime)}}
+			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', effectiveStartTime)}}—{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', effectiveEndTime)}}
 	  </td>
 	  <td>
 		  {{if  usedScene == '1'}}
@@ -176,9 +176,7 @@
 		  {{/if}}
 	  </td>      
       <td>{{:maxCountIssue}}</td>
-	  <td></td>
-	  <td></td>
-	  <td></td>
+	 
 	  <td>{{:createOperator}}</td>
 	  <td>
 			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}
@@ -198,5 +196,14 @@
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._manualSend">手动发放</a>
 	  </td>
     </tr>
-</script> 
+</script>
+ <script type="text/javascript">
+	var pager;
+	(function () {
+		seajs.use('app/jsp/couponTemplate/couponTemplateList', function (OrderListPager) {
+			pager = new OrderListPager({element: document.body});
+			pager.render();
+		});
+	})();
+ </script>  
 </body>

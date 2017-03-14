@@ -88,10 +88,10 @@
 	<dubbo:reference id="iBillGenerateSV"
 					 interface="com.ai.slp.balance.api.translatorbill.interfaces.IBillGenerateSV" />
 	<!--优惠券模板-->
-	<dubbo:reference id="iBillGenerateSV"
+	<dubbo:reference id="iCouponTemplateSV"
 					 interface="com.ai.slp.balance.api.coupontemplate.interfaces.ICouponTemplateSV" />
 	<!--优惠券-->
-	<dubbo:reference id="iBillGenerateSV"
+	<dubbo:reference id="iSendCouponSV"
 					 interface="com.ai.slp.balance.api.sendcoupon.interfaces.ISendCouponSV" />
 
 </beans>

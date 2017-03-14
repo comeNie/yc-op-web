@@ -74,7 +74,7 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
 			'&nickName='+nickName+'&acountType='+acountType+'&state='+stateBill+"&offset="+today.stdTimezoneOffset();
 		},*/
 
-		_searchBillList:function(){
+    	_searchCouponTemplateList:function(){
 			var _this=this;
 			var url = _base+"/balance/getCouponTemplatePageData";
 			var queryData = this._getSearchParams();
@@ -92,13 +92,43 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
 					if(data&&data.length>0){
 						var template = $.templates("#couponTemplateListTemple");
 						var htmlOut = template.render(data);
-						$("#orderListData").html(htmlOut);
+						$("#couponTemplateListData").html(htmlOut);
 					}else{
-						$("#orderListData").html("未搜索到信息");
+						$("#couponTemplateListData").html("未搜索到信息");
 					}
 				},
 			});
-		}
+		},
+		
+		_getSearchParams:function(){
+			/*var stateBill="";
+			var flag="";
+			var orderTimeS = $("#billTimeBegin").val();
+			var orderTimeE = $("#billTimeEnd").val();
+			var wait = $('#waitHandle').attr('class');
+			var refund = $('#refundId').attr('class');
+			var domestic = $('#domestic').attr('class');
+			var foreign = $('#foreign').attr('class');
+
+			if(domestic="current1" && domestic!=""){
+				flag = 0;
+			}else if(foreign="current1" && foreign!=""){
+				flag=  1;//待审核
+			}
+			if(wait="current" && wait!=""){
+				stateBill = 2;
+			}else if(refund="current" && refund!=""){
+				stateBill=  1;//待审核
+			}*/
+    		return {
+    			"couponName":jQuery.trim($("#couponName").val()),
+    			"faceValue":jQuery.trim($("#faceValue").val()),
+    			"usedScene":jQuery.trim($("#usedScene option:selected").val()),
+    			"status":jQuery.trim($("#status option:selected").val()),
+    			"currencyUnit":jQuery.trim($("#currencyUnit option:selected").val()),
+    			"createOperator":jQuery.trim($("#createOperator").val())
+    		}
+    	}
     });
     
     module.exports = OrderListPager

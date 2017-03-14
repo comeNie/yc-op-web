@@ -45,7 +45,7 @@
 													<option value="1">支付宝</option>
 													<!--微信 -->
 													<option value="2">微信</option>
-													<!-银行汇款/转账 -->
+													<!-- 银行汇款/转账 -->
 													<option value="3">银行汇款/转账</option>
 													<%--PayPal--%>
 													<option value="4">PayPal</option>
