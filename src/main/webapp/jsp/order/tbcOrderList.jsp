@@ -199,7 +199,7 @@
      <td>{{:statePage}}</td>
      <td>
 		<a href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a>
-		<a href="javascript:void(0)" class="adopt">退款</a>
+		<a href="javascript:void(0)" class="adopt" onclick="pager._rejectReviewOrder('{{:orderId}}')">退款</a>
 	</td>
   </tr>                                                                       
 </script> 

@@ -19,7 +19,7 @@ import com.ai.yc.order.api.orderdetails.interfaces.IQueryOrderDetailsSV;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsRequest;
 import com.ai.yc.order.api.orderdetails.param.QueryOrderDetailsResponse;
 import com.ai.yc.order.api.orderrefund.interfaces.IOrderRefundSV;
-import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundCheckRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
 import com.ai.yc.ucenter.api.members.interfaces.IUcMembersSV;
 import com.ai.yc.ucenter.api.members.param.get.UcMembersGetRequest;
@@ -98,14 +98,14 @@ public class RefundOrdDetailController {
 	 */
 	@RequestMapping("/refundCheck")
 	@ResponseBody
-    public ResponseData<Boolean> updateOrderInfo(OrderRefundRequest req){
+    public ResponseData<Boolean> refundCheck(OrderRefundCheckRequest req){
 		IOrderRefundSV orderRefundSV = DubboConsumerFactory.getService(IOrderRefundSV.class);
 		OrderRefundResponse resp = null;
 		try {
 			GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
 			req.setOperId(loginUser.getUserId());
 			req.setOperName(loginUser.getLoginName());
-			resp = orderRefundSV.refund(req);
+			resp = orderRefundSV.refundCheck(req);
 		} catch (Exception e) {
 			log.error("系统异常，请稍后重试", e);
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
@@ -118,7 +118,7 @@ public class RefundOrdDetailController {
 			log.error(resp.getResponseHeader().getResultMessage());
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, resp.getResponseHeader().getResultMessage(), null);
 		}
-		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "修改订单成功", true);
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "订单审核成功", true);
 		
 	}
 }

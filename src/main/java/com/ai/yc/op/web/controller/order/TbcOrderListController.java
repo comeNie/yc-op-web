@@ -34,12 +34,17 @@ import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
+import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
 import com.ai.yc.op.web.utils.AmountUtil;
+import com.ai.yc.op.web.utils.LoginUtil;
 import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
 import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
+import com.ai.yc.order.api.orderrefund.interfaces.IOrderRefundSV;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
+import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
 
 @Controller
 public class TbcOrderListController {
@@ -393,5 +398,33 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 		} catch (Exception e) {
 			logger.error("导出订单列表失败："+e.getMessage(), e);
 		}
+	}
+    /**
+	 * 退款申请订单
+	 */
+	@RequestMapping("/refundApply")
+	@ResponseBody
+    public ResponseData<Boolean> refundCheck(OrderRefundRequest req){
+		IOrderRefundSV orderRefundSV = DubboConsumerFactory.getService(IOrderRefundSV.class);
+		OrderRefundResponse resp = null;
+		try {
+			GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+			req.setOperId(loginUser.getUserId());
+			req.setOperName(loginUser.getLoginName());
+			resp = orderRefundSV.refund(req);
+		} catch (Exception e) {
+			logger.error("系统异常，请稍后重试", e);
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		if(resp==null){
+			logger.error("系统异常，请稍后重试");
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		if(!resp.getResponseHeader().isSuccess()){
+			logger.error(resp.getResponseHeader().getResultMessage());
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, resp.getResponseHeader().getResultMessage(), null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "订单退款申请成功", true);
+		
 	}
 }
