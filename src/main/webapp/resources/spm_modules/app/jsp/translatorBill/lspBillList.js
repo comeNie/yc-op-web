@@ -197,7 +197,7 @@ define('app/jsp/translatorBill/lspBillList', function (require, exports, module)
 			//弹出框展示
 			$('#eject-mask').fadeIn(100);
 			$('#add-samll').slideDown(200);
-			$("#updateMoney").val(accountAmout);
+			$("#updateMoney").val(accountAmout/1000);
 			$("#billIdUpdate").val(billId);
 			$("#billState").val(state);
 			// $("#payStyle").val(accountType);
