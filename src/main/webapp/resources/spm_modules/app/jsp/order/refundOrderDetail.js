@@ -85,7 +85,12 @@ define('app/jsp/order/refundOrderDetail', function(require, exports, module) {
 					$("#date1").html(orderInfoHtml);
 					var orderStateChgHtml = $("#orderStateChgTempl").render(rs.data);
 					$("#orderStateChgTable").html(orderStateChgHtml);
-					//初始化按钮展示
+					//获取stateCheck
+					var stateCheck=$("#stateCheck").val();
+					if(stateCheck=="" || stateCheck==null){
+						$("#checkemarkId").hide();
+					}
+				
 				}
 			});
 		}

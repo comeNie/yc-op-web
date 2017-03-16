@@ -251,9 +251,9 @@ define('app/jsp/order/refundOrderList', function (require, exports, module) {
 			var wait = $('#waitHandle').attr('class');
 			var refund = $('#refundId').attr('class');
 			if(wait="current" && wait!=""){
-				 stateFlag = "40";
+				 stateFlag = "40";//待审核
 			}else if(refund="current" && refund!=""){
-				stateFlag="92";//待审核
+				stateFlag="92";
 			}
 			var orderTimeS = $("#orderTimeBegin").val();
 			var orderTimeE = $("#orderTimeEnd").val();

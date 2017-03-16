@@ -165,21 +165,21 @@
 											{{:remark}}
 										</p>
 									</li>
+									{{if state=='92'}}
 									<li class="col-md-6">
 										<p class="word">退款留言：</p>
 										<p class="col-md-8">
 											{{:reasonDesc}}
 										</p>
-									</li>			
+									</li>	
+									{{/if}}		
 							 </ul>
-							{{if state!='92'}}
-							<ul>
+							<ul id="checkemarkId">
 								<li class="word">审核备注:</li>
 								<li>
 									<textarea class="int-text textarea-large" id="checkRemark" maxlength="100"></textarea>
 								</li>
 							</ul>
-							{{/if}}
 						</div>
 				</script>				
             <div class="bc-ang mb-12">

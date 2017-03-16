@@ -219,7 +219,16 @@ public class EvaluateOrderListController {
 		        		if(orderTypeParam!=null){
 		        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
 		        		}
-		        		
+		        		//翻译订单级别
+                		paramCond = new SysParamSingleCond();
+                		paramCond.setTenantId(Constants.TENANT_ID);
+    					paramCond.setColumnValue(vo.getOrderLevel());
+    					paramCond.setTypeCode(Constants.TYPE_CODE);
+    					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+                		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+                		if(levelParam!=null){
+                			exOrder.setOrderLevel(levelParam.getColumnDesc());
+                		}
 		        		//翻译评论状态
 		        		paramCond = new SysParamSingleCond();
 		        		paramCond.setTenantId(Constants.TENANT_ID);
@@ -268,7 +277,16 @@ public class EvaluateOrderListController {
 	        		if(orderTypeParam!=null){
 	        			exOrder.setOrderType(orderTypeParam.getColumnDesc());
 	        		}
-	        		
+	        		//翻译订单级别
+            		paramCond = new SysParamSingleCond();
+            		paramCond.setTenantId(Constants.TENANT_ID);
+					paramCond.setColumnValue(vo.getOrderLevel());
+					paramCond.setTypeCode(Constants.TYPE_CODE);
+					paramCond.setParamCode(Constants.ORD_ORDER_LEVEL);
+            		SysParam levelParam = iCacheSV.getSysParamSingle(paramCond);
+            		if(levelParam!=null){
+            			exOrder.setOrderLevel(levelParam.getColumnDesc());
+            		}
 	        		//翻译评论状态
 	        		paramCond = new SysParamSingleCond();
 	        		paramCond.setTenantId(Constants.TENANT_ID);

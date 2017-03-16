@@ -260,7 +260,7 @@
 		{{if state==53}}
 			<a href="javascript:void(0);" onclick="pager._jugedDetail('{{:orderId}}')">查看</a>
 		{{/if}}
-		{{if busiType!='2' && state!=53}}
+		{{if busiType!='2' && state!=53 && state!=92}}
 			<a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">查看</a>
 		{{/if}} 		
 		{{if state==11}}
@@ -274,7 +274,9 @@
 			<a href="javascript:void(0);" class="adopt" onclick="pager._check('{{:orderId}}','92')">确认</a>
 			<a href="javascript:void(0);" class="reject" onclick="pager._check('{{:orderId}}','42')">锁定</a>
 		{{/if}}	
-		
+		{{if state==50}}
+			<a href="javascript:void(0)" class="adopt" onclick="pager._refundOrder('{{:orderId}}')">退款</a>
+		{{/if}}
 	</td>
   </tr>                                                                       
 </script> 

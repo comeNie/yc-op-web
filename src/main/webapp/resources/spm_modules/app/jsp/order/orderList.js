@@ -440,6 +440,40 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 		_jugedDetail:function(orderId){
 			window.location.href = _base+"/toEvaluteOrdDetail?orderId="
             + orderId+'&isAll=all'+"&mod=edit&random="+Math.random();
+		},
+		_refundOrder:function(orderId){
+			var _this = this;
+			var param={};
+			param.orderId=orderId;
+			var d = Dialog({
+				content:'<textarea id="reasonDesc" style="width:200px;" class="int-text"  maxlength="100"></textarea>',
+				padding: 0,
+				okValue: '确认',
+				title: '退款原因:',
+				ok:function(){
+					param.busiType='2';
+					param.reasonDesc = $("#reasonDesc").val();
+					param.state = '40';
+					param.displayFlag='40';
+					_this._handReviewOrder(param);
+				},
+				cancelValue: '取消',
+			    cancel: function () {}
+			});
+			d.showModal();
+		},
+    	_handReviewOrder:function(param){
+			var _this=this;
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: _base + "/refundApply",
+				data: param,
+				success: function (data) {
+					window.location.href=_base+"/order/toOrderList";
+				}
+			});
 		}
     });
     
