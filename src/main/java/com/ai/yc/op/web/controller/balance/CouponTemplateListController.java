@@ -13,8 +13,11 @@ import com.ai.slp.balance.api.coupontemplate.param.CouponTemplateParam;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateQueryRequest;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateQueryResponse;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateResponse;
+import com.ai.slp.balance.api.coupontemplate.param.SaveFunCouponTemplate;
 import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.coupon.ExAllCouponTemplate;
+import com.ai.yc.op.web.model.order.OrderDetailPagerRequest;
+import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -100,7 +103,17 @@ public class CouponTemplateListController {
     	Integer checkCouponByCouponName = couponTemplateSV.checkCouponTemplateName(param);
 		return checkCouponByCouponName;
     }
-    
+    /**
+     * 添加优惠券模板
+     */
+    public ResponseData<Boolean> insertCouponTemplate(SaveFunCouponTemplate req){
+    	ICouponTemplateSV couponTemplateSV = DubboConsumerFactory.getService(ICouponTemplateSV.class);
+    	Integer checkCouponByCouponName = couponTemplateSV.savaCouponTemplate(req);
+    	if(checkCouponByCouponName==null){
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加优惠券模板成功", true);
+    }
     
     
     /**
