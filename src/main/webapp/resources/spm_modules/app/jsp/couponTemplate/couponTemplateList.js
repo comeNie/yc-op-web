@@ -87,6 +87,16 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
 				},
 			});
 		},
+		_getSearchParams:function(){
+    		return {
+    			"couponName":jQuery.trim($("#couponName").val()),
+    			"faceValue":jQuery.trim($("#faceValue").val()),
+    			"usedScene":jQuery.trim($("#usedScene option:selected").val()),
+    			"status":jQuery.trim($("#status option:selected").val()),
+    			"currencyUnit":jQuery.trim($("#currencyUnit option:selected").val()),
+    			"createOperator":jQuery.trim($("#createOperator").val())
+    		}
+    	},
 		_initValidate:function(){
     		var formValidator=$("#dataForm").validate({
     			rules: {
@@ -103,16 +113,6 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
     			}
     		});
     		return formValidator;
-    	},
-		_getSearchParams:function(){
-    		return {
-    			"couponName":jQuery.trim($("#couponName").val()),
-    			"faceValue":jQuery.trim($("#faceValue").val()),
-    			"usedScene":jQuery.trim($("#usedScene option:selected").val()),
-    			"status":jQuery.trim($("#status option:selected").val()),
-    			"currencyUnit":jQuery.trim($("#currencyUnit option:selected").val()),
-    			"createOperator":jQuery.trim($("#createOperator").val())
-    		}
     	}
     });
     

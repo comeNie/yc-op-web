@@ -22,30 +22,40 @@
 			                    	<ul>
 										<li class="col-md-6">
 											<p class="word">名称</p>
-											<p><input class="int-text int-medium"  value="" type="text"></p>
+											<p><input class="int-text int-medium" id="couponName" value="" type="text"></p>
 										</li>
 										<li class="col-md-6">
 											<p class="word">面值</p>
-											<p><input class="int-text int-medium"  value="" type="text"></p>
+											<p><input class="int-text int-medium" id="faceValue" value="" type="text"></p>
 										</li>
 			                    		<li class="col-md-6">
 								           <p class="word">使用场景</p>
 						            		<p>
-							            		<select class="select select-medium">
+							            		<select class="select select-medium" id="usedScene">
 							            			<option value="" selected="selected">全部</option>
 													<!-- pc -->
-													<option value="1">pc</option>
+													<option value="1">译 云-中文站</option>
 													<!-- app -->
-													<option value="2">app</option>
+													<option value="2">译云-英文站</option>
 													<!-- app-hd -->
-													<option value="3">app-hd</option>
+													<option value="3">百度</option>
+													<!-- pc -->
+													<option value="4">金山</option>
+													<!-- app -->
+													<option value="5">wap-中文</option>
+													<!-- app-hd -->
+													<option value="6">wap-英文</option>
+													<!-- pc -->
+													<option value="7">找翻译</option>
+													<!-- app -->
+													<option value="8">微信助手</option>
 												</select>
 						            		</p>
 							            </li>
 							            <li class="col-md-6">
 								           <p class="word">状态</p>
 						            		<p>
-							            		<select class="select select-medium">
+							            		<select class="select select-medium" id="status">
 							            			<option value="" selected="selected">全部</option>
 													<!-- 启用 -->
 													<option value="1">启用</option>
@@ -57,7 +67,7 @@
 							            <li class="col-md-6">
 								           <p class="word">币种单位</p>
 						            		<p>
-							            		<select class="select select-medium">
+							            		<select class="select select-medium" id="currencyUnit">
 							            			<option value="" selected="selected">全部</option>
 													<!-- CNY￥ -->
 													<option value="1">CNY¥</option>
@@ -68,7 +78,7 @@
 							            </li>
 							            <li class="col-md-6">
 											<p class="word">创建人</p>
-											<p><input class="int-text int-medium" value="" type="text"></p>
+											<p><input class="int-text int-medium" id="createOperator" value="" type="text"></p>
 										</li>
 			                    	</ul>
 		                    	</div> 
@@ -167,11 +177,21 @@
 	  </td>
 	  <td>
 		  {{if  usedScene == '1'}}
-		  pc
+		     译云-中文站
 		  {{else usedScene == '2'}}
-		  app
+		    译云-英文站
 		  {{else usedScene == '3'}}
-		  app-hd
+		     百度
+		  {{else usedScene == '4'}}
+		     金山
+		  {{else usedScene == '5'}}
+		  wap-中文
+		  {{else usedScene == '6'}}
+		  wap-英文
+		  {{else usedScene == '7'}}
+		      找翻译
+		  {{else usedScene == '8'}}
+		      微信助手
 		  {{/if}}
 	  </td>      
       <td>{{:maxCountIssue}}</td>
