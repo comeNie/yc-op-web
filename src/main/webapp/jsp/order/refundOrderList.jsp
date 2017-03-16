@@ -176,7 +176,7 @@
    </div> 
 <script id="orderListTemple" type="text/template">
 	<tr>
-		<td>{{:parentOrderId}}</td>
+	  <td title="{{:parentOrderId}}">{{:~subStr(10,parentOrderId)}}</td>
   	  <td>{{:chlIdPage}}</td>
       <td>{{:translateTypePage}}</td>
       <td><a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">{{:orderId}}</a></td>

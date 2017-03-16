@@ -76,6 +76,14 @@
                   <div class="form-label">
 								<ul>
 									<li class="col-md-6">
+										<p class="word">服务单号：</p>
+										<p>{{:parentOrderId}}</p>
+									</li>
+									<li class="col-md-6">
+										<p class="word">申请时间：</p>
+										<p>{{:~timesToFmatter(stateChgTime)}}</p>
+									</li>
+									<li class="col-md-6">
 										<p class="word">订单号：</p>
 										<p>{{:orderId}}</p>
 									</li>
