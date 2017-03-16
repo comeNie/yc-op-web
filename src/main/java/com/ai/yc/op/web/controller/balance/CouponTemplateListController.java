@@ -9,17 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ai.slp.balance.api.coupontemplate.interfaces.ICouponTemplateSV;
+import com.ai.slp.balance.api.coupontemplate.param.CouponTemplateParam;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateQueryRequest;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateQueryResponse;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateResponse;
-import com.ai.slp.balance.api.translatorbill.interfaces.IBillGenerateSV;
-import com.ai.slp.balance.api.translatorbill.param.FunAccountQueryRequest;
-import com.ai.slp.balance.api.translatorbill.param.FunAccountQueryResponse;
-import com.ai.slp.balance.api.translatorbill.param.FunAccountResponse;
 import com.ai.yc.op.web.constant.Constants.ExcelConstants;
-import com.ai.yc.op.web.model.bill.ExAllBill;
 import com.ai.yc.op.web.model.coupon.ExAllCouponTemplate;
-import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -47,7 +42,15 @@ public class CouponTemplateListController {
 	public ModelAndView toCouponTemplateList(HttpServletRequest request) {
 		return new ModelAndView("jsp/balance/couponTemplateList");
 	}
-	
+	/**
+	 * 跳转到添加页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/toAddCouponTemplate")
+	public ModelAndView toAddCouponTemplate(HttpServletRequest request) {
+		return new ModelAndView("jsp/balance/addCouponTemplate");
+	}
 	/**
      * 优惠券模板查询
      */
@@ -84,6 +87,20 @@ public class CouponTemplateListController {
 		}
 	    return responseData;
     }
+    
+    
+    
+    /**
+     * 检测名称唯一
+     */
+    @RequestMapping("/checkName")
+    @ResponseBody
+    public Integer checkName(CouponTemplateParam param)throws Exception{
+    	ICouponTemplateSV couponTemplateSV = DubboConsumerFactory.getService(ICouponTemplateSV.class);
+    	Integer checkCouponByCouponName = couponTemplateSV.checkCouponTemplateName(param);
+		return checkCouponByCouponName;
+    }
+    
     
     
     /**

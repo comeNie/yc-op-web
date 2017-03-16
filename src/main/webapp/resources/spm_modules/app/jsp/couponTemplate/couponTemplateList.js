@@ -47,22 +47,9 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
 				formValidator.element(this);
 			});
     	},
-
     	_add:function(){
-    		var _this= this;
-    		$("#couponName").val("");
-    		$("#couponDesc").val("");
-    		$("#maxCountIssue").val("");
-    		$("#currencyUnit").val("");
-    		$("#faceValue").val("");
-    		$("#useLimits").val("");
-    		$(".usedScene").val("");
-    		//$("#payStyle").val("");
-    		$("#couponUserId").val("");
-			//弹出框展示
-			$('#eject-mask').fadeIn(100);
-			$('#add-samll').show();
-    	},
+			window.location.href = _base+"/coupon/toAddCouponTemplate";
+		},
 		_export:function(){
 			var _this=this;
 			var couponName = jQuery.trim($("#couponName").val());
