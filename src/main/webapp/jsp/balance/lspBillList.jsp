@@ -34,7 +34,7 @@
 			                    	<ul>
 										<li class="col-md-6">
 											<p class="word">lsp名称</p>
-											<p><input class="int-text int-medium" id="nickName"  value="" type="text"></p>
+											<p><input class="int-text int-medium" id="lspName"  value="" type="text"></p>
 										</li>
 										<li class="col-md-6">
 											<p class="word">管理员</p>
@@ -201,8 +201,8 @@
 <script id="orderListTemple" type="text/template">
 	<tr>
   	  <td>{{:billId}}</td>
-      <td>{{:nickname}}</td>
-      <td>{{:targetName}}</td>
+      <td>{{:lspAdmin}}</td>
+      <td>{{:lspAdmin}}</td>
  	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', startAccountTime)}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', endAccountTime)}}</td>
       <td>
@@ -227,7 +227,15 @@
 		  {{else flag == '1'}}
 		  $
 		  {{/if}}
-		  {{:~liToYuan(accountAmout)}}
+		  {{:~liToYuan(translatorFee)}}
+	  </td>
+	  <td>
+		{{if  flag == '0'}}
+		¥
+		{{else flag == '1'}}
+		$
+		{{/if}}
+		{{:~liToYuan(accountAmout)}}
 	  </td>
       <td>1个月</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}</td>
@@ -245,14 +253,14 @@
 	  <td>{{:settleAccount}}</td>
 	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', actAccountTime)}}</td>
 	  <td>
-		  {{if  state == '1'}}
+		  {{if  state == '2'}}
 		  已结算
 		  {{else }}
 		  未结算
 		  {{/if}}
 	  </td>
 	  <td>
-		  {{if  state == '1'}}
+		  {{if  state == '2'}}
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:billId}}')">明细</a>
 		  {{else }}
 		  <a href="javascript:void(0);" onclick="pager._popUp('{{:billId}}','{{:state}}','{{:accountAmout}}')">结算</a>
@@ -264,8 +272,8 @@
   <script type="text/javascript">
 	var pager;
 	(function () {
-		seajs.use('app/jsp/translatorBill/lspBillList', function (OrderListPager) {
-			pager = new OrderListPager({element: document.body});
+		seajs.use('app/jsp/translatorBill/lspBillList', function (LspListPager) {
+			pager = new LspListPager({element: document.body});
 			pager.render();
 		});
 	})();

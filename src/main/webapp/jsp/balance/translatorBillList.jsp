@@ -240,14 +240,14 @@
 	  <td>{{:settleAccount}}</td>
 	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', actAccountTime)}}</td>
 	  <td>
-		  {{if  state == '1'}}
+		  {{if  state == '2'}}
 		  已结算
 		  {{else }}
 		  未结算
 		  {{/if}}
 	  </td>
 	  <td>
-		  {{if  state == '1'}}
+		  {{if  state == '2'}}
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:billId}}')">明细</a>
 		  {{else }}
 		  <a href="javascript:void(0);" onclick="pager._popUp('{{:billId}}','{{:state}}','{{:accountAmout}}')">结算</a>

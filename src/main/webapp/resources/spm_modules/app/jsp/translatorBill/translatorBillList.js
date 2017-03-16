@@ -169,9 +169,9 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
 				flag=  1;//待审核
 			}
 			if(wait="current" && wait!=""){
-				stateBill = 2;
+				stateBill = 1;//未结算
 			}else if(refund="current" && refund!=""){
-				stateBill=  1;//待审核
+				stateBill=  2;//已结算
 			}
     		return {
 				"flag":flag,
@@ -180,7 +180,9 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
     			"nickName":jQuery.trim($("#nickName").val()),
     			"acountType":jQuery.trim($("#accountType option:selected").val()),
     			"state":stateBill,
-    		}
+				"targetType":"3",
+
+			}
     	},
     	//弹出框
     	_popUp:function(billId,state,accountAmout){
