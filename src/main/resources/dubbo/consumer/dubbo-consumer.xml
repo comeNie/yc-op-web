@@ -93,5 +93,8 @@
 	<!--优惠券-->
 	<dubbo:reference id="iSendCouponSV"
 					 interface="com.ai.slp.balance.api.sendcoupon.interfaces.ISendCouponSV" />
+	<!--优惠券使用规则-->
+	<dubbo:reference id="iCouponUseRuleSV"
+					 interface="com.ai.slp.balance.api.couponuserule.interfaces.ICouponUseRuleSV" />
 
 </beans>

@@ -17,6 +17,8 @@ import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateQueryRequest
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateQueryResponse;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateResponse;
 import com.ai.slp.balance.api.coupontemplate.param.SaveFunCouponTemplate;
+import com.ai.slp.balance.api.couponuserule.interfaces.ICouponUseRuleSV;
+import com.ai.slp.balance.api.couponuserule.param.FunCouponUseRuleQueryResponse;
 import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.coupon.ExAllCouponTemplate;
 
@@ -76,6 +78,18 @@ public class CouponTemplateListController {
 			}*/
 			ICouponTemplateSV couponTemplateSV = DubboConsumerFactory.getService(ICouponTemplateSV.class);
 			FunCouponTemplateQueryResponse funCouponTemplateQueryResponse = couponTemplateSV.queryFunCouponTemplate(funCouponTemplateQueryRequest);
+			List<FunCouponTemplateResponse> result2 = funCouponTemplateQueryResponse.getPageInfo().getResult();
+			for (FunCouponTemplateResponse funCouponTemplateResponse : result2) {
+				String requiredMoneyAmounts = null;
+				String couponUserId = funCouponTemplateResponse.getCouponUserId();
+				ICouponUseRuleSV couponUseRuleSV = DubboConsumerFactory.getService(ICouponUseRuleSV.class);
+				List<FunCouponUseRuleQueryResponse> queryFunCouponUseRule = couponUseRuleSV.queryFunCouponUseRule(couponUserId);
+				for (FunCouponUseRuleQueryResponse funCouponUseRuleQueryResponse : queryFunCouponUseRule) {
+					Integer requiredMoneyAmount = funCouponUseRuleQueryResponse.getRequiredMoneyAmount();
+					requiredMoneyAmounts = requiredMoneyAmount.toString();
+				}
+				funCouponTemplateResponse.setCouponUserId(requiredMoneyAmounts);
+			}
 			if (funCouponTemplateQueryResponse.getResponseHeader().isSuccess()) {
 				PageInfo<FunCouponTemplateResponse> pageInfo = funCouponTemplateQueryResponse.getPageInfo();
 				BeanUtils.copyProperties(resultPageInfo, pageInfo);

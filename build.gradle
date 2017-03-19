@@ -113,7 +113,8 @@ dependencies {
     compile 'com.ai.slp.balance:coupontemplate:1.0-SNAPSHOT'
     /********************优惠券********************/
     compile 'com.ai.slp.balance:sendcoupon:1.0-SNAPSHOT'
-	
+	/********************优惠券********************/
+    compile 'com.ai.slp.balance:couponuserule:1.0-SNAPSHOT'
 	
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
