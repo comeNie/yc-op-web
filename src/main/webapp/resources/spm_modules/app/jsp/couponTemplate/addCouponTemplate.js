@@ -46,17 +46,35 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
 			if(!$("#dataForm").valid()){
 				return false;
 			}
-			var param = $("#dataForm").serializeArray();
-			ajaxController.ajax({
-				type: "post",
-				processing: true,
-				message: "保存数据中，请等待...",
-				url: _base + "/coupon/saveCouponTemplate",
-				data: param,
-				success: function (rs) {
-					_this._cancel();
-				}
-			});
+			var maxCountIssue = $("#maxCountIssue").val();
+			var noLimit = $("noLimit").val();
+			var faceValue = $("#faceValue").val();
+			var random = $("random").val();
+			var couponUserId = $("#couponUserId").val();
+			var sum = $("sum").val();
+			var effectiveStartTime = $("effectiveStartTime").val();
+			var day = $("day").val();
+			if(maxCountIssue != null && noLimit != null){
+				$("#maxCountOnly").html("发放数量二选一");
+			}else if(faceValue != null && random != null){
+				$("#faceValueOnly").html("面值二选一");
+			}else if(couponUserId != null && sum != null){
+				$("#couponUserOnly").html("使用规则二选一");
+			}else if(effectiveStartTime != null && day != null){
+				$("#effectiveOnly").html("有效期时间和天数二选一");
+			}else{
+				var param = $("#dataForm").serializeArray();
+				ajaxController.ajax({
+					type: "post",
+					processing: true,
+					message: "保存数据中，请等待...",
+					url: _base + "/coupon/insertCouponTemplate",
+					data: param,
+					success: function (rs) {
+						_this._cancel();
+					}
+				});
+			}
 		},
 		_initValidate:function(){
 	    	   var _this = this;
@@ -167,7 +185,7 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
 						}
 					});
 				}
-			},
+			}
     });
     
     module.exports = OrderListPager

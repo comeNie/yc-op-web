@@ -37,7 +37,7 @@
 										<li>
 										    <p class="word">发放数量*:</p>
 											<p><input type="text" id="maxCountIssue" name="maxCountIssue" class="int-text int-small" ></p>
-											<p><input type="radio" id="" name="">不限</p>
+											<p><input type="radio" id="noLimit" name="">不限</p>&nbsp;&nbsp;&nbsp;&nbsp;<span id="maxCountOnly"></span>
 										</li>
 									 </ul>
 									<ul>
@@ -58,7 +58,8 @@
 										<li>
 										    <p class="word">面值*:</p>
 											<p><input type="text" id="faceValue" name="faceValue" class="int-text int-small" >(￥/$)</p>
-											<p><input type="radio" id="" name="">随机值<input type="text" id="" name="">~<input type="text" id="" name=""></p>
+											<p><input type="radio" id="random" name="">随机值<input type="text" name="" value="1">~<input type="text" value="10" name=""></p>
+											&nbsp;&nbsp;&nbsp;&nbsp;<span id="faceValueOnly"></span>
 										</li>
 									</ul>
 									<ul>
@@ -99,7 +100,8 @@
 										<li>
 											<p class="word">使用规则*:</p>
 											<p><input type="radio" id="couponUserId" name="couponUserId">满 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="" name="" class="int-text int-small" >(￥/$)可使用</p>
-											<p><input type="radio" id="" name="">全额抵用</p>
+											<p><input type="radio" id="sum">全额抵用</p>
+											&nbsp;&nbsp;&nbsp;&nbsp;<span id="couponUserOnly"></span>
 										</li>
 									</ul>
 									<ul>
@@ -118,7 +120,8 @@
 												<input type="text" id="effectiveStartTime" name="effectiveStartTime" class="int-text int-small" onfocus="WdatePicker({isShowWeek:true})" >
 												~<input type="text" id="effectiveEndTime" name="effectiveEndTime" class="int-text int-small" onfocus="WdatePicker({isShowWeek:true})" >
 											</p>
-											<p><input type="radio" id="" name="">天数&nbsp;&nbsp;<input type="text" id="" name="" class="int-text int-small"></p>(0表示长期有效)
+											<p><input type="radio" id="day">天数&nbsp;&nbsp;<input type="text" id="" name="" class="int-text int-small"></p>(0表示长期有效)
+											&nbsp;&nbsp;&nbsp;&nbsp;<span id="effectiveOnly"></span>
 										</li>
 									</ul>
 									<ul>

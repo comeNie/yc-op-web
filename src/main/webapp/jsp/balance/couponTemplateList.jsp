@@ -7,6 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>券码管理</title>
 <%@include file="/inc/inc.jsp" %>
+<input type="hidden" id="templateIdUpdate"/>
 </head>
 <body>
    <div class="content-wrapper-iframe" ><!--右侧灰色背景-->
@@ -150,6 +151,32 @@
 								  </div>
 								<!--分页结束-->
                             </div>
+                            <!-- 弹出框 start-->
+                            <form id="dataForm" method="post">
+                            	<div class="eject-big">
+									<div class="eject-medium" id="add-samll">
+										<div class="form-label mt-10">
+										<ul>
+											<li>手动发放:</li>
+										</ul>
+										<div>
+													<p align="center"><input type="radio" id="allVip">全部会员
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<input type="radio" id="specifyVip">指定会员</p>
+										</div>
+									    </div>	
+										<!--按钮-->
+										<div class="row mt-15"><!--删格化-->
+								               <p class="center pr-30 mt-30">
+								                   <input type="button" id="addCouponVip" class="biu-btn  btn-primary  btn-auto  ml-5" value="确  认">
+								                   <input id="add-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5 edit-close" value="取  消">
+								                </p>
+								        </div>
+									</div>	
+									<div class="mask" id="eject-mask"></div>	
+								</div>
+                            </form>
+                            <!-- 弹出框 end-->
                         </div>
                     </div>
                 </div>
@@ -212,7 +239,7 @@
 	  <td>
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:templateId}}')">明细</a>
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:templateId}}')">删除</a>
- 		  <a href="javascript:void(0);" class="adopt" onclick="pager._manualSend">手动发放</a>
+ 		  <a href="javascript:void(0);" class="adopt" onclick="pager._manualSend('{{:templateId}}')">手动发放</a>
 	  </td>
     </tr>
 </script>

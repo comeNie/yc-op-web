@@ -34,7 +34,8 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
 			//查询
             "click #search":"_searchCouponTemplateList",
             "click #export":"_export",
-            "click #add":"_add"
+            "click #add":"_add",
+            "click #addCouponVip":"_addCouponVip",
             
         },
     	//重写父类
@@ -46,6 +47,33 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
 			$(":input").bind("focusout",function(){
 				formValidator.element(this);
 			});
+    	},
+    	
+    	//弹出框
+    	_manualSend:function(templateId){
+    		var _this= this;
+    		$("#allVip").val("");
+    		$("#specifyVip").val("");
+			//弹出框展示
+			$('#eject-mask').fadeIn(100);
+			$('#add-samll').slideDown(200);
+			$("#templateIdUpdate").val(templateId);
+    	},
+    	_updatePayState:function(){
+    		var _this= this;
+    		var formValidator=_this._initValidate();
+			formValidator.form();
+			if(!$("#dataForm").valid()){
+				return false;
+			}
+			var templateId = $("#templateIdUpdate").val();
+			var allvip = $("#allVip").val();
+			var specifyVip = $("#specifyVip").val();
+    		if(specifyVip != null){
+    			window.location.href = _base+"/coupon/toUserList";
+    		}else{
+    			//全部会员获得优惠券
+    		}
     	},
     	_add:function(){
 			window.location.href = _base+"/coupon/toAddCouponTemplate";
@@ -113,7 +141,13 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
     			}
     		});
     		return formValidator;
-    	}
+    	},
+    	_detailPage:function(templateId){
+			window.location.href = _base+"/coupon/toCouponDetailList?templateId="+templateId;
+		},
+		_delete:function(templateId){
+			window.location.href = _base+"/coupon/deleteCouponTemplate?templateId="+templateId;
+		}
     });
     
     module.exports = OrderListPager

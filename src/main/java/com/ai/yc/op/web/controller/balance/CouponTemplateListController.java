@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ai.slp.balance.api.coupontemplate.interfaces.ICouponTemplateSV;
 import com.ai.slp.balance.api.coupontemplate.param.CouponTemplateParam;
+import com.ai.slp.balance.api.coupontemplate.param.FunCouponDetailPageResponse;
+import com.ai.slp.balance.api.coupontemplate.param.FunCouponDetailQueryRequest;
+import com.ai.slp.balance.api.coupontemplate.param.FunCouponDetailResponse;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateQueryRequest;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateQueryResponse;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateResponse;
 import com.ai.slp.balance.api.coupontemplate.param.SaveFunCouponTemplate;
 import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.coupon.ExAllCouponTemplate;
-import com.ai.yc.op.web.model.order.OrderDetailPagerRequest;
-import com.ai.yc.order.api.updateorder.param.UpdateOrderRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -106,6 +107,8 @@ public class CouponTemplateListController {
     /**
      * 添加优惠券模板
      */
+    @RequestMapping("/insertCouponTemplate")
+    @ResponseBody
     public ResponseData<Boolean> insertCouponTemplate(SaveFunCouponTemplate req){
     	ICouponTemplateSV couponTemplateSV = DubboConsumerFactory.getService(ICouponTemplateSV.class);
     	Integer checkCouponByCouponName = couponTemplateSV.savaCouponTemplate(req);
@@ -115,7 +118,40 @@ public class CouponTemplateListController {
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加优惠券模板成功", true);
     }
     
-    
+    @RequestMapping("/toCouponDetailList")
+	public ModelAndView toCouponDetailList(Integer templateId) {
+		ModelAndView view = new ModelAndView("jsp/balance/couponDetailList");
+		view.addObject("templateId", templateId);
+		return view;
+	}
+    /**
+	 * 优惠券明细查询
+	 */
+	@RequestMapping("/getCouponDetailData")
+	@ResponseBody
+	public ResponseData<PageInfo<FunCouponDetailResponse>> getDetailList(HttpServletRequest request,Integer templateId)throws Exception{
+		FunCouponDetailQueryRequest funCouponDetailQueryRequest = new FunCouponDetailQueryRequest();
+		funCouponDetailQueryRequest.setTemplateId(templateId);
+		ResponseData<PageInfo<FunCouponDetailResponse>> responseData = null;
+		PageInfo<FunCouponDetailResponse> resultPageInfo  = new PageInfo<FunCouponDetailResponse>();
+		try{
+			ICouponTemplateSV couponTemplateSV = DubboConsumerFactory.getService(ICouponTemplateSV.class);
+			FunCouponDetailPageResponse funCouponDetailPageResponse = couponTemplateSV.queryCouponDetail(funCouponDetailQueryRequest);
+			if (funCouponDetailPageResponse.getResponseHeader().isSuccess()) {
+				PageInfo<FunCouponDetailResponse> pageInfo = funCouponDetailPageResponse.getPageInfo();
+				BeanUtils.copyProperties(resultPageInfo, pageInfo);
+				List<FunCouponDetailResponse> result = pageInfo.getResult();
+				resultPageInfo.setResult(result);
+				responseData = new ResponseData<PageInfo<FunCouponDetailResponse>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
+			}else {
+				responseData = new ResponseData<PageInfo<FunCouponDetailResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);
+			}
+		} catch (Exception e) {
+			logger.error("查询账单列表失败：", e);
+			responseData = new ResponseData<PageInfo<FunCouponDetailResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
+		}
+		return responseData;
+	}
     /**
      * 优惠券模板信息导出
      */
@@ -220,5 +256,19 @@ public class CouponTemplateListController {
 			logger.error("导出模板列表失败："+e.getMessage(), e);
 		}
 	}
+    
+    /**
+     * 删除优惠券模板
+     */
+    @RequestMapping("/deleteCouponTemplate")
+    @ResponseBody
+    public ResponseData<Boolean> deleteCouponTemplate(Integer templateId){
+    	ICouponTemplateSV couponTemplateSV = DubboConsumerFactory.getService(ICouponTemplateSV.class);
+    	Integer deleteCouponTemplate = couponTemplateSV.deleteCouponTemplate(templateId);
+    	if(deleteCouponTemplate==null){
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "删除优惠券模板成功", true);
+    }
 
 }
