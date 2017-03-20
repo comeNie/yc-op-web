@@ -42,42 +42,7 @@ public class LspBillListController {
 		return new ModelAndView("jsp/balance/lspBillList");
 	}
 	
-	/**
-     * 账单信息查询
-     */
-    @RequestMapping("/getLspBillPageData")
-    @ResponseBody
-    public ResponseData<PageInfo<FunAccountResponse>> getList(HttpServletRequest request,FunAccountQueryRequest funAccountQueryRequest)throws Exception{
-    	ResponseData<PageInfo<FunAccountResponse>> responseData = null;
-    	List<FunAccountResponse> resultList = new ArrayList<FunAccountResponse>();
-    	PageInfo<FunAccountResponse> resultPageInfo  = new PageInfo<FunAccountResponse>();
-		try{
 
-			String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
-		    String strPageSize=(null==request.getParameter("pageSize"))?"10":request.getParameter("pageSize");
-			resultPageInfo.setPageNo(Integer.parseInt(strPageNo));
-			resultPageInfo.setPageSize(Integer.parseInt(strPageSize));
-			funAccountQueryRequest.setPageInfo(resultPageInfo);
-			if (funAccountQueryRequest.getState()==null){
-				funAccountQueryRequest.setState(1);
-			}
-			IBillGenerateSV billGenerateSV = DubboConsumerFactory.getService(IBillGenerateSV.class);
-			FunAccountQueryResponse funAccountQueryResponse = billGenerateSV.queryFunAccount(funAccountQueryRequest);
-			if (funAccountQueryResponse.getResponseHeader().isSuccess()) {
-				PageInfo<FunAccountResponse> pageInfo = funAccountQueryResponse.getPageInfo();
-				BeanUtils.copyProperties(resultPageInfo, pageInfo);
-				List<FunAccountResponse> result = pageInfo.getResult();
-				resultPageInfo.setResult(result);
-				responseData = new ResponseData<PageInfo<FunAccountResponse>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
-			}else {
-				responseData = new ResponseData<PageInfo<FunAccountResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);
-			}
-		} catch (Exception e) {
-			logger.error("查询账单列表失败：", e);
-			responseData = new ResponseData<PageInfo<FunAccountResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
-		}
-	    return responseData;
-    }
 
 	@RequestMapping("/toLspDetailBillList")
 	public ModelAndView toLspDetailBillList(String billID) {
@@ -86,76 +51,6 @@ public class LspBillListController {
 		return view;
 	}
 
-	/**
-	 * 账单明细查询
-	 */
-	@RequestMapping("/getBillDetailData")
-	@ResponseBody
-	public ResponseData<PageInfo<BillDetailResponse>> getDetailList(HttpServletRequest request,String billId)throws Exception{
-		FunAccountDetailQueryRequest funAccountDetailQueryRequest = new FunAccountDetailQueryRequest();
-		funAccountDetailQueryRequest.setBillID(billId);
-		ResponseData<PageInfo<BillDetailResponse>> responseData = null;
-		List<BillDetailResponse> resultList = new ArrayList<BillDetailResponse>();
-		PageInfo<BillDetailResponse> resultPageInfo  = new PageInfo<BillDetailResponse>();
-		
-		try{
-			IBillGenerateSV billGenerateSV = DubboConsumerFactory.getService(IBillGenerateSV.class);
-			IYCTranslatorServiceSV translatorServiceSV = DubboConsumerFactory.getService(IYCTranslatorServiceSV.class);
-			FunAccountDetailPageResponse funAccountDetailPageResponse = billGenerateSV.queryFunAccountDetail(funAccountDetailQueryRequest);
-			if (funAccountDetailPageResponse.getResponseHeader().isSuccess()) {
-				PageInfo<FunAccountDetailResponse> pageInfo = funAccountDetailPageResponse.getPageInfo();
-				BeanUtils.copyProperties(resultPageInfo, pageInfo);
-				List<FunAccountDetailResponse> result = pageInfo.getResult();
-				for (int i=0;i<result.size();i++){
-					Integer id = i+1;
-					String lspID = result.get(i).getLspId();
-					searchYCLSPInfoRequest searchLSPParams = new searchYCLSPInfoRequest();
-					searchLSPParams.setLspId(lspID);
-					YCLSPInfoReponse yclspInfoReponse = translatorServiceSV.searchLSPInfo(searchLSPParams);
-					String lspName = yclspInfoReponse.getLspName();
-					BillDetailResponse billDetailResponse = new BillDetailResponse();
-					billDetailResponse.setId(id);
-					billDetailResponse.setLspName(lspName);
-					BeanUtils.copyProperties(billDetailResponse,result.get(i));
-					resultList.add(billDetailResponse);
-				}
-				resultPageInfo.setResult(resultList);
-				responseData = new ResponseData<PageInfo<BillDetailResponse>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
-			}else {
-				responseData = new ResponseData<PageInfo<BillDetailResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);
-			}
-
-		} catch (Exception e) {
-			logger.error("查询账单列表失败：", e);
-			responseData = new ResponseData<PageInfo<BillDetailResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
-		}
-		return responseData;
-	}
-
-
-	/**
-	 * 账单结算
-	 */
-	@RequestMapping("/lspBillSettle")
-	@ResponseBody
-	public ResponseData<Boolean> settleBill(SettleParam param)throws Exception{
-		IBillGenerateSV billGenerateSV = DubboConsumerFactory.getService(IBillGenerateSV.class);
-		String billId=null;
-		try {
-			billId = billGenerateSV.settleBill(param);
-		}catch (Exception e){
-			logger.error("系统异常，请稍后重试", e);
-			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
-		}
-		if(billId==null){
-			logger.error("系统异常，请稍后重试");
-			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
-		}
-		if (!param.getBillID().equals(billId)){
-			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
-		}
-		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "账单结算成功", true);
-	}
 
 	/**
      * 订单信息导出

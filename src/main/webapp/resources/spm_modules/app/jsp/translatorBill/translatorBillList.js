@@ -208,7 +208,7 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
 				return false;
 			}
     		var billId = $("#billIdUpdate").val();
-    		var money = $("#updateMoney").val();
+    		var money = $("#updateMoney").val()*1000;
     		var payStyle=jQuery.trim($("#payStyle option:selected").val());
 			var settleAccount = $("#account").val();
 			var billState = $("#billState").val();

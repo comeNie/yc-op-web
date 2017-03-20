@@ -41,7 +41,7 @@ define('app/jsp/translatorBill/lspDetailBill', function (require, exports, modul
 		
 		_searchBillList:function(){
 			var _this=this;
-			var url = _base+"/lspBill/getBillDetailData";
+			var url = _base+"/balance/getBillDetailData";
 			var queryData = this._getSearchParams();
 			$("#pagination").runnerPagination({
 				url:url,

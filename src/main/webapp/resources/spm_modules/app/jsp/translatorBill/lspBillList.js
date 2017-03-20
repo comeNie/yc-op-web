@@ -129,7 +129,7 @@ define('app/jsp/translatorBill/lspBillList', function (require, exports, module)
 
 		_searchBillList:function(){
 			var _this=this;
-			var url = _base+"/lspBill/getLspBillPageData";
+			var url = _base+"/balance/getBillPageData";
 			var queryData = this._getSearchParams();
 			$("#pagination").runnerPagination({
 				url:url,
@@ -197,27 +197,27 @@ define('app/jsp/translatorBill/lspBillList', function (require, exports, module)
 			//弹出框展示
 			$('#eject-mask').fadeIn(100);
 			$('#add-samll').slideDown(200);
-			$("#updateMoney").val(accountAmout/1000);
+			$("#updateMoney").val(accountAmout);
 			$("#billIdUpdate").val(billId);
 			$("#billState").val(state);
 			// $("#payStyle").val(accountType);
     	},
-    	_updatePayState:function(){
-    		var _this= this;
-    		var formValidator=_this._initValidate();
+		_updatePayState:function(){
+			var _this= this;
+			var formValidator=_this._initValidate();
 			formValidator.form();
 			if(!$("#dataForm").valid()){
 				return false;
 			}
-    		var billId = $("#billIdUpdate").val();
-    		var money = $("#updateMoney").val();
-    		var payStyle=jQuery.trim($("#payStyle option:selected").val());
+			var billId = $("#billIdUpdate").val();
+			var money = $("#updateMoney").val()*1000;
+			var payStyle=jQuery.trim($("#payStyle option:selected").val());
 			var settleAccount = $("#account").val();
 			var billState = $("#billState").val();
-    		$.ajax({
+			$.ajax({
 				type : "post",
 				processing : false,
-				url : _base+ "/lspBill/lspBillSettle",
+				url : _base+ "/balance/settleBill",
 				dataType : "json",
 				data : {
 					state:billState,
@@ -245,7 +245,7 @@ define('app/jsp/translatorBill/lspBillList', function (require, exports, module)
 					}
 				}
 			});
-    	},
+		},
     	_closeDialog:function(){
     		$("#errorMessage").html("");
     		$('#eject-mask').fadeOut(100);
