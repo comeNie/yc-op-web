@@ -222,8 +222,16 @@
 	<tr>
   	  <td>{{:chlIdPage}}</td>
       <td>{{:translateTypePage}}</td>
-      <td><a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">{{:orderId}}</a></td>
- 	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
+	  {{if state==40 && busiType=='2' || state==92}}
+ 			<td><a href="javascript:void(0);" onclick="pager._refundDetail('{{:orderId}}')">{{:orderId}}</a></td>
+	  {{/if}}
+	  {{if state==53}}
+		<td><a href="javascript:void(0);" onclick="pager._jugedDetail('{{:orderId}}')">{{:orderId}}</a></td>
+	  {{/if}}
+	  {{if busiType!='2' && state!=53 && state!=92}}
+      	<td><a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}','{{:state}}')">{{:orderId}}</a></td>
+ 	  {{/if}}
+	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
       <td>{{:userName}}</td>
  	  <td>
       	 <table class="table close-border" width="100%">
