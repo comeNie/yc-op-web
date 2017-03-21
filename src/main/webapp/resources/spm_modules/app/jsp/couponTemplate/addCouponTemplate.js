@@ -40,26 +40,40 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
     		OrderListPager.superclass.setup.call(this);
     	},
 		_save:function(){
+			var currencyUnit=$("#currencyUnit option:selected").val(); 
+			var couponUserId = $('input[name="couponUserId"]:checked').val();
+			var faceValue = $("#faceValue").val();
+			var rma = $("#rma").val();
+			if(couponUserId=="1"){
+				ajaxController.ajax({
+					type: "post",
+					processing: true,
+					message: "保存数据中，请等待...",
+					url: _base + "/coupon/insertCouponUseRule",
+					data: {currencyUnit,faceValue,rma},
+					success: function (rs) {
+					}
+				});
+			}
+			
+			
+			/*var maxCountIssue = $("#maxCountIssue").val();
+			var noLimit = $("noLimit").val();
+			var faceValue = $("#faceValue").val();
+			var random = $("random").val();
+			var couponUserId = $("#couponUserId").val();
+			var effectiveStartTime = $("effectiveStartTime").val();
+			var day = $("day").val();
 			var _this = this;
 			var formValidator=_this._initValidate();
 			formValidator.form();
 			if(!$("#dataForm").valid()){
 				return false;
 			}
-			var maxCountIssue = $("#maxCountIssue").val();
-			var noLimit = $("noLimit").val();
-			var faceValue = $("#faceValue").val();
-			var random = $("random").val();
-			var couponUserId = $("#couponUserId").val();
-			var sum = $("sum").val();
-			var effectiveStartTime = $("effectiveStartTime").val();
-			var day = $("day").val();
 			if(maxCountIssue != null && noLimit != null){
 				$("#maxCountOnly").html("发放数量二选一");
 			}else if(faceValue != null && random != null){
 				$("#faceValueOnly").html("面值二选一");
-			}else if(couponUserId != null && sum != null){
-				$("#couponUserOnly").html("使用规则二选一");
 			}else if(effectiveStartTime != null && day != null){
 				$("#effectiveOnly").html("有效期时间和天数二选一");
 			}else{
@@ -71,10 +85,9 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
 					url: _base + "/coupon/insertCouponTemplate",
 					data: param,
 					success: function (rs) {
-						_this._cancel();
 					}
 				});
-			}
+			}*/
 		},
 		_initValidate:function(){
 	    	   var _this = this;

@@ -71,6 +71,7 @@
       <td></td>
 	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', effectiveStartTime)}}</td>
       <td></td>
+	  <td></td>
 	  <td>
 		  {{if  status == '1'}}
 		  未领取
@@ -89,8 +90,12 @@
 		  后台派送
 		  {{/if}}
 	  </td>
+	  <td>
+			<a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:templateId}}')">移除</a>
+			<a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:templateId}}')">延长有效期</a>
+	  </td>
     </tr>
-</script> 
+</script>
   <script type="text/javascript">
 	var pager;
 	(function () {

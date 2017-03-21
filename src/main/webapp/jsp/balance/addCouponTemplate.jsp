@@ -84,23 +84,23 @@
 										<li>
 										    <p class="word">使用场景*:</p>
 										    <p>
-													<input type="checkbox" class="usedScene" name="usedScene" value="全选"/>全选
-													<input type="checkbox" class="usedScene" name="usedScene" value="译云-中文站"/>译云-中文站
-													<input type="checkbox" class="usedScene" name="usedScene" value="译云-英文站"/>译云-英文站
-													<input type="checkbox" class="usedScene" name="usedScene" value="百度"/>百度
-													<input type="checkbox" class="usedScene" name="usedScene" value="金山"/>金山<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<input type="checkbox" class="usedScene" name="usedScene" value="wap-中文"/>wap-中文
-													<input type="checkbox" class="usedScene" name="usedScene" value="wap-英文"/>wap-英文
-													<input type="checkbox" class="usedScene" name="usedScene" value="找翻译"/>找翻译
-													<input type="checkbox" class="usedScene" name="usedScene" value="微信助手"/>微信助手
+													<input type="checkbox" class="usedScene" name="usedScene" value=""/>全选
+													<input type="checkbox" class="usedScene" name="usedScene" value="1"/>译云-中文站
+													<input type="checkbox" class="usedScene" name="usedScene" value="2"/>译云-英文站
+													<input type="checkbox" class="usedScene" name="usedScene" value="3"/>百度
+													<input type="checkbox" class="usedScene" name="usedScene" value="4"/>金山<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<input type="checkbox" class="usedScene" name="usedScene" value="5"/>wap-中文
+													<input type="checkbox" class="usedScene" name="usedScene" value="6"/>wap-英文
+													<input type="checkbox" class="usedScene" name="usedScene" value="7"/>找翻译
+													<input type="checkbox" class="usedScene" name="usedScene" value="8"/>微信助手
 											</p>
 										</li>
 									</ul>
 									<ul>
 										<li>
 											<p class="word">使用规则*:</p>
-											<p><input type="radio" id="couponUserId" name="couponUserId">满 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="" name="" class="int-text int-small" >(￥/$)可使用</p>
-											<p><input type="radio" id="sum">全额抵用</p>
+											<p><input type="radio" id="couponUserId" name="couponUserId" value="1">满 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="rma" name="" class="int-text int-small" >(￥/$)可使用</p>
+											<p><input type="radio" id="sum" name="couponUserId"  value="0">全额抵用</p>
 											&nbsp;&nbsp;&nbsp;&nbsp;<span id="couponUserOnly"></span>
 										</li>
 									</ul>
@@ -128,8 +128,8 @@
 										<li>
 										    <p class="word">状态:</p>
 											<p>
-												<input name="status" type="radio" value="" />启用
-												<input name="status" type="radio" value="" />禁用
+												<input name="status" type="radio" value="1" />启用
+												<input name="status" type="radio" value="2" />禁用
 											</p>
 										</li>
 									</ul>

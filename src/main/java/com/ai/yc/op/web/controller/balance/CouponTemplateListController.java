@@ -19,6 +19,7 @@ import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateResponse;
 import com.ai.slp.balance.api.coupontemplate.param.SaveFunCouponTemplate;
 import com.ai.slp.balance.api.couponuserule.interfaces.ICouponUseRuleSV;
 import com.ai.slp.balance.api.couponuserule.param.FunCouponUseRuleQueryResponse;
+import com.ai.slp.balance.api.couponuserule.param.SaveCouponUseRule;
 import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.coupon.ExAllCouponTemplate;
 
@@ -132,6 +133,20 @@ public class CouponTemplateListController {
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加优惠券模板成功", true);
     }
     
+    /**
+     * 添加使用规则
+     */
+    @RequestMapping("/insertCouponUseRule")
+    @ResponseBody
+    public ResponseData<Boolean> insertCouponUseRule(SaveCouponUseRule param){
+    	ICouponUseRuleSV couponUseRuleSV = DubboConsumerFactory.getService(ICouponUseRuleSV.class);
+    	Integer checkCouponByCouponName = couponUseRuleSV.saveCouponUseRule(param);
+    	if(checkCouponByCouponName==null){
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加优惠券模板成功", true);
+    }
+    
     @RequestMapping("/toCouponDetailList")
 	public ModelAndView toCouponDetailList(Integer templateId) {
 		ModelAndView view = new ModelAndView("jsp/balance/couponDetailList");
@@ -156,6 +171,7 @@ public class CouponTemplateListController {
 				BeanUtils.copyProperties(resultPageInfo, pageInfo);
 				List<FunCouponDetailResponse> result = pageInfo.getResult();
 				resultPageInfo.setResult(result);
+				
 				responseData = new ResponseData<PageInfo<FunCouponDetailResponse>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
 			}else {
 				responseData = new ResponseData<PageInfo<FunCouponDetailResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);

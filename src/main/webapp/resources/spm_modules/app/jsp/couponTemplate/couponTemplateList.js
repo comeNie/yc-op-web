@@ -35,8 +35,7 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
             "click #search":"_searchCouponTemplateList",
             "click #export":"_export",
             "click #add":"_add",
-            "click #addCouponVip":"_addCouponVip",
-            
+            "click #addCouponVip":"_addCouponVip"
         },
     	//重写父类
     	setup: function () {
@@ -146,7 +145,18 @@ define('app/jsp/couponTemplate/couponTemplateList', function (require, exports, 
 			window.location.href = _base+"/coupon/toCouponDetailList?templateId="+templateId;
 		},
 		_delete:function(templateId){
-			window.location.href = _base+"/coupon/deleteCouponTemplate?templateId="+templateId;
+			var _this=this;
+			alert(templateId);
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: _base + "/coupon/deleteCouponTemplate",
+				data: templateId,
+				success: function (rs) {
+					_this._cancel();
+				}
+			});
 		}
     });
     
