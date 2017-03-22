@@ -257,11 +257,11 @@
 									</li>
 							</ul>
 						</div>
+						 <div class="bc-ang mb-12">
+            	 			<input id="save" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="提交" />
+							<input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />      
+						</div>
 				</script>				
-            <div class="bc-ang mb-12">
-            	 <input id="save" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="提交" />
-				<input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />      
-			</div>
     </div>                       
 </script>
 <script id="orderStateChgTempl" type="text/x-jsrender">
