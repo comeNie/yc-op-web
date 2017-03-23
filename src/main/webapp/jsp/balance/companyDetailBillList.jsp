@@ -87,7 +87,7 @@
 		  {{else currencyUnit == '2'}}
 		  $
 		  {{/if}}
-		  {{:~liToYuan(totalFee)}-{:~liToYuan(discountFee)}}
+		  {{:~liToYuan(totalFee-discountFee)}}
 	  </td>
 	 <%-- <td>
 		  {{if  accountType == '1'}}
@@ -150,7 +150,7 @@
   <script type="text/javascript">
 	var pager;
 	(function () {
-		seajs.use('app/jsp/translatorBill/lspDetailBill', function (OrderListPager) {
+		seajs.use('app/jsp/translatorBill/companyDetailBill', function (OrderListPager) {
 			pager = new OrderListPager({element: document.body});
 			pager.render();
 		});

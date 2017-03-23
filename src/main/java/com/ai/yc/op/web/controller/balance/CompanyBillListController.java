@@ -40,9 +40,9 @@ public class CompanyBillListController {
 	
 
 
-	@RequestMapping("/toLspDetailBillList")
-	public ModelAndView toLspDetailBillList(String billID) {
-		ModelAndView view = new ModelAndView("jsp/balance/lspDetailBillList");
+	@RequestMapping("/toCompanyDetailBillList")
+	public ModelAndView toCompanyDetailBillList(String billID) {
+		ModelAndView view = new ModelAndView("jsp/balance/companyDetailBillList");
 		view.addObject("billID", billID);
 		return view;
 	}

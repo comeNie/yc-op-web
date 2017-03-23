@@ -259,7 +259,7 @@
   <script type="text/javascript">
 	var pager;
 	(function () {
-		seajs.use('app/jsp/translatorBill/lspBillList', function (LspListPager) {
+		seajs.use('app/jsp/translatorBill/companyBillList', function (LspListPager) {
 			pager = new LspListPager({element: document.body});
 			pager.render();
 		});
