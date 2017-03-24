@@ -13,4 +13,4 @@ ADD ./script/start-web.sh /start-web.sh
 RUN chmod 755 /*.sh
 
 # Define default command.
-CMD ["/start-web.sh"]
+#CMD ["/start-web.sh"]
