@@ -189,16 +189,16 @@
 								</li>
 							</ul>
 						</div>
+						<div class="bc-ang mb-12">
+            				<c:if test="${stateCheck=='92'}">
+            	 				<input id="passId" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="确认" />
+            				</c:if>	
+            				<c:if test="${stateCheck=='42'}">
+            	 				<input id="refuseId" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="锁定" />
+            				</c:if>
+							<input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />      
+						</div>
 				</script>				
-            <div class="bc-ang mb-12">
-            <c:if test="${stateCheck=='92'}">
-            	 <input id="passId" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="确认" />
-            </c:if>	
-            <c:if test="${stateCheck=='42'}">
-            	 <input id="refuseId" type="button" class="biu-btn btn-primary btn-blue btn-medium ml-10" value="锁定" />
-            </c:if>
-				<input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" />      
-			</div>
     </div>                       
 </script>
 <script id="orderStateChgTempl" type="text/x-jsrender">
