@@ -1,4 +1,4 @@
-package com.ai.yc.op.web.controller.balance;
+package com.ai.yc.op.web.controller.coupon;
 
 import java.util.ArrayList;
 import java.util.Date;
