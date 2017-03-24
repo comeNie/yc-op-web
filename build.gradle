@@ -116,7 +116,11 @@ dependencies {
 	/********************优惠券********************/
     compile 'com.ai.slp.balance:couponuserule:1.0-SNAPSHOT'
     //企业
-	 compile 'com.ai.yc.user:usercompany:2.0-SNAPSHOT'
+	compile 'com.ai.yc.user:usercompany:2.0-SNAPSHOT'
+	
+	compile 'com.ai.slp.balance:fundquery:1.0-SNAPSHOT'
+	/********************账户********************/
+	compile 'com.ai.slp.balance:accountmaintain:1.0-SNAPSHOT'
 	
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){

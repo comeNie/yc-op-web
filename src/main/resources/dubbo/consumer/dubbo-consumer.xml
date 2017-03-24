@@ -99,4 +99,10 @@
 	<!--企业用户-->
 	<dubbo:reference id="iYCUserCompanySV"
 					 interface="com.ai.yc.user.api.usercompany.interfaces.IYCUserCompanySV"/>		 
+	<!--  -->
+	<dubbo:reference id="iFundQuerySV"
+			interface="com.ai.slp.balance.api.fundquery.interfaces.IFundQuerySV "/>
+	<!--账户-->	
+	<dubbo:reference id="iAccountMaintainSV"
+		interface="com.ai.slp.balance.api.accountmaintain.interfaces.IAccountMaintainSV" />
 </beans>
