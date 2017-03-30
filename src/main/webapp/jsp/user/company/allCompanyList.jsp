@@ -21,8 +21,8 @@
 								<div class="main-box-body clearfix">
 									<div class="bill-list-table">
 										<ul>
-											<li ><a href="#" id="domestic" class="current" >待审核</a></li>
-											<li ><a href="#"  id="foreign" >企业列表</a></li>
+											<li ><a href="#" id="domestic" >待审核</a></li>
+											<li ><a href="#"  id="foreign" class="current">企业列表</a></li>
 										</ul>
 									</div>
 								</div>
@@ -31,6 +31,7 @@
 										<li class="col-md-6">
 											<p class="word">昵称</p>
 											<p><input class="int-text int-medium" id="nickName"  value="" type="text"></p>
+											<label id="nickNameErrMsg" style="display: none;"><span class="ash" id="nickNameErrText"></span></label>
 										</li >
 										<li class="col-md-6">
 											<p class="word">企业名称</p>
@@ -107,10 +108,16 @@
 												<th>申请来源</th>
 												<th>企业名称</th>
 												<th>创建人昵称</th>
-												<th>姓名</th>
-												<th>企业座机</th>
+												<th>创建人角色</th>
 												<th>联系人</th>
+												<th>联系电话</th>
 												<th>申请时间</th>
+												<th>成员数量</th>
+												<th>企业账户余额</th>
+												<th>企业折扣</th>
+												<th>结算方式</th>
+												<th>审核人</th>
+												<th>审核时间</th>
 												<th>状态</th>
 												<th>操作</th>
 											</tr>
@@ -137,7 +144,7 @@
    </div> 
 <script id="companyListTemple" type="text/template">
 	<tr>
-  	  <td>{{:companyId}}=={{:#index+1}}</td>
+  	  <td>{{:#index+1}}</td>
       <td>
 		{{if usersource == '0'}}
            	 pc
@@ -161,35 +168,28 @@
       </td>
       <td>{{:companyName}}</td>
  	  <td>{{:nickName}}</td>
-      <td>{{:firstname}}{{:lastname}}</td>
-      <td>{{:telephone}}</td>
+      <td>用户</td>
       <td>{{:linkman}}</td>
+	  <td>{{:telephone}}</td>
       <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}</td>
-      <td>
-	     {{if  state == 0}}
-		 	未审核
-		  {{/if}}
-		 {{if  state == 1}}
-		 	已审核
-		  {{/if}}
-		 {{if  state == 2}}
-		 	解锁
-		  {{/if}}
-		 {{if  state == 3}}
-		 	锁定
-		 {{/if}}
-	  </td>
+      <td>{{:membersCount}}</td>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+      <td></td>
+	  <td></td>
+      <td></td>
 	<td>
         <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyDetail('{{:companyId}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">查看</a>  
-        <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyAudit('{{:companyId}}','{{:companyName}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">通过</a>
-                           锁定
+        <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyAudit('{{:companyId}}','{{:companyName}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">修改</a>
+          消费明细
     </td>
     </tr>
 </script> 
   <script type="text/javascript">
 	var pager;
 	(function () {
-		seajs.use('app/jsp/user/companyInfolList', function (OrderListPager) {
+		seajs.use('app/jsp/user/allCompanyInfolList', function (OrderListPager) {
 			pager = new OrderListPager({element: document.body});
 			pager.render();
 		});

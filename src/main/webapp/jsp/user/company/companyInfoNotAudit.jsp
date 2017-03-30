@@ -153,7 +153,6 @@
 						<li>企业信息</li>
 					</ul>
 				  </div>
-				  <form id="dataForm" method="post">
 				   <div class="form-label">
 								<ul>
 									<li class="col-md-6">
@@ -228,39 +227,37 @@
 									</li>
 									<li class="col-md-6">
 										<p class="word">企业折扣：</p>
-                                        <p><input class="int-text int-medium" id="corporateDiscount" name="corporateDiscount" type="text">%</p>
-										<label id="discountErrMsg" style="display: none;"><span class="ash" id="discountText"></span></label>
+                                        <p><input class="int-text int-medium" id="corporateDiscount" type="text">%</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">账单日：</p>
-										<p><input class="int-text int-medium" id="statementDate" name="statementDate" type="text">日</p>
-										<label id="statementDateErrMsg" style="display: none;"><span class="ash" id="statementDateText"></span></label>
+										<p><input class="int-text int-medium" id="statementDate" type="text">日</p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">结算周期：</p>
-                                        <p><input class="int-text int-medium" id="settlementPeriod" name="settlementPeriod"  type="text">月</p>
-										<label id="settlementPeriodErrMsg" style="display: none;"><span class="ash" id="settlementPeriodText"></span></label>
+										<p>
+                                          <p><input class="int-text int-medium" id="settlementPeriod"  type="text">月</p>
+										</p>
 									</li>
 									
 								<ul>
 									<li class="col-md-6">
 										<p class="word">企业简介：</p>
-										<p><input class="int-text int-medium" id="settlementPeriod"  type="text"></p>
+										<p></p>
 									</li>
 								</ul>
 								<ul>
 									<li class="col-md-6">
-										<p class="word">备注：</p>
-										<p><input class="int-text int-medium" id="settlementPeriod"  type="text"></p>
+										<p class="word">企业简介：</p>
+										<p></p>
 									</li>
 								</ul>
 						</div>
 						<div class="main-box-body clearfix">
 						</div>
-					</form>
 				</script>				
             <div class="bc-ang mb-12">
-            	<input id="auditPass" type="button" class="biu-btn  btn-yellow btn-medium ml-10"  value="通过" >
+            	<input id="auditPass" type="button" class="biu-btn  btn-yellow btn-medium ml-10"  value="锁定" >
 				<input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" onclick="history.go(-1)">      
 			</div>
 <script type="text/javascript">

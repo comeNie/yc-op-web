@@ -108,4 +108,7 @@
 	<!--活动策略-->
 	<dubbo:reference id="iActivitySV"
 					 interface="com.ai.slp.balance.api.activity.interfaces.IActivitySV" />
+	<!--企业关系-->	
+	<dubbo:reference id="iYCUserCompanyRelationSV"
+		interface="com.ai.yc.user.api.usercompanyrelation.interfaces.IYCUserCompanyRelationSV" />
 </beans>
