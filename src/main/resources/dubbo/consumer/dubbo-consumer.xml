@@ -111,6 +111,7 @@
 		
 	<dubbo:reference id="iYCUserGriwthValueSV"
 		interface="com.ai.yc.user.api.usergriwthvalue.interfaces.IYCUserGriwthValueSV" />
+
 	<!--活动策略-->
 	<dubbo:reference id="iActivitySV"
 					 interface="com.ai.slp.balance.api.activity.interfaces.IActivitySV" />

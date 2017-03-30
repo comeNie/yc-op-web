@@ -19,6 +19,7 @@ import com.ai.slp.balance.api.coupontemplate.param.FunCouponTemplateResponse;
 import com.ai.slp.balance.api.coupontemplate.param.SaveFunCouponTemplate;
 import com.ai.slp.balance.api.couponuserule.interfaces.ICouponUseRuleSV;
 import com.ai.slp.balance.api.couponuserule.param.FunCouponUseRuleQueryResponse;
+import com.ai.slp.balance.api.couponuserule.param.SaveCouponUseRule;
 import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.coupon.ExAllCouponTemplate;
 
@@ -28,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
@@ -40,32 +40,32 @@ import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.paas.ipaas.ccs.IConfigClient;
 
 @Controller
-@RequestMapping("/coupon")
-public class CouponTemplateListController {
+@RequestMapping("/activity")
+public class ActivityListController {
 	
-	private static final Logger logger = Logger.getLogger(CouponTemplateListController.class);
+	private static final Logger logger = Logger.getLogger(ActivityListController.class);
 	
-	@RequestMapping("/toCouponTemplateList")
+	@RequestMapping("/toActivityList")
 	public ModelAndView toCouponTemplateList(HttpServletRequest request) {
-		return new ModelAndView("jsp/coupon/couponTemplateList");
+		return new ModelAndView("jsp/coupon/activityList");
 	}
 	/**
 	 * 跳转到添加页面
 	 * @param request
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/toAddCouponTemplate")
 	public ModelAndView toAddCouponTemplate(HttpServletRequest request) {
 		return new ModelAndView("jsp/coupon/addCouponTemplate");
 	}
-	/**
+	*//**
      * 优惠券模板查询
-     */
+     *//*
     @RequestMapping("/getCouponTemplatePageData")
     @ResponseBody
     public ResponseData<PageInfo<FunCouponTemplateResponse>> getList(HttpServletRequest request,FunCouponTemplateQueryRequest funCouponTemplateQueryRequest)throws Exception{
     	ResponseData<PageInfo<FunCouponTemplateResponse>> responseData = null;
-    	/*List<FunAccountResponse> resultList = new ArrayList<FunAccountResponse>();*/
+    	List<FunAccountResponse> resultList = new ArrayList<FunAccountResponse>();
     	PageInfo<FunCouponTemplateResponse> resultPageInfo  = new PageInfo<FunCouponTemplateResponse>();
 		try{
 
@@ -74,21 +74,14 @@ public class CouponTemplateListController {
 			resultPageInfo.setPageNo(Integer.parseInt(strPageNo));
 			resultPageInfo.setPageSize(Integer.parseInt(strPageSize));
 			funCouponTemplateQueryRequest.setPageInfo(resultPageInfo);
-			/*if (funAccountQueryRequest.getState()==null){
+			if (funAccountQueryRequest.getState()==null){
 				funAccountQueryRequest.setState(1);
-			}*/
+			}
 			ICouponTemplateSV couponTemplateSV = DubboConsumerFactory.getService(ICouponTemplateSV.class);
 			FunCouponTemplateQueryResponse funCouponTemplateQueryResponse = couponTemplateSV.queryFunCouponTemplate(funCouponTemplateQueryRequest);
 			List<FunCouponTemplateResponse> result2 = funCouponTemplateQueryResponse.getPageInfo().getResult();
 			for (FunCouponTemplateResponse funCouponTemplateResponse : result2) {
-				String usedScene = funCouponTemplateResponse.getUsedScene();
-				String[] usedSceneArray = usedScene.split(",");
-		        for (int i = 0; i < usedSceneArray.length; i++) {
-		            funCouponTemplateResponse.setUsedScene(usedSceneArray[i]);
-		        }
-			}
-			for (FunCouponTemplateResponse funCouponTemplateResponse : result2) {
-				if(!(funCouponTemplateResponse.getCouponUserId().equals("0"))){
+				if(funCouponTemplateResponse.getCreateOperator()!="0"){
 					String requiredMoneyAmounts = null;
 					String couponUserId = funCouponTemplateResponse.getCouponUserId();
 					ICouponUseRuleSV couponUseRuleSV = DubboConsumerFactory.getService(ICouponUseRuleSV.class);
@@ -118,9 +111,9 @@ public class CouponTemplateListController {
     
     
     
-    /**
+    *//**
      * 检测名称唯一
-     */
+     *//*
     @RequestMapping("/checkName")
     @ResponseBody
     public Integer checkName(CouponTemplateParam param)throws Exception{
@@ -128,20 +121,33 @@ public class CouponTemplateListController {
     	Integer checkCouponByCouponName = couponTemplateSV.checkCouponTemplateName(param);
 		return checkCouponByCouponName;
     }
-    /**
+    *//**
      * 添加优惠券模板
-     */
+     *//*
     @RequestMapping("/insertCouponTemplate")
     @ResponseBody
-    public ResponseData<Boolean> insertCouponTemplate(SaveFunCouponTemplate req){
+    public ResponseData<Boolean> insertCouponTemplate(HttpServletRequest request,SaveFunCouponTemplate req){
     	ICouponTemplateSV couponTemplateSV = DubboConsumerFactory.getService(ICouponTemplateSV.class);
-    	BaseResponse savaCouponTemplate = couponTemplateSV.savaCouponTemplate(req);
-    	if(savaCouponTemplate.getResponseHeader().getIsSuccess()==false){
+    	Integer checkCouponByCouponName = couponTemplateSV.savaCouponTemplate(req);
+    	if(checkCouponByCouponName==null){
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加优惠券模板成功", true);
     }
     
+    *//**
+     * 添加使用规则
+     *//*
+    @RequestMapping("/insertCouponUseRule")
+    @ResponseBody
+    public ResponseData<Boolean> insertCouponUseRule(SaveCouponUseRule param){
+    	ICouponUseRuleSV couponUseRuleSV = DubboConsumerFactory.getService(ICouponUseRuleSV.class);
+    	Integer checkCouponByCouponName = couponUseRuleSV.saveCouponUseRule(param);
+    	if(checkCouponByCouponName==null){
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加优惠券模板成功", true);
+    }
     
     @RequestMapping("/toCouponDetailList")
 	public ModelAndView toCouponDetailList(Integer templateId) {
@@ -149,9 +155,9 @@ public class CouponTemplateListController {
 		view.addObject("templateId", templateId);
 		return view;
 	}
-    /**
+    *//**
 	 * 优惠券明细查询
-	 */
+	 *//*
 	@RequestMapping("/getCouponDetailData")
 	@ResponseBody
 	public ResponseData<PageInfo<FunCouponDetailResponse>> getDetailList(HttpServletRequest request,Integer templateId)throws Exception{
@@ -178,9 +184,9 @@ public class CouponTemplateListController {
 		}
 		return responseData;
 	}
-    /**
+    *//**
      * 优惠券模板信息导出
-     */
+     *//*
     @RequestMapping("/export")
     @ResponseBody
     public void export(HttpServletRequest request, HttpServletResponse response, FunCouponTemplateQueryRequest funCouponTemplateQueryRequest) {
@@ -283,9 +289,9 @@ public class CouponTemplateListController {
 		}
 	}
     
-    /**
+    *//**
      * 删除优惠券模板
-     */
+     *//*
     @RequestMapping("/deleteCouponTemplate")
     @ResponseBody
     public ResponseData<Boolean> deleteCouponTemplate(Integer templateId){
@@ -295,6 +301,6 @@ public class CouponTemplateListController {
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "删除优惠券模板成功", true);
-    }
+    }*/
 
 }

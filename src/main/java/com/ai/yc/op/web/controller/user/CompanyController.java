@@ -1,23 +1,34 @@
 package com.ai.yc.op.web.controller.user;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ai.opt.base.vo.PageInfo;
+import com.ai.opt.sdk.components.ccs.CCSClientFactory;
+import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
+import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
 import com.ai.opt.sdk.components.idps.IDPSClientFactory;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.UUIDUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
+import com.ai.paas.ipaas.ccs.IConfigClient;
 import com.ai.paas.ipaas.image.IImageClient;
 import com.ai.slp.balance.api.accountmaintain.interfaces.IAccountMaintainSV;
 import com.ai.slp.balance.api.accountmaintain.param.RegAccReq;
@@ -26,6 +37,12 @@ import com.ai.slp.balance.api.fundquery.param.AccountIdParam;
 import com.ai.slp.balance.api.fundquery.param.FundInfo;
 import com.ai.slp.balance.api.translatorbill.interfaces.IBillGenerateSV;
 import com.ai.slp.balance.api.translatorbill.param.AccountParam;
+import com.ai.slp.balance.api.translatorbill.param.FunAccountQueryRequest;
+import com.ai.slp.balance.api.translatorbill.param.FunAccountQueryResponse;
+import com.ai.slp.balance.api.translatorbill.param.FunAccountResponse;
+import com.ai.yc.op.web.constant.Constants.ExcelConstants;
+import com.ai.yc.op.web.model.bill.ExAllBill;
+import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.translator.api.translatorservice.interfaces.IYCTranslatorServiceSV;
 import com.ai.yc.translator.api.translatorservice.param.SearchYCTranslatorRequest;
 import com.ai.yc.translator.api.translatorservice.param.YCTranslatorInfoResponse;
@@ -39,23 +56,57 @@ import com.ai.yc.user.api.usercompany.param.UserCompanyInfoListResponse;
 import com.ai.yc.user.api.usercompany.param.UserCompanyInfoRequest;
 import com.ai.yc.user.api.usercompany.param.UserCompanyPageInfoRequest;
 import com.ai.yc.user.api.usercompany.param.UsrCompanyInfo;
+import com.ai.yc.user.api.usercompanyrelation.interfaces.IYCUserCompanyRelationSV;
+import com.ai.yc.user.api.usercompanyrelation.param.CompanyRelationInfo;
+import com.ai.yc.user.api.usercompanyrelation.param.CompanyRelationResponse;
+import com.ai.yc.user.api.usercompanyrelation.param.UserCompanyRelationPageInfoRequest;
 import com.ai.yc.user.api.userservice.interfaces.IYCUserServiceSV;
 import com.ai.yc.user.api.userservice.param.SearchYCUserRequest;
 import com.ai.yc.user.api.userservice.param.YCUserInfoResponse;
-import com.alibaba.fastjson.JSON;
 
 @Controller
 @RequestMapping("/company")
 public class CompanyController {
 	
+	private static final Logger logger = Logger.getLogger(CompanyController.class);
+	
 	@RequestMapping("/toCompanyListPager")
 	public ModelAndView toCouponTemplateList(HttpServletRequest request) {
-		return new ModelAndView("jsp/user/company/companyList");
+		return new ModelAndView("jsp/user/company/auditCompanyList");
 	}
 	
 	@RequestMapping("/getList")
 	@ResponseBody
 	public ResponseData<PageInfo<UsrCompanyInfo>> getList(HttpServletRequest request,UserCompanyPageInfoRequest pageInfoRequest){
+		IYCUserCompanySV userCompanySV = DubboConsumerFactory.getService(IYCUserCompanySV.class);
+		ResponseData<PageInfo<UsrCompanyInfo>> responseData = null;
+		String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
+	    String strPageSize=(null==request.getParameter("pageSize"))?"10":request.getParameter("pageSize");
+	    pageInfoRequest.setPageNo(Integer.parseInt(strPageNo));
+	    pageInfoRequest.setPageSize(Integer.parseInt(strPageSize));
+		try{
+			UserCompanyInfoListResponse response = userCompanySV.queryPageInfoCompanyInfo(pageInfoRequest);
+			if(response.getResponseHeader().isSuccess()){
+				PageInfo<UsrCompanyInfo> resultPageInfo = response.getCompanyList();
+				responseData = new ResponseData<PageInfo<UsrCompanyInfo>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
+			}else{
+				responseData = new ResponseData<PageInfo<UsrCompanyInfo>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败",null);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			responseData = new ResponseData<PageInfo<UsrCompanyInfo>>(ResponseData.AJAX_STATUS_FAILURE, "查询异常",null);
+		}
+		return responseData;
+	}
+	
+	@RequestMapping("/toAllCompanyListPager")
+	public ModelAndView toAllCompanyListPager(HttpServletRequest request) {
+		return new ModelAndView("jsp/user/company/allCompanyList");
+	}
+	
+	@RequestMapping("/getAllCompanyList")
+	@ResponseBody
+	public ResponseData<PageInfo<UsrCompanyInfo>> getAllCompanyList(HttpServletRequest request,UserCompanyPageInfoRequest pageInfoRequest){
 		IYCUserCompanySV userCompanySV = DubboConsumerFactory.getService(IYCUserCompanySV.class);
 		ResponseData<PageInfo<UsrCompanyInfo>> responseData = null;
 		String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
@@ -175,6 +226,82 @@ public class CompanyController {
 		return responseData;
 	}
 	
+	@RequestMapping("/getCompanyUsersList")
+	@ResponseBody
+	public ResponseData<PageInfo<UsrCompanyInfo>> getCompanyUsersList(HttpServletRequest request){
+		
+		ResponseData<PageInfo<UsrCompanyInfo>> responseData = null;
+		
+		PageInfo<UsrCompanyInfo> resultPageInfo = new PageInfo<UsrCompanyInfo>();
+		try{
+			IYCUserCompanyRelationSV companyRelationSV = DubboConsumerFactory.getService(IYCUserCompanyRelationSV.class);
+			
+			IUcMembersSV ucMembersSV = DubboConsumerFactory.getService(IUcMembersSV.class);
+			
+			IYCUserServiceSV ycUserServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
+			/**
+			 * 获取企业成员信息
+			 */
+			UserCompanyRelationPageInfoRequest pageInfoRequest = new UserCompanyRelationPageInfoRequest();
+			pageInfoRequest.setCompanyId(request.getParameter("companyId"));
+			String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
+		    String strPageSize=(null==request.getParameter("pageSize"))?"10":request.getParameter("pageSize");
+			pageInfoRequest.setPageNo(Integer.parseInt(strPageNo));
+			pageInfoRequest.setPageSize(Integer.parseInt(strPageSize));
+			CompanyRelationResponse companyRelationresponse = companyRelationSV.getCompanyUsers(pageInfoRequest);
+			
+			if(companyRelationresponse!=null&&companyRelationresponse.getList()!=null){
+				
+				List<CompanyRelationInfo> relationList = companyRelationresponse.getList().getResult();
+			    YCUserInfoResponse userInfoResponse = null;
+			    List<UsrCompanyInfo> usrCompanyInfoList = new ArrayList<UsrCompanyInfo>();
+			    
+			    for(int i=0;i<relationList.size();i++){
+			    	
+					CompanyRelationInfo relationInfo = relationList.get(i);
+					/**
+					 * 获取ucenter信息
+					 */
+					String userId = relationInfo.getUserId();
+					UcMembersGetRequest membersRequest = new UcMembersGetRequest();
+					membersRequest.setUserId(userId);
+					membersRequest.setGetmode("-1");
+					membersRequest.setUsername("-1");
+					UcMembersGetResponse getResponse = ucMembersSV.ucGetMember(membersRequest);
+					/**
+					 * 获取用户信息
+					 */
+					ycUserServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
+					SearchYCUserRequest ucUser = new SearchYCUserRequest();
+					ucUser.setUserId(userId);
+					userInfoResponse = ycUserServiceSV.searchYCUserInfo(ucUser);
+					/**
+					 * 组装信息
+					 */
+					UsrCompanyInfo companyInfo = new UsrCompanyInfo();
+					companyInfo.setCompanyUserUserName((String)getResponse.getDate().get("username"));
+					companyInfo.setCompanyUserNickName(userInfoResponse.getNickname());
+					companyInfo.setCompanyUserLevel(userInfoResponse.getGriwthLevelZH());
+					companyInfo.setCompanyJoinTime(relationInfo.getJoinTime());
+					companyInfo.setIsManagment(relationInfo.getIsManagment());
+					
+					usrCompanyInfoList.add(companyInfo);
+				}
+			    resultPageInfo.setPageCount(companyRelationresponse.getList().getPageCount());
+			    resultPageInfo.setPageNo(companyRelationresponse.getList().getPageNo());
+			    resultPageInfo.setPageSize(companyRelationresponse.getList().getPageSize());
+			    resultPageInfo.setCount(companyRelationresponse.getList().getCount());
+				resultPageInfo.setResult(usrCompanyInfoList);
+			}
+			responseData = new ResponseData<PageInfo<UsrCompanyInfo>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
+		}catch(Exception e){
+			e.printStackTrace();
+			responseData = new ResponseData<PageInfo<UsrCompanyInfo>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败",resultPageInfo);
+		}
+		
+	    return responseData;
+	}
+	
 	@RequestMapping("/auditCompanyInfo")
 	@ResponseBody
 	public ResponseData<Boolean> auditCompanyInfo(HttpServletRequest request){
@@ -230,4 +357,81 @@ public class CompanyController {
 		return responseData;
 	}
 	
+	/**
+     * 未审核企业列表导出
+     */
+    @RequestMapping("/export")
+    @ResponseBody
+    public void  export(HttpServletRequest request,HttpServletResponse response,UserCompanyPageInfoRequest pageInfoRequest,String flag) {
+    	logger.error("进入导出方法>>>>");
+		PageInfo<UsrCompanyInfo> resultPageInfo  = new PageInfo<UsrCompanyInfo>();
+	    try {
+	    //获取配置中的导出最大数值
+	    logger.error("获取导出最大条数配置>>>>");
+	    IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
+        String maxRow =  configClient.get(ExcelConstants.EXCEL_OUTPUT_MAX_ROW);
+        int excelMaxRow = Integer.valueOf(maxRow);
+        pageInfoRequest.setPageSize(excelMaxRow);
+        pageInfoRequest.setPageNo(1);
+		IYCUserCompanySV userCompanySV = DubboConsumerFactory.getService(IYCUserCompanySV.class);
+		List<UsrCompanyInfo> resultCompanyInfo = new ArrayList<UsrCompanyInfo>();
+		try{
+			UserCompanyInfoListResponse companyIfoResponse = userCompanySV.queryPageInfoCompanyInfo(pageInfoRequest);
+			if(companyIfoResponse.getResponseHeader().isSuccess()){
+				resultPageInfo = companyIfoResponse.getCompanyList();
+				List<UsrCompanyInfo> usrCompanyInfoList = resultPageInfo.getResult();
+				for(int i=0;i<usrCompanyInfoList.size();i++){
+					UsrCompanyInfo  companyInfo = usrCompanyInfoList.get(i);
+					String usersource = companyInfo.getUsersource();
+					if("0".equals(usersource)){
+						companyInfo.setUsersource("pc");
+					}else if("10".equals(usersource)){
+						companyInfo.setUsersource("译云中文站");
+					}else if("11".equals(usersource)){
+						companyInfo.setUsersource("译云英文站");
+					}else if("2".equals(usersource)){
+						companyInfo.setUsersource("百度");
+					}else if("1".equals(usersource)){
+						companyInfo.setUsersource("金山");
+					}else if("12".equals(usersource)){
+						companyInfo.setUsersource("找翻译");
+					}else if("13".equals(usersource)){
+						companyInfo.setUsersource("wap-中文站");
+					}else if("14".equals(usersource)){
+						companyInfo.setUsersource("wap-英文站");
+					}else{
+						companyInfo.setUsersource("微信助手");
+					}
+					if(companyInfo.getState()==0){
+						companyInfo.setStateName("未审核");
+					}else if(companyInfo.getState()==1){
+						companyInfo.setStateName("已审核");
+					}
+					companyInfo.setContent("用户");
+					companyInfo.setFullName(companyInfo.getFirstname()+companyInfo.getLastname());
+					resultCompanyInfo.add(companyInfo);
+				}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+			logger.error("获取输出流>>>>");
+			ServletOutputStream outputStream = response.getOutputStream();
+			response.reset();// 清空输出流
+            response.setContentType("application/msexcel");// 定义输出类型
+            response.setHeader("Content-disposition", "attachment; filename=company"+new Date().getTime()+".xls");// 设定输出文件头
+            String[] titles = new String[]{"申请来源", "企业名称", "创建人昵称", "姓名", "企业座机", "联系人","申请时间","状态"};
+    		String[] fieldNames = new String[]{"usersource", "companyName", "nickName", "fullName",	"telephone", "linkman","createTime","stateName"};
+			if("allCompanyDate".equals(flag)){
+				 titles = new String[]{"申请来源", "企业名称", "创建人昵称", "创建人角色", "联系人", "联系电话","申请时间","成员数量","企业账户余额","企业折扣","结算方式","审核人","审核时间","状态"};
+		    	 fieldNames = new String[]{"usersource", "companyName", "nickName", "content","telephone", "createTime","membersCount","companyAccount","corporateDiscount","settlingAccounts","auditor","checkTime","stateName"};
+			}
+    		
+    		AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
+			logger.error("写入数据到excel>>>>");
+			excelHelper.writeExcel(outputStream, "company"+new Date().getTime(), UsrCompanyInfo.class,resultCompanyInfo,fieldNames, titles);
+		} catch (Exception e) {
+			logger.error("导出账单列表失败："+e.getMessage(), e);
+		}
+	}
 }
