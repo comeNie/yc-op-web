@@ -105,4 +105,7 @@
 	<!--账户-->	
 	<dubbo:reference id="iAccountMaintainSV"
 		interface="com.ai.slp.balance.api.accountmaintain.interfaces.IAccountMaintainSV" />
+	<!--活动策略-->
+	<dubbo:reference id="iActivitySV"
+					 interface="com.ai.slp.balance.api.activity.interfaces.IActivitySV" />
 </beans>
