@@ -66,7 +66,8 @@
 			                    		<ul>
 							                <li class="col-md-6">
 							                    <p class="word">创建时间</p>
-							                    <p><input  readonly class="int-text int-medium " type="text"  id="billTimeBegin" name="beginDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'billTimeEnd\')}'});" />~<input  readonly class="int-text int-medium " type="text"  id="billTimeEnd" name="endDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'billTimeBegin\')}'});"/>
+							                    <p><input  readonly class="int-text int-medium " type="text"  id="createStartTime" name="beginDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'createStartTime\')}'});" />~
+							                       <input  readonly class="int-text int-medium " type="text"  id="createEndTime" name="endDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'createEndTime\')}'});"/>
 												</p>
 												</p>
 							                </li>

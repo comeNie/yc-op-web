@@ -38,7 +38,7 @@ define('app/jsp/user/allCompanyInfolList', function (require, exports, module) {
 			"click #domestic":"_searchBillList",
 			"click #foreign":"_searchAllCompanyList",
 			//查询
-            "click #search":"_searchBillList",
+            "click #search":"_searchAllCompanyList",
             "click #update":"_updatePayState",
             "click #export":"_export",
             "click #add-close":"_closeDialog",
@@ -63,8 +63,10 @@ define('app/jsp/user/allCompanyInfolList', function (require, exports, module) {
 			var userSource = $("#userSource").val()
 			var domestic = $('#domestic').attr('class');
 			var foreign = $('#foreign').attr('class');
+			var createStartTime = $('#createStartTime').val();
+			var createEndTime = $('#createEndTime').val();
 			window.location.href=_base+'/company/export?nickName='+nickName+'&companyName='+companyName+'&mobilephone='+mobilephone+
-			'&checkName='+checkName+'&userSource='+userSource+"&flag=allCompanyDate";
+			'&checkName='+checkName+'&userSource='+userSource+"&flag=allCompanyDate"+"&createStartTime="+createStartTime,"&createEndTime="+createEndTime;
 		},
 		_checkNickNameValue:function(){
 			var nickName = $("#nickName").val();
@@ -127,12 +129,16 @@ define('app/jsp/user/allCompanyInfolList', function (require, exports, module) {
 			var userSource = $("#userSource").val()
 			var domestic = $('#domestic').attr('class');
 			var foreign = $('#foreign').attr('class');
+			var createStartTime = $('#createStartTime').val();
+			var createEndTime = $('#createEndTime').val();
     		return {
     			"nickName":jQuery.trim($("#nickName").val()),
     			"companyName":jQuery.trim($("#companyName").val()),
     			"mobilephone":jQuery.trim($("#mobilephone").val()),
     			"checkName":jQuery.trim($("#checkName").val()),
     			"userSource":userSource,
+    			"createStartTime":createStartTime,
+    			"createEndTime":createEndTime
 			}
     	},
     	_toCompanyDetail:function(companyId,userId,usersource,createTime){
