@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>券码管理</title>
+<title>券码列表</title>
 <%@include file="/inc/inc.jsp" %>
 <input type="hidden" id="templateIdUpdate"/>
 </head>
@@ -188,14 +188,19 @@
   	  <td>{{:templateId}}</td>
       <td>{{:couponName}}</td>
       <td>
-		  {{:faceValue}}
+		  {{:~liToYuan(faceValue)}}
 		  {{if  currencyUnit == '1'}}
 		  CNY¥
 		  {{else currencyUnit == '2'}}
 		  USD$
 		  {{/if}}
 	  </td>
- 	  <td>{{:couponUserId}}</td>
+ 	  <td>
+ 		  {{if  couponUserId == '0'}}
+		  	全额抵用
+		  {{else }}
+			满{{:~liToYuan(couponUserId)}}可用
+		  {{/if}}
       <td>
 			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', receiveStartTime)}}—{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', receiveEndTime)}}
 	  </td>

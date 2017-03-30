@@ -50,7 +50,7 @@
 					</a> <!-- 一级菜单结束--> <!--二级菜单-->
 						<ul class="submenu">
 							<li menuAttr="menu"><a href="${_base}/coupon/toCouponTemplateList" target="mainFrame">券码列表</a></li>
-							<li menuAttr="menu"><a href="${_base}/coupon/toCouponTemplateList" target="mainFrame">活动策略</a></li>
+							<li menuAttr="menu"><a href="${_base}/activity/toActivityList" target="mainFrame">活动策略</a></li>
 						</ul> <!--二级菜单结束--></li>
 
 				</ul>

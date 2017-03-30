@@ -37,7 +37,7 @@
 										<li>
 										    <p class="word">发放数量*:</p>
 											<p><input type="text" id="maxCountIssue" name="maxCountIssue" class="int-text int-small" ></p>
-											<p><input type="radio" id="noLimit" name="">不限</p>&nbsp;&nbsp;&nbsp;&nbsp;<span id="maxCountOnly"></span>
+											<p><input type="radio" id="noLimit" name="maxCountIssue">不限</p>&nbsp;&nbsp;&nbsp;&nbsp;<span id="maxCountOnly"></span>
 										</li>
 									 </ul>
 									<ul>
@@ -57,8 +57,11 @@
 									<ul>
 										<li>
 										    <p class="word">面值*:</p>
-											<p><input type="text" id="faceValue" name="faceValue" class="int-text int-small" >(￥/$)</p>
-											<p><input type="radio" id="random" name="">随机值<input type="text" name="" value="1">~<input type="text" value="10" name=""></p>
+											<p><input type="text" id="faceValue" name="faceValue" class="int-text int-small">(￥/$)</p>
+											<p>
+												<input type="radio" id="random" value="1">随机值&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="text" name="" value="1" class="int-text int-small">~<input type="text" value="10" name="" class="int-text int-small">
+											</p>
 											&nbsp;&nbsp;&nbsp;&nbsp;<span id="faceValueOnly"></span>
 										</li>
 									</ul>
@@ -84,7 +87,7 @@
 										<li>
 										    <p class="word">使用场景*:</p>
 										    <p>
-													<input type="checkbox" class="usedScene" name="usedScene" value=""/>全选
+													<input type="checkbox" id="all"/>全选
 													<input type="checkbox" class="usedScene" name="usedScene" value="1"/>译云-中文站
 													<input type="checkbox" class="usedScene" name="usedScene" value="2"/>译云-英文站
 													<input type="checkbox" class="usedScene" name="usedScene" value="3"/>百度
@@ -99,7 +102,7 @@
 									<ul>
 										<li>
 											<p class="word">使用规则*:</p>
-											<p><input type="radio" id="couponUserId" name="couponUserId" value="1">满 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="rma" name="" class="int-text int-small" >(￥/$)可使用</p>
+											<p><input type="radio" id="couponUserId" name="couponUserId" value="1">满 &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="requiredMoneyAmount" name="requiredMoneyAmount" class="int-text int-small" >(￥/$)可使用</p>
 											<p><input type="radio" id="sum" name="couponUserId"  value="0">全额抵用</p>
 											&nbsp;&nbsp;&nbsp;&nbsp;<span id="couponUserOnly"></span>
 										</li>
@@ -108,8 +111,8 @@
 										<li>
 										    <p class="word">领取时间:</p>
 											<p>
-												<input type="text" id="receiveStartTime" name="receiveStartTime" class="int-text int-small" onfocus="WdatePicker({isShowWeek:true})" >
-												~<input type="text" id="receiveEndTime" name="receiveEndTime" class="int-text int-small" onfocus="WdatePicker({isShowWeek:true})" >
+												<input type="text" id="receiveStartTime" name="receiveStartTime" class="int-text int-small" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'receiveEndTime\')}'});" >
+												~<input type="text" id="receiveEndTime" name="receiveEndTime" class="int-text int-small" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'receiveStartTime\')}'});" >
 											</p>
 										</li>
 									</ul>
@@ -117,10 +120,10 @@
 										<li>
 										    <p class="word">有效期时间*:</p>
 											<p>
-												<input type="text" id="effectiveStartTime" name="effectiveStartTime" class="int-text int-small" onfocus="WdatePicker({isShowWeek:true})" >
-												~<input type="text" id="effectiveEndTime" name="effectiveEndTime" class="int-text int-small" onfocus="WdatePicker({isShowWeek:true})" >
+												<input type="text" id="effectiveStartTime" name="effectiveStartTime" class="int-text int-small" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'effectiveEndTime\')}'});" >
+												~<input type="text" id="effectiveEndTime" name="effectiveEndTime" class="int-text int-small" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'effectiveStartTime\')}'});" >
 											</p>
-											<p><input type="radio" id="day">天数&nbsp;&nbsp;<input type="text" id="" name="" class="int-text int-small"></p>(0表示长期有效)
+											<p><input type="radio" id="day">天数&nbsp;&nbsp;<input type="text" id="effectiveTime" name="effectiveTime" class="int-text int-small"></p>(0表示长期有效)
 											&nbsp;&nbsp;&nbsp;&nbsp;<span id="effectiveOnly"></span>
 										</li>
 									</ul>
@@ -160,8 +163,8 @@
  <script type="text/javascript">
     var pager;
     (function () {
-        seajs.use('app/jsp/couponTemplate/addCouponTemplate', function (orderDetailsPager) {
-            pager = new orderDetailsPager({element: document.body});
+        seajs.use('app/jsp/couponTemplate/addCouponTemplate', function (OrderListPager) {
+            pager = new OrderListPager({element: document.body});
             pager.render();
         });
     })();

@@ -32,7 +32,9 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
     	//事件代理
     	events: {
     		"blur #couponName":"_cheName",
-    		"click #save":"_save"
+    		"click #save":"_save",
+    		"click #all":"_allCheck",
+    		"click #add-close":"_closeDialog"
         },
     	//重写父类
     	setup: function () {
@@ -41,62 +43,76 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
     	},
 		_save:function(){
 			var _this = this;
-			var maxCountIssue = $("#maxCountIssue").val()
-			var noLimit = $("noLimit").val();
-			var random = $("random").val();
-			var effectiveStartTime = $("effectiveStartTime").val();
-			var day = $("day").val();
-			var currencyUnit=$("#currencyUnit option:selected").val(); 
-			var couponUserId = $('input[name="couponUserId"]:checked').val();
-			var faceValue = $("#faceValue").val();
-			var requiredMoneyAmount = $("#rma").val();
-			
 			var formValidator=_this._initValidate();
 			formValidator.form();
 			if(!$("#dataForm").valid()){
 				return false;
 			}
+			var param = $("#dataForm").serializeArray();
+			var f = {};//声明一个对象
 			
-			if(maxCountIssue != null && noLimit != null){
-				$("#maxCountOnly").html("发放数量二选一");
-			}else if(faceValue != null && random != null){
-				$("#faceValueOnly").html("面值二选一");
-			}else if(effectiveStartTime != null && day != null){
-				$("#effectiveOnly").html("有效期时间和天数二选一");
-			}else if(couponUserId=="1"){
-				ajaxController.ajax({
-					type: "post",
-					processing: true,
-					message: "保存数据中，请等待...",
-					url: _base + "/coupon/insertCouponUseRule",
-					data: {currencyUnit,faceValue,requiredMoneyAmount},
-					success: function (rs) {
-					}
+				var couponName = $("#couponName").val();
+				f["couponName"] =couponName;
+				var couponDesc = $("#couponDesc").val();
+				f["couponDesc"] =couponDesc;
+				
+				var maxCountIssue = $("#maxCountIssue").val();
+				f["maxCountIssue"] =maxCountIssue;
+				var currencyUnit = $("#currencyUnit").val();
+				f["currencyUnit"] =currencyUnit;
+				if($("#random").is(':checked')){
+					var n1=Math.floor(Math.random()*10+1);
+					f["faceValue"] = n1;
+				}else{
+					var faceValue = $("#faceValue").val();
+					f["faceValue"] =faceValue;
+				}
+				var useLimits = $("#useLimits").val();
+				f["useLimits"] =useLimits;
+				var requiredMoneyAmount = $("#requiredMoneyAmount").val();
+				f["requiredMoneyAmount"] =requiredMoneyAmount;
+				var couponUserId = $("#couponUserId").val();
+				f["couponUserId"] =couponUserId;
+				var receiveStartTime=$("#receiveStartTime").val();
+				var receiveEndTime=$("#receiveEndTime").val();
+				f["receiveStartTime"] =receiveStartTime;
+				f["receiveEndTime"] =receiveEndTime;
+				if($("#day").is(':checked')){
+					var effectiveTime = $("#effectiveTime").val();
+					f["effectiveTime"] =effectiveTime;
+				}else{
+					var effectiveStartTime=$("#effectiveStartTime").val();
+					var effectiveEndTime=$("#effectiveEndTime").val();
+					f["effectiveStartTime"] =effectiveStartTime;
+					f["effectiveEndTime"] =effectiveEndTime;
+				}
+				var status = $('input[name="status"]:checked').val();
+				f["status"] =status;
+				
+				var usedScenes=[];
+				$("input[name=usedScene]:checked").each(function(){
+					usedScenes.push($(this).val());
 				});
-				var param = $("#dataForm").serializeArray();
-				ajaxController.ajax({
-					type: "post",
-					processing: true,
-					message: "保存数据中，请等待...",
-					url: _base + "/coupon/insertCouponTemplate",
-					data: param,
-					success: function (rs) {
-						window.location.href = _base+"/coupon/getCouponTemplatePageData";
-					}
-					}
-				});
-			}else if(couponUserId=="0"){
-				var param = $("#dataForm").serializeArray();
-				ajaxController.ajax({
-					type: "post",
-					processing: true,
-					message: "保存数据中，请等待...",
-					url: _base + "/coupon/insertCouponTemplate",
-					data: param,
-					success: function (rs) {
-						window.location.href = _base+"/coupon/getCouponTemplatePageData";
-					}
-			}
+				var usedScenes = usedScenes;
+				f["usedScene"] = usedScenes.join(",");
+			//等遍历结束，就会生成一个json对象了
+
+			//如果需要对象与字符串的转换
+			//这是从json对象 向 json 字符串转换
+			 var str = JSON.stringify(f);
+			
+			var url = _base + "/coupon/insertCouponTemplate";
+			ajaxController.ajax({
+				type: "post",
+				dataType:"json",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: url,
+				data: f,
+				success: function (rs) {
+					window.history.back(-1); 
+				}
+			});
 		},
 		_initValidate:function(){
 	    	   var _this = this;
@@ -117,7 +133,6 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
 	    					required:true
 	    				},
 	    				"faceValue":{
-	    					required:true,
 	    					digits:true,
 	    					min:0
 	    				},
@@ -137,10 +152,8 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
 	    				"receiveEndTime":{
 	    				},
 	    				"effectiveStartTime":{
-	    					required:true
 	    				},
 	    				"effectiveEndTime":{
-	    					required:true
 	    				},
 	    				"status":{
 	    					moneyNumber:true
@@ -164,7 +177,6 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
 	    					required:"请选择币种单位"
 	    				},
 	    				"faceValue":{
-	    					required:"请输入面值",
 	    					number:"面值格式不正确",
 	    					min:"面值不合法"
 	    				},
@@ -176,16 +188,13 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
 	    				},
 	    				"couponUserId":{
 	    					required:"请选择使用规则"
-	    				},
-	    				"effectiveStartTime":{
-	    					required:"请选择有效期时间"
-	    				},
-	    				"effectiveEndTime":{
-	    					required:"请选择有效期时间"
-	    				},
+	    				}
 	    			}
 	    		});
 	    	   return formValidator ;
+	    	},
+	    	_closeDialog:function(){
+	    		window.location.href = _base+"/coupon/toCouponTemplateList";
 	    	},
 	    	_cheName:function(){
 				var _this = this;
@@ -198,7 +207,7 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
 						},
 						url: _base + "/coupon/checkName",
 						success: function (data) {
-							if(data == 1){
+							if(data >= 1){
 								$(".cname").html("名称已存在");
 								return false;
 							}else{
@@ -207,7 +216,13 @@ define('app/jsp/couponTemplate/addCouponTemplate', function (require, exports, m
 						}
 					});
 				}
+			},
+			_allCheck:function(){  
+				$("input[name='usedScene']").each( function() { 
+					$(this).attr("checked", true); 
+				}); 
 			}
+			
     });
     
     module.exports = OrderListPager
