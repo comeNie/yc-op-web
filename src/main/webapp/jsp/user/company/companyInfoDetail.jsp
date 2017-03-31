@@ -252,14 +252,85 @@
 						</div>
 						<div class="main-box-body clearfix">
 						</div>
-				</script>				
-            <div class="bc-ang mb-12">
-				<input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" onclick="history.go(-1)">      
-			</div>
+				</script>	
+				<div class="main-box-body clearfix">
+					<div class="bill-list-table">
+						<ul>
+							<li ><a href="#"  id="foreign" class="current">企业成员信息</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="row"><!--外围框架-->
+            		<div class="col-lg-12"><!--删格化-->
+                	<div class="row"><!--内侧框架-->
+                 	   <div class="col-lg-12"><!--删格化-->
+                      	  <div class="main-box clearfix"><!--白色背景-->
+                        <!--标题结束-->   
+                            <div class="main-box-body clearfix">
+                            	<!--table表格-->
+                                <div class="table-responsive clearfix">
+                                   	<!--table表格-->
+                          		<div class="table-responsive clearfix mt-10">
+                                    <table class="table table-hover table-border table-bordered ">
+                                        <thead>
+                                            <tr>
+												<th>序号</th>
+												<th>昵称</th>
+												<th>成员姓名</th>
+												<th>企业角色</th>
+												<th>会员级别 </th>
+												<th>加入时间</th>
+												<th>余额</th>
+												<th>积分</th>
+												<th>下单数</th>
+											</tr>
+                                        </thead>
+                                         <tbody id="companyUsersListData"></tbody>
+                                    </table>
+                                    <div id="showMessage"></div>
+                                </div>
+                           		<!--/table表格结束-->
+                                </div>
+                                <!--分页-->
+								 <div>
+					 				 <nav style="text-align: center">
+										<ul id="companyUsersPagination"></ul>
+									</nav>
+								  </div>
+								<!--分页结束-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    	</div>
+ <script id="companyUserListTemple" type="text/template">
+	<tr>
+  	  <td>{{:#index+1}}</td>
+      <td>{{:companyUserNickName}}</td>
+      <td>{{:companyUserUserName}}</td>
+ 	  <td>
+		  {{if isManagment==1}}
+				企业管理员
+		  {{else isManagment==0}}
+                                               企业成员
+		  {{/if}}
+	  </td>
+      <td>{{:companyUserLevel}}</td>
+      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', companyJoinTime)}}</td>
+	  <td></td>
+      <td></td>
+      <td>{{:companySingularNumber}}</td>
+    </tr>
+</script> 
+<div class="bc-ang mb-12">
+    <input id="cancel" type="button" class="biu-btn  btn-yellow btn-medium ml-10" value="返回" onclick="history.go(-1)">      
+</div>
 <script type="text/javascript">
 	var userId = '${userId}';
 	var usersource='${usersource}';
 	var createTime='${createTime}';
+	var companyId='${companyId}';
     var pager;
     (function () {
         seajs.use('app/jsp/user/companyInfo', function (CompanyInfoDetailsPager) {

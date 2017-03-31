@@ -105,7 +105,17 @@
 	<!--账户-->	
 	<dubbo:reference id="iAccountMaintainSV"
 		interface="com.ai.slp.balance.api.accountmaintain.interfaces.IAccountMaintainSV" />
+		
+	<dubbo:reference id="iAccountQuerySV"
+		interface="com.ai.slp.balance.api.accountquery.interfaces.IAccountQuerySV" />
+		
+	<dubbo:reference id="iYCUserGriwthValueSV"
+		interface="com.ai.yc.user.api.usergriwthvalue.interfaces.IYCUserGriwthValueSV" />
+
 	<!--活动策略-->
 	<dubbo:reference id="iActivitySV"
 					 interface="com.ai.slp.balance.api.activity.interfaces.IActivitySV" />
+	<!--企业关系-->	
+	<dubbo:reference id="iYCUserCompanyRelationSV"
+		interface="com.ai.yc.user.api.usercompanyrelation.interfaces.IYCUserCompanyRelationSV" />
 </beans>

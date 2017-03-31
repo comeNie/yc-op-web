@@ -1,4 +1,4 @@
-define('app/jsp/user/companyInfolList', function (require, exports, module) {
+define('app/jsp/user/allCompanyInfolList', function (require, exports, module) {
     'use strict';
     var $=require('jquery'),
     Widget = require('arale-widget/1.2.0/widget'),
@@ -36,80 +36,68 @@ define('app/jsp/user/companyInfolList', function (require, exports, module) {
 			"click #refundId":"_searchBillList",
 			"click #showQuery":"_showQueryInfo",
 			"click #domestic":"_searchBillList",
-			"click #foreign":"_searchBillList",
+			"click #foreign":"_searchAllCompanyList",
 			//查询
-            "click #search":"_searchBillList",
+            "click #search":"_searchAllCompanyList",
             "click #update":"_updatePayState",
             "click #export":"_export",
             "click #add-close":"_closeDialog",
-            "click #colseImage":"_closeDialog"
-            
+            "click #colseImage":"_closeDialog",
         },
     	//重写父类
     	setup: function () {
     		CompanyListPager.superclass.setup.call(this);
     		// 初始化执行搜索
-    		this._searchBillList();
-    		/*var formValidator=this._initValidate();
-			$(":input").bind("focusout",function(){
-				formValidator.element(this);
-			});*/
+			this._searchAllCompanyList();
+    		
     	},
-
-    	_initValidate:function(){
-    		var formValidator=$("#dataForm").validate({
-    			rules: {
-					account: {
-    					required: true,
-    					maxlength:30
-    					},
-					payStyle: {
-						required: true
-					}
-    			},
-    			messages: {
-					account: {
-    					required: "请输入账户!",
-    					maxlength:"最大长度不能超过{0}"
-    					},
-					payStyle:{
-						required: "请选择支付方式!",
-					}
-    			}
-    		});
-    		return formValidator;
-    	},
-
-
 		_export:function(){
 			var _this=this;
 			var stateBill="";
 			var flag="";
-			var orderTimeS = $("#billTimeBegin").val();
-			var orderTimeE = $("#billTimeEnd").val();
-			var wait = $('#waitHandle').attr('class');
-			var refund = $('#refundId').attr('class');
+			var stateBill="";
+			var nickName = $("#nickName").val();
+			var companyName = $("#companyName").val();
+			var mobilephone = $("#mobilephone").val();
+			var checkName = $("#checkName").val();
+			var userSource = $("#userSource").val()
 			var domestic = $('#domestic').attr('class');
 			var foreign = $('#foreign').attr('class');
-			var nickName = jQuery.trim($("#nickName").val());
-			var acountType = jQuery.trim($("#accountType option:selected").val());
-			if(domestic="current1" && domestic!=""){
-				flag = 0;
-			}else if(foreign="current1" && foreign!=""){
-				flag=  1;//待审核
-			}
-			if(wait="current" && wait!=""){
-				stateBill = 2;
-			}else if(refund="current" && refund!=""){
-				stateBill=  1;//待审核
-			}
-			window.location.href=_base+'/balance/export?flag='+flag+'&beginDate='+orderTimeS+'&endDate='+orderTimeE+
-			'&nickName='+nickName+'&acountType='+acountType+'&state='+stateBill+"&offset="+today.stdTimezoneOffset();
+			var createStartTime = $('#createStartTime').val();
+			var createEndTime = $('#createEndTime').val();
+			window.location.href=_base+'/company/export?nickName='+nickName+'&companyName='+companyName+'&mobilephone='+mobilephone+
+			'&checkName='+checkName+'&userSource='+userSource+"&flag=allCompanyDate"+"&createStartTime="+createStartTime,"&createEndTime="+createEndTime;
 		},
-
+		_checkNickNameValue:function(){
+			var nickName = $("#nickName").val();
+			var flag = true;
+			if(nickName!=null&&nickName!=""){
+				var re = /^[\-_0-9a-zA-Z\u4e00-\u9fa5]{1,24}$/;
+				if(!re.test(value)){
+					$("#nickNameErrMsg").show();
+					$("#nickNameErrText").text("昵称为中英文下划线或减号1-24个字符");
+					flag = false;
+				}else{
+					$("#nickNameErrMsg").hide();
+				}
+			}
+		},
+		_checkCompanyNameValue:function(){
+			var companyName = $("#companyName").val();
+			if(companyName!=null&&companyName!=""){
+				var cLength = companyName.length;
+				if(cLength>50){
+					
+				}
+				
+			}
+		},
 		_searchBillList:function(){
+			window.location.href = _base+"/company/toCompanyListPager";
+		},
+		_searchAllCompanyList:function(){
 			var _this=this;
-			var url = _base+"/company/getList";
+			var url = _base+"/company/getAllCompanyList";
 			var queryData = this._getSearchParams();
 			$("#pagination").runnerPagination({
 				url:url,
@@ -132,10 +120,8 @@ define('app/jsp/user/companyInfolList', function (require, exports, module) {
 				},
 			});
 		},
-		
 		_getSearchParams:function(){
 			var stateBill="";
-			var state="";
 			var nickName = $("#nickName").val();
 			var companyName = $("#companyName").val();
 			var mobilephone = $("#mobilephone").val();
@@ -143,19 +129,16 @@ define('app/jsp/user/companyInfolList', function (require, exports, module) {
 			var userSource = $("#userSource").val()
 			var domestic = $('#domestic').attr('class');
 			var foreign = $('#foreign').attr('class');
-			//待审核
-			if(domestic="current1" && domestic!=""){
-				state = 0;
-			}else if(foreign="current1" && foreign!=""){
-				state=  1;//企业列表
-			}
+			var createStartTime = $('#createStartTime').val();
+			var createEndTime = $('#createEndTime').val();
     		return {
     			"nickName":jQuery.trim($("#nickName").val()),
     			"companyName":jQuery.trim($("#companyName").val()),
     			"mobilephone":jQuery.trim($("#mobilephone").val()),
     			"checkName":jQuery.trim($("#checkName").val()),
-    			"state":state,
     			"userSource":userSource,
+    			"createStartTime":createStartTime,
+    			"createEndTime":createEndTime
 			}
     	},
     	_toCompanyDetail:function(companyId,userId,usersource,createTime){

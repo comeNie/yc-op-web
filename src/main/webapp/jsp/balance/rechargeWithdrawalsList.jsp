@@ -287,14 +287,18 @@
 <script type="text/javascript">
 	var pager;
 	(function () {
-		seajs.use('app/jsp/translatorBill/translatorBillList', function (OrderListPager) {
+		seajs.use('app/jsp/translatorBill/rechargeWithdrawalsList', function (OrderListPager) {
 			pager = new OrderListPager({element: document.body});
 			pager.render();
 		});
 	})();
 	$(function() {
 		$("#allBox").click(function() {
-			$('input[name="subBox"]').attr("checked",this.checked);
+			if(this.checked){
+				$("input[name='subBox']").each(function(){this.checked=true;});
+			}else{
+				$("input[name='subBox']").each(function(){this.checked=false;});
+			}
 		});
 		var $subBox = $("input[name='subBox']");
 		$subBox.click(function(){

@@ -44,6 +44,16 @@
 							<li menuAttr="menu"><a href="${_base}/companyBill/toCompanyBillList" target="mainFrame">企业账单</a></li>
 							<li menuAttr="menu"><a href="${_base}/rechargeWithdrawals/toRechargeWithdrawals" target="mainFrame">充值提现管理</a></li>
 						</ul> <!--二级菜单结束--></li>
+					<%--交易记录菜单--%>
+					<li><!-- 一级菜单--> <a href="#" class="dropdown-toggle"> <i
+							class="fa fa-inbox"></i><span>交易记录</span> <i
+							class="fa fa-chevron-circle-right drop-icon"></i>
+					</a> <!-- 一级菜单结束--> <!--二级菜单-->
+						<ul class="submenu">
+							<li menuAttr="menu"><a href="${_base}/businessList/toBusinessList" target="mainFrame">充值交易</a></li>
+						</ul> <!--二级菜单结束--></li>
+
+
 						<li><!-- 一级菜单--> <a href="#" class="dropdown-toggle"> <i
 							class="fa fa-inbox"></i><span>券码管理</span> <i
 							class="fa fa-chevron-circle-right drop-icon"></i>
@@ -52,7 +62,15 @@
 							<li menuAttr="menu"><a href="${_base}/coupon/toCouponTemplateList" target="mainFrame">券码列表</a></li>
 							<li menuAttr="menu"><a href="${_base}/activity/toActivityList" target="mainFrame">活动策略</a></li>
 						</ul> <!--二级菜单结束--></li>
-
+					<li><!-- 一级菜单--> <a href="#" class="dropdown-toggle"> <i
+							class="fa fa-inbox"></i><span>用户管理</span> <i
+							class="fa fa-chevron-circle-right drop-icon"></i>
+					</a> <!-- 一级菜单结束--> <!--二级菜单-->
+						<ul class="submenu">
+							<li menuAttr="menu"><a href="${_base}/user/toUserList" target="mainFrame">会员列表</a></li>
+							<li menuAttr="menu"><a href="${_base}/toCancelOrderList" target="mainFrame">译员列表</a></li>
+							<li menuAttr="menu"><a href="${_base}/company/toCompanyListPager" target="mainFrame">企业用户</a></li>
+						</ul> <!--二级菜单结束--></li>
 				</ul>
 			</div>
 		</div>
