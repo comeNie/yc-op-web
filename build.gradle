@@ -127,6 +127,8 @@ dependencies {
 	compile 'com.ai.slp.balance:activity:1.0-SNAPSHOT'
 	/********************企业关系*****************/
 	compile 'com.ai.yc.user:usercompanyrelation:2.0-SNAPSHOT'
+    //收支查询服务
+    compile 'com.ai.slp.balance:incomeoutquery:1.0-SNAPSHOT'
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
 	jarPaths=configurations.optUedTemplate.files.asType(List)
