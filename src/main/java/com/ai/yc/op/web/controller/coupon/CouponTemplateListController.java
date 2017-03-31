@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ai.slp.balance.api.coupontemplate.interfaces.ICouponTemplateSV;
 import com.ai.slp.balance.api.coupontemplate.param.CouponTemplateParam;
+import com.ai.slp.balance.api.coupontemplate.param.DeleteFunCouponTemplate;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponDetailPageResponse;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponDetailQueryRequest;
 import com.ai.slp.balance.api.coupontemplate.param.FunCouponDetailResponse;
@@ -289,8 +290,10 @@ public class CouponTemplateListController {
     @RequestMapping("/deleteCouponTemplate")
     @ResponseBody
     public ResponseData<Boolean> deleteCouponTemplate(Integer templateId){
+    	DeleteFunCouponTemplate deleteFunCouponTemplate = new DeleteFunCouponTemplate();
+    	deleteFunCouponTemplate.setTemplateId(templateId);;
     	ICouponTemplateSV couponTemplateSV = DubboConsumerFactory.getService(ICouponTemplateSV.class);
-    	Integer deleteCouponTemplate = couponTemplateSV.deleteCouponTemplate(templateId);
+    	Integer deleteCouponTemplate = couponTemplateSV.deleteCouponTemplate(deleteFunCouponTemplate);
     	if(deleteCouponTemplate==null){
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
