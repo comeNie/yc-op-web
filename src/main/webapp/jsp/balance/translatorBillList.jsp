@@ -170,7 +170,7 @@
 													</p>
 								                </li>
 								                <li>
-								                    <p class="word">账户*:</p>
+								                    <p class="word">账户<span style="color: red">*</span>:</p>
 								                	<p><input type="text" id="account" name="account" class="int-text int-small" ></p>
 								                </li>
 							            	</ul>

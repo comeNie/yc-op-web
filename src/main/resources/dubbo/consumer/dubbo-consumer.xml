@@ -118,4 +118,7 @@
 	<!--企业关系-->	
 	<dubbo:reference id="iYCUserCompanyRelationSV"
 		interface="com.ai.yc.user.api.usercompanyrelation.interfaces.IYCUserCompanyRelationSV" />
+	<!--交易记录-->
+	<dubbo:reference id="incomeOutQuerySV"
+					 interface="com.ai.slp.balance.api.incomeoutquery.interfaces.IncomeOutQuerySV" />
 </beans>

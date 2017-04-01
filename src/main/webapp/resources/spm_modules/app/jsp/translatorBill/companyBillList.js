@@ -164,12 +164,12 @@ define('app/jsp/translatorBill/companyBillList', function (require, exports, mod
 			var domestic = $('#domestic').attr('class');
 			var foreign = $('#foreign').attr('class');
 
-			if(domestic="current1" && domestic!=""){
+			if(domestic=="current" && domestic!=""){
 				flag = 0;
-			}else if(foreign="current1" && foreign!=""){
+			}else if(foreign=="current" && foreign!=""){
 				flag=  1;//待审核
 			}
-			if(wait="current" && wait!=""){
+			if(wait=="current" && wait!=""){
 				stateBill = 1;//未结算
 			}else if(refund="current" && refund!=""){
 				stateBill=  2;//已结算
