@@ -67,7 +67,9 @@
 								            <p class="word">企业用户</p>
 								            <p>
 							            		<select class="select select-medium" id="isCompany">
-							            			<option value="">全部</option>
+							            			<option value="2">全部</option>
+							            			<option value="1">是</option>
+							            			<option value="0">不是</option>
 							            		</select>
 						            		</p>
 							            </li>

@@ -17,6 +17,7 @@
 <body>
     <form id="userForm">
     <input id="userId" name="userId" type="hidden" value="${userId}"/>
+    <input id="state" name=""state"" type="hidden" />
 	 <div class="row">
 	 
 		<!--内侧框架-->

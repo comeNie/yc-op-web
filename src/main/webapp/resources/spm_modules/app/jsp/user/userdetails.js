@@ -43,7 +43,19 @@ define('app/jsp/user/userdetails', function(require, exports, module) {
 		});
 		d.showModal();
     }
-	
+	var showSuccessDialog1 = function(error){
+    	var d = Dialog({
+			content:error,
+			icon:'success',
+			okValue: '确 定',
+			title: '提示',
+			ok:function(){
+				this.close();
+		    	window.location.href =_base+"/user/toUserDetail?userId="+$("#userId").val();;
+			}
+		});
+		d.showModal();
+    }
 	
     
 	var userDetailsPager = Widget.extend({
@@ -56,19 +68,8 @@ define('app/jsp/user/userdetails', function(require, exports, module) {
 		},
 		// 事件代理
 		events : {
-			"click #save":"_save"
-			/*"change #orderLevel":"_getInterperLevel",
-			"change #isSetType": "_setTypeControl",
-			"change .requestP":"_requestTotalPrice",
-			"change .changeP":"_changeTotalPrice",
-			"change #totalFee":"_totalFeeChange",
-			,
-			"click #cancel":"_cancel",
-			"click #globalRome": "_setPattern",
-			"change #selectFormatConv": "_formatControl",
-			"change #isUrgent": "_urgeControl"*/
-			
-			
+			"click #save":"_save",
+			"click #lock":"_lock"
 		},
 		// 重写父类
 		setup : function() {
@@ -164,6 +165,9 @@ define('app/jsp/user/userdetails', function(require, exports, module) {
 			if(null != rs.data.usrUser.sex){
 				$("[name=sex]").val(rs.data.usrUser.sex);
 			}
+			if(null != rs.data.usrUser.state){
+				$("#state").val(rs.data.usrUser.state);
+			}
 		},
        _initValidate:function(){
     	   var _this = this;
@@ -172,24 +176,25 @@ define('app/jsp/user/userdetails', function(require, exports, module) {
     				"nickname":{
     					required:true,
     					maxlength:10,
-    					min:2
+    					minlength:2
     				},
     				"username": {
     					required:true,
-    					maxlength:10,
-    					min:2
+    					maxlength:20,
+    					minlength:2
     				},
     				"name":{
     					required:true,
     					maxlength:6,
-    					min:2
+    					minlength:2
     				},
     				"sex":{
     					required:true
     				},
     				"mobilePhone":{
-    					regexp:/^1[3|4|5|8][0-9]\d{4,8}$/,
-    					required:true
+    					required:true,
+    					number:true,
+    					rangelength:[11,11]
     				},
     				"userId":{
     					required:true
@@ -204,24 +209,24 @@ define('app/jsp/user/userdetails', function(require, exports, module) {
     				"nickname":{
     					required:"请输入昵称",
     					maxlength:"昵称不能超过10字符",
-    					min:"昵称长度不能少于2个字符"
+    					minlength:"昵称长度不能少于2个字符"
     				},
     				"username": {
     					required:"请输入用户名",
-    					maxlength:"用户名不能超过15字符",
-    					min:"用户名长度不能少于6个字符"
+    					maxlength:"用户名不能超过20字符",
+    					minlength:"用户名长度不能少于6个字符"
     				},
     				"name":{
     					required:"请输入姓名",
     					maxlength:"姓名不能超过6字符",
-    					min:"用户名长度不能少于2个字符"
+    					minlength:"用户名长度不能少于2个字符"
     				},
     				"sex":{
     					required:"请选择性别"
     				},
     				"mobilePhone":{
-    					regexp:"请输入手机号",
-    					required:"请输入手机号"
+    					required:"请输入手机号",
+    					rangelength:"手机号格式不正确"
     				},
     				"userId":{
     					required:"请输入用户Id"
@@ -235,6 +240,32 @@ define('app/jsp/user/userdetails', function(require, exports, module) {
     		});
     		
     	   return formValidator ;
+    	},
+    	_lock:function(){
+    		
+    		var k ={};
+    		k.userId = $("#userId").val();
+    		var state = $("#state").val();
+    		if(state==1 || state ==0){
+    			k.state = 2;
+    		}else{
+    			k.state = 0;
+    		}
+    		
+    		ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: _base + "/user/updateUserDetail",
+				data: k,
+				success: function (rs) {
+					if(rs.statusCode=="1"){
+						showSuccessDialog1(rs.statusInfo);
+					}else{
+						showErrorDialog(rs.statusInfo);
+					}
+				}
+			});
     	}
 	});
 	module.exports = userDetailsPager;

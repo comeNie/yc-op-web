@@ -36,6 +36,10 @@ public class UserUpdateParams implements Serializable{
 	 */
 	@Email(message = "邮箱格式不正确")
 	private String email;
+	/**
+	 * 用户状态
+	 */
+	private String state;
 
 	public String getUserId() {
 		return userId;
@@ -91,6 +95,14 @@ public class UserUpdateParams implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 }

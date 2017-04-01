@@ -11,6 +11,7 @@
 									<li class="col-md-6">
 										<p class="word">会员编号：</p>
 										<p>{{:usrUser.userId}}</p>
+										<p><input type="button" id="lock" class="biu-btn  btn-primary  ml-5" style ='height: 31px;padding:0px 20px;' value="{{if usrUser.state==0}}锁定{{else usrUser.state ==1}}锁定{{else usrUser.state ==2}}解锁{{/if}}"></p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">logo头像：</p>

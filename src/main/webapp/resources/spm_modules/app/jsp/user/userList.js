@@ -59,11 +59,6 @@ define('app/jsp/user/userList', function (require, exports, module) {
     		UserListPager.superclass.setup.call(this);
     		// 初始化执行搜索
     		this._searchUserList();
-    		/*this._bindChlIdSelect();
-    		this._bindOrdTypeSelect();
-    		this._bindStateSelect();
-    		this._bindPayStyleSelect();
-    		this._bindLanguageSelect();*/
     		var formValidator=this._initValidate();
 			$(":input").bind("focusout",function(){
 				formValidator.element(this);
@@ -174,7 +169,7 @@ define('app/jsp/user/userList', function (require, exports, module) {
     			"usersource":jQuery.trim($("#userSource option:selected").val()),
     			"safetyLevel":jQuery.trim($("#safetyLevel option:selected").val()),
     			"isTranslator":jQuery.trim($("#userType option:selected").val()),
-    			/*"isCompany":jQuery.trim($("#isCompany option:selected").val()),*/
+    			"isCompany":jQuery.trim($("#isCompany option:selected").val()),
     			"state":jQuery.trim($("#userState option:selected").val()),
     			"registTimeStart":registTimeStart,
     			"registTimeEnd":registTimeEnd

@@ -28,6 +28,7 @@ import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.UUIDUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
+import com.ai.opt.sso.client.filter.SSOClientConstants;
 import com.ai.paas.ipaas.ccs.IConfigClient;
 import com.ai.paas.ipaas.image.IImageClient;
 import com.ai.slp.balance.api.accountmaintain.interfaces.IAccountMaintainSV;
@@ -42,6 +43,7 @@ import com.ai.slp.balance.api.translatorbill.param.FunAccountQueryResponse;
 import com.ai.slp.balance.api.translatorbill.param.FunAccountResponse;
 import com.ai.yc.op.web.constant.Constants.ExcelConstants;
 import com.ai.yc.op.web.model.bill.ExAllBill;
+import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
 import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.translator.api.translatorservice.interfaces.IYCTranslatorServiceSV;
 import com.ai.yc.translator.api.translatorservice.param.SearchYCTranslatorRequest;
@@ -343,8 +345,12 @@ public class CompanyController {
 			/**
 			 * 审核结果
 			 */
+			 GeneralSSOClientUser loginUser = (GeneralSSOClientUser) request.getSession().getAttribute(
+			    		SSOClientConstants.USER_SESSION_KEY);
 			IYCUserCompanySV companySV = DubboConsumerFactory.getService(IYCUserCompanySV.class);
 			UserCompanyInfoRequest companyInfoRequest = new UserCompanyInfoRequest();
+			companyInfoRequest.setCreateTime(DateUtil.getSysDate());
+			companyInfoRequest.setAuditor(loginUser.getLoginName());
 			companyInfoRequest.setCompanyId(request.getParameter("companyId"));
 			companyInfoRequest.setState(state);
 			companyInfoRequest.setAccountId(accountId);
@@ -424,7 +430,7 @@ public class CompanyController {
     		String[] fieldNames = new String[]{"usersource", "companyName", "nickName", "fullName",	"telephone", "linkman","createTime","stateName"};
 			if("allCompanyDate".equals(flag)){
 				 titles = new String[]{"申请来源", "企业名称", "创建人昵称", "创建人角色", "联系人", "联系电话","申请时间","成员数量","企业账户余额","企业折扣","结算方式","审核人","审核时间","状态"};
-		    	 fieldNames = new String[]{"usersource", "companyName", "nickName", "content","telephone", "createTime","membersCount","companyAccount","corporateDiscount","settlingAccounts","auditor","checkTime","stateName"};
+		    	 fieldNames = new String[]{"usersource", "companyName", "nickName", "content","linkman","telephone", "createTime","membersCount","companyAccount","corporateDiscount","settlingAccounts","auditor","checkTime","stateName"};
 			}
     		
     		AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();

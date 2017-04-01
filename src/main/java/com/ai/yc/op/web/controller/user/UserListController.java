@@ -66,6 +66,7 @@ public class UserListController {
     		IUcMembersSV ucMembersSV = DubboConsumerFactory.getService(IUcMembersSV.class);
     		IAccountQuerySV accountQuerySV = DubboConsumerFactory.getService(IAccountQuerySV.class);
     		IYCUserCompanySV userCompanySV = DubboConsumerFactory.getService(IYCUserCompanySV.class);
+    		IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
 
     		QueryUserRequest queryReq = new QueryUserRequest();
    		 	String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";    
@@ -82,16 +83,11 @@ public class UserListController {
     				}
     			}
     		}
-    		
-    		
-    		
-//    		QueryUserResponse userReq
-//    		QueryUserResponse queryUserPage(QueryUserRequest request)
     		queryReq.setPageSize(queryRequest.getPageSize());
     		queryReq.setPageNo(queryRequest.getPageNo());
-    		IYCUserServiceSV userServiceSV = DubboConsumerFactory.getService(IYCUserServiceSV.class);
-//    		List<YCUserInfoResponse> allUserInfo = userServiceSV.getAllUserInfo();
-//	    	BeanUtils.copyProperties(queryReq, queryRequest);
+    		if(null != queryRequest.getIsCompany()){
+    			queryReq.setIsCompany(queryRequest.getIsCompany());
+    		}
     		if(!StringUtil.isBlank(queryRequest.getNickname())){
     			queryReq.setNickname(queryRequest.getNickname());
     		}
@@ -159,21 +155,12 @@ public class UserListController {
     				
     			}
     		}
-    		
-    		
-    		
-    		
     		BeanUtils.copyProperties(resultPageInfo, pageInfo);
-//    		IYCUserServiceSV sss = new YCUserServiceSVImpl();
-    		
-//    		responseData.setData(resultPageInfo);
 
 		} catch (Exception e) {
 			logger.error("查询会员列表失败：", e);
 			responseData = new ResponseData<PageInfo<QueryUserResponse>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
 		}
-    	
-    	
     	
 		return new ResponseData<PageInfo<QueryUserResponse>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
 	}

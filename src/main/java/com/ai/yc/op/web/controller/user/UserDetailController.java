@@ -131,34 +131,32 @@ public class UserDetailController {
 					ucMembersEditEmailRequest.setEmail(userUpdateParams.getEmail());
 					ucMembersSV.ucEditEmail(ucMembersEditEmailRequest);
 				}
-				if(!StringUtil.isBlank(userUpdateParams.getMobilePhone())){
-					UcMembersEditMobileRequest ucMembersEditMobileRequest = new UcMembersEditMobileRequest();
-					ucMembersEditMobileRequest.setUid(Integer.parseInt(userId));
-					ucMembersEditMobileRequest.setMobilephone(userUpdateParams.getMobilePhone());
-					ucMembersSV.ucEditMobilephone(ucMembersEditMobileRequest);
-				}
 				if(!StringUtil.isBlank(userUpdateParams.getUsername())){
 					UcMembersEditUserNameRequest ucMembersEditUserNameRequest = new UcMembersEditUserNameRequest();
 					ucMembersEditUserNameRequest.setUid(Integer.parseInt(userId));
 					ucMembersEditUserNameRequest.setUsername(userUpdateParams.getUsername());
 					ucMembersSV.ucEditUserName(ucMembersEditUserNameRequest);
 				}
-				if(!StringUtil.isBlank(userUpdateParams.getUsername())){
-					UpdateYCUserRequest updateYCUserRequest = new UpdateYCUserRequest();
-					updateYCUserRequest.setUserId(userId);
-					if(!StringUtil.isBlank(userUpdateParams.getNickname())){
-						updateYCUserRequest.setNickname(userUpdateParams.getNickname());
-					}
-					if(!StringUtil.isBlank(userUpdateParams.getName())){
-						updateYCUserRequest.setLastname(userUpdateParams.getName().substring(0, 1));
-						updateYCUserRequest.setFirstname(userUpdateParams.getName().substring(1));
-					}
-					if(!StringUtil.isBlank(userUpdateParams.getSex())){
-						updateYCUserRequest.setSex(Integer.parseInt(userUpdateParams.getSex()));
-					}
-					updateYCUserRequest.setLastModifyTime(new Timestamp(new Date().getTime()));
-					userServiceSV.updateYCUserInfo(updateYCUserRequest);
+				UpdateYCUserRequest updateYCUserRequest = new UpdateYCUserRequest();
+				updateYCUserRequest.setUserId(userId);
+				if(!StringUtil.isBlank(userUpdateParams.getNickname())){
+					updateYCUserRequest.setNickname(userUpdateParams.getNickname());
 				}
+				if(!StringUtil.isBlank(userUpdateParams.getName())){
+					updateYCUserRequest.setLastname(userUpdateParams.getName().substring(0, 1));
+					updateYCUserRequest.setFirstname(userUpdateParams.getName().substring(1));
+				}
+				if(!StringUtil.isBlank(userUpdateParams.getSex())){
+					updateYCUserRequest.setSex(Integer.parseInt(userUpdateParams.getSex()));
+				}
+				if(!StringUtil.isBlank(userUpdateParams.getMobilePhone())){
+					updateYCUserRequest.setMobilePhone(userUpdateParams.getMobilePhone());
+				}
+				if(!StringUtil.isBlank(userUpdateParams.getState())){
+					updateYCUserRequest.setState(Integer.parseInt(userUpdateParams.getState()));
+				}
+				updateYCUserRequest.setLastModifyTime(new Timestamp(new Date().getTime()));
+				userServiceSV.updateYCUserInfo(updateYCUserRequest);
 			}else{
 				return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", false);
 			}
