@@ -5,7 +5,6 @@ import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
 import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
-import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.paas.ipaas.ccs.IConfigClient;
@@ -43,8 +42,67 @@ public class BusinessListController {
 	public ModelAndView toCompanyBillList(HttpServletRequest request) {
 		return new ModelAndView("jsp/balance/businessList");
 	}
+
 	/**
-	 * 账单信息查询
+	 * 信息查询
+	 */
+
+	@RequestMapping("/getIncomeOutData")
+	@ResponseBody
+	public ResponseData<FundBookQueryResponseAll> getData(HttpServletRequest request, IncomeQueryRequestAll incomeQueryRequestAll)throws Exception{
+		ResponseData<FundBookQueryResponseAll> responseData = null;
+		List<IncomeDetailAll> resultList = new ArrayList<IncomeDetailAll>();
+		PageInfo<IncomeDetailAll> resultPageInfo  = new PageInfo<IncomeDetailAll>();
+		if (incomeQueryRequestAll.getSerialCode()==""){
+			incomeQueryRequestAll.setSerialCode(null);
+		}
+		if (incomeQueryRequestAll.getChannel()==""){
+			incomeQueryRequestAll.setChannel(null);
+		}
+		if (incomeQueryRequestAll.getNickName()==""){
+			incomeQueryRequestAll.setNickName(null);
+		}
+		if (incomeQueryRequestAll.getBeginDate()==""){
+			incomeQueryRequestAll.setBeginDate(null);
+		}
+		if (incomeQueryRequestAll.getEndDate()==""){
+			incomeQueryRequestAll.setEndDate(null);
+		}
+		if (incomeQueryRequestAll.getState()==""){
+			incomeQueryRequestAll.setState(null);
+		}
+		if (incomeQueryRequestAll.getCurrencyUnit()==""){
+			incomeQueryRequestAll.setCurrencyUnit(null);
+		}
+		if (incomeQueryRequestAll.getIncomeFlag()==""){
+			incomeQueryRequestAll.setIncomeFlag(null);
+		}
+		if (incomeQueryRequestAll.getOptType()==""){
+			incomeQueryRequestAll.setOptType(null);
+		}
+		try{
+			String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
+			String strPageSize=(null==request.getParameter("pageSize"))?"10":request.getParameter("pageSize");
+			resultPageInfo.setPageNo(Integer.parseInt(strPageNo));
+			resultPageInfo.setPageSize(Integer.parseInt(strPageSize));
+			incomeQueryRequestAll.setPageInfo(resultPageInfo);
+			IncomeOutQuerySV incomeOutQuerySV = DubboConsumerFactory.getService(IncomeOutQuerySV.class);
+			FundBookQueryResponseAll fundBookQueryResponseAll = incomeOutQuerySV.incomeOutQueryAll(incomeQueryRequestAll);
+			if (fundBookQueryResponseAll.getResponseHeader().isSuccess()) {
+				responseData = new ResponseData<FundBookQueryResponseAll>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",fundBookQueryResponseAll);
+			}else {
+				responseData = new ResponseData<FundBookQueryResponseAll>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);
+			}
+		} catch (Exception e) {
+			logger.error("查询列表失败：", e);
+			responseData = new ResponseData<FundBookQueryResponseAll>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
+		}
+		return responseData;
+	}
+
+
+	/**
+	 * 交易信息查询
 	 */
 	@RequestMapping("/getIncomeOutPageData")
 	@ResponseBody
@@ -89,7 +147,6 @@ public class BusinessListController {
 			FundBookQueryResponseAll fundBookQueryResponseAll = incomeOutQuerySV.incomeOutQueryAll(incomeQueryRequestAll);
 			if (fundBookQueryResponseAll.getResponseHeader().isSuccess()) {
 				PageInfo<IncomeDetailAll> pageInfo = fundBookQueryResponseAll.getPageInfo();
-
 				responseData = new ResponseData<PageInfo<IncomeDetailAll>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",pageInfo);
 			}else {
 				responseData = new ResponseData<PageInfo<IncomeDetailAll>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);

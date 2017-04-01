@@ -114,13 +114,7 @@
 			<div class="row"><!--内侧框架-->
 				<div class="col-lg-12"><!--删格化-->
 					<div class="main-box clearfix"><!--白色背景-->
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#333333;">收入 1</span><span style="color:#333333;">68</span><span style="color:#333333;"> 笔,共 </span>
-							<span style="color:#33CCFF;">20306.88</span><span style="color:#333333;"> 元</span><span style="color:#333333;">,</span>
-							<span style="color:#0099CC;">234.00</span><span style="color:#333333;">美元</span><span style="color:#333333;"></span>
-							<span style="color:#333333;">;</span><span style="color:#333333;">&nbsp;&nbsp; </span>
-							<span style="color:#333333;">支出 1</span><span style="color:#333333;">25</span><span style="color:#333333;"> 笔,共 </span>
-							<span style="color:#FF6633;">14284.44</span><span style="color:#333333;"> 元</span><span style="color:#333333;">,</span>
-							<span style="color:#FF9900;">234.00</span><span style="color:#333333;">美元</span>
+						<p id="show">
 						</p>
 						<div class="main-box-body clearfix">
 							<!--table表格-->

@@ -76,6 +76,36 @@ define('app/jsp/translatorBill/businessList', function (require, exports, module
 			var _this=this;
 			var url = _base+"/businessList/getIncomeOutPageData";
 			var queryData = this._getSearchParams();
+			$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/businessList/getIncomeOutData",
+				dataType : "json",
+				data : queryData,
+				message : "正在加载数据..",
+				success : function(data) {
+					if(data) {
+						if (queryData.incomeFlag == "" && queryData.optType == "") {
+							document.getElementById("show").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#333333;'>收入 " + data.data.incomeNum + " 笔,共 </span><span style='color:#33CCFF;'>" +
+								data.data.incomeAmountRMB / 1000 + "</span><span style='color:#333333;'> 元,</span><span style='color:#0099CC;'>" +
+								data.data.incomeAmountUSD / 1000 + "</span><span style='color:#333333;'>美元;&nbsp;&nbsp;支出 " + data.data.outNum + " 笔,共 </span>" +
+								"<span style='color:#FF6633;'>" + (0 - data.data.outAmountRMB / 1000) + "</span><span style='color:#333333;'> 元,</span>" +
+								"<span style='color:#FF9900;'>" + (0 - data.data.outAmountUSD / 1000) + "</span><span style='color:#333333;'>美元</span>";
+						}
+						if (queryData.incomeFlag == "1" && queryData.optType == "1") {
+							document.getElementById("show").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;<span style='color:#333333;'>收入 " + data.data.incomeNum + " 笔,共 </span><span style='color:#33CCFF;'>" +
+								data.data.incomeAmountRMB / 1000 + "</span><span style='color:#333333;'> 元,</span><span style='color:#0099CC;'>" +
+								data.data.incomeAmountUSD / 1000 + "</span><span style='color:#333333;'>美元;&nbsp;&nbsp;";
+						}
+						if (queryData.incomeFlag == "0") {
+							document.getElementById("show").innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp;支出 " + data.data.outNum + " 笔,共 </span>" +
+								"<span style='color:#FF6633;'>" + (0 - data.data.outAmountRMB / 1000) + "</span><span style='color:#333333;'> 元,</span>" +
+								"<span style='color:#FF9900;'>" + (0 - data.data.outAmountUSD / 1000) + "</span><span style='color:#333333;'>美元</span>";
+						}
+					}
+
+				}
+			}),
 			$("#pagination").runnerPagination({
 				url:url,
 				method: "POST",
