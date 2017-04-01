@@ -113,14 +113,14 @@ define('app/jsp/translatorBill/lspBillList', function (require, exports, module)
 			var foreign = $('#foreign').attr('class');
 			var nickName = jQuery.trim($("#nickName").val());
 			var acountType = jQuery.trim($("#accountType option:selected").val());
-			if(domestic="current1" && domestic!=""){
+			if(domestic=="current1" && domestic!=""){
 				flag = 0;
-			}else if(foreign="current1" && foreign!=""){
+			}else if(foreign=="current1" && foreign!=""){
 				flag=  1;//待审核
 			}
-			if(wait="current" && wait!=""){
+			if(wait=="current" && wait!=""){
 				stateBill = 1;
-			}else if(refund="current" && refund!=""){
+			}else if(refund=="current" && refund!=""){
 				stateBill=  2;//待审核
 			}
 			window.location.href=_base+'/balance/export?flag='+flag+'&beginDate='+orderTimeS+'&endDate='+orderTimeE+
