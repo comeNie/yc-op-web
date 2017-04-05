@@ -49,7 +49,7 @@ define('app/jsp/user/userList', function (require, exports, module) {
     		//查询
             "click #search":"_searchUserList",
             "click #update":"_saveGrowthValue",
-            /*"click #export":"_export",*/
+            "click #export":"_export",
             "click #add-close":"_closeDialog",
             "click #colseImage":"_closeDialog"
             
@@ -234,6 +234,42 @@ define('app/jsp/user/userList', function (require, exports, module) {
 			window.location.href = _base+"/user/toUserDetail?userId="
             + orderId+'&mod=edit'+'&isAll=all'+"&random="+Math.random();
 		},
+		_export:function(){
+			var _this=this;
+			var nickname = $("#nickName").val().trim();
+			nickname = encodeURI(nickname);
+			nickname = encodeURI(nickname);
+			var mobilePhone = $("#mobilePhone").val();
+			var isTranslator = $("#userType").val();
+			var registTimeStart = $("#registTimeStart").val();
+			var registTimeEnd = $("#registTimeEnd").val();
+			var loginTimeBegin = $("#loginTimeBegin").val();
+			var loginTimeEnd = $("#loginTimeEnd").val();
+			if(registTimeStart=="" || registTimeStart==null){
+				registTimeStart="";
+			}else{
+				registTimeStart= new Date( Date.parse( $("#registTimeStart").val().replace(/-/g,"/"))).getTime();
+			}
+			if(registTimeEnd=="" || registTimeEnd==null){
+				registTimeEnd="";
+			}else{
+				registTimeEnd= new Date( Date.parse( $("#registTimeEnd").val().replace(/-/g,"/")) ).getTime();
+			}
+			if(loginTimeBegin=="" || loginTimeBegin==null){
+				loginTimeBegin="";
+			}else{
+				loginTimeBegin= new Date( Date.parse( $("#loginTimeBegin").val().replace(/-/g,"/")) ).getTime();
+			}
+			if(loginTimeEnd=="" || loginTimeEnd==null){
+				loginTimeEnd="";
+			}else{
+				loginTimeEnd= new Date( Date.parse( $("#loginTimeEnd").val().replace(/-/g,"/")) ).getTime();
+			}
+			
+			window.location.href=_base+'/user/export?nickname='+nickname+'&mobilePhone='+mobilePhone+'&usersource='+jQuery.trim($("#userSource option:selected").val())+
+			'&safetyLevel='+jQuery.trim($("#safetyLevel option:selected").val())+'&isTranslator='+jQuery.trim($("#userType option:selected").val())+'&isCompany='+jQuery.trim($("#isCompany option:selected").val())+'&state='+jQuery.trim($("#userState option:selected").val())+'&registTimeStart='
+		+registTimeStart+'&registTimeEnd='+registTimeEnd;
+		}
 		
     });
     

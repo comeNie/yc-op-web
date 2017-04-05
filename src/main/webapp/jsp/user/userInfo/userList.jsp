@@ -88,7 +88,7 @@
 						            		</p>
 							            </li>
 							            <li class="col-md-6">
-							            	<p class="word">账户状态</p>
+							            	<p class="word">激活状态</p>
 						            		<p>
 							            		<select class="select select-medium" id="userState">
 							            			<option value="3">全部</option>
