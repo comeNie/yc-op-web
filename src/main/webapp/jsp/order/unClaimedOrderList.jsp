@@ -268,7 +268,10 @@
 	<td>{{:orderLevelPage}}</td>
 	<td>{{:remainingTimePage}}</td>
 	<td>{{:statePage}}</td>
-	<td><a  href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a></td>	
+	<td>
+		<a  href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a>
+		<a href="javascript:void(0)" class="adopt" onclick="pager._rejectRefundOrder('{{:orderId}}')">退款</a>
+	</td>	
 	</tr>			
 {{/if}}                                                                  
 </script> 

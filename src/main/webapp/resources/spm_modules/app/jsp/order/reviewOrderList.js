@@ -330,15 +330,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 				url: _base + "/order/handReviewOrder",
 				data: param,
 				success: function (data) {
-					/*if(data.data=="00"){
-						//如果通过调到待确认列表
-						window.location.href=_base+"/toTbcOrderList";
-					}else if(data.data=="11"){
-						//如果通过调到翻译中列表
-						window.location.href=_base+"/toTranslateOrderList";
-					}else{*/
-						window.location.href=_base+"/order/toReviewOrderList?random="+Math.random();
-					//}
+					window.location.href=_base+"/order/toReviewOrderList?random="+Math.random();
 				}
 			});
 		},
@@ -408,7 +400,41 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
     			"interperName":jQuery.trim($("#interperName").val()),
     			"orderLevel":$("#orderLevel option:selected").val()
     		}
-    	}
+    	},
+    	_rejectRefundOrder:function(orderId){
+			var _this = this;
+			var param={};
+			param.orderId=orderId;
+			var d = Dialog({
+				content:'<textarea id="reasonDesc" style="width:200px;" class="int-text"  maxlength="100"></textarea>',
+				padding: 0,
+				okValue: '确认',
+				title: '退款原因:',
+				ok:function(){
+					param.busiType='2';
+					param.reasonDesc = $("#reasonDesc").val();
+					param.state = '40';
+					param.displayFlag='40';
+					_this._handReviewOrder(param);
+				},
+				cancelValue: '取消',
+			    cancel: function () {}
+			});
+			d.showModal();
+		},
+    	_handRefundOrder:function(param){
+			var _this=this;
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: _base + "/refundApply",
+				data: param,
+				success: function (data) {
+					window.location.href=_base+"/order/toReviewOrderList";
+				}
+			});
+		}
 		
     });
     
