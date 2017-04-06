@@ -121,4 +121,10 @@
 	<!--交易记录-->
 	<dubbo:reference id="incomeOutQuerySV"
 					 interface="com.ai.slp.balance.api.incomeoutquery.interfaces.IncomeOutQuerySV" />
+	<!-- 译员列表 -->
+	<dubbo:reference id="iYCUserTranslatorSV"
+					 interface="com.ai.yc.translator.api.translatorservice.interfaces.IYCUserTranslatorSV" />
+	<dubbo:reference id="iYCUcMembersSV"
+					 interface="com.ai.yc.ucenter.api.members.interfaces.IYCUcMembersSV" />				 
+					 				 
 </beans>

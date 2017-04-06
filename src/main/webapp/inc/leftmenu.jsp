@@ -68,7 +68,7 @@
 					</a> <!-- 一级菜单结束--> <!--二级菜单-->
 						<ul class="submenu">
 							<li menuAttr="menu"><a href="${_base}/user/toUserList" target="mainFrame">会员列表</a></li>
-							<li menuAttr="menu"><a href="${_base}/toCancelOrderList" target="mainFrame">译员列表</a></li>
+							<li menuAttr="menu"><a href="${_base}/translator/toTranslatorInfoList" target="mainFrame">译员列表</a></li>
 							<li menuAttr="menu"><a href="${_base}/company/toCompanyListPager" target="mainFrame">企业用户</a></li>
 						</ul> <!--二级菜单结束--></li>
 				</ul>
