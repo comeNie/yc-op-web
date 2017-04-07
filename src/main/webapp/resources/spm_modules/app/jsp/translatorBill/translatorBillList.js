@@ -202,16 +202,18 @@ define('app/jsp/translatorBill/translatorBillList', function (require, exports, 
     	},
     	_updatePayState:function(){
     		var _this= this;
-    		var formValidator=_this._initValidate();
+
+
+    		var billId = $("#billIdUpdate").val();
+    		var money = $("#updateMoney").val()*1000;
+    		var payStyle=jQuery.trim($("#payStyle option:selected").val());
+			var settleAccount = jQuery.trim($("#account").val());
+			var billState = $("#billState").val();
+			var formValidator=_this._initValidate();
 			formValidator.form();
 			if(!$("#dataForm").valid()){
 				return false;
 			}
-    		var billId = $("#billIdUpdate").val();
-    		var money = $("#updateMoney").val()*1000;
-    		var payStyle=jQuery.trim($("#payStyle option:selected").val());
-			var settleAccount = $("#account").val();
-			var billState = $("#billState").val();
     		$.ajax({
 				type : "post",
 				processing : false,

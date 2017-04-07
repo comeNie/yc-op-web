@@ -171,7 +171,7 @@
 								                </li>
 								                <li>
 								                    <p class="word">账户<span style="color: red">*</span>:</p>
-								                	<p><input type="text" id="account" name="account" class="int-text int-small" ></p>
+								                	<p><input type="text" id="account" name="account" class="int-text int-small" onBlur="replaceSpace(this)"></p>
 								                </li>
 							            	</ul>
 									    </div>	
@@ -270,5 +270,8 @@
 		});
 		$(this).addClass("current");
 	});
+	function replaceSpace(obj){
+		obj.value = obj.value.replace(/\s/gi,'')
+	}
  </script>  
 </body>
