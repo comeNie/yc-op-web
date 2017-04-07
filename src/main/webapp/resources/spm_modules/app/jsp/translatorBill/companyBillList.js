@@ -187,7 +187,7 @@ define('app/jsp/translatorBill/companyBillList', function (require, exports, mod
 			}
     	},
     	//弹出框
-    	_popUp:function(billId,state,accountAmout){
+    	_popUp:function(billId,state,flag,accountAmout){
     		var _this= this;
     		$("#updateMoney").val("");
     		$("#payStyle").val("");
@@ -197,7 +197,13 @@ define('app/jsp/translatorBill/companyBillList', function (require, exports, mod
 			//弹出框展示
 			$('#eject-mask').fadeIn(100);
 			$('#add-samll').slideDown(200);
-			$("#updateMoney").val(accountAmout);
+			var currenUnit;
+			if(flag=="1"){
+				currenUnit = "$"
+			}else {
+				currenUnit = "¥"
+			}
+			$("#updateMoney").val(currenUnit+accountAmout);
 			$("#billIdUpdate").val(billId);
 			$("#billState").val(state);
 			// $("#payStyle").val(accountType);
@@ -210,8 +216,8 @@ define('app/jsp/translatorBill/companyBillList', function (require, exports, mod
 				return false;
 			}
     		var billId = $("#billIdUpdate").val();
-    		var money = $("#updateMoney").val()*1000;
-    		var payStyle=jQuery.trim($("#payStyle option:selected").val());
+			var money = $("#updateMoney").val().substring(1,$("#updateMoney").val().length)*1000;
+			var payStyle=jQuery.trim($("#payStyle option:selected").val());
 			var settleAccount = $("#account").val();
 			var billState = $("#billState").val();
     		$.ajax({

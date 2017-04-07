@@ -250,7 +250,7 @@
 		  {{if  state == '2'}}
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:billId}}')">明细</a>
 		  {{else }}
-		  <a href="javascript:void(0);" onclick="pager._popUp('{{:billId}}','{{:state}}','{{:~liToYuan(accountAmout)}}')">结算</a>
+		  <a href="javascript:void(0);" onclick="pager._popUp('{{:billId}}','{{:state}}','{{:flag}}','{{:~liToYuan(accountAmout)}}')">结算</a>
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:billId}}')">明细</a>
 		  {{/if}}
 	  </td>
