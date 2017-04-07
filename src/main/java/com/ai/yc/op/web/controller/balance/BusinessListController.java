@@ -160,117 +160,117 @@ public class BusinessListController {
 
 
 	/**
-     * 订单信息导出
+     * 充值交易信息导出
      */
-    @RequestMapping("/export")
-    @ResponseBody
-    public void  export(HttpServletRequest request, HttpServletResponse response, FunAccountQueryRequest funAccountQueryRequest) {
-    	logger.error("进入导出方法>>>>");
-		List<ExAllBill> exAllBills = new ArrayList<ExAllBill>();
-		PageInfo<FunAccountResponse> resultPageInfo  = new PageInfo<FunAccountResponse>();
-	    try {
-	  //获取配置中的导出最大数值
-	    	logger.error("获取导出最大条数配置>>>>");
-	    IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
-        String maxRow =  configClient.get(ExcelConstants.EXCEL_OUTPUT_MAX_ROW);
-        int excelMaxRow = Integer.valueOf(maxRow);
-		resultPageInfo.setPageSize(excelMaxRow);
-		resultPageInfo.setPageNo(1);
-		funAccountQueryRequest.setPageInfo(resultPageInfo);
-		IBillGenerateSV billGenerateSV = DubboConsumerFactory.getService(IBillGenerateSV.class);
-	    logger.error("调用查询方法>>>>");
-		FunAccountQueryResponse funAccountQueryResponse = billGenerateSV.queryFunAccount(funAccountQueryRequest);
-		PageInfo<FunAccountResponse> pageInfo = funAccountQueryResponse.getPageInfo();
-		List<FunAccountResponse> billList = pageInfo.getResult();
-		if(!CollectionUtil.isEmpty(billList)){
-			for (FunAccountResponse funAccountResponse:billList){
-				ExAllBill exAllBill = new ExAllBill();
-				//编号
-				exAllBill.setBillId(funAccountResponse.getBillId());
-				//昵称
-				exAllBill.setNickname(funAccountResponse.getNickname());
-				//用户名
-				exAllBill.setTargetName(funAccountResponse.getTargetName());
-				//开始时间
-				if (funAccountResponse.getStartAccountTime()!=null){
-					exAllBill.setStartAccountTime(funAccountResponse.getStartAccountTime().toString());
-				}
-				//结束时间
-				if (funAccountResponse.getEndAccountTime()!=null){
-					exAllBill.setEndAccountTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getEndAccountTime()));
-				}
-				//本期账单金额billFee
-				if (funAccountResponse.getFlag().equals("0")){
-					exAllBill.setBillFee("¥"+funAccountResponse.getBillFee());
-				}else {
-					exAllBill.setBillFee("$"+funAccountResponse.getBillFee());
-				}
-				//平台费用
-				if (funAccountResponse.getFlag().equals("0")){
-					exAllBill.setPlatFee("¥"+funAccountResponse.getPlatFee());
-				}else {
-					exAllBill.setPlatFee("$"+funAccountResponse.getPlatFee());
-				}
-				//应结金额
-				if (funAccountResponse.getFlag().equals("0")){
-					exAllBill.setAccountAmout("¥"+funAccountResponse.getAccountAmout());
-				}else {
-					exAllBill.setAccountAmout("$"+funAccountResponse.getAccountAmout());
-				}
-				//账单周期
-				exAllBill.setAccountPeriod(funAccountResponse.getAccountPeriod()+"个月");
-				//账单生成时间
-				if (funAccountResponse.getCreateTime()!=null){
-					exAllBill.setCreateTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getCreateTime()));
-				}
-				//结算方式
-				if (funAccountResponse.getAccountType()!=null){
-					if (funAccountResponse.getAccountType().equals("1")){
-						exAllBill.setAccountType("支付宝");
-					}else if (funAccountResponse.getAccountType().equals("2")){
-						exAllBill.setAccountType("微信");
-					}else if (funAccountResponse.getAccountType().equals("3")){
-						exAllBill.setAccountType("银行汇款/转账");
-					}else if(funAccountResponse.getAccountType().equals("4")){
-						exAllBill.setAccountType("PayPal");
-					}
-				}
-				//结算账户
-				if (funAccountResponse.getSettleAccount()!=null){
-					exAllBill.setSettleAccount(funAccountResponse.getSettleAccount());
-				}
-				//结算时间
-				if (funAccountResponse.getActAccountTime()!=null){
-					exAllBill.setActAccountTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getActAccountTime()));
-				}
-				//结算状态
-				if (funAccountResponse.getState()!=null){
-					if (funAccountResponse.getState()==1){
-						exAllBill.setState("已结算");
-					}else {
-						exAllBill.setState("未结算");
-					}
-				}
-				exAllBills.add(exAllBill);
-			}
-		}else{
-			logger.error("查询数据为空>>>>");
-		}
-			logger.error("获取输出流>>>>");
-			ServletOutputStream outputStream = response.getOutputStream();
-			response.reset();// 清空输出流
-            response.setContentType("application/msexcel");// 定义输出类型
-            response.setHeader("Content-disposition", "attachment; filename=bill"+new Date().getTime()+".xls");// 设定输出文件头
-            String[] titles = new String[]{"编号", "昵称", "用户名", "开始时间", "结束时间", "本期账单金额","平台费用","应结金额","账单周期","账单生成时间","结算方式","结算账户","结算时间"
-											,"结算状态"};
-    		String[] fieldNames = new String[]{"billId", "nickname", "targetName", "startAccountTime",
-    				"endAccountTime", "billFee","platFee","accountAmout","accountPeriod","createTime","accountType","settleAccount","actAccountTime","state"};
-			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
-			 logger.error("写入数据到excel>>>>");
-			 excelHelper.writeExcel(outputStream, "bill"+new Date().getTime(), ExAllBill.class, exAllBills,fieldNames, titles);
-		} catch (Exception e) {
-			logger.error("导出账单列表失败："+e.getMessage(), e);
-		}
-	}
+//    @RequestMapping("/export")
+//    @ResponseBody
+//    public void  export(HttpServletRequest request, HttpServletResponse response, IncomeQueryRequestAll incomeQueryRequestAll) {
+//    	logger.error("进入导出方法>>>>");
+//		List<ExAllBill> exAllBills = new ArrayList<ExAllBill>();
+//		PageInfo<FundBookQueryResponseAll> resultPageInfo  = new PageInfo<FundBookQueryResponseAll>();
+//	    try {
+//	  //获取配置中的导出最大数值
+//	    	logger.error("获取导出最大条数配置>>>>");
+//	    IConfigClient configClient = CCSClientFactory.getDefaultConfigClient();
+//        String maxRow =  configClient.get(ExcelConstants.EXCEL_OUTPUT_MAX_ROW);
+//        int excelMaxRow = Integer.valueOf(maxRow);
+//		resultPageInfo.setPageSize(excelMaxRow);
+//		resultPageInfo.setPageNo(1);
+//			incomeQueryRequestAll.setPageInfo(resultPageInfo);
+//		IBillGenerateSV billGenerateSV = DubboConsumerFactory.getService(IBillGenerateSV.class);
+//	    logger.error("调用查询方法>>>>");
+//		FunAccountQueryResponse funAccountQueryResponse = billGenerateSV.queryFunAccount(funAccountQueryRequest);
+//		PageInfo<FunAccountResponse> pageInfo = funAccountQueryResponse.getPageInfo();
+//		List<FunAccountResponse> billList = pageInfo.getResult();
+//		if(!CollectionUtil.isEmpty(billList)){
+//			for (FunAccountResponse funAccountResponse:billList){
+//				ExAllBill exAllBill = new ExAllBill();
+//				//编号
+//				exAllBill.setBillId(funAccountResponse.getBillId());
+//				//昵称
+//				exAllBill.setNickname(funAccountResponse.getNickname());
+//				//用户名
+//				exAllBill.setTargetName(funAccountResponse.getTargetName());
+//				//开始时间
+//				if (funAccountResponse.getStartAccountTime()!=null){
+//					exAllBill.setStartAccountTime(funAccountResponse.getStartAccountTime().toString());
+//				}
+//				//结束时间
+//				if (funAccountResponse.getEndAccountTime()!=null){
+//					exAllBill.setEndAccountTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getEndAccountTime()));
+//				}
+//				//本期账单金额billFee
+//				if (funAccountResponse.getFlag().equals("0")){
+//					exAllBill.setBillFee("¥"+funAccountResponse.getBillFee());
+//				}else {
+//					exAllBill.setBillFee("$"+funAccountResponse.getBillFee());
+//				}
+//				//平台费用
+//				if (funAccountResponse.getFlag().equals("0")){
+//					exAllBill.setPlatFee("¥"+funAccountResponse.getPlatFee());
+//				}else {
+//					exAllBill.setPlatFee("$"+funAccountResponse.getPlatFee());
+//				}
+//				//应结金额
+//				if (funAccountResponse.getFlag().equals("0")){
+//					exAllBill.setAccountAmout("¥"+funAccountResponse.getAccountAmout());
+//				}else {
+//					exAllBill.setAccountAmout("$"+funAccountResponse.getAccountAmout());
+//				}
+//				//账单周期
+//				exAllBill.setAccountPeriod(funAccountResponse.getAccountPeriod()+"个月");
+//				//账单生成时间
+//				if (funAccountResponse.getCreateTime()!=null){
+//					exAllBill.setCreateTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getCreateTime()));
+//				}
+//				//结算方式
+//				if (funAccountResponse.getAccountType()!=null){
+//					if (funAccountResponse.getAccountType().equals("1")){
+//						exAllBill.setAccountType("支付宝");
+//					}else if (funAccountResponse.getAccountType().equals("2")){
+//						exAllBill.setAccountType("微信");
+//					}else if (funAccountResponse.getAccountType().equals("3")){
+//						exAllBill.setAccountType("银行汇款/转账");
+//					}else if(funAccountResponse.getAccountType().equals("4")){
+//						exAllBill.setAccountType("PayPal");
+//					}
+//				}
+//				//结算账户
+//				if (funAccountResponse.getSettleAccount()!=null){
+//					exAllBill.setSettleAccount(funAccountResponse.getSettleAccount());
+//				}
+//				//结算时间
+//				if (funAccountResponse.getActAccountTime()!=null){
+//					exAllBill.setActAccountTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getActAccountTime()));
+//				}
+//				//结算状态
+//				if (funAccountResponse.getState()!=null){
+//					if (funAccountResponse.getState()==1){
+//						exAllBill.setState("已结算");
+//					}else {
+//						exAllBill.setState("未结算");
+//					}
+//				}
+//				exAllBills.add(exAllBill);
+//			}
+//		}else{
+//			logger.error("查询数据为空>>>>");
+//		}
+//			logger.error("获取输出流>>>>");
+//			ServletOutputStream outputStream = response.getOutputStream();
+//			response.reset();// 清空输出流
+//            response.setContentType("application/msexcel");// 定义输出类型
+//            response.setHeader("Content-disposition", "attachment; filename=bill"+new Date().getTime()+".xls");// 设定输出文件头
+//            String[] titles = new String[]{"编号", "昵称", "用户名", "开始时间", "结束时间", "本期账单金额","平台费用","应结金额","账单周期","账单生成时间","结算方式","结算账户","结算时间"
+//											,"结算状态"};
+//    		String[] fieldNames = new String[]{"billId", "nickname", "targetName", "startAccountTime",
+//    				"endAccountTime", "billFee","platFee","accountAmout","accountPeriod","createTime","accountType","settleAccount","actAccountTime","state"};
+//			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
+//			 logger.error("写入数据到excel>>>>");
+//			 excelHelper.writeExcel(outputStream, "bill"+new Date().getTime(), ExAllBill.class, exAllBills,fieldNames, titles);
+//		} catch (Exception e) {
+//			logger.error("导出账单列表失败："+e.getMessage(), e);
+//		}
+//	}
 
 }

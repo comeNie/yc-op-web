@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 public class ExAllBill {
 	private String billId;
 
+	private String translatorFee;
+
 	private String targetType;
 
 	private String targetId;
@@ -48,6 +50,16 @@ public class ExAllBill {
 	private String content;
 
 	private String flag;
+
+	private String discountFee;
+
+	public String getDiscountFee() {
+		return discountFee;
+	}
+
+	public void setDiscountFee(String discountFee) {
+		this.discountFee = discountFee;
+	}
 
 	public String getBillId() {
 		return billId;
@@ -231,5 +243,13 @@ public class ExAllBill {
 
 	public void setFlag(String flag) {
 		this.flag = flag;
+	}
+
+	public String getTranslatorFee() {
+		return translatorFee;
+	}
+
+	public void setTranslatorFee(String translatorFee) {
+		this.translatorFee = translatorFee;
 	}
 }

@@ -113,9 +113,9 @@ define('app/jsp/translatorBill/lspBillList', function (require, exports, module)
 			var foreign = $('#foreign').attr('class');
 			var nickName = jQuery.trim($("#nickName").val());
 			var acountType = jQuery.trim($("#accountType option:selected").val());
-			if(domestic=="current1" && domestic!=""){
+			if(domestic=="current" && domestic!=""){
 				flag = 0;
-			}else if(foreign=="current1" && foreign!=""){
+			}else if(foreign=="current" && foreign!=""){
 				flag=  1;//待审核
 			}
 			if(wait=="current" && wait!=""){
@@ -123,8 +123,8 @@ define('app/jsp/translatorBill/lspBillList', function (require, exports, module)
 			}else if(refund=="current" && refund!=""){
 				stateBill=  2;//待审核
 			}
-			window.location.href=_base+'/balance/export?flag='+flag+'&beginDate='+orderTimeS+'&endDate='+orderTimeE+
-			'&nickName='+nickName+'&acountType='+acountType+'&state='+stateBill+"&offset="+today.stdTimezoneOffset();
+			window.location.href=_base+'/lspBill/export?flag='+flag+'&beginDate='+orderTimeS+'&endDate='+orderTimeE+
+			'&nickName='+nickName+'&acountType='+acountType+'&state='+stateBill+"&targetType=4"+"&offset="+today.stdTimezoneOffset();
 		},
 
 		_searchBillList:function(){

@@ -176,7 +176,7 @@ public class TranslatorBillListController {
 	}
 
 	/**
-     * 订单信息导出
+     * 译员账单信息导出
      */
     @RequestMapping("/export")
     @ResponseBody
@@ -217,24 +217,24 @@ public class TranslatorBillListController {
 				}
 				//本期账单金额billFee
 				if (funAccountResponse.getFlag().equals("0")){
-					exAllBill.setBillFee("¥"+funAccountResponse.getBillFee());
+					exAllBill.setBillFee("¥"+AmountUtil.liToYuan(funAccountResponse.getBillFee()));
 				}else {
-					exAllBill.setBillFee("$"+funAccountResponse.getBillFee());
+					exAllBill.setBillFee("$"+AmountUtil.liToYuan(funAccountResponse.getBillFee()));
 				}
 				//平台费用
 				if (funAccountResponse.getFlag().equals("0")){
-					exAllBill.setPlatFee("¥"+funAccountResponse.getPlatFee());
+					exAllBill.setPlatFee("¥"+AmountUtil.liToYuan(funAccountResponse.getPlatFee()));
 				}else {
-					exAllBill.setPlatFee("$"+funAccountResponse.getPlatFee());
+					exAllBill.setPlatFee("$"+AmountUtil.liToYuan(funAccountResponse.getPlatFee()));
 				}
 				//应结金额
 				if (funAccountResponse.getFlag().equals("0")){
-					exAllBill.setAccountAmout("¥"+funAccountResponse.getAccountAmout());
+					exAllBill.setAccountAmout("¥"+AmountUtil.liToYuan(funAccountResponse.getAccountAmout()));
 				}else {
-					exAllBill.setAccountAmout("$"+funAccountResponse.getAccountAmout());
+					exAllBill.setAccountAmout("$"+AmountUtil.liToYuan(funAccountResponse.getAccountAmout()));
 				}
 				//账单周期
-				exAllBill.setAccountPeriod(funAccountResponse.getAccountPeriod()+"个月");
+				exAllBill.setAccountPeriod("1个月");
 				//账单生成时间
 				if (funAccountResponse.getCreateTime()!=null){
 					exAllBill.setCreateTime(TimeZoneTimeUtil.getTimes(funAccountResponse.getCreateTime()));
@@ -261,7 +261,7 @@ public class TranslatorBillListController {
 				}
 				//结算状态
 				if (funAccountResponse.getState()!=null){
-					if (funAccountResponse.getState()==1){
+					if (funAccountResponse.getState()==2){
 						exAllBill.setState("已结算");
 					}else {
 						exAllBill.setState("未结算");
@@ -276,14 +276,14 @@ public class TranslatorBillListController {
 			ServletOutputStream outputStream = response.getOutputStream();
 			response.reset();// 清空输出流
             response.setContentType("application/msexcel");// 定义输出类型
-            response.setHeader("Content-disposition", "attachment; filename=bill"+new Date().getTime()+".xls");// 设定输出文件头
+            response.setHeader("Content-disposition", "attachment; filename=translatorBill"+new Date().getTime()+".xls");// 设定输出文件头
             String[] titles = new String[]{"编号", "昵称", "用户名", "开始时间", "结束时间", "本期账单金额","平台费用","应结金额","账单周期","账单生成时间","结算方式","结算账户","结算时间"
 											,"结算状态"};
     		String[] fieldNames = new String[]{"billId", "nickname", "targetName", "startAccountTime",
     				"endAccountTime", "billFee","platFee","accountAmout","accountPeriod","createTime","accountType","settleAccount","actAccountTime","state"};
 			 AbstractExcelHelper excelHelper = ExcelFactory.getJxlExcelHelper();
 			 logger.error("写入数据到excel>>>>");
-			 excelHelper.writeExcel(outputStream, "bill"+new Date().getTime(), ExAllBill.class, exAllBills,fieldNames, titles);
+			 excelHelper.writeExcel(outputStream, "translatorBill"+new Date().getTime(), ExAllBill.class, exAllBills,fieldNames, titles);
 		} catch (Exception e) {
 			logger.error("导出账单列表失败："+e.getMessage(), e);
 		}
