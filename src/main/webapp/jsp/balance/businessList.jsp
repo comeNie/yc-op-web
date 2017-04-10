@@ -186,7 +186,11 @@
 			{{:channel}}
 		</td>
 		<td>
-			{{:state}}
+			{{if  payStatus == '1'}}
+			交易成功
+			{{else }}
+			交易失败
+			{{/if}}
 		</td>
 		<td>{{:remark}}</td>
 	</tr>

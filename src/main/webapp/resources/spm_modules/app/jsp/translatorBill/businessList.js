@@ -48,28 +48,37 @@ define('app/jsp/translatorBill/businessList', function (require, exports, module
 
 		_export:function(){
 			var _this=this;
-			var stateBill="";
-			var flag="";
-			var orderTimeS = $("#billTimeBegin").val();
-			var orderTimeE = $("#billTimeEnd").val();
-			var wait = $('#waitHandle').attr('class');
-			var refund = $('#refundId').attr('class');
-			var domestic = $('#domestic').attr('class');
-			var foreign = $('#foreign').attr('class');
-			var nickName = jQuery.trim($("#nickName").val());
-			var acountType = jQuery.trim($("#accountType option:selected").val());
-			if(domestic="current1" && domestic!=""){
-				flag = 0;
-			}else if(foreign="current1" && foreign!=""){
-				flag=  1;//待审核
+			var serialCode=jQuery.trim($("#serialCode").val());
+			var nickName=jQuery.trim($("#nickName").val());
+			var beginDate = $('#timeBegin').val();
+			var endDate = $("#timeEnd").val();
+
+			//支付方式 智联在线;支付宝;微信;线下充值
+			var channel = jQuery.trim($("#channel option:selected").val());
+
+			//状态:0 交易未完成 1 交易成功 2 交易失败
+			var state = jQuery.trim($("#state option:selected").val());
+
+			var currencyUnit = jQuery.trim($("#currencyUnit option:selected").val());
+			var beginAmount = $('#amountBegin').val();
+			var endAmount =  $('#amountEnd').val();
+			var incomeFlag = "";
+			var optType  = "";
+			var detail = $('#detail').attr('class');
+			var income = $('#income').attr('class');
+			var out = $('#out').attr('class');
+			if(detail=="current"){
+				incomeFlag = "";
+				optType  = "";
+			}else if(income=="current"){
+				incomeFlag = "1";
+				optType  = "1";
+			}else if(out=="current"){
+				incomeFlag = "0";
 			}
-			if(wait="current" && wait!=""){
-				stateBill = 2;
-			}else if(refund="current" && refund!=""){
-				stateBill=  1;//待审核
-			}
-			window.location.href=_base+'/balance/export?flag='+flag+'&beginDate='+orderTimeS+'&endDate='+orderTimeE+
-			'&nickName='+nickName+'&acountType='+acountType+'&state='+stateBill+"&offset="+today.stdTimezoneOffset();
+			window.location.href=_base+'/businessList/export?incomeFlag='+incomeFlag+'&serialCode='+serialCode+'&nickName='+nickName+
+			'&beginDate='+beginDate+'&endDate='+endDate+'&channel='+channel+'&state='+state+'&currencyUnit='+currencyUnit+
+				'&beginAmount='+beginAmount+'&endAmount='+endAmount+'&optType='+optType+"&offset="+today.stdTimezoneOffset();
 		},
 
 		_searchBillList:function(){
