@@ -32,7 +32,7 @@
 						     <li menuAttr="menu"><a href="${_base}/toUpdateOrderList" target="mainFrame">修改中订单</a></li>
 						     <li menuAttr="menu"><a href="${_base}/toDoneOrderList" target="mainFrame">已完成订单</a></li>
 						     <li menuAttr="menu"><a href="${_base}/toEvaluateOrderList" target="mainFrame">已评价订单</a></li>
-						      <li menuAttr="menu"><a href="${_base}/toRefundOrderList" target="mainFrame">已退款订单</a></li>
+						      <li menuAttr="menu"><a href="${_base}/toRefundOrderList" target="mainFrame">退款订单</a></li>
 						</ul> <!--二级菜单结束--></li>
 					<li><!-- 一级菜单--> <a href="#" class="dropdown-toggle"> <i
 							class="fa fa-inbox"></i><span>账务资产</span> <i

@@ -125,8 +125,11 @@ define(function (require, exports, module) {
 	        if(newState=='23'){
 	        	return "订单翻译";
 	        }
-	        if(newState=='40'){
+	        if(orgState=='23'&& newState=='40' ){
 	        	return "提交译文";
+	        }
+	        if(newState=='40'){
+	        	return "退款申请";
 	        }
 	        return newState;
 		 }
@@ -155,7 +158,6 @@ define(function (require, exports, module) {
 			var now  = new Date().getTime();
 			
 			var overplus = stateChgTime + day*24*60*60*1000 - now;
-			alert(overplus);
 			var d = parseInt(overplus/(24*60*60*1000));
 			overplus = overplus%(24*60*60*1000);
 			var h = Math.round(overplus/(60*60*1000));
