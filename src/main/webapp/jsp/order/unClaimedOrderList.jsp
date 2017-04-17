@@ -211,7 +211,10 @@
 				<td rowspan="{{:~levelSize}}">{{:~orderLevelPage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~remainingTimePage}}</td>
 				<td rowspan="{{:~levelSize}}">{{:~statePage}}</td>
-				<td rowspan="{{:~levelSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
+				<td rowspan="{{:~levelSize}}">
+					<a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a>
+					<a href="javascript:void(0)" class="adopt" onclick="pager._rejectRefundOrder('{{:orderId}}')">退款</a>
+				</td>
 			{{/if}}	
 		</tr>		
 	{{/for}}
@@ -249,7 +252,11 @@
 				<td rowspan="{{:~extendSize}}">{{:~orderLevelPage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~remainingTimePage}}</td>
 				<td rowspan="{{:~extendSize}}">{{:~statePage}}</td>
-				<td rowspan="{{:~extendSize}}"><a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a></td>
+				<td rowspan="{{:~extendSize}}">
+					<a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a>
+					<a href="javascript:void(0)" class="adopt" onclick="pager._rejectRefundOrder('{{:orderId}}')">退款</a>
+				</td>
+
 			{{/if}}	
 		</tr>		
 	{{/for}}
