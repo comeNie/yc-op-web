@@ -282,7 +282,10 @@
 			<a href="javascript:void(0);" class="adopt" onclick="pager._check('{{:orderId}}','92')">确认</a>
 			<a href="javascript:void(0);" class="reject" onclick="pager._check('{{:orderId}}','42')">锁定</a>
 		{{/if}}	
-		{{if state==50 || state==25 || state==23 || state==20 || state==40}}
+		{{if state==50 || state==25 || state==23 || state==20}}
+			<a href="javascript:void(0)" class="adopt" onclick="pager._refundOrder('{{:orderId}}')">退款</a>
+		{{/if}}
+		{{if state==40 && busiType!=2}}
 			<a href="javascript:void(0)" class="adopt" onclick="pager._refundOrder('{{:orderId}}')">退款</a>
 		{{/if}}
 	</td>

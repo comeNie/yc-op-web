@@ -95,6 +95,7 @@ public class ReviewOrderController {
 			ordReq.setLockTimeEnd(submitTimeE);
 		}
 		ordReq.setState(Constants.State.REVIEW_STATE);
+		ordReq.setBusiType(Constants.NORMAL_BUSI_TYPE);
 		String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
 	    String strPageSize=(null==request.getParameter("pageSize"))?"10":request.getParameter("pageSize");
 	    ordReq.setPageNo(Integer.parseInt(strPageNo));
@@ -228,6 +229,7 @@ public class ReviewOrderController {
 			ordReq.setLockTimeEnd(submitTimeE);
 		}
 		ordReq.setState(Constants.State.REVIEW_STATE);
+		ordReq.setBusiType(Constants.NORMAL_BUSI_TYPE);
 	    ordReq.setPageNo(1);
 	    try {
 	  //获取配置中的导出最大数值

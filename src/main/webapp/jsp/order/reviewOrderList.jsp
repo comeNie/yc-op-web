@@ -223,7 +223,7 @@
 		<a href="../order/orderdetails?mod=edit&orderId={{:orderId}}">查看</a>
 		<a href="javascript:void(0);" class="adopt">通过</a>
 		<a href="javascript:void(0);" class="reject">驳回</a>
-		<a href="javascript:void(0)" class="adopt" onclick="pager._rejectRefundOrder('{{:orderId}}')">退款</a>
+		<a href="javascript:void(0)" class="adopt1" onclick="pager._rejectRefundOrder('{{:orderId}}')">退款</a>
 	</td>
   </tr>                                                                       
 </script> 

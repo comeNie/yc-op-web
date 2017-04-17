@@ -40,6 +40,10 @@ public final class Constants {
 	 */
 	public static final String REFUND_BUSI_TYPE = "2";
 	/**
+	 * 业务类型（正常单）
+	 */
+	public static final String NORMAL_BUSI_TYPE = "1";
+	/**
 	 * 公共库语言对表中对应的翻译类型（笔译）
 	 */
 	public static final String TRANSLATE_TYPE_COMMON = "1";
