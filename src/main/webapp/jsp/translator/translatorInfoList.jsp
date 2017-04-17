@@ -127,7 +127,7 @@
 												<th>领域</th>
 												<th>用途</th>
 												<th>申请时间</th>
-											    <th>是否锁定</th>
+											    <%--<th>是否锁定</th>--%>
 												<th>操作</th>
 											</tr>
                                         </thead>
@@ -153,35 +153,46 @@
    </div> 
 <script id="translatorListTemple" type="text/template">
 	<tr>
-  	  <td>{{:companyId}}=={{:#index+1}}</td>
+  	  <td>{{:#index+1}}</td>
       <td>
 		{{if usersource == '0'}}
            	 pc
         {{else usersource == '10'}}
            	   译云中文站
         {{else usersource=='11'}}
-                                       译云英文站
+			   译云英文站
 		{{else usersource=='2'}}
-                                       百度
+			   百度
 		{{else usersource=='1'}}
-                                       金山
+		       金山
 		{{else usersource=='12'}}
-                                       找翻译
+			   找翻译
 		{{else usersource=='13'}}
-             wap-中文站
+		       wap-中文站
 		{{else usersource=='13'}}
-             wap-英文站
+               wap-英文站
 		{{else usersource=='14'}}
-             	微信助手
+		       微信助手
 		{{/if}}
       </td>
-      <td>{{:companyName}}</td>
- 	  <td>{{:nickName}}</td>
-      <td>{{:firstname}}{{:lastname}}</td>
-      <td>{{:telephone}}</td>
-      <td>{{:linkman}}</td>
-      <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}</td>
-      <td>
+		<td>{{:nickname}}</td>
+		<td>{{:mobilePhone}}</td>
+ 	  <td>{{:email}}</td>
+      <td>{{:vipLevel}}</td>
+      <td>{{:firstname}}</td>
+      <td>{{if sex == '0'}}
+		  女
+		  {{else sex=='1'}}
+		  男
+		  {{/if}}
+	  </td>
+		<td>{{:motherTongue}}</td>
+		<td>{{:workingLife}}</td>
+		<td>{{:usrLanguages}}</td>
+		<td>{{:usrField}}</td>
+		<td>{{:usrPurpose}}</td>
+		<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}</td>
+     <%-- <td>
 	     {{if  state == 0}}
 		 	未审核
 		  {{/if}}
@@ -194,7 +205,7 @@
 		 {{if  state == 3}}
 		 	锁定
 		 {{/if}}
-	  </td>
+	  </td>--%>
 	<td>
         <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyDetail('{{:companyId}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">查看</a>  
         <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyAudit('{{:companyId}}','{{:companyName}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">通过</a>
