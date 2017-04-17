@@ -415,7 +415,7 @@ define('app/jsp/order/reviewOrderList', function (require, exports, module) {
 					param.reasonDesc = $("#reasonDesc").val();
 					param.state = '40';
 					param.displayFlag='40';
-					_this._handReviewOrder(param);
+					_this._handRefundOrder(param);
 				},
 				cancelValue: '取消',
 			    cancel: function () {}
