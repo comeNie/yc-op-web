@@ -173,14 +173,12 @@
 											{{:remark}}
 										</p>
 									</li>
-									{{if state=='92'}}
 									<li class="col-md-6">
 										<p class="word">退款留言：</p>
 										<p class="col-md-8">
 											{{:reasonDesc}}
 										</p>
 									</li>	
-									{{/if}}		
 							 </ul>
 							<ul id="checkemarkId">
 								<li class="word">审核备注:</li>
