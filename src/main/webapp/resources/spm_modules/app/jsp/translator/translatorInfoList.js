@@ -107,6 +107,20 @@ define('app/jsp/translator/translatorInfoList', function (require, exports, modu
 
 		_searchBillList:function(){
 			var _this=this;
+			var state="";
+			var domestic = $('#domestic').attr('class');
+			var foreign = $('#foreign').attr('class');
+			//待审核
+			if(domestic=="current" && domestic!=""){
+				state = 0;
+			}else if(foreign=="current" && foreign!=""){
+				state=  1;//企业列表
+			}
+			debugger;
+			if (state=="0"){
+				window.location.href=_base+'/translator/toCheckTranslatorInfoList';
+				return;
+			}
 			var url = _base+"/translator/getTranslatorPageData";
 			var queryData = this._getSearchParams();
 			$("#pagination").runnerPagination({
@@ -142,9 +156,9 @@ define('app/jsp/translator/translatorInfoList', function (require, exports, modu
 			var domestic = $('#domestic').attr('class');
 			var foreign = $('#foreign').attr('class');
 			//待审核
-			if(domestic="current1" && domestic!=""){
+			if(domestic="current" && domestic!=""){
 				state = 0;
-			}else if(foreign="current1" && foreign!=""){
+			}else if(foreign="current" && foreign!=""){
 				state=  1;//企业列表
 			}
     		return {

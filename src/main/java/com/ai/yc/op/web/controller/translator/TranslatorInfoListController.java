@@ -41,6 +41,15 @@ public class TranslatorInfoListController {
 	}
 
 	/**
+	 * 待审核列表
+	 * @param request
+	 * @return
+     */
+	@RequestMapping("/toCheckTranslatorInfoList")
+	public ModelAndView tocheckTranslatorInfoList(HttpServletRequest request){
+		return new ModelAndView("jsp/translator/checkTranslatorInfoList");
+	}
+	/**
 	 * 译员列表
 	 * @param request
 	 * @param PageInfoRequest

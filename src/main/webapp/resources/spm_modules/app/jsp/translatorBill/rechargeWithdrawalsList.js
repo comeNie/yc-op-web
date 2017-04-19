@@ -113,12 +113,12 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 			var foreign = $('#foreign').attr('class');
 			var nickName = jQuery.trim($("#nickName").val());
 			var acountType = jQuery.trim($("#accountType option:selected").val());
-			if(domestic="current1" && domestic!=""){
+			if(domestic=="current1" && domestic!=""){
 				flag = 0;
 			}else if(foreign="current1" && foreign!=""){
 				flag=  1;//待审核
 			}
-			if(wait="current" && wait!=""){
+			if(wait=="current" && wait!=""){
 				stateBill = 2;
 			}else if(refund="current" && refund!=""){
 				stateBill=  1;//待审核
@@ -163,14 +163,14 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 			var domestic = $('#domestic').attr('class');
 			var foreign = $('#foreign').attr('class');
 
-			if(domestic="current1" && domestic!=""){
+			if(domestic=="current1" && domestic!=""){
 				flag = 0;
-			}else if(foreign="current1" && foreign!=""){
+			}else if(foreign=="current1" && foreign!=""){
 				flag=  1;//待审核
 			}
-			if(wait="current" && wait!=""){
+			if(wait=="current" && wait!=""){
 				stateBill = 1;//未结算
-			}else if(refund="current" && refund!=""){
+			}else if(refund=="current" && refund!=""){
 				stateBill=  2;//已结算
 			}
 			return {

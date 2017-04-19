@@ -21,8 +21,8 @@
 								<div class="main-box-body clearfix">
 									<div class="bill-list-table">
 										<ul>
-											<li ><a href="#" id="domestic" class="current" >待审核</a></li>
-											<li ><a href="#"  id="foreign" >译员列表</a></li>
+											<li ><a href="#" id="domestic" >待审核</a></li>
+											<li ><a href="#"  id="foreign" class="current" >译员列表</a></li>
 											<li ><a href="#"  id="foreign1">LSP团队</a></li>
 										</ul>
 									</div>
@@ -127,7 +127,7 @@
 												<th>领域</th>
 												<th>用途</th>
 												<th>申请时间</th>
-											    <%--<th>是否锁定</th>--%>
+											    <th>是否锁定</th>
 												<th>操作</th>
 											</tr>
                                         </thead>
@@ -192,7 +192,7 @@
 		<td>{{:usrField}}</td>
 		<td>{{:usrPurpose}}</td>
 		<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}</td>
-     <%-- <td>
+      <td>
 	     {{if  state == 0}}
 		 	未审核
 		  {{/if}}
@@ -205,7 +205,7 @@
 		 {{if  state == 3}}
 		 	锁定
 		 {{/if}}
-	  </td>--%>
+	  </td>
 	<td>
         <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyDetail('{{:companyId}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">查看</a>  
         <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyAudit('{{:companyId}}','{{:companyName}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">通过</a>
