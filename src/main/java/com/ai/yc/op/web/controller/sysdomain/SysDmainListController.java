@@ -43,7 +43,7 @@ public class SysDmainListController {
 	}
 	
 	/**
-     * 用途查询
+     * 领域查询
      */
     @RequestMapping("/getSysDomainPageData")
     @ResponseBody
@@ -70,7 +70,7 @@ public class SysDmainListController {
 				responseData = new ResponseData<PageInfo<DomainPageVo>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);
 			}
 		} catch (Exception e) {
-			logger.error("查询用途列表失败：", e);
+			logger.error("查询领域列表失败：", e);
 			responseData = new ResponseData<PageInfo<DomainPageVo>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
 		}
 	    return responseData;
@@ -91,10 +91,10 @@ public class SysDmainListController {
     	if(saveSysDomain.getResponseHeader().getIsSuccess()==false){
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
-		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加优惠券模板成功", true);
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加领域成功", true);
     }
     /**
-     * 删除优惠券模板
+     * 删除领域
      */
     @RequestMapping("/deleteSysDomain")
     @ResponseBody
@@ -106,7 +106,7 @@ public class SysDmainListController {
     	if(deleteSysDomainResponse==null){
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
-		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "删除优惠券模板成功", true);
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "删除领域成功", true);
     }
 
 	

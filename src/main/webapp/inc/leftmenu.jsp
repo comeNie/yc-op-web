@@ -80,7 +80,7 @@
 						<ul class="submenu">
 							<li menuAttr="menu"><a href="${_base}/syspurpose/toSysPurposeList" target="mainFrame">用途列表</a></li>
 							<li menuAttr="menu"><a href="${_base}/sysdomain/toSysDomainList" target="mainFrame">领域列表</a></li>
-							<li menuAttr="menu"><a href="${_base}/coupon/toCouponTemplateList" target="mainFrame">语言对管理</a></li>
+							<li menuAttr="menu"><a href="${_base}/sysduad/toSysDuadList" target="mainFrame">语言对管理</a></li>
 							<li menuAttr="menu"><a href="${_base}/activity/toActivityList" target="mainFrame">题库列表</a></li>
 						</ul>
 						<!--二级菜单结束--></li>

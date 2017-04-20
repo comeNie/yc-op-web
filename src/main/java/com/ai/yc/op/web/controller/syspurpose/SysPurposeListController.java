@@ -90,10 +90,10 @@ public class SysPurposeListController {
     	if(saveSysPurpose.getResponseHeader().getIsSuccess()==false){
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
-		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加优惠券模板成功", true);
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加用途成功", true);
     }
     /**
-     * 删除优惠券模板
+     * 删除用途
      */
     @RequestMapping("/deleteSysPurpose")
     @ResponseBody
@@ -105,7 +105,7 @@ public class SysPurposeListController {
     	if(deleteSysPurposeResponse==null){
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
-		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "删除优惠券模板成功", true);
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "删除用途成功", true);
     }
 
 	
