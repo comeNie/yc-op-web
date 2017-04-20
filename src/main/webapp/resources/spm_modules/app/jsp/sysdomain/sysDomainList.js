@@ -1,4 +1,4 @@
-define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) {
+define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
     'use strict';
     var $=require('jquery'),
     Widget = require('arale-widget/1.2.0/widget'),
@@ -32,14 +32,14 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
     	//事件代理
     	events: {
 			//查询
-            "click #search":"_searchSysPurposeList",
+            "click #search":"_searchSysDomainList",
             "click #add":"_add"
         },
     	//重写父类
     	setup: function () {
     		OrderListPager.superclass.setup.call(this);
     		// 初始化执行搜索
-    		this._searchSysPurposeList();
+    		this._searchSysDomainList();
     		var formValidator=this._initValidate();
 			$(":input").bind("focusout",function(){
 				formValidator.element(this);
@@ -47,37 +47,37 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
     	},
     	
     	_add:function(){
-			window.location.href = _base+"/syspurpose/toAddPurpose";
+			window.location.href = _base+"/sysdomain/toAddDomain";
 		},
 
-		_searchSysPurposeList:function(){
+		_searchSysDomainList:function(){
 			var _this=this;
-			var url = _base+"/syspurpose/getSysPurposePageData";
+			var url = _base+"/sysdomain/getSysDomainPageData";
 			var queryData = this._getSearchParams();
 			$("#pagination").runnerPagination({
 				url:url,
 				method: "POST",
 				dataType: "json",
 				messageId:"showMessage",
-				renderId:"sysPurposeListData",
+				renderId:"sysDomainListData",
 				data : queryData,
 				pageSize: OrderListPager.DEFAULT_PAGE_SIZE,
 				visiblePages:5,
 				message: "正在为您查询数据..",
 				render: function (data) {
 					if(data&&data.length>0){
-						var template = $.templates("#sysPurposeListTemple");
+						var template = $.templates("#sysDomainListTemple");
 						var htmlOut = template.render(data);
-						$("#sysPurposeListData").html(htmlOut);
+						$("#sysDomainListData").html(htmlOut);
 					}else{
-						$("#sysPurposeListData").html("未搜索到信息");
+						$("#sysDomainListData").html("未搜索到信息");
 					}
 				},
 			});
 		},
 		_getSearchParams:function(){
     		return {
-    			"purposeCn":jQuery.trim($("#purposeCn").val()),
+    			"domainCn":jQuery.trim($("#domainCn").val()),
     			"site":jQuery.trim($("#site option:selected").val()),
     			"state":jQuery.trim($("#state option:selected").val())
     		}
@@ -85,26 +85,26 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
 		_initValidate:function(){
     		var formValidator=$("#dataForm").validate({
     			rules: {
-    				purposeCn: {
+    				domainCn: {
     					maxlength:10
     					}
     			},
     			messages: {
-    				purposeCn: {
+    				domainCn: {
     					maxlength:"最大长度不能超过{0}"
     					}
     			}
     		});
     		return formValidator;
     	},
-    	_delete:function(purposeId){
+    	_delete:function(domainId){
 			var _this=this;
 			ajaxController.ajax({
 				type: "post",
 				processing: true,
 				message: "删除数据中，请等待...",
-				data: {purposeId:purposeId},
-				url: _base + "/syspurpose/deleteSysPurpose",
+				data: {domainId:domainId},
+				url: _base + "/sysdomain/deleteSysDomain",
 				success: function (rs) {
 					 window.location.reload();
 				}

@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>用途列表</title>
 <%@include file="/inc/inc.jsp" %>
-<input type="hidden" id="syspurposeIdUpdate"/>
+<input type="hidden" id="sysdomainIdUpdate"/>
 </head>
 <body>
    <div class="content-wrapper-iframe" ><!--右侧灰色背景-->
@@ -22,8 +22,8 @@
 		                    	<div id="selectDiv">
 			                    	<ul>
 										<li class="col-md-6">
-											<p class="word">用途名称</p>
-											<p><input class="int-text int-medium" id="purposeCn" value="" type="text"></p>
+											<p class="word">领域名称</p>
+											<p><input class="int-text int-medium" id="domainCn" value="" type="text"></p>
 										</li>
 										<li class="col-md-6">
 								           <p class="word">站点</p>
@@ -103,7 +103,7 @@
                                         <thead>
                                             <tr>
 												<th>序号</th>
-												<th>用途名称</th>
+												<th>领域名称</th>
 												<th>站点</th>
 												<th>地区语言</th>
 												<th>排序</th>
@@ -112,7 +112,7 @@
 												<th>操作</th>
 											</tr>
                                         </thead>
-                                         <tbody id="sysPurposeListData"></tbody>
+                                         <tbody id="sysDomainListData"></tbody>
                                     </table>
                                     <div id="showMessage"></div>
                                 </div>
@@ -132,10 +132,10 @@
             </div>
     	</div>
    </div> 
-<script id="sysPurposeListTemple" type="text/template">
+<script id="sysDomainListTemple" type="text/template">
 	<tr>
-  	  <td>{{:purposeId}}</td>
-      <td>{{:purposeCn}}</td>
+  	  <td>{{:domainId}}</td>
+      <td>{{:domainCn}}</td>
 	  <td>
 		  {{if  site == '1'}}
 		     译云-中文站
@@ -175,15 +175,15 @@
 		  {{/if}}
 	  </td>     
 	  <td>
- 		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:purposeId}}')">删除</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._update('{{:purposeId}}')">修改</a>
+ 		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:domainId}}')">删除</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._update('{{:domainId}}')">修改</a>
 	  </td>
     </tr>
 </script>
  <script type="text/javascript">
 	var pager;
 	(function () {
-		seajs.use('app/jsp/syspurpose/sysPurposeList', function (OrderListPager) {
+		seajs.use('app/jsp/sysdomain/sysDomainList', function (OrderListPager) {
 			pager = new OrderListPager({element: document.body});
 			pager.render();
 		});
