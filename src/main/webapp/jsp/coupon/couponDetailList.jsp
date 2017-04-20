@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>译员账单</title>
+<title>优惠券明细</title>
 <%@include file="/inc/inc.jsp" %>
 <input id="templateId" name="templateId" type="hidden" value="${templateId}"/>
 </head>
@@ -73,11 +73,11 @@
       <td></td>
 	  <td></td>
 	  <td>
-		  {{if  status == '1'}}
+		  {{if  status == '0'}}
 		  未领取
-		  {{else status == '2'}}
+		  {{else status == '1'}}
 		  已领取  未使用
-		  {{else status == '3'}}
+		  {{else status == '2'}}
 		  已领取  已使用
 		  {{/if}}
 	  </td>

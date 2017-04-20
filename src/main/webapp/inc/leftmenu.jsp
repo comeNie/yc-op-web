@@ -71,6 +71,19 @@
 							<li menuAttr="menu"><a href="${_base}/translator/toTranslatorInfoList" target="mainFrame">译员列表</a></li>
 							<li menuAttr="menu"><a href="${_base}/company/toCompanyListPager" target="mainFrame">企业用户</a></li>
 						</ul> <!--二级菜单结束--></li>
+						
+					<li><!-- 一级菜单--> 
+					<a href="#" class="dropdown-toggle"> 
+						<i class="fa fa-inbox"></i><span>人工翻译</span> <i class="fa fa-chevron-circle-right drop-icon"></i>
+					</a> <!-- 一级菜单结束--> 
+						<!--二级菜单-->
+						<ul class="submenu">
+							<li menuAttr="menu"><a href="${_base}/syspurpose/toSysPurposeList" target="mainFrame">用途列表</a></li>
+							<li menuAttr="menu"><a href="${_base}/activity/toActivityList" target="mainFrame">领域列表</a></li>
+							<li menuAttr="menu"><a href="${_base}/coupon/toCouponTemplateList" target="mainFrame">语言对管理</a></li>
+							<li menuAttr="menu"><a href="${_base}/activity/toActivityList" target="mainFrame">题库列表</a></li>
+						</ul>
+						<!--二级菜单结束--></li>
 				</ul>
 			</div>
 		</div>

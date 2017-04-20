@@ -70,7 +70,7 @@
 										    <p class="word">使用限制:</p>
 										    <p>
 														<select class="select select-medium" id="useLimits" name="useLimits">
-															<option value="" selected="selected">不限</option>
+															<option value="" selected="selected" value="0">不限</option>
 															<!-- 笔译-文本 -->
 															<option value="1">笔译-文本</option>
 															<!-- 笔译附件 -->
