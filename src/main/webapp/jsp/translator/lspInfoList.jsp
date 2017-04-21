@@ -21,9 +21,9 @@
 								<div class="main-box-body clearfix">
 									<div class="bill-list-table">
 										<ul>
-											<li ><a href="#" id="domestic" class="current" >待审核</a></li>
+											<li ><a href="#" id="domestic" >待审核</a></li>
 											<li ><a href="#"  id="foreign" >译员列表</a></li>
-											<li ><a href="#"  id="foreign1">LSP团队</a></li>
+											<li ><a href="#"  id="foreign1" class="current" >LSP团队</a></li>
 										</ul>
 									</div>
 								</div>
@@ -115,16 +115,14 @@
                                             <tr>
 												<th>编号</th>
 												<th>申请来源</th>
-												<th>昵称</th>
-												<th>手机</th>
-												<th>邮箱</th>
-												<th>姓名</th>
-												<th>性别</th>
-												<th>母语</th>
-												<th>翻译年限</th>
-												<th>学历</th>
-												<th>领域</th>
-												<th>用途</th>
+												<th>团队昵称</th>
+												<th>创建人昵称</th>
+												<th>船舰人角色</th>
+												<th>联系人</th>
+												<th>联系电话</th>
+												<th>成员数量</th>
+												<th>结算周期</th>
+												<th>申请时间</th>
 												<th>操作</th>
 											</tr>
                                         </thead>
@@ -185,20 +183,17 @@
 		<td>{{:motherTongue}}</td>
 		<td>{{:workingLife}}</td>
 		<td>学历{{:usrLanguages}}</td>
-		<td>{{:usrField}}</td>
-		<td>{{:usrPurpose}}</td>
 	<td>
         <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyDetail('{{:companyId}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">查看</a>  
-        <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyAudit('{{:companyId}}','{{:companyName}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">通过</a>
-                           锁定
+        <a href="javaScript:void(0);" class="adopt" onclick="pager._toCompanyAudit('{{:companyId}}','{{:companyName}}','{{:adminUserId}}','{{:usersource}}','{{:createTime}}')">修改</a>
     </td>
     </tr>
 </script> 
   <script type="text/javascript">
 	var pager;
 	(function () {
-		seajs.use('app/jsp/translator/checkTranslatorInfoList', function (TranslatorInfoListPager) {
-			pager = new TranslatorInfoListPager({element: document.body});
+		seajs.use('app/jsp/translator/lspList', function (LspListPager) {
+			pager = new LspListPager({element: document.body});
 			pager.render();
 		});
 	})();

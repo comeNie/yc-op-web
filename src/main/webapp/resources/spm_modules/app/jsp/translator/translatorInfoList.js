@@ -35,6 +35,7 @@ define('app/jsp/translator/translatorInfoList', function (require, exports, modu
 			"click #showQuery":"_showQueryInfo",
 			"click #domestic":"_searchBillList",
 			"click #foreign":"_searchBillList",
+			"click #foreign1":"_searchBillList",
 			//查询
             "click #search":"_searchBillList",
             "click #update":"_updatePayState",
@@ -110,15 +111,21 @@ define('app/jsp/translator/translatorInfoList', function (require, exports, modu
 			var state="";
 			var domestic = $('#domestic').attr('class');
 			var foreign = $('#foreign').attr('class');
+			var foreign1 = $('#foreign1').attr('class');
 			//待审核
 			if(domestic=="current" && domestic!=""){
 				state = 0;
 			}else if(foreign=="current" && foreign!=""){
 				state=  1;//企业列表
+			}else if(foreign1=="current" && foreign1!=""){
+				state=  2;//企业列表
 			}
 			debugger;
 			if (state=="0"){
 				window.location.href=_base+'/translator/toCheckTranslatorInfoList';
+				return;
+			}else if (state=="2"){
+				window.location.href=_base+'/translator/toLspList';
 				return;
 			}
 			var url = _base+"/translator/getTranslatorPageData";

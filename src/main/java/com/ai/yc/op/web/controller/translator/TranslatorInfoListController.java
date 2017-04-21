@@ -49,6 +49,16 @@ public class TranslatorInfoListController {
 	public ModelAndView tocheckTranslatorInfoList(HttpServletRequest request){
 		return new ModelAndView("jsp/translator/checkTranslatorInfoList");
 	}
+
+	/**
+	 * lsp列表
+	 * @param request
+	 * @return
+     */
+	@RequestMapping("/toLspList")
+	public ModelAndView toLspList(HttpServletRequest request){
+		return new ModelAndView("jsp/translator/lspInfoList");
+	}
 	/**
 	 * 译员列表
 	 * @param request

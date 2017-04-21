@@ -1,4 +1,4 @@
-define('app/jsp/translator/checkTranslatorInfoList', function (require, exports, module) {
+define('app/jsp/translator/lspList', function (require, exports, module) {
     'use strict';
     var $=require('jquery'),
     Widget = require('arale-widget/1.2.0/widget'),
@@ -18,7 +18,7 @@ define('app/jsp/translator/checkTranslatorInfoList', function (require, exports,
     //实例化AJAX控制处理对象
     var ajaxController = new AjaxController();
     //定义页面组件类
-    var TranslatorInfoListPager = Widget.extend({
+    var LspListPager = Widget.extend({
     	
     	Implements:SendMessageUtil,
     	//属性，使用时由类的构造函数传入
@@ -46,7 +46,7 @@ define('app/jsp/translator/checkTranslatorInfoList', function (require, exports,
         },
     	//重写父类
     	setup: function () {
-    		TranslatorInfoListPager.superclass.setup.call(this);
+			LspListPager.superclass.setup.call(this);
     		// 初始化执行搜索
     		this._searchBillList();
     		/*var formValidator=this._initValidate();
@@ -118,14 +118,14 @@ define('app/jsp/translator/checkTranslatorInfoList', function (require, exports,
 			}else if(foreign=="current" && foreign!=""){
 				state=  1;//企业列表
 			}else if(foreign1=="current" && foreign1!=""){
-				state=  2;//企业列表
+				state=  2;//lsp列表
 			}
 			debugger;
-			if (state=="1"){
-				window.location.href=_base+'/translator/toTranslatorInfoList';
+			if (state=="0"){
+				window.location.href=_base+'/translator/toCheckTranslatorInfoList';
 				return;
-			}else if (state=="2"){
-				window.location.href=_base+'/translator/toLspList';
+			}else if (state=="1"){
+				window.location.href=_base+'/translator/toTranslatorInfoList';
 				return;
 			}
 			debugger;
@@ -138,7 +138,7 @@ define('app/jsp/translator/checkTranslatorInfoList', function (require, exports,
 				messageId:"showMessage",
 				renderId:"translatorListData",
 				data : queryData,
-				pageSize: TranslatorInfoListPager.DEFAULT_PAGE_SIZE,
+				pageSize: LspListPager.DEFAULT_PAGE_SIZE,
 				visiblePages:5,
 				message: "正在为您查询数据..",
 				render: function (data) {
@@ -163,12 +163,10 @@ define('app/jsp/translator/checkTranslatorInfoList', function (require, exports,
 			var userSource = $("#userSource").val()
 			var domestic = $('#domestic').attr('class');
 			var foreign = $('#foreign').attr('class');
-			var foreign1 = $('#foreign1').attr('class');
-
 			//待审核
-			if(domestic=="current" && domestic!=""){
+			if(domestic="current" && domestic!=""){
 				state = 0;
-			}else if(foreign=="current" && foreign!=""){
+			}else if(foreign="current" && foreign!=""){
 				state=  1;//企业列表
 			}
     		return {
@@ -188,6 +186,6 @@ define('app/jsp/translator/checkTranslatorInfoList', function (require, exports,
     	}
     });
     
-    module.exports = TranslatorInfoListPager
+    module.exports = LspListPager
 });
 
