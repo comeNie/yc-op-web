@@ -1,4 +1,4 @@
-define('app/jsp/sysdomain/addSysDomain', function (require, exports, module) {
+define('app/jsp/sysduad/addSysDuad', function (require, exports, module) {
     'use strict';
     var $=require('jquery'),
     Widget = require('arale-widget/1.2.0/widget'),
@@ -47,7 +47,7 @@ define('app/jsp/sysdomain/addSysDomain', function (require, exports, module) {
 				return false;
 			}
 			var param = $("#dataForm").serializeArray();
-			var url = _base + "/sysdomain/insertSysDomain";
+			var url = _base + "/sysduad/insertSysDuad";
 			ajaxController.ajax({
 				type: "post",
 				dataType:"json",
@@ -71,7 +71,7 @@ define('app/jsp/sysdomain/addSysDomain', function (require, exports, module) {
 	    	   return formValidator ;
 	    	},
 	    	_closeDialog:function(){
-	    		window.location.href = _base+"/sysdomain/toSysDomainList";
+	    		window.location.href = _base+"/sysduad/toSysDuadList";
 	    	}
 			
     });

@@ -5,7 +5,15 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>添加用途</title>
+<style type="text/css">
+.table-c table {
+	border-right: 1px solid;border-bottom: 1px solid;
+}
+.table-c table td{
+	border-left: 1px solid;border-top: 1px solid;
+}
+</style>
+<title>添加语言对</title>
 <%@include file="/inc/inc.jsp" %>
 </head>
 <body>
@@ -23,7 +31,7 @@
 								<form id="dataForm">
 									<ul>
 										<li>
-										    <p class="word">地区语言:</p>
+										    <p class="word">地区语言</p>
 											<p>
 												<select class="select select-medium" id="language" name="language">
 															<option value="1">中文</option>
@@ -33,7 +41,7 @@
 									</ul>
 									<ul>
 										<li>
-										    <p class="word">站点*:</p>
+										    <p class="word">站点*</p>
 										    <p>		&nbsp;&nbsp;
 													<input type="radio" class="site" name="site" value="1"/>译云-中文站
 													<input type="radio" class="site" name="site" value="2"/>译云-英文站
@@ -48,22 +56,51 @@
 									</ul>
 									<ul>
 										<li>
-										    <p class="word">用途名称*:</p>
-											<p><input type="text" id="domainCn" name="domainCn" onblur="domainCn()" class="int-text int-small" ></p>
+										    <p class="word">源语言*</p>
+											<p><input type="text" id="sourceCn" name="sourceCn" class="int-text int-small" ></p>
 										</li>
 									 </ul>
-									<ul>
+									 <ul>
 										<li>
-										    <p class="word">描述:</p>
-										    <p>
-												<textarea  rows="4" cols="30" name="remarks" style="border: black 1px solid"></textarea>
-											</p>
+										    <p class="word">目标语言*:</p>
+											<p><input type="text" id="targetCn" name="targetCn" class="int-text int-small" ></p>
 										</li>
-									</ul>
+									 </ul>
+									 <ul>
+										<li>
+										    <p class="word">价格*(￥/$/字词)</p>
+										    <div class="table-c" style="float: right;">
+												<table width="400px;" style="float: right;">
+													<tr>
+														<td>翻译级别</td>
+														<td>翻译价格</td>
+														<td>加急翻译价格</td>
+													</tr>
+													<tr>
+														<td>普通级</td>
+														<td><input type="text" name="ordinary" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+														<td><input type="text" name="ordinaryUrgent" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+													</tr>
+													<tr>
+														<td>专业级</td>
+														<td><input type="text" name="professional" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+														<td><input type="text" name="professionalUrgent" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+													</tr>
+													<tr>
+														<td>出版级</td>
+														<td><input type="text" name="publish" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+														<td><input type="text" name="publishUrgent" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+													</tr>
+												</table>
+											</div>
+										</li>
+									 </ul>
+									
 									<ul>
 										<li>
 										    <p class="word">排序:</p>
 											<p><input type="text" id="sort" name="sort" class="int-text int-small"></p>
+											<p>数字越大越靠前</p>
 										</li>
 									</ul>
 									<ul>
@@ -97,7 +134,7 @@
  <script type="text/javascript">
     var pager;
     (function () {
-        seajs.use('app/jsp/sysdomain/addSysDomain', function (OrderListPager) {
+        seajs.use('app/jsp/sysduad/addSysDuad', function (OrderListPager) {
             pager = new OrderListPager({element: document.body});
             pager.render();
         });

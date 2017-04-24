@@ -39,7 +39,18 @@ public class SysPurposeListController {
 	 */
 	@RequestMapping("/toAddPurpose")
 	public ModelAndView toAddPurpose(HttpServletRequest request) {
-		return new ModelAndView("jsp/syspurpose/addPurpose");
+		return new ModelAndView("jsp/syspurpose/addSysPurpose");
+	}
+	/**
+	 * 跳转到修改页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/toUpdatePurpose")
+	public ModelAndView toUpdatesPurpose(HttpServletRequest request,String purposeId) {
+		ModelAndView view = new ModelAndView("jsp/syspurpose/updatePurpose");
+		view.addObject("purposeId", purposeId);
+		return view;
 	}
 	
 	/**
@@ -93,13 +104,28 @@ public class SysPurposeListController {
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加用途成功", true);
     }
     /**
+     * 修改用途
+     */
+    @RequestMapping("/updateSysPurpose")
+    @ResponseBody
+    public ResponseData<Boolean> updateSysPurpose(SaveSysPurpose req){
+    	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+    	req.setCreateOperator(loginUser.getLoginName());*/
+    	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
+    	BaseResponse updateSysPurpose = querySysPurposeSV.updateSysPurpose(req);
+    	if(updateSysPurpose.getResponseHeader().getIsSuccess()==false){
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "修改用途成功", true);
+    }
+    /**
      * 删除用途
      */
     @RequestMapping("/deleteSysPurpose")
     @ResponseBody
     public ResponseData<Boolean> deleteSysPurpose(String purposeId){
     	DeleteSysPurpose deleteSysPurpose = new DeleteSysPurpose();
-    	deleteSysPurpose.setPurposeId(purposeId);;
+    	deleteSysPurpose.setPurposeId(purposeId);
     	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
     	Integer deleteSysPurposeResponse = querySysPurposeSV.deleteSysPurpose(deleteSysPurpose);
     	if(deleteSysPurposeResponse==null){

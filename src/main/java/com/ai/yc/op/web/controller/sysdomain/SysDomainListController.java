@@ -24,9 +24,9 @@ import com.ai.yc.common.api.sysdomain.param.SaveSysDomain;
 
 @Controller
 @RequestMapping("/sysdomain")
-public class SysDmainListController {
+public class SysDomainListController {
 	
-	private static final Logger logger = Logger.getLogger(SysDmainListController.class);
+	private static final Logger logger = Logger.getLogger(SysDomainListController.class);
 	
 	@RequestMapping("/toSysDomainList")
 	public ModelAndView toSysDomainList(HttpServletRequest request) {
@@ -78,7 +78,7 @@ public class SysDmainListController {
     
     
     /**
-     * 添加用途
+     * 添加领域
      */
     @RequestMapping("/insertSysDomain")
     @ResponseBody
@@ -94,13 +94,28 @@ public class SysDmainListController {
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加领域成功", true);
     }
     /**
+     * 修改领域
+     */
+    @RequestMapping("/updateSysDomain")
+    @ResponseBody
+    public ResponseData<Boolean> updateSysDomain(SaveSysDomain req){
+    	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+    	req.setCreateOperator(loginUser.getLoginName());*/
+    	IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
+    	BaseResponse updateSysDomain = querySysDomainSV.updateSysDomain(req);
+    	if(updateSysDomain.getResponseHeader().getIsSuccess()==false){
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加领域成功", true);
+    }
+    /**
      * 删除领域
      */
     @RequestMapping("/deleteSysDomain")
     @ResponseBody
     public ResponseData<Boolean> deleteSysDomain(String domainId){
     	DeleteSysDomain deleteSysDomain = new DeleteSysDomain();
-    	deleteSysDomain.setDomainId(domainId);;
+    	deleteSysDomain.setDomainId(domainId);
     	IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
     	Integer deleteSysDomainResponse = querySysDomainSV.deleteSysDomain(deleteSysDomain);
     	if(deleteSysDomainResponse==null){

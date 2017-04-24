@@ -33,7 +33,10 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
     	events: {
 			//查询
             "click #search":"_searchSysDomainList",
-            "click #add":"_add"
+            "click #add":"_add",
+            "click #update":"_update",
+            "click #add-close":"_closeDialog",
+            "click #colseImage":"_closeDialog"
         },
     	//重写父类
     	setup: function () {
@@ -109,7 +112,51 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
 					 window.location.reload();
 				}
 			});
-		}
+		},
+		_show:function(domainId,language,site,domainCn,remarks,sort,state){
+			var _this= this;
+    		$("#language").val("");
+    		$("#domainId").val("");
+    		$("#updateDomainCn").val("");
+    		$("#updateRemarks").val("");
+    		$("#updateSort").val("");
+    		$(".site").val("");
+    		$(".state").val("");
+    		//赋值支付方式
+    		//$("#payStyle").val(payStylePage);
+			//弹出框展示
+			$('#eject-mask').fadeIn(100);
+			$('#add-samll').slideDown(200);
+			
+			$("#language").val(language);
+    		$("#updateDomainCn").val(domainCn);
+    		$("#updateRemarks").val(remarks);
+    		$("#updateSort").val(sort);
+    		$("#domainId").val(domainId);
+    		$(".site").val(site);
+    		$(".state").val(state);
+		},
+		_update:function(){
+			var _this = this;
+			var param = $("#dataForm").serializeArray();
+			var url = _base + "/sysdomain/updateSysDomain";
+			ajaxController.ajax({
+				type: "post",
+				dataType:"json",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: url,
+				data: param,
+				success: function (rs) {
+					window.location.reload();
+				}
+			});
+		},
+		_closeDialog:function(){
+    		$("#errorMessage").html("");
+    		$('#eject-mask').fadeOut(100);
+    		$('#add-samll').slideUp(150);
+    	}
     });
     
     module.exports = OrderListPager

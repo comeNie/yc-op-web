@@ -125,6 +125,92 @@
 									</nav>
 								  </div>
 								<!--分页结束-->
+								<form id="dataForm" method="post">
+                            	<div class="eject-big">
+									<div class="eject-medium" id="add-samll">
+										<div class="eject-medium-title">
+											<p>修改</p>
+											<p class="img" id="colseImage"><i class="fa fa-times" ></i></p>
+										</div>
+										<div class="form-label mt-10">
+							           		<ul>
+												<li>
+													<p class="word">地区语言:</p><input id="purposeId" name="purposeId" type="hidden"/>
+													<p>
+														<select class="select select-medium" id="language" name="language">
+															<option value="1">中文</option>
+															<option value="2">英语</option>
+														</select>
+													</p>
+													<p id="errorMessage"></p>
+												</li>
+											</ul>
+											<ul>
+								                <li>
+								                    <p class="word">站点*:</p>
+								                    <p>
+														&nbsp;&nbsp;
+														<input type="radio" name="site" value="1"/>译云-中文站
+														<input type="radio" name="site" value="2"/>译云-英文站
+														<input type="radio" name="site" value="3"/>百度
+														<input type="radio" name="site" value="4"/>金山<br/>&nbsp;&nbsp;
+														<input type="radio" name="site" value="5"/>wap-中文
+														<input type="radio" name="site" value="6"/>wap-英文
+														<input type="radio" name="site" value="7"/>找翻译
+														<input type="radio" name="site" value="8"/>微信助手
+													</p>
+								                </li>
+								              </ul>
+								              <ul>
+								                <li>
+								                    <p class="word">用途名称*:</p>
+													<p>
+														<input type="text" class="int-text int-small" id="updatePurposeCn" name="purposeCn">
+														<input type="hidden"  id="realPurposeCn">
+													</p>								               
+												</li>
+											  </ul>
+											  <ul>
+												<li>
+								                    <p class="word">描述:</p>
+													<p>
+														<input type="text" class="int-text int-small" id="updateRemarks" name="remarks">
+														<input type="hidden"  id="realRemarks">
+													</p>								               
+												</li>
+												</ul>
+												<ul>
+												<li>
+								                    <p class="word">排序:</p>
+													<p>
+														<input type="text" class="int-text int-small" id="updateSort" name="sort">
+														<input type="hidden"  id="realSort">
+													</p>								               
+												</li>
+												</ul>
+											<ul>
+												<li>
+													<p class="word">状态:</p>
+													<p>
+														<input name="state" type="radio" value="0" />显示
+														<input name="state" type="radio" value="1" />隐藏
+													</p>
+													<p id="errorMessage"></p>
+												</li>
+							            	</ul>
+									    </div>	
+										<!--按钮-->
+										<div class="row mt-15"><!--删格化-->
+								               <p class="center pr-30 mt-30">
+								                   <input type="button" id="update" class="biu-btn  btn-primary  btn-auto  ml-5" value="提  交">
+								                   <input id="add-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5 edit-close" value="取  消">
+								                </p>
+								        </div>
+									</div>	
+									<div class="mask" id="eject-mask"></div>	
+								</div>
+                            </form>
+                            <!-- 弹出框 end-->
                             </div>
                         </div>
                     </div>
@@ -176,7 +262,7 @@
 	  </td>     
 	  <td>
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:purposeId}}')">删除</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._update('{{:purposeId}}')">修改</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:purposeId}}','{{:language}}','{{:site}}','{{:purposeCn}}','{{:remarks)}}','{{:sort}}','{{:state)}}')">修改</a>
 	  </td>
     </tr>
 </script>

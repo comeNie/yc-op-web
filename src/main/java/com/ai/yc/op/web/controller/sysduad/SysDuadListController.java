@@ -89,5 +89,20 @@ public class SysDuadListController {
 		}
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加语言对成功", true);
     }
+    /**
+     * 修改语言对
+     */
+    @RequestMapping("/updateSysDuad")
+    @ResponseBody
+    public ResponseData<Boolean> updateSysDuad(SaveSysDuad req){
+    	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+    	req.setCreateOperator(loginUser.getLoginName());*/
+    	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
+    	BaseResponse updateSysDuad = querySysDuadSV.updateSysDuad(req);
+    	if(updateSysDuad.getResponseHeader().getIsSuccess()==false){
+			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
+		}
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加语言对成功", true);
+    }
 	
 }

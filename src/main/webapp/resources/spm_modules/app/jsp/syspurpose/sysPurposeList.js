@@ -33,7 +33,10 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
     	events: {
 			//查询
             "click #search":"_searchSysPurposeList",
-            "click #add":"_add"
+            "click #add":"_add",
+            "click #update":"_update",
+            "click #add-close":"_closeDialog",
+            "click #colseImage":"_closeDialog"
         },
     	//重写父类
     	setup: function () {
@@ -49,7 +52,22 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
     	_add:function(){
 			window.location.href = _base+"/syspurpose/toAddPurpose";
 		},
-
+		_update:function(){
+			var _this = this;
+			var param = $("#dataForm").serializeArray();
+			var url = _base + "/syspurpose/updateSysPurpose";
+			ajaxController.ajax({
+				type: "post",
+				dataType:"json",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: url,
+				data: param,
+				success: function (rs) {
+					window.location.reload();
+				}
+			});
+		},
 		_searchSysPurposeList:function(){
 			var _this=this;
 			var url = _base+"/syspurpose/getSysPurposePageData";
@@ -109,7 +127,35 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
 					 window.location.reload();
 				}
 			});
-		}
+		},
+		_show:function(purposeId,language,site,purposeCn,remarks,sort,state){
+			var _this= this;
+    		$("#language").val("");
+    		$("#purposeId").val("");
+    		$("#updatePurposeCn").val("");
+    		$("#updateRemarks").val("");
+    		$("#updateSort").val("");
+    		$(".site").val("");
+    		$(".state").val("");
+    		//赋值支付方式
+    		//$("#payStyle").val(payStylePage);
+			//弹出框展示
+			$('#eject-mask').fadeIn(100);
+			$('#add-samll').slideDown(200);
+			
+			$("#language").val(language);
+    		$("#updatePurposeCn").val(purposeCn);
+    		$("#updateRemarks").val(remarks);
+    		$("#updateSort").val(sort);
+    		$("#purposeId").val(purposeId);
+    		$(".site").val(site);
+    		$(".state").val(state);
+		},
+		_closeDialog:function(){
+    		$("#errorMessage").html("");
+    		$('#eject-mask').fadeOut(100);
+    		$('#add-samll').slideUp(150);
+    	}
     });
     
     module.exports = OrderListPager

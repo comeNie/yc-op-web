@@ -17,25 +17,28 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     require("twbs-pagination/jquery.twbsPagination");
     require('bootstrap/js/modal');
     var SendMessageUtil = require("app/util/sendMessage");
-    //实例化AJAX控制处理对象
+    // 实例化AJAX控制处理对象
     var ajaxController = new AjaxController();
-    //定义页面组件类
+    // 定义页面组件类
     var OrderListPager = Widget.extend({
     	
     	Implements:SendMessageUtil,
-    	//属性，使用时由类的构造函数传入
+    	// 属性，使用时由类的构造函数传入
     	attrs: {
     	},
     	Statics: {
     		DEFAULT_PAGE_SIZE: 20
     	},
-    	//事件代理
+    	// 事件代理
     	events: {
-			//查询
+			// 查询
             "click #search":"_searchSysDuadList",
-            "click #add":"_add"
+            "click #add":"_add",
+            "click #update":"_update",
+            "click #add-close":"_closeDialog",
+            "click #colseImage":"_closeDialog"
         },
-    	//重写父类
+    	// 重写父类
     	setup: function () {
     		OrderListPager.superclass.setup.call(this);
     		// 初始化执行搜索
@@ -90,6 +93,59 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     			}
     		});
     		return formValidator;
+    	},
+    	_show:function(duadId,language,site,sourceCn,targetCn,ordinary,ordinaryUrgent,professional,professionalUrgent,publish,publishUrgent,sort,state){
+			var _this= this;
+    		$("#language").val("");
+    		$("#duadId").val("");
+    		$("#sourceCn").val("");
+    		$("#targetCn").val("");
+    		$("#ordinary").val("");
+    		$("#ordinaryUrgent").val("");
+    		$("#professional").val("");
+    		$("#professionalUrgent").val("");
+    		$("#publish").val("");
+    		$("#publishUrgent").val("");
+    		$("#sort").val("");
+    		$(".site").val("");
+    		$(".state").val("");
+			// 弹出框展示
+			$('#eject-mask').fadeIn(100);
+			$('#add-samll').slideDown(200);
+			$("#language").val(language);
+    		$("#duadId").val(duadId);
+    		$("#sourceCn").val(sourceCn);
+    		$("#targetCn").val(targetCn);
+    		$("#ordinary").val(ordinary);
+    		$("#ordinaryUrgent").val(ordinaryUrgent);
+    		$("#professional").val(professional);
+    		$("#professionalUrgent").val(professionalUrgent);
+    		$("#publish").val(publish);
+    		$("#publishUrgent").val(publishUrgent);
+    		$("#sort").val(sort);
+    		$(".site").val(site);
+    		$(".state").val(state);
+		},
+		_update:function(){
+			var _this = this;
+			var param = $("#dataForm").serializeArray();
+			var url = _base + "/sysduad/updateSysDuad";
+			ajaxController.ajax({
+				type: "post",
+				dataType:"json",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: url,
+				data: param,
+				success: function (rs) {
+					window.location.reload();
+				}
+			});
+		},
+		_closeDialog:function(){
+    		$("#errorMessage").html("");
+    		$('#eject-mask').fadeOut(100);
+    		$('#add-samll').slideUp(150);
     	}
     });
     
