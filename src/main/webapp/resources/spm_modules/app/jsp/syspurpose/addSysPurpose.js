@@ -32,7 +32,8 @@ define('app/jsp/syspurpose/addSysPurpose', function (require, exports, module) {
     	//事件代理
     	events: {
     		"click #save":"_save",
-    		"click #add-close":"_closeDialog"
+    		"click #add-close":"_closeDialog",
+    		"blur #purposeCn":"_chePurposeCn"
         },
     	//重写父类
     	setup: function () {
@@ -60,12 +61,63 @@ define('app/jsp/syspurpose/addSysPurpose', function (require, exports, module) {
 				}
 			});
 		},
+		
+		_chePurposeCn:function(){
+			var _this = this;
+			var purposeCn = $("#purposeCn").val();
+			var language = $("#language").val();
+			if(purposeCn != "" && purposeCn != null && language != "" && language != null){
+				$.ajax({
+					type: "post",
+					data: {
+						purposeCn,language
+					},
+					url: _base + "/syspurpose/checkPurposeCn",
+					success: function (data) {
+						if(data >= 1){
+							$(".check").html("该语言下此名称已存在");
+							$("#save").attr("disabled", true); 
+						}else{
+							$(".check").html("");
+							$("#save").attr("disabled", false); 
+						}
+					}
+				});
+			}
+		},
+		
 		_initValidate:function(){
 	    	   var _this = this;
 	    	   var formValidator = $("#dataForm").validate({
 	    			rules: {
+	    				"site":{
+	    					required:true
+	    				},
+	    				"purposeCn":{
+	    					required:true,
+	    					maxlength:10
+	    				},
+	    				"remarks":{
+	    					maxlength:50
+	    				},
+	    				"sort":{
+	    					digits:true
+	    				}
 	    			},
 	    			messages: {
+	    				"site":{
+	    					required:"请选择站点"
+	    				},
+	    				"purposeCn":{
+	    					required:"请输入用途名称",
+	    					maxlength:"用途名称10个字以内"
+	    				},
+	    				"remarks":{
+	    					maxlength:"描述50个字以内"
+	    				},
+	    				"sort":{
+	    					number:"输入的排序格式不正确"
+	    				}
 	    			}
 	    		});
 	    	   return formValidator ;

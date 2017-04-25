@@ -50,13 +50,14 @@
 										<li>
 										    <p class="word">用途名称*:</p>
 											<p><input type="text" id="purposeCn" name="purposeCn" onblur="purposeCn()" class="int-text int-small" ></p>
+											<span class="check"></span>
 										</li>
 									 </ul>
 									<ul>
 										<li>
 										    <p class="word">描述:</p>
 										    <p>
-												<textarea  rows="4" cols="30" name="remarks" style="border: black 1px solid"></textarea>
+												<textarea  rows="4" cols="30" id="remarks" name="remarks" style="border: black 1px solid"></textarea>
 											</p>
 										</li>
 									</ul>

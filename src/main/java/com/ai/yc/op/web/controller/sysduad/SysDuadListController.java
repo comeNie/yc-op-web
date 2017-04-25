@@ -104,5 +104,7 @@ public class SysDuadListController {
 		}
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加语言对成功", true);
     }
+    
+
 	
 }

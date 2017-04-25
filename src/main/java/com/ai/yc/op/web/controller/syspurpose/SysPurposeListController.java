@@ -16,6 +16,7 @@ import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.common.api.syspurpose.interfaces.IQuerySysPurposeSV;
+import com.ai.yc.common.api.syspurpose.param.CheckPurposeCn;
 import com.ai.yc.common.api.syspurpose.param.DeleteSysPurpose;
 import com.ai.yc.common.api.syspurpose.param.PurposePageQueryRequest;
 import com.ai.yc.common.api.syspurpose.param.PurposePageQueryResponse;
@@ -95,7 +96,7 @@ public class SysPurposeListController {
     public ResponseData<Boolean> insertSysPurpose(SaveSysPurpose req){
     	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());*/
-    	req.setPurposeId("6");
+    	req.setPurposeId("7");
     	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
     	BaseResponse saveSysPurpose = querySysPurposeSV.saveSysPurpose(req);
     	if(saveSysPurpose.getResponseHeader().getIsSuccess()==false){
@@ -132,6 +133,16 @@ public class SysPurposeListController {
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "删除用途成功", true);
+    }
+    /**
+     * 同语言下的已存在相同名称的用途不可再次新建
+     */
+    @RequestMapping("/checkPurposeCn")
+    @ResponseBody
+    public Integer checkPurposeCn(CheckPurposeCn param)throws Exception{
+    	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
+    	Integer checkPurposeCn = querySysPurposeSV.checkPurposeCn(param);
+		return checkPurposeCn;
     }
 
 	

@@ -150,14 +150,14 @@
 								                    <p class="word">站点*:</p>
 								                    <p>
 														&nbsp;&nbsp;
-														<input type="radio" name="site" value="1"/>译云-中文站
-														<input type="radio" name="site" value="2"/>译云-英文站
-														<input type="radio" name="site" value="3"/>百度
-														<input type="radio" name="site" value="4"/>金山<br/>&nbsp;&nbsp;
-														<input type="radio" name="site" value="5"/>wap-中文
-														<input type="radio" name="site" value="6"/>wap-英文
-														<input type="radio" name="site" value="7"/>找翻译
-														<input type="radio" name="site" value="8"/>微信助手
+														<input type="radio" class="site" name="site" value="1"/>译云-中文站
+														<input type="radio" class="site" name="site" value="2"/>译云-英文站
+														<input type="radio" class="site" name="site" value="3"/>百度
+														<input type="radio" class="site" name="site" value="4"/>金山<br/>&nbsp;&nbsp;
+														<input type="radio" class="site" name="site" value="5"/>wap-中文
+														<input type="radio" class="site" name="site" value="6"/>wap-英文
+														<input type="radio" class="site" name="site" value="7"/>找翻译
+														<input type="radio" class="site" name="site" value="8"/>微信助手
 													</p>
 								                </li>
 								              </ul>
@@ -192,8 +192,8 @@
 												<li>
 													<p class="word">状态:</p>
 													<p>
-														<input name="state" type="radio" value="0" />显示
-														<input name="state" type="radio" value="1" />隐藏
+														<input name="state" class="state" type="radio" value="0" />显示
+														<input name="state" class="state" type="radio" value="1" />隐藏
 													</p>
 													<p id="errorMessage"></p>
 												</li>
