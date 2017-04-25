@@ -57,13 +57,13 @@
 									<ul>
 										<li>
 										    <p class="word">源语言*</p>
-											<p><input type="text" id="sourceCn" name="sourceCn" class="int-text int-small" ></p>
+											<p><input type="text" id="sourceCn" name="sourceCn" onblur="sourceCn()" class="int-text int-small" ></p><span class="check"></span>
 										</li>
 									 </ul>
 									 <ul>
 										<li>
 										    <p class="word">目标语言*:</p>
-											<p><input type="text" id="targetCn" name="targetCn" class="int-text int-small" ></p>
+											<p><input type="text" id="targetCn" name="targetCn" onblur="sourceCn()" class="int-text int-small" ></p><span class="check"></span>
 										</li>
 									 </ul>
 									 <ul>

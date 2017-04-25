@@ -138,6 +138,12 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
 		},
 		_update:function(){
 			var _this = this;
+			var formValidator=_this._initValidate();
+			formValidator.form();
+			if(!$("#dataForm").valid()){
+				return false;
+			}
+			var _this = this;
 			var param = $("#dataForm").serializeArray();
 			var url = _base + "/sysdomain/updateSysDomain";
 			ajaxController.ajax({
@@ -152,6 +158,42 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
 				}
 			});
 		},
+		_initValidate:function(){
+	    	   var _this = this;
+	    	   var formValidator = $("#dataForm").validate({
+	    			rules: {
+	    				"site":{
+	    					required:true
+	    				},
+	    				"domainCn":{
+	    					required:true,
+	    					maxlength:10
+	    				},
+	    				"remarks":{
+	    					maxlength:50
+	    				},
+	    				"sort":{
+	    					digits:true
+	    				}
+	    			},
+	    			messages: {
+	    				"site":{
+	    					required:"请选择站点"
+	    				},
+	    				"domainCn":{
+	    					required:"请输入用途名称",
+	    					maxlength:"用途名称10个字以内"
+	    				},
+	    				"remarks":{
+	    					maxlength:"描述50个字以内"
+	    				},
+	    				"sort":{
+	    					number:"输入的排序格式不正确"
+	    				}
+	    			}
+	    		});
+	    	   return formValidator ;
+	    	},
 		_closeDialog:function(){
     		$("#errorMessage").html("");
     		$('#eject-mask').fadeOut(100);

@@ -16,11 +16,14 @@ import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV;
+import com.ai.yc.common.api.sysdomain.param.CheckDomainCn;
 import com.ai.yc.common.api.sysdomain.param.DeleteSysDomain;
 import com.ai.yc.common.api.sysdomain.param.DomainPageQueryResponse;
 import com.ai.yc.common.api.sysdomain.param.DomainPageVo;
 import com.ai.yc.common.api.sysdomain.param.DomainQueryRequest;
 import com.ai.yc.common.api.sysdomain.param.SaveSysDomain;
+import com.ai.yc.common.api.syspurpose.interfaces.IQuerySysPurposeSV;
+import com.ai.yc.common.api.syspurpose.param.CheckPurposeCn;
 
 @Controller
 @RequestMapping("/sysdomain")
@@ -124,5 +127,14 @@ public class SysDomainListController {
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "删除领域成功", true);
     }
 
-	
+    /**
+     * 同语言下的已存在相同名称的领域不可再次新建
+     */
+    @RequestMapping("/checkDomainCn")
+    @ResponseBody
+    public Integer checkDomainCn(CheckDomainCn param)throws Exception{
+    	IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
+    	Integer checkDomainCn = querySysDomainSV.checkDomainCn(param);
+		return checkDomainCn;
+    }
 }

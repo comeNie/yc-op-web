@@ -36,7 +36,7 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
             "click #add":"_add",
             "click #update":"_update",
             "click #add-close":"_closeDialog",
-            "click #colseImage":"_closeDialog"
+            "click #colseImage":"_closeDialog",
         },
     	// 重写父类
     	setup: function () {
@@ -78,6 +78,11 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
 				},
 			});
 		},
+		
+		_languageDir:function(){
+			
+		},
+		
 		_getSearchParams:function(){
     		return {
     			"language":jQuery.trim($("#language option:selected").val()),

@@ -199,9 +199,8 @@
 													<li>
 														<p class="word">描述:</p>
 														<p>
-															<input type="text" class="int-text int-small"
-																id="updateRemarks" name="remarks"> <input
-																type="hidden" id="realRemarks">
+															<textarea rows="4" cols="30" id="updateRemarks" name="remarks" style="border: black 1px solid"></textarea>
+															 <input type="hidden" id="realRemarks">
 														</p>
 													</li>
 												</ul>

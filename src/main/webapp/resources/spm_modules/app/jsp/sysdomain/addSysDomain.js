@@ -32,7 +32,8 @@ define('app/jsp/sysdomain/addSysDomain', function (require, exports, module) {
     	//事件代理
     	events: {
     		"click #save":"_save",
-    		"click #add-close":"_closeDialog"
+    		"click #add-close":"_closeDialog",
+    		"blur #domainCn":"_cheDomainCn"
         },
     	//重写父类
     	setup: function () {
@@ -60,12 +61,63 @@ define('app/jsp/sysdomain/addSysDomain', function (require, exports, module) {
 				}
 			});
 		},
+		
+		_cheDomainCn:function(){
+			var _this = this;
+			var domainCn = $("#domainCn").val();
+			var language = $("#language").val();
+			if(domainCn != "" && domainCn != null && language != "" && language != null){
+				$.ajax({
+					type: "post",
+					data: {
+						domainCn,language
+					},
+					url: _base + "/sysdomain/checkDomainCn",
+					success: function (data) {
+						if(data >= 1){
+							$(".check").html("该语言下此名称已存在");
+							$("#save").attr("disabled", true); 
+						}else{
+							$(".check").html("");
+							$("#save").attr("disabled", false); 
+						}
+					}
+				});
+			}
+		},
+		
 		_initValidate:function(){
 	    	   var _this = this;
 	    	   var formValidator = $("#dataForm").validate({
 	    			rules: {
+	    				"site":{
+	    					required:true
+	    				},
+	    				"domainCn":{
+	    					required:true,
+	    					maxlength:10
+	    				},
+	    				"remarks":{
+	    					maxlength:50
+	    				},
+	    				"sort":{
+	    					digits:true
+	    				}
 	    			},
 	    			messages: {
+	    				"site":{
+	    					required:"请选择站点"
+	    				},
+	    				"domainCn":{
+	    					required:"请输入领域名称",
+	    					maxlength:"用途名称10个字以内"
+	    				},
+	    				"remarks":{
+	    					maxlength:"描述50个字以内"
+	    				},
+	    				"sort":{
+	    					number:"输入的排序格式不正确"
+	    				}
 	    			}
 	    		});
 	    	   return formValidator ;

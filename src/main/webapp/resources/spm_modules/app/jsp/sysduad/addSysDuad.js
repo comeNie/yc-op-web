@@ -32,7 +32,9 @@ define('app/jsp/sysduad/addSysDuad', function (require, exports, module) {
     	//事件代理
     	events: {
     		"click #save":"_save",
-    		"click #add-close":"_closeDialog"
+    		"click #add-close":"_closeDialog",
+    		"blur #sourceCn":"_cheDuadCn",
+    		"blur #targetCn":"_cheDuadCn"
         },
     	//重写父类
     	setup: function () {
@@ -60,12 +62,90 @@ define('app/jsp/sysduad/addSysDuad', function (require, exports, module) {
 				}
 			});
 		},
+		_cheDuadCn:function(){
+			var _this = this;
+			var sourceCn = $("#sourceCn").val();
+			var targetCn = $("#targetCn").val();
+			var language = $("#language").val();
+			if(sourceCn != "" && sourceCn != null && language != "" && language != null && targetCn != "" && targetCn != null){
+				$.ajax({
+					type: "post",
+					data: {
+						sourceCn,targetCn,language
+					},
+					url: _base + "/sysduad/checkDuadCn",
+					success: function (data) {
+						if(data >= 1){
+							$(".check").html("该语言下此语言对已存在");
+							$("#save").attr("disabled", true); 
+						}else{
+							$(".check").html("");
+							$("#save").attr("disabled", false); 
+						}
+					}
+				});
+			}
+		},
 		_initValidate:function(){
 	    	   var _this = this;
 	    	   var formValidator = $("#dataForm").validate({
 	    			rules: {
+	    				"site":{
+	    					required:true
+	    				},
+	    				"sourceCn":{
+	    					required:true
+	    				},
+	    				"targetCn":{
+	    					required:true
+	    				},
+	    				"ordinary":{
+	    					required:true
+	    				},
+	    				"ordinaryUrgent":{
+	    					required:true
+	    				},
+	    				"professional":{
+	    					required:true
+	    				},
+	    				"professionalUrgent":{
+	    					required:true
+	    				},
+	    				"publish":{
+	    					required:true
+	    				},
+	    				"publishUrgent":{
+	    					required:true
+	    				}
 	    			},
 	    			messages: {
+	    				"site":{
+	    					required:"请选择站点"
+	    				},
+	    				"sourceCn":{
+	    					required:"请输入领域名称"
+	    				},
+	    				"targetCn":{
+	    					required:"请输入领域名称"
+	    				},
+	    				"ordinary":{
+	    					required:"请输入普通级翻译价格"
+	    				},
+	    				"ordinaryUrgent":{
+	    					required:"请输入加急普通级翻译价格"
+	    				},
+	    				"professional":{
+	    					required:"请输入专业级翻译价格"
+	    				},
+	    				"professionalUrgent":{
+	    					required:"请输入加急专业级翻译价格"
+	    				},
+	    				"publish":{
+	    					required:"请输入出版级翻译价格"
+	    				},
+	    				"publishUrgent":{
+	    					required:"请输入加急出版级翻译价格"
+	    				}
 	    			}
 	    		});
 	    	   return formValidator ;

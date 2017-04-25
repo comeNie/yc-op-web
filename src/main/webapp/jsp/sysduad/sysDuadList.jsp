@@ -41,9 +41,9 @@
 												<select class="select select-medium" id="">
 													<option value="" selected="selected">全部</option>
 													<!-- 启用 -->
-													<option value=""></option>
+													<option value="">中文--英文</option>
 													<!-- 禁用 -->
-													<option value=""></option>
+													<option value="">英文--中文</option>
 												</select>
 											</p>
 										</li>

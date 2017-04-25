@@ -13,6 +13,7 @@ import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.common.api.sysduad.interfaces.IQuerySysDuadSV;
+import com.ai.yc.common.api.sysduad.param.CheckDuadCn;
 import com.ai.yc.common.api.sysduad.param.DuadPageQueryRequest;
 import com.ai.yc.common.api.sysduad.param.DuadPageQueryResponse;
 import com.ai.yc.common.api.sysduad.param.DuadPageVo;
@@ -105,6 +106,15 @@ public class SysDuadListController {
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加语言对成功", true);
     }
     
-
+    /**
+     *同语言下已存在相同的语言对不可再次新建
+     */
+    @RequestMapping("/checkDuadCn")
+    @ResponseBody
+    public Integer checkDuadCn(CheckDuadCn param)throws Exception{
+    	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
+    	Integer checkDuadCn = querySysDuadSV.checkDuadCn(param);
+		return checkDuadCn;
+    }
 	
 }
