@@ -14,6 +14,7 @@ import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.common.api.sysdomain.interfaces.IQuerySysDomainSV;
 import com.ai.yc.common.api.sysdomain.param.CheckDomainCn;
@@ -89,6 +90,8 @@ public class SysDomainListController {
     	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());*/
     	req.setDomainId("5");
+    	long time = DateUtil.getSysDate().getTime();
+    	req.setUpdatetime(time);
     	IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
     	BaseResponse saveSysDomain = querySysDomainSV.saveSysDomain(req);
     	if(saveSysDomain.getResponseHeader().getIsSuccess()==false){
@@ -104,6 +107,8 @@ public class SysDomainListController {
     public ResponseData<Boolean> updateSysDomain(SaveSysDomain req){
     	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());*/
+    	long time = DateUtil.getSysDate().getTime();
+    	req.setUpdatetime(time);
     	IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
     	BaseResponse updateSysDomain = querySysDomainSV.updateSysDomain(req);
     	if(updateSysDomain.getResponseHeader().getIsSuccess()==false){

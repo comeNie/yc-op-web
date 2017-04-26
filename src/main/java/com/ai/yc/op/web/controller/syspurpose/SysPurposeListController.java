@@ -14,6 +14,7 @@ import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.common.api.syspurpose.interfaces.IQuerySysPurposeSV;
 import com.ai.yc.common.api.syspurpose.param.CheckPurposeCn;
@@ -96,7 +97,9 @@ public class SysPurposeListController {
     public ResponseData<Boolean> insertSysPurpose(SaveSysPurpose req){
     	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());*/
-    	req.setPurposeId("7");
+    	req.setPurposeId("10");
+    	long time = DateUtil.getSysDate().getTime();
+    	req.setUpdatetime(time);
     	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
     	BaseResponse saveSysPurpose = querySysPurposeSV.saveSysPurpose(req);
     	if(saveSysPurpose.getResponseHeader().getIsSuccess()==false){
@@ -112,6 +115,8 @@ public class SysPurposeListController {
     public ResponseData<Boolean> updateSysPurpose(SaveSysPurpose req){
     	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());*/
+    	long time = DateUtil.getSysDate().getTime();
+    	req.setUpdatetime(time);
     	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
     	BaseResponse updateSysPurpose = querySysPurposeSV.updateSysPurpose(req);
     	if(updateSysPurpose.getResponseHeader().getIsSuccess()==false){

@@ -251,7 +251,7 @@
 	 
 	  <td>{{:sort}}</td>
 	  <td>
-			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}
+			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', updatetime)}}
 	  </td>
 	  <td>
 		  {{if  state == '0'}}

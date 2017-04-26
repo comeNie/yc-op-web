@@ -11,6 +11,7 @@ import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.common.api.sysduad.interfaces.IQuerySysDuadSV;
 import com.ai.yc.common.api.sysduad.param.CheckDuadCn;
@@ -82,6 +83,8 @@ public class SysDuadListController {
     public ResponseData<Boolean> insertSysDuad(SaveSysDuad req){
     	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());*/
+    	long time = DateUtil.getSysDate().getTime();
+    	req.setUpdatetime(time);
     	req.setDuadId("114");
     	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
     	BaseResponse saveSysDuad = querySysDuadSV.saveSysDuad(req);
@@ -98,6 +101,8 @@ public class SysDuadListController {
     public ResponseData<Boolean> updateSysDuad(SaveSysDuad req){
     	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());*/
+    	long time = DateUtil.getSysDate().getTime();
+    	req.setUpdatetime(time);
     	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
     	BaseResponse updateSysDuad = querySysDuadSV.updateSysDuad(req);
     	if(updateSysDuad.getResponseHeader().getIsSuccess()==false){
