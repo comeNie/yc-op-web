@@ -61,10 +61,10 @@
 												</select>
 						            		</p>
 							            </li>
-							           <!--  <li class="col-md-6">
+							            <li class="col-md-6">
 											<p class="word">创建人</p>
-											<p><input class="int-text int-medium" id="" value="" type="text"></p>
-										</li> -->
+											<p><input class="int-text int-medium" id="createOperator" value="" type="text"></p>
+										</li>
 			                    	</ul>
 		                    	</div> 
 	                    		<ul>

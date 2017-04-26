@@ -87,7 +87,8 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     		return {
     			"language":jQuery.trim($("#language option:selected").val()),
     			"site":jQuery.trim($("#site option:selected").val()),
-    			"state":jQuery.trim($("#state option:selected").val())
+    			"state":jQuery.trim($("#state option:selected").val()),
+    			"createOperator":jQuery.trim($("#createOperator").val())
     		}
     	},
     	_show:function(duadId,language,site,sourceCn,targetCn,ordinary,ordinaryUrgent,professional,professionalUrgent,publish,publishUrgent,sort,state){

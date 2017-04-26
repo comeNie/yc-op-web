@@ -23,6 +23,8 @@ import com.ai.yc.common.api.syspurpose.param.PurposePageQueryRequest;
 import com.ai.yc.common.api.syspurpose.param.PurposePageQueryResponse;
 import com.ai.yc.common.api.syspurpose.param.PurposePageVo;
 import com.ai.yc.common.api.syspurpose.param.SaveSysPurpose;
+import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
+import com.ai.yc.op.web.utils.LoginUtil;
 
 @Controller
 @RequestMapping("/syspurpose")
@@ -95,8 +97,8 @@ public class SysPurposeListController {
     @RequestMapping("/insertSysPurpose")
     @ResponseBody
     public ResponseData<Boolean> insertSysPurpose(SaveSysPurpose req){
-    	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
-    	req.setCreateOperator(loginUser.getLoginName());*/
+    	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+    	req.setCreateOperator(loginUser.getLoginName());
     	req.setPurposeId("10");
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
@@ -113,8 +115,8 @@ public class SysPurposeListController {
     @RequestMapping("/updateSysPurpose")
     @ResponseBody
     public ResponseData<Boolean> updateSysPurpose(SaveSysPurpose req){
-    	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
-    	req.setCreateOperator(loginUser.getLoginName());*/
+    	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+    	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);

@@ -1,12 +1,15 @@
 package com.ai.yc.op.web.controller.sysduad;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.PageInfo;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
@@ -19,6 +22,8 @@ import com.ai.yc.common.api.sysduad.param.DuadPageQueryRequest;
 import com.ai.yc.common.api.sysduad.param.DuadPageQueryResponse;
 import com.ai.yc.common.api.sysduad.param.DuadPageVo;
 import com.ai.yc.common.api.sysduad.param.SaveSysDuad;
+import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
+import com.ai.yc.op.web.utils.LoginUtil;
 
 @Controller
 @RequestMapping("/sysduad")
@@ -81,8 +86,8 @@ public class SysDuadListController {
     @RequestMapping("/insertSysDuad")
     @ResponseBody
     public ResponseData<Boolean> insertSysDuad(SaveSysDuad req){
-    	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
-    	req.setCreateOperator(loginUser.getLoginName());*/
+    	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+    	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	req.setDuadId("114");
@@ -99,8 +104,8 @@ public class SysDuadListController {
     @RequestMapping("/updateSysDuad")
     @ResponseBody
     public ResponseData<Boolean> updateSysDuad(SaveSysDuad req){
-    	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
-    	req.setCreateOperator(loginUser.getLoginName());*/
+    	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+    	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);

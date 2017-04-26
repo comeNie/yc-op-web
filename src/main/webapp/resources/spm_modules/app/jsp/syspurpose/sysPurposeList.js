@@ -102,7 +102,8 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
     		return {
     			"purposeCn":jQuery.trim($("#purposeCn").val()),
     			"site":jQuery.trim($("#site option:selected").val()),
-    			"state":jQuery.trim($("#state option:selected").val())
+    			"state":jQuery.trim($("#state option:selected").val()),
+    			"createOperator":jQuery.trim($("#createOperator").val())
     		}
     	},
 		_initValidate:function(){

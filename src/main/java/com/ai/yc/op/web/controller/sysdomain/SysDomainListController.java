@@ -23,8 +23,8 @@ import com.ai.yc.common.api.sysdomain.param.DomainPageQueryResponse;
 import com.ai.yc.common.api.sysdomain.param.DomainPageVo;
 import com.ai.yc.common.api.sysdomain.param.DomainQueryRequest;
 import com.ai.yc.common.api.sysdomain.param.SaveSysDomain;
-import com.ai.yc.common.api.syspurpose.interfaces.IQuerySysPurposeSV;
-import com.ai.yc.common.api.syspurpose.param.CheckPurposeCn;
+import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
+import com.ai.yc.op.web.utils.LoginUtil;
 
 @Controller
 @RequestMapping("/sysdomain")
@@ -87,8 +87,8 @@ public class SysDomainListController {
     @RequestMapping("/insertSysDomain")
     @ResponseBody
     public ResponseData<Boolean> insertSysDomain(SaveSysDomain req){
-    	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
-    	req.setCreateOperator(loginUser.getLoginName());*/
+    	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+    	req.setCreateOperator(loginUser.getLoginName());
     	req.setDomainId("5");
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
@@ -105,8 +105,8 @@ public class SysDomainListController {
     @RequestMapping("/updateSysDomain")
     @ResponseBody
     public ResponseData<Boolean> updateSysDomain(SaveSysDomain req){
-    	/*GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
-    	req.setCreateOperator(loginUser.getLoginName());*/
+    	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
+    	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);

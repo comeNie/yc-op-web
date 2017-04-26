@@ -82,7 +82,8 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
     		return {
     			"domainCn":jQuery.trim($("#domainCn").val()),
     			"site":jQuery.trim($("#site option:selected").val()),
-    			"state":jQuery.trim($("#state option:selected").val())
+    			"state":jQuery.trim($("#state option:selected").val()),
+    			"createOperator":jQuery.trim($("#createOperator").val())
     		}
     	},
 		_initValidate:function(){
