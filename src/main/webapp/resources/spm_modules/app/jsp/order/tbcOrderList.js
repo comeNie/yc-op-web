@@ -10,6 +10,9 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
     require("bootstrap-paginator/bootstrap-paginator.min");
     require("app/util/jsviews-ext");
     
+    require("jquery-validation/1.15.1/jquery.validate");
+	require("app/util/aiopt-validate-ext");
+    
     require("opt-paging/aiopt.pagination");
     require("twbs-pagination/jquery.twbsPagination.min");
     require('bootstrap/js/modal');
@@ -31,7 +34,10 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
     		 "click #showQuery":"_showQueryInfo",
     		//查询
             "click #search":"_searchOrderList",
-            "click #export":"_export"
+            "click #edit-close":"_closeDialog",
+            "click #colseImage":"_closeDialog",
+            "click #export":"_export",
+            "click #update":"_returnWork"
             
         },
     	//重写父类
@@ -42,6 +48,10 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
     		this._bindChlIdSelect();
     		this._bindOrdTypeSelect();
     		this._bindLanguageSelect();
+    		var formValidator=this._initValidate();
+			$(":input").bind("focusout",function(){
+				formValidator.element(this);
+			});
     	},
     	_showQueryInfo: function(){
 			//展示查询条件
@@ -259,7 +269,106 @@ define('app/jsp/order/tbcOrderList', function (require, exports, module) {
 					window.location.href=_base+"/toTbcOrderList";
 				}
 			});
-		}
+		},
+		//弹出框
+    	_popUp:function(orderId,nickName,time,confirmTime){
+    		var _this= this;
+    		$("#orderIdShow").val("");
+    		$("#nickNameShow").val("");
+    		$("#remaingTimeShow").val("");
+    		$("#remainingTimePageShow").val("");
+			//弹出框展示
+			$('#eject-mask').fadeIn(100);
+			$('#edit-medium').slideDown(200);
+			$("#orderIdShow").val(orderId);
+    		$("#nickNameShow").val(nickName);
+    		$("#remaingTimeShow").val(time);
+    		$("#remainingTimePageShow").val(confirmTime);
+    	},
+    	_closeDialog:function(){
+    		$("#hourShow-error").html("");
+    		$("#dayShow-error").html("");
+    		$("#remark-error").html("");
+    		$('#eject-mask').fadeOut(100);
+    		$('#edit-medium').slideUp(150);
+    	},
+    	_initValidate:function(){
+    		var formValidator=$("#dataForm").validate({
+    			rules: {
+					remark: {
+    					required: true,
+    					maxlength:100
+    				},
+    				dayShow:{
+    					required: true,
+    					regexp: /^[0-9]*[1-9][0-9]*$/,
+    				},
+    				hourShow: {
+    					required:true,
+    					regexp: /^[0-9]*[1-9][0-9]*$/,
+    					max:24
+    				}
+    			},
+    			messages: {
+    				remark: {
+    					required: "请输入备注!",
+    					maxlength:"最大长度不能超过{0}"
+    				},
+    				dayShow: {
+    					required: "请输入需耗天!",
+    					regexp:"输入格式不正确"
+    				},
+    				hourShow: {
+    					required: "请输入需耗时!",
+    					regexp:"输入格式不正确",
+    					max:"最大值为24"
+    				}
+    			}
+    		});
+    		return formValidator;
+    	},
+    	_returnWork:function(){
+    		var _this= this;
+    		var formValidator=_this._initValidate();
+			formValidator.form();
+			if(!$("#dataForm").valid()){
+				return false;
+			}
+    		var orderId = $("#orderIdShow").val();
+    		var dayShow = $("#dayShow").val();
+    		var remak = $("#remark").val();
+    		var hourShow=$("#hourShow").val();
+    		$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/returnWork",
+				dataType : "json",
+				data : {
+					orderId:orderId,
+					remark:remak,
+					takeDay:dayShow,
+					takeTime:hourShow
+				},
+				message : "正在加载数据..",
+				success : function(data) {
+					if(data.statusCode==1){
+						//跳到列表页面
+						window.location.href=_base+"/toTbcOrderList?random="+Math.random();
+					}else{
+						var d = Dialog({
+							title: '消息',
+							content:"修改失败",
+							icon:'prompt',
+							okValue: '确 定',
+							ok:function(){
+								this.close();
+							}
+						});
+						d.show();
+					}
+				}
+			});
+    	}
 		
     });
     

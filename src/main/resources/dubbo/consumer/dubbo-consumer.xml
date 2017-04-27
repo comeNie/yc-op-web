@@ -52,6 +52,9 @@
 	
 	<dubbo:reference id="iOrderRefundSV"
 		interface="com.ai.yc.order.api.orderrefund.interfaces.IOrderRefundSV" />
+	
+	<dubbo:reference id="iOrderReprocessSV"
+		interface="com.ai.yc.order.api.orderreprocess.interfaces.IOrderReprocessSV" />
 				
 	<!-- 公共中心 -->
 	<dubbo:reference id="ICacheSV"

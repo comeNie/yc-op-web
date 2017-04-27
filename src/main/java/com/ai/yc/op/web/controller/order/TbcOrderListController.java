@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.PageInfo;
+import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
 import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
@@ -25,6 +27,7 @@ import com.ai.opt.sdk.util.CollectionUtil;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
+import com.ai.opt.sso.client.filter.SSOClientConstants;
 import com.ai.paas.ipaas.ccs.IConfigClient;
 import com.ai.yc.common.api.cache.interfaces.ICacheSV;
 import com.ai.yc.common.api.cache.param.SysParam;
@@ -45,6 +48,10 @@ import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
 import com.ai.yc.order.api.orderrefund.interfaces.IOrderRefundSV;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundRequest;
 import com.ai.yc.order.api.orderrefund.param.OrderRefundResponse;
+import com.ai.yc.order.api.orderreprocess.interfaces.IOrderReprocessSV;
+import com.ai.yc.order.api.orderreprocess.param.OrdProductInfo;
+import com.ai.yc.order.api.orderreprocess.param.OrderBaseInfo;
+import com.ai.yc.order.api.orderreprocess.param.OrderReprocessRequest;
 
 @Controller
 public class TbcOrderListController {
@@ -426,5 +433,36 @@ private static final Logger logger = Logger.getLogger(TbcOrderListController.cla
 		}
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "订单退款申请成功", true);
 		
+	}
+	/**
+	 * 重启订单
+	 */
+	@RequestMapping("/returnWork")
+	@ResponseBody
+	public ResponseData<String> returnWork(HttpServletRequest request,String orderId,String remark,String takeDay,String takeTime) {
+		ResponseData<String> responseData = null;
+		IOrderReprocessSV iOrderReprocessSV = DubboConsumerFactory.getService(IOrderReprocessSV.class);
+		GeneralSSOClientUser user = (GeneralSSOClientUser) request.getSession().getAttribute(SSOClientConstants.USER_SESSION_KEY);
+		OrderReprocessRequest processRequest  = new OrderReprocessRequest();
+		OrderBaseInfo baseInfo = new OrderBaseInfo();
+		OrdProductInfo prodInfo = new OrdProductInfo();
+		baseInfo.setOperId(user.getUserId());
+		baseInfo.setOrderId(Long.valueOf(orderId));
+		baseInfo.setOperName(user.getLoginName());
+		baseInfo.setState(Constants.State.UPDATING_STATE);
+		baseInfo.setReasonDesc(remark);
+		prodInfo.setTakeDay(takeDay);
+		prodInfo.setTakeTime(takeTime);
+		processRequest.setBaseInfo(baseInfo);
+		processRequest.setProductInfo(prodInfo);
+		BaseResponse response = iOrderReprocessSV.orderReprocess(processRequest);
+		ResponseHeader header = response.getResponseHeader();
+		if (null != header && !header.isSuccess()){
+            responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "修改失败:"+header.getResultMessage());
+            logger.error("返工失败："+header.getResultMessage());
+        }else{
+        	responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "修改成功");
+        }
+        return responseData;
 	}
 }
