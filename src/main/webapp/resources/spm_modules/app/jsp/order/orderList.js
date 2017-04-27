@@ -37,7 +37,10 @@ define('app/jsp/order/orderList', function (require, exports, module) {
             "click #update":"_updatePayState",
             "click #export":"_export",
             "click #add-close":"_closeDialog",
-            "click #colseImage":"_closeDialog"
+            "click #colseImage":"_closeDialog",
+            "click #edit-close":"_closeReturnDialog",
+            "click #colseImageReturn":"_closeReturnDialog",
+            "click #update":"_returnWork"
             
         },
     	//重写父类
@@ -53,6 +56,10 @@ define('app/jsp/order/orderList', function (require, exports, module) {
     		var formValidator=this._initValidate();
 			$(":input").bind("focusout",function(){
 				formValidator.element(this);
+			});
+			var formValidator2=this._initValidate2();
+			$(":input").bind("focusout",function(){
+				formValidator2.element(this);
 			});
     	},
     	
@@ -474,7 +481,106 @@ define('app/jsp/order/orderList', function (require, exports, module) {
 					window.location.href=_base+"/order/toOrderList";
 				}
 			});
-		}
+		},
+		//弹出框
+    	_popReturnWorkUp:function(orderId,nickName,time,confirmTime){
+    		var _this= this;
+    		$("#orderIdShow").val("");
+    		$("#nickNameShow").val("");
+    		$("#remaingTimeShow").val("");
+    		$("#remainingTimePageShow").val("");
+			//弹出框展示
+			$('#eject-mask').fadeIn(100);
+			$('#edit-medium').slideDown(200);
+			$("#orderIdShow").val(orderId);
+    		$("#nickNameShow").val(nickName);
+    		$("#remaingTimeShow").val(time);
+    		$("#remainingTimePageShow").val(confirmTime);
+    	},
+    	_initValidate2:function(){
+    		var formValidator=$("#dataFormReturn").validate({
+    			rules: {
+    				remarkShow: {
+    					required: true,
+    					maxlength:100
+    				},
+    				dayShow:{
+    					required: true,
+    					regexp: /^[0-9]*[1-9][0-9]*$/,
+    				},
+    				hourShow: {
+    					required:true,
+    					regexp: /^[0-9]*[1-9][0-9]*$/,
+    					max:24
+    				}
+    			},
+    			messages: {
+    				remarkShow: {
+    					required: "请输入备注!",
+    					maxlength:"最大长度不能超过{0}"
+    				},
+    				dayShow: {
+    					required: "请输入需耗天!",
+    					regexp:"输入格式不正确"
+    				},
+    				hourShow: {
+    					required: "请输入需耗时!",
+    					regexp:"输入格式不正确",
+    					max:"最大值为24"
+    				}
+    			}
+    		});
+    		return formValidator;
+    	},
+		_closeReturnDialog:function(){
+    		$("#hourShow-error").html("");
+    		$("#dayShow-error").html("");
+    		$("#remarkShow-error").html("");
+    		$('#eject-mask').fadeOut(100);
+    		$('#edit-medium').slideUp(150);
+    	},
+    	_returnWork:function(){
+    		var _this= this;
+    		var formValidator=_this._initValidate2();
+			formValidator.form();
+			if(!$("#dataFormReturn").valid()){
+				return false;
+			}
+    		var orderId = $("#orderIdShow").val();
+    		var dayShow = $("#dayShow").val();
+    		var remak = $("#remarkShow").val();
+    		var hourShow=$("#hourShow").val();
+    		$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/returnWork",
+				dataType : "json",
+				data : {
+					orderId:orderId,
+					remark:remak,
+					takeDay:dayShow,
+					takeTime:hourShow
+				},
+				message : "正在加载数据..",
+				success : function(data) {
+					if(data.statusCode==1){
+						//跳到列表页面
+						window.location.href=_base+"/order/toOrderList?random="+Math.random();
+					}else{
+						var d = Dialog({
+							title: '消息',
+							content:"修改失败",
+							icon:'prompt',
+							okValue: '确 定',
+							ok:function(){
+								this.close();
+							}
+						});
+						d.show();
+					}
+				}
+			});
+    	}
     });
     
     module.exports = OrderListPager

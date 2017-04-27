@@ -212,6 +212,60 @@
 								</div>
                             </form>
                             <!-- 弹出框 end-->
+                            <!--编辑名称弹出框-->
+								<form id="dataFormReturn" method="post">
+								<div class="eject-big">
+										<div class="eject-medium" id="edit-medium">
+											<div class="eject-medium-title">
+												<p>重启订单</p>
+												<p class="img" id="colseImageReturn"><i class="fa fa-times"></i></p>
+											</div>
+											<div class="form-label">
+								           		<ul>
+									                <li>
+									                    <p class="word">订单编号:</p>
+									                    <p><input type="text" class="int-text int-small" id="orderIdShow" readonly></p>
+									                </li>
+									                <li>
+									                    <p class="word">译员昵称:</p>
+									                    <p><input type="text" class="int-text int-small" id="nickNameShow" readonly></p>
+									                </li>
+									                <li>
+									                    <p class="word">交稿剩余时间:</p>
+									                    <p><input type="text" class="int-text int-medium" id="remaingTimeShow" readonly></p>
+									                </li> 
+									                <li>
+									                    <p class="word">确认剩余时间:</p>
+									                    <p><input type="text" class="int-text int-medium" id="remainingTimePageShow" readonly></p>
+									                </li>  
+								            			 <li>
+										                    <p class="word"><span>*</span>修改时间:</p>
+										                    <p>
+										                    	<input type="text" class="int-text int-mini" name="dayShow" id="dayShow">天
+										                    	<input type="text" class="int-text int-mini" name="hourShow" id="hourShow">小时
+										                    </p>
+									                	</li> 
+									               		<li>
+										                    <p class="word"><span>*</span>订单重启备注:</p>
+										                    <p>
+										                    	<p><textarea id="remarkShow" name="remarkShow" rows="3" cols="25" class="int-text"></textarea></p>
+										                    </p>
+									                	</li>  
+								            		</ul>  
+								      	  </div>
+					            	 	<!--按钮-->
+										<div class="row mt-15"><!--删格化-->
+					                         <p class="center pr-10 mt-8">
+					                         	<input type="button" class="biu-btn  btn-primary  btn-auto  ml-5" id="update" value="确  认">
+					                         	<input id="edit-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5" value="取  消">
+					                         </p>
+					                     </div>
+										</div>	
+										<div class="mask" id="eject-maskReturn"></div>	
+								</div>
+								</form>
+								<!--编辑名称弹出框 结束-->	
+                            
                         </div>
                     </div>
                 </div>
@@ -287,6 +341,9 @@
 		{{/if}}
 		{{if state==40 && busiType!=2}}
 			<a href="javascript:void(0)" class="adopt" onclick="pager._refundOrder('{{:orderId}}')">退款</a>
+		{{/if}}
+		{{if state==50}}
+			<a href="javascript:void(0);" onclick="pager._popReturnWorkUp('{{:orderId}}','{{:userName}}','{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', remainingTime)}}','{{:remainingTimePage}}')">重启订单</a>
 		{{/if}}
 	</td>
   </tr>                                                                       

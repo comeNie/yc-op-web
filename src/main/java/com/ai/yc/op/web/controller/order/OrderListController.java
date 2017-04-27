@@ -22,6 +22,7 @@ import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.paas.ipaas.ccs.IConfigClient;
@@ -108,6 +109,18 @@ public class OrderListController {
 					for(OrdOrderVo vo:orderList){
 						OrderPageResParam resParam = new OrderPageResParam();
 						BeanUtils.copyProperties(resParam, vo);
+						//翻译剩余时间
+						Timestamp retime= vo.getRemainingTime();
+						if(retime!=null){
+							//Long time= vo.getRemainingTime().getTime();
+							Long time = vo.getEndChgTime().getTime()-DateUtil.getCurrentTimeMillis();
+							//获取天数、小时数、分钟
+							int day = (int)(time/(1000 * 60 * 60 * 24));
+							int hours = (int)(time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+							int minite = (int)(time % (1000 * 60 * 60)) / (1000 * 60); 
+							String remaningPage = day+"天"+hours+"小时"+minite+"分钟";
+							resParam.setRemainingTimePage(remaningPage);
+						}
 						//翻译订单来源
     					SysParamSingleCond	paramCond = new SysParamSingleCond();
     					paramCond.setTenantId(Constants.TENANT_ID);
