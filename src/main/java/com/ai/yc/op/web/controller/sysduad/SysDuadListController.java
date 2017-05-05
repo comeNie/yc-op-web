@@ -90,7 +90,7 @@ public class SysDuadListController {
     	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
-    	req.setDuadId("114");
+    	req.setDuadId("115");
     	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
     	BaseResponse saveSysDuad = querySysDuadSV.saveSysDuad(req);
     	if(saveSysDuad.getResponseHeader().getIsSuccess()==false){
@@ -113,7 +113,7 @@ public class SysDuadListController {
     	if(updateSysDuad.getResponseHeader().getIsSuccess()==false){
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
-		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "添加语言对成功", true);
+		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "修改语言对成功", true);
     }
     
     /**

@@ -141,10 +141,6 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
     		$("#updatePurposeCn").val("");
     		$("#updateRemarks").val("");
     		$("#updateSort").val("");
-    		$(".site").val("");
-    		$(".state").val("");
-    		//赋值支付方式
-    		//$("#payStyle").val(payStylePage);
 			//弹出框展示
 			$('#eject-mask').fadeIn(100);
 			$('#add-samll').slideDown(200);
@@ -154,8 +150,18 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
     		$("#updateRemarks").val(remarks);
     		$("#updateSort").val(sort);
     		$("#purposeId").val(purposeId);
-    		$(".site").val(site);
-    		$(".state").val(state);
+    		var states = document.getElementsByName("state");
+    		for(var i=0;i<states.length;i++){
+    			if(state == states[i].value){
+    				states[i].checked = true;
+    			}
+    		}
+    		var sites = document.getElementsByName("site");
+    		for(var i=0;i<sites.length;i++){
+    			if(site == sites[i].value){
+    				sites[i].checked = true;
+    			}
+    		}
 		},
 		_initValidate:function(){
 	    	   var _this = this;

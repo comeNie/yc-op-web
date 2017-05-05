@@ -68,7 +68,7 @@
 									 </ul>
 									 <ul>
 										<li>
-										    <p class="word">价格*(￥/$/字词)</p>
+										    <p class="word">价格*(￥)</p>
 										    <div class="table-c" style="float: right;">
 												<table width="400px;" style="float: right;">
 													<tr>
@@ -95,7 +95,35 @@
 											</div>
 										</li>
 									 </ul>
-									
+									 <ul>
+										<li>
+										    <p class="word">价格*($)</p>
+										    <div class="table-c" style="float: right;">
+												<table width="400px;" style="float: right;">
+													<tr>
+														<td>翻译级别</td>
+														<td>翻译价格</td>
+														<td>加急翻译价格</td>
+													</tr>
+													<tr>
+														<td>普通级</td>
+														<td><input type="text" name="ordinaryDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+														<td><input type="text" name="ourgentDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+													</tr>
+													<tr>
+														<td>专业级</td>
+														<td><input type="text" name="professionalDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+														<td><input type="text" name="purgentDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+													</tr>
+													<tr>
+														<td>出版级</td>
+														<td><input type="text" name="publishDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+														<td><input type="text" name="puburgentDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+													</tr>
+												</table>
+											</div>
+										</li>
+									 </ul>
 									<ul>
 										<li>
 										    <p class="word">排序:</p>

@@ -121,8 +121,7 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
     		$("#updateDomainCn").val("");
     		$("#updateRemarks").val("");
     		$("#updateSort").val("");
-    		$(".site").val("");
-    		$(".state").val("");
+    		
     		//赋值支付方式
     		//$("#payStyle").val(payStylePage);
 			//弹出框展示
@@ -134,8 +133,18 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
     		$("#updateRemarks").val(remarks);
     		$("#updateSort").val(sort);
     		$("#domainId").val(domainId);
-    		$(".site").val(site);
-    		$(".state").val(state);
+    		var states = document.getElementsByName("state");
+    		for(var i=0;i<states.length;i++){
+    			if(state == states[i].value){
+    				states[i].checked = true;
+    			}
+    		}
+    		var sites = document.getElementsByName("site");
+    		for(var i=0;i<sites.length;i++){
+    			if(site == sites[i].value){
+    				sites[i].checked = true;
+    			}
+    		}
 		},
 		_update:function(){
 			var _this = this;

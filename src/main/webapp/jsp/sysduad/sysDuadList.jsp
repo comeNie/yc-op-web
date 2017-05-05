@@ -38,12 +38,8 @@
 										<li class="col-md-6">
 											<p class="word">语言方向</p>
 											<p>
-												<select class="select select-medium" id="">
-													<option value="" selected="selected">全部</option>
-													<!-- 启用 -->
-													<option value="">中文--英文</option>
-													<!-- 禁用 -->
-													<option value="">英文--中文</option>
+												<select class="select select-medium" id="langugePaire">
+													<option value="">全部</option>
 												</select>
 											</p>
 										</li>
@@ -232,7 +228,7 @@
 												</ul>
 												<ul>
 													<li>
-														<p class="word">价格*(￥/$/字词)</p>
+														<p class="word">价格*(￥/字词)</p>
 														<div class="table-c" style="float: right;">
 															<table width="400px;" style="float: right;">
 																<tr>
@@ -270,7 +266,35 @@
 														</div>
 													</li>
 												</ul>
-
+												<ul>
+													<li>
+													    <p class="word">价格*($/字词)</p>
+													    <div class="table-c" style="float: right;">
+															<table width="400px;" style="float: right;">
+																<tr>
+																	<td>翻译级别</td>
+																	<td>翻译价格</td>
+																	<td>加急翻译价格</td>
+																</tr>
+																<tr>
+																	<td>普通级</td>
+																	<td><input type="text" id="ordinaryDollar" name="ordinaryDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+																	<td><input type="text" id="ourgentDollar" name="ourgentDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+																</tr>
+																<tr>
+																	<td>专业级</td>
+																	<td><input type="text" id="professionalDollar" name="professionalDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+																	<td><input type="text" id="purgentDollar" name="purgentDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+																</tr>
+																<tr>
+																	<td>出版级</td>
+																	<td><input type="text" id="publishDollar" name="publishDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+																	<td><input type="text" id="puburgentDollar" name="puburgentDollar" style="border: 1px solid;height: 30px;margin: 2px;"></td>
+																</tr>
+															</table>
+														</div>
+													</li>
+												 </ul>
 												<ul>
 													<li>
 														<p class="word">排序:</p>
@@ -346,20 +370,20 @@
 		  {{/if}}
 	  </td>
 	  <td>
-		普通{{:ordinary}}|
-		加急{{:ordinaryUrgent}}
+		普通{{:ordinary}}￥/{{:ordinaryDollar}}$|
+		加急{{:ordinaryUrgent}}￥/{{:ourgentDollar}}$
 	  </td>
 	  <td>
-		普通{{:professional}}|
-		加急{{:professionalUrgent}}
+		普通{{:professional}}￥/{{:professionalDollar}}$|
+		加急{{:professionalUrgent}}￥/{{:purgentDollar}}$
 	  </td>
 	  <td>
-		普通{{:publish}}|
-		加急{{:publishUrgent}}
+		普通{{:publish}}￥/{{:publishDollar}}$|
+		加急{{:publishUrgent}}￥/{{:puburgentDollar}}$
 	  </td>
 	  <td>{{:sort}}</td>
 	  <td>
-			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}
+			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', updatetime)}}
 	  </td>
 	  <td>
 		  {{if  state == '0'}}
@@ -370,7 +394,7 @@
 	  </td>     
 	  <td>
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:duadId}}')">查看</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:duadId}}','{{:language}}','{{:site}}','{{:sourceCn}}','{{:targetCn)}}','{{:ordinary}}','{{:ordinaryUrgent}}','{{:professional}}','{{:professionalUrgent}}','{{:publish}}','{{:publishUrgent}}','{{:sort}}','{{:state)}}')">修改</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:duadId}}','{{:language}}','{{:site}}','{{:sourceCn}}','{{:targetCn)}}','{{:ordinary}}','{{:ordinaryUrgent}}','{{:professional}}','{{:professionalUrgent}}','{{:publish}}','{{:publishUrgent}}','{{:sort}}','{{:state}}','{{:ordinaryDollar}}','{{:ourgentDollar}}','{{:professionalDollar}}','{{:purgentDollar}}','{{:publishDollar}}','{{:puburgentDollar}}')">修改</a>
 	  </td>
     </tr>
 </script>

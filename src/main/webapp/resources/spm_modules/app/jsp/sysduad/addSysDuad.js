@@ -116,6 +116,24 @@ define('app/jsp/sysduad/addSysDuad', function (require, exports, module) {
 	    				},
 	    				"publishUrgent":{
 	    					required:true
+	    				},
+	    				"ordinaryDollar":{
+	    					required:true
+	    				},
+	    				"ourgentDollar":{
+	    					required:true
+	    				},
+	    				"professionalDollar":{
+	    					required:true
+	    				},
+	    				"purgentDollar":{
+	    					required:true
+	    				},
+	    				"publishDollar":{
+	    					required:true
+	    				},
+	    				"puburgentDollar":{
+	    					required:true
 	    				}
 	    			},
 	    			messages: {
@@ -145,6 +163,24 @@ define('app/jsp/sysduad/addSysDuad', function (require, exports, module) {
 	    				},
 	    				"publishUrgent":{
 	    					required:"请输入加急出版级翻译价格"
+	    				},
+	    				"ordinaryDollar":{
+	    					required:"请输入普通级翻译美元价格"
+	    				},
+	    				"ourgentDollar":{
+	    					required:"请输入加急普通级翻译美元价格"
+	    				},
+	    				"professionalDollar":{
+	    					required:"请输入专业级翻译美元价格"
+	    				},
+	    				"purgentDollar":{
+	    					required:"请输入加急专业级翻译美元价格"
+	    				},
+	    				"publishDollar":{
+	    					required:"请输入出版级翻译美元价格"
+	    				},
+	    				"puburgentDollar":{
+	    					required:"请输入加急出版级翻译美元价格"
 	    				}
 	    			}
 	    		});

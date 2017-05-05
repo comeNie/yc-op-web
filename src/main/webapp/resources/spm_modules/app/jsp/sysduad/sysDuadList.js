@@ -43,12 +43,37 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     		OrderListPager.superclass.setup.call(this);
     		// 初始化执行搜索
     		this._searchSysDuadList();
+    		this._bindLanguageSelect();
     		var formValidator=this._initValidate();
 			$(":input").bind("focusout",function(){
 				formValidator.element(this);
 			});
     	},
-    	
+    	// 下拉 语种方向
+		_bindLanguageSelect:function() {
+			var this_=this;
+			$.ajax({
+				type : "post",
+				processing : false,
+				url : _base+ "/getLangugeSelect",
+				dataType : "json",
+				data : {
+				},
+				message : "正在加载数据..",
+				success : function(data) {
+					var d=data.data;
+					$.each(d,function(index,item){
+						if(d[index].language == '2'){
+							var langugeName = "英文"+"->"+d[index].sourceCn+"->"+d[index].targetCn;
+						}else{
+							var langugeName = "中文"+"->"+d[index].sourceCn+"->"+d[index].targetCn;
+						}
+						var langugeCode = d[index].duadId;
+						$("#langugePaire").append('<option value="'+langugeCode+'">'+langugeName+'</option>');
+					})
+				}
+			});
+		},
     	_add:function(){
 			window.location.href = _base+"/sysduad/toAddDuad";
 		},
@@ -88,10 +113,11 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     			"language":jQuery.trim($("#language option:selected").val()),
     			"site":jQuery.trim($("#site option:selected").val()),
     			"state":jQuery.trim($("#state option:selected").val()),
-    			"createOperator":jQuery.trim($("#createOperator").val())
+    			"createOperator":jQuery.trim($("#createOperator").val()),
+    			"duadId":jQuery.trim($("#langugePaire option:selected").val())
     		}
     	},
-    	_show:function(duadId,language,site,sourceCn,targetCn,ordinary,ordinaryUrgent,professional,professionalUrgent,publish,publishUrgent,sort,state){
+    	_show:function(duadId,language,site,sourceCn,targetCn,ordinary,ordinaryUrgent,professional,professionalUrgent,publish,publishUrgent,sort,state,ordinaryDollar,ourgentDollar,professionalDollar,purgentDollar,publishDollar,puburgentDollar){
 			var _this= this;
     		$("#language").val("");
     		$("#duadId").val("");
@@ -104,8 +130,12 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     		$("#publish").val("");
     		$("#publishUrgent").val("");
     		$("#sort").val("");
-    		$(".site").val("");
-    		$(".state").val("");
+    		$("#ordinaryDollar").val("");
+    		$("#ourgentDollar").val("");
+    		$("#professionalDollar").val("");
+    		$("#purgentDollar").val("");
+    		$("#publishDollar").val("");
+    		$("#puburgentDollar").val("");
 			// 弹出框展示
 			$('#eject-mask').fadeIn(100);
 			$('#add-samll').slideDown(200);
@@ -120,8 +150,24 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     		$("#publish").val(publish);
     		$("#publishUrgent").val(publishUrgent);
     		$("#sort").val(sort);
-    		$(".site").val(site);
-    		$(".state").val(state);
+    		$("#ordinaryDollar").val(ordinaryDollar);
+    		$("#ourgentDollar").val(ourgentDollar);
+    		$("#professionalDollar").val(professionalDollar);
+    		$("#purgentDollar").val(purgentDollar);
+    		$("#publishDollar").val(publishDollar);
+    		$("#puburgentDollar").val(puburgentDollar);
+    		var states = document.getElementsByName("state");
+    		for(var i=0;i<states.length;i++){
+    			if(state == states[i].value){
+    				states[i].checked = true;
+    			}
+    		}
+    		var sites = document.getElementsByName("site");
+    		for(var i=0;i<sites.length;i++){
+    			if(site == sites[i].value){
+    				sites[i].checked = true;
+    			}
+    		}
 		},
 		_update:function(){
 			var _this = this;
@@ -173,6 +219,24 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     				},
     				"publishUrgent":{
     					required:true
+    				},
+    				"ordinaryDollar":{
+    					required:true
+    				},
+    				"ourgentDollar":{
+    					required:true
+    				},
+    				"professionalDollar":{
+    					required:true
+    				},
+    				"purgentDollar":{
+    					required:true
+    				},
+    				"publishDollar":{
+    					required:true
+    				},
+    				"puburgentDollar":{
+    					required:true
     				}
     			},
     			messages: {
@@ -202,6 +266,24 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     				},
     				"publishUrgent":{
     					required:"请输入加急出版级翻译价格"
+    				},
+    				"ordinaryDollar":{
+    					required:"请输入普通级翻译美元价格"
+    				},
+    				"ourgentDollar":{
+    					required:"请输入加急普通级翻译美元价格"
+    				},
+    				"professionalDollar":{
+    					required:"请输入专业级翻译美元价格"
+    				},
+    				"purgentDollar":{
+    					required:"请输入加急专业级翻译美元价格"
+    				},
+    				"publishDollar":{
+    					required:"请输入出版级翻译美元价格"
+    				},
+    				"puburgentDollar":{
+    					required:"请输入加急出版级翻译美元价格"
     				}
     			}
     		});
