@@ -148,7 +148,7 @@
 
 								<form id="dataForm" method="post">
 									<div class="eject-big">
-										<div class="eject-medium" id="add-samll" style="verflow-y:scroll;width: 70%; left: 40%; top: 25%">
+										<div class="eject-medium" id="add-samll" style="overflow:auto;width: 70%; left: 40%; top: 35%;height:500px;">
 											<div class="eject-medium-title">
 												<p>修改</p>
 												<p class="img" id="colseImage">

@@ -173,7 +173,7 @@
 								<!-- 弹出框开始 -->
 								<form id="dataForm" method="post">
 									<div class="eject-big">
-										<div class="eject-medium" id="add-samll" style="width: 70%; left: 40%; top: 25%;verflow-y:scroll;" >
+										<div class="eject-medium" id="add-samll"style="overflow:auto;width: 70%; left: 40%; top: 35%;height:500px;">
 											<div class="eject-medium-title">
 												<p>修改</p><input type="hidden" id="duadId" name="duadId">
 												<p class="img" id="colseImage">
