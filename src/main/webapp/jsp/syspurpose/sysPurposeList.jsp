@@ -127,7 +127,7 @@
 								<!--分页结束-->
 								<form id="dataForm" method="post">
                             	<div class="eject-big">
-									<div class="eject-medium" id="add-samll">
+									<div class="eject-medium" id="add-samll" style="width: 70%; left: 40%; top: 25%">
 										<div class="eject-medium-title">
 											<p>修改</p>
 											<p class="img" id="colseImage"><i class="fa fa-times" ></i></p>

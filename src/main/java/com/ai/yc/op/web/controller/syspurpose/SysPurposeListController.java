@@ -45,17 +45,6 @@ public class SysPurposeListController {
 	public ModelAndView toAddPurpose(HttpServletRequest request) {
 		return new ModelAndView("jsp/syspurpose/addSysPurpose");
 	}
-	/**
-	 * 跳转到修改页面
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping("/toUpdatePurpose")
-	public ModelAndView toUpdatesPurpose(HttpServletRequest request,String purposeId) {
-		ModelAndView view = new ModelAndView("jsp/syspurpose/updatePurpose");
-		view.addObject("purposeId", purposeId);
-		return view;
-	}
 	
 	/**
      * 用途查询
