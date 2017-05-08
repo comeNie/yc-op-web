@@ -148,9 +148,9 @@
 													<th>目标语言</th>
 													<th>站点</th>
 													<th>地区语言</th>
-													<th>普通级(￥/$//字词)</th>
-													<th>专业级(￥/$//字词)</th>
-													<th>出版级(￥/$//字词)</th>
+													<th>普通级(￥/$/字词)</th>
+													<th>专业级(￥/$/字词)</th>
+													<th>出版级(￥/$/字词)</th>
 													<th>排序</th>
 													<th>创建时间</th>
 													<th>状态</th>
@@ -370,16 +370,16 @@
 		  {{/if}}
 	  </td>
 	  <td>
-		普通{{:ordinary}}￥/{{:ordinaryDollar}}$|
-		加急{{:ordinaryUrgent}}￥/{{:ourgentDollar}}$
+		普通￥{{:ordinary}}/{{:ordinaryDollar}}$<br/>
+		加急￥{{:ordinaryUrgent}}/{{:ourgentDollar}}$
 	  </td>
 	  <td>
-		普通{{:professional}}￥/{{:professionalDollar}}$|
-		加急{{:professionalUrgent}}￥/{{:purgentDollar}}$
+		普通￥{{:professional}}/{{:professionalDollar}}$<br/>
+		加急￥{{:professionalUrgent}}/{{:purgentDollar}}$
 	  </td>
 	  <td>
-		普通{{:publish}}￥/{{:publishDollar}}$|
-		加急{{:publishUrgent}}￥/{{:puburgentDollar}}$
+		普通￥{{:publish}}/{{:publishDollar}}$<br/>
+		加急￥{{:publishUrgent}}/{{:puburgentDollar}}$
 	  </td>
 	  <td>{{:sort}}</td>
 	  <td>
