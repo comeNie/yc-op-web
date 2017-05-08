@@ -99,7 +99,6 @@ public class SysPurposeListController {
     public ResponseData<Boolean> insertSysPurpose(SaveSysPurpose req){
     	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());
-    	req.setPurposeId("10");
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);

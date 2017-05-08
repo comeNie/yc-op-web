@@ -89,7 +89,6 @@ public class SysDomainListController {
     public ResponseData<Boolean> insertSysDomain(SaveSysDomain req){
     	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());
-    	req.setDomainId("5");
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);

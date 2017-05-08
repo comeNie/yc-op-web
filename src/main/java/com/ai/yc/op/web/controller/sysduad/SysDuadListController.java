@@ -90,7 +90,6 @@ public class SysDuadListController {
     	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
-    	req.setDuadId("115");
     	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
     	BaseResponse saveSysDuad = querySysDuadSV.saveSysDuad(req);
     	if(saveSysDuad.getResponseHeader().getIsSuccess()==false){
