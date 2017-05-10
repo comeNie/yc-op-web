@@ -50,7 +50,7 @@
 													<option value="" selected="selected">全部</option>
 													<!-- 启用 -->
 													<option value="1">中文</option>
-													<!-- 禁用 -->
+													<!-- 禁用 --> 
 													<option value="2">英文</option>
 												</select>
 											</p>
@@ -370,16 +370,16 @@
 		  {{/if}}
 	  </td>
 	  <td>
-		普通￥{{:ordinary}}/{{:ordinaryDollar}}$<br/>
-		加急￥{{:ordinaryUrgent}}/{{:ourgentDollar}}$
+		普通￥{{:ordinary}}/\${{:ordinaryDollar}}<br/>
+		加急￥{{:ordinaryUrgent}}/\${{:ourgentDollar}}
 	  </td>
 	  <td>
-		普通￥{{:professional}}/{{:professionalDollar}}$<br/>
-		加急￥{{:professionalUrgent}}/{{:purgentDollar}}$
+		普通￥{{:professional}}/\${{:professionalDollar}}<br/>
+		加急￥{{:professionalUrgent}}/\${{:purgentDollar}}
 	  </td>
 	  <td>
-		普通￥{{:publish}}/{{:publishDollar}}$<br/>
-		加急￥{{:publishUrgent}}/{{:puburgentDollar}}$
+		普通￥{{:publish}}/\${{:publishDollar}}<br/>
+		加急￥{{:publishUrgent}}/\${{:puburgentDollar}}
 	  </td>
 	  <td>{{:sort}}</td>
 	  <td>
