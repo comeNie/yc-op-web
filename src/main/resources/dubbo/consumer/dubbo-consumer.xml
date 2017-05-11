@@ -128,6 +128,9 @@
 	<dubbo:reference id="iYCUserTranslatorSV"
 					 interface="com.ai.yc.translator.api.translatorservice.interfaces.IYCUserTranslatorSV" />
 	<dubbo:reference id="iYCUcMembersSV"
-					 interface="com.ai.yc.ucenter.api.members.interfaces.IYCUcMembersSV" />				 
+					 interface="com.ai.yc.ucenter.api.members.interfaces.IYCUcMembersSV" />		
+	<!-- 题库管理 -->	
+	<dubbo:reference id="iQuerySysItemBankSV"
+		interface="com.ai.yc.common.api.sysitembank.interfaces.IQuerySysItemBankSV" />			 
 					 				 
 </beans>
