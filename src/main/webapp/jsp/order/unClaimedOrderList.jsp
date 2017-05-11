@@ -7,6 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>待领取订单列表</title>
 <%@include file="/inc/inc.jsp" %>
+<input type="hidden" id="selectOrderId">
 </head>
 <body>
    <div class="content-wrapper-iframe" ><!--右侧灰色背景-->
@@ -163,12 +164,74 @@
 								  </div>
 								<!--分页结束-->
                             </div>
+                            <!-- 选择译员开始 -->
+								<div class="eject-big">
+										<div class="eject-large" id="user">		
+											<div class="eject-medium-title">
+												<p>选择用户</p>
+												<p class="img"><i class="fa fa-times" id="closeImage"></i></p>
+											</div>
+											<div class="eject-large-list">
+										    <div class="search-firm">
+										    		<p>搜索用户</p>
+										    		<p><input type="input" class="int-text int-xlarge" /></p>
+										    		<p><input type="button" value="查询" class="biu-btn btn-primary btn-mini blue-btn" id="userSearch"></p>
+										    </div>
+										    <div class="table-responsive clearfix">
+				                                <!--table表格-->
+				                          		<div class="table-responsive clearfix mt-10">
+				                                    <table class="table table-hover table-border table-bordered ">
+				                                        <thead>
+				                                            <tr>
+				                                            	<th>编号</th>
+				                                            	<th>昵称</th>
+				                                                <th>手机</th>
+				                                                <th>级别</th>
+				                                                <th>姓名</th>
+				                                            </tr>
+				                                        </thead>
+				                                         <tbody id="userListData"></tbody>
+				                                    </table>
+				                                    <div id="showMessage"></div>
+				                                </div>
+				                           		<!--/table表格结束-->
+				                                </div>
+											</div>	
+											<!--分页-->
+									         <div>
+								 				 <nav style="text-align: center">
+													<ul id="paginationUser"></ul>
+												</nav>
+											  </div>
+											   <!--分页结束-->
+											<!--按钮-->
+											<div class="row mt-15"><!--删格化-->
+									               <p class="center pr-30 mt-30">
+									               	   <input type="button" class="biu-btn  btn-primary  btn-auto  ml-5 " value="提  交">
+									                   <input id="close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5 " value="取  消">
+									                </p>
+									        </div>
+										</div>	
+										<div  class="mask" id="eject-mask"></div>	
+									</div>
+								<!-- 选择译员结束-->
                         </div>
                     </div>
                 </div>
             </div>
     	</div>
    </div> 
+   <!-- 用户信息 start -->
+  <script id="userListTemple" type="text/template">
+	<tr>
+  	  <td><input type="radio" name="userno" value="{{:interperId}}">{{:index}}</td>
+      <td>{{:translateTypePage}}</td>
+      <td><a href="javascript:void(0);" onclick="pager._detailPage('{{:orderId}}')">{{:orderId}}</a></td>
+ 	  <td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', orderTime)}}</td>
+      <td>{{:userName}}</td>
+  </tr>                                                                       
+</script> 
+<!-- 用户信息 end -->
 <script id="orderListTemple" type="text/template">
 	<!--{{if levelSize>=extendSize && levelSize!=0 && extendSize!=0}} {{/if}}-->
 {{if  levelSize!=0 && extendSize!=0}}
@@ -214,6 +277,7 @@
 				<td rowspan="{{:~levelSize}}">
 					<a  href="javascript:void(0);" onclick="pager._detailPage('{{:~orderId}}')">查看</a>
 					<a href="javascript:void(0)" class="adopt" onclick="pager._rejectRefundOrder('{{:~orderId}}')">退款</a>
+					<a  href="javascript:void(0)" onclick="pager._popUp('{{:orderId}}')">分配</a>
 				</td>
 			{{/if}}	
 		</tr>		
@@ -278,6 +342,7 @@
 	<td>
 		<a  href="javascript:void(0)" onclick="pager._detailPage('{{:orderId}}')">查看</a>
 		<a href="javascript:void(0)" class="adopt" onclick="pager._rejectRefundOrder('{{:orderId}}')">退款</a>
+		<a  href="javascript:void(0)" onclick="pager._popUp('{{:orderId}}')">分配</a>
 	</td>	
 	</tr>			
 {{/if}}                                                                  

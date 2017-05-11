@@ -256,7 +256,7 @@
 					            	 	<!--按钮-->
 										<div class="row mt-15"><!--删格化-->
 					                         <p class="center pr-10 mt-8">
-					                         	<input type="button" class="biu-btn  btn-primary  btn-auto  ml-5" id="update" value="确  认">
+					                         	<input type="button" class="biu-btn  btn-primary  btn-auto  ml-5" id="rework" value="确  认">
 					                         	<input id="edit-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5" value="取  消">
 					                         </p>
 					                     </div>

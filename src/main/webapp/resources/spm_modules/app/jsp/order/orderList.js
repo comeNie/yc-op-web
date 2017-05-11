@@ -40,7 +40,7 @@ define('app/jsp/order/orderList', function (require, exports, module) {
             "click #colseImage":"_closeDialog",
             "click #edit-close":"_closeReturnDialog",
             "click #colseImageReturn":"_closeReturnDialog",
-            "click #update":"_returnWork"
+            "click #rework":"_returnWork"
             
         },
     	//重写父类

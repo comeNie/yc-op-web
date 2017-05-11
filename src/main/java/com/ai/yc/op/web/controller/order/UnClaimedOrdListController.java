@@ -15,15 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.PageInfo;
+import com.ai.opt.base.vo.ResponseHeader;
 import com.ai.opt.sdk.components.ccs.CCSClientFactory;
 import com.ai.opt.sdk.components.excel.client.AbstractExcelHelper;
 import com.ai.opt.sdk.components.excel.factory.ExcelFactory;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.CollectionUtil;
+import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.util.StringUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
+import com.ai.opt.sso.client.filter.SSOClientConstants;
 import com.ai.paas.ipaas.ccs.IConfigClient;
 import com.ai.yc.common.api.cache.interfaces.ICacheSV;
 import com.ai.yc.common.api.cache.param.SysParam;
@@ -34,6 +38,7 @@ import com.ai.yc.op.web.model.order.ExAllOrder;
 import com.ai.yc.op.web.model.order.OrdTransLevelVo;
 import com.ai.yc.op.web.model.order.OrderPageQueryParams;
 import com.ai.yc.op.web.model.order.OrderPageResParam;
+import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
 import com.ai.yc.op.web.utils.AmountUtil;
 import com.ai.yc.op.web.utils.TimeZoneTimeUtil;
 import com.ai.yc.order.api.orderquery.interfaces.IOrderQuerySV;
@@ -41,6 +46,10 @@ import com.ai.yc.order.api.orderquery.param.OrdOrderVo;
 import com.ai.yc.order.api.orderquery.param.OrdProdLevelVo;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRequest;
 import com.ai.yc.order.api.orderquery.param.QueryOrderRsponse;
+import com.ai.yc.order.api.orderreceive.interfaces.IOrderReceiveSV;
+import com.ai.yc.order.api.orderreceive.param.OrderBackReceiveRequest;
+import com.ai.yc.order.api.orderreceive.param.OrderReceiveBaseInfo;
+import com.ai.yc.order.api.orderreceive.param.OrderReceiveStateChgInfo;
 @Controller
 public class UnClaimedOrdListController {
 private static final Logger logger = Logger.getLogger(UnClaimedOrdListController.class);
@@ -651,5 +660,73 @@ private static final Logger logger = Logger.getLogger(UnClaimedOrdListController
 		} catch (Exception e) {
 			logger.error("导出订单列表失败："+e.getMessage(), e);
 		}
+	}
+    /**
+     * 领取人员信息查询
+     */
+    @RequestMapping("/getUserPageData")
+    @ResponseBody
+    public ResponseData<PageInfo<OrderPageResParam>> getUserList(HttpServletRequest request,OrderPageQueryParams queryRequest)throws Exception{
+    	ResponseData<PageInfo<OrderPageResParam>> responseData = null;
+    	List<OrderPageResParam> resultList = new ArrayList<OrderPageResParam>();
+    	PageInfo<OrderPageResParam> resultPageInfo  = new PageInfo<OrderPageResParam>();
+	    try{
+	    	QueryOrderRequest ordReq = new QueryOrderRequest();
+	    	BeanUtils.copyProperties(ordReq, queryRequest);
+	    	String pgeOrderId = queryRequest.getOrderPageId();
+			ordReq.setState(Constants.State.UN_CLAIM_STATE);
+			String strPageNo=(null==request.getParameter("pageNo"))?"1":request.getParameter("pageNo");
+		    String strPageSize=(null==request.getParameter("pageSize"))?"10":request.getParameter("pageSize");
+		    ordReq.setPageNo(Integer.parseInt(strPageNo));
+		    ordReq.setPageSize(Integer.parseInt(strPageSize));
+		    IOrderQuerySV orderQuerySV = DubboConsumerFactory.getService(IOrderQuerySV.class);
+		    ICacheSV iCacheSV = DubboConsumerFactory.getService(ICacheSV.class);
+		    QueryOrderRsponse orderListResponse = orderQuerySV.queryOrder(ordReq);
+			if (orderListResponse != null && orderListResponse.getResponseHeader().isSuccess()) {
+				PageInfo<OrdOrderVo> pageInfo = orderListResponse.getPageInfo();
+				BeanUtils.copyProperties(resultPageInfo, pageInfo);
+				List<OrdOrderVo> orderList = pageInfo.getResult();
+				if(!CollectionUtil.isEmpty(orderList)){
+					for(OrdOrderVo vo:orderList){
+						OrderPageResParam resParam = new OrderPageResParam();
+						BeanUtils.copyProperties(resParam, vo);
+						resultList.add(resParam);
+					}
+				}
+				resultPageInfo.setResult(resultList);
+				responseData = new ResponseData<PageInfo<OrderPageResParam>>(ResponseData.AJAX_STATUS_SUCCESS, "查询成功",resultPageInfo);
+			} else {
+				responseData = new ResponseData<PageInfo<OrderPageResParam>>(ResponseData.AJAX_STATUS_FAILURE, "查询失败", null);
+			}
+		} catch (Exception e) {
+			logger.error("查询用户列表失败：", e);
+			responseData = new ResponseData<PageInfo<OrderPageResParam>>(ResponseData.AJAX_STATUS_FAILURE, "查询信息异常", null);
+		}
+	    return responseData;
+    }
+    
+    /**
+	 * 分配订单
+	 */
+	@RequestMapping("/receiveOrder")
+	@ResponseBody
+	public ResponseData<String> receiveOrder(HttpServletRequest request,String orderId,String interperId) {
+		ResponseData<String> responseData = null;
+		IOrderReceiveSV iOrderReceiveSV = DubboConsumerFactory.getService(IOrderReceiveSV.class);
+		GeneralSSOClientUser user = (GeneralSSOClientUser) request.getSession().getAttribute(SSOClientConstants.USER_SESSION_KEY);
+		OrderBackReceiveRequest receiveRequest  = new OrderBackReceiveRequest();
+		receiveRequest.setOrderId(Long.valueOf(orderId));
+		receiveRequest.setInterperId(interperId);
+		receiveRequest.setState("");
+		receiveRequest.setOperName(user.getUsername());
+		BaseResponse response = iOrderReceiveSV.orderBackReceive(receiveRequest);
+		ResponseHeader header = response.getResponseHeader();
+		if (null != header && !header.isSuccess()){
+            responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_FAILURE, "修改失败:"+header.getResultMessage());
+            logger.error("分配订单失败："+header.getResultMessage());
+        }else{
+        	responseData = new ResponseData<String>(ResponseData.AJAX_STATUS_SUCCESS, "修改成功");
+        }
+        return responseData;
 	}
 }

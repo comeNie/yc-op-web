@@ -31,7 +31,10 @@ define('app/jsp/order/unClaimedOrderList', function (require, exports, module) {
     		 "click #showQuery":"_showQueryInfo",
     		//查询
             "click #search":"_searchOrderList",
-            "click #export":"_export"
+            "click #export":"_export",
+            "click #closeImage":"_closeDialog",
+            "click #close":"_closeDialog",   
+            "click #userSearch":"_searchUserList"
             
         },
     	//重写父类
@@ -278,6 +281,60 @@ define('app/jsp/order/unClaimedOrderList', function (require, exports, module) {
 				message: "保存数据中，请等待...",
 				url: _base + "/refundApply",
 				data: param,
+				success: function (data) {
+					window.location.href=_base+"/toUnclaimOrderList";
+				}
+			});
+		},
+		//弹出框
+    	_popUp:function(orderId){
+    		var _this= this;
+    		$("#selectOrderId").val(orderId);
+			//弹出框展示
+			$('#eject-mask').fadeIn(100);
+			$('#user').slideDown(200);
+    	},
+    	_closeDialog:function(){
+    		$('#eject-mask').fadeOut(100);
+    		$('#user').slideUp(150);
+    	},
+    	_searchUserList:function(){
+			var _this=this;
+			var url = _base+"/getUserPageData";
+			$("#paginationUser").runnerPagination({
+				url:url,
+				method: "POST",
+				dataType: "json",
+				messageId:"showMessage",
+				renderId:"userListData",
+				data : {"userName":jQuery.trim($("#nickName").val())},
+				pageSize: UnClaimedOrderListPager.DEFAULT_PAGE_SIZE,
+				visiblePages:5,
+				message: "正在为您查询数据..",
+				render: function (data) {
+					if(data&&data.length>0){
+						var template = $.templates("#userListTemple");
+						var htmlOut = template.render(data);
+						$("#userListData").html(htmlOut);
+					}else{
+						$("#userListData").html("未搜索到信息");
+					}
+				},
+			});
+		},
+		_selectUser:function(){
+			var userId = $("input[name='radio']:checked").val();
+			var orderId = $("#selectOrderId").val();
+			var _this=this;
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "保存数据中，请等待...",
+				url: _base + "/receiveOrder",
+				data: {
+					interperId:userId,
+					orderId:orderId
+				},
 				success: function (data) {
 					window.location.href=_base+"/toUnclaimOrderList";
 				}
