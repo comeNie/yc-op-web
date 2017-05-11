@@ -65,17 +65,17 @@ define('app/jsp/sysdomain/addSysDomain', function (require, exports, module) {
 		_cheDomainCn:function(){
 			var _this = this;
 			var domainCn = $("#domainCn").val();
-			var language = $("#language").val();
-			if(domainCn != "" && domainCn != null && language != "" && language != null){
+			/*var language = $("#language").val();*/
+			if(domainCn != "" && domainCn != null){
 				$.ajax({
 					type: "post",
 					data: {
-						domainCn,language
+						domainCn
 					},
 					url: _base + "/sysdomain/checkDomainCn",
 					success: function (data) {
 						if(data >= 1){
-							$(".check").html("该语言下此名称已存在");
+							$(".check").html("此名称已存在");
 							$("#save").attr("disabled", true); 
 						}else{
 							$(".check").html("");

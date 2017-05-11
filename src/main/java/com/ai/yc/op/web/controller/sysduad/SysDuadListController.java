@@ -90,6 +90,7 @@ public class SysDuadListController {
     	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
+    	req.setLanguage("1");
     	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
     	BaseResponse saveSysDuad = querySysDuadSV.saveSysDuad(req);
     	if(saveSysDuad.getResponseHeader().getIsSuccess()==false){
@@ -107,6 +108,7 @@ public class SysDuadListController {
     	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
+    	req.setLanguage("1");
     	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
     	BaseResponse updateSysDuad = querySysDuadSV.updateSysDuad(req);
     	if(updateSysDuad.getResponseHeader().getIsSuccess()==false){

@@ -156,10 +156,10 @@
 												</p>
 											</div>
 											<div class="form-label mt-10">
-												<ul>
+											<input id="domainId" name="domainId" type="hidden" />
+												<!-- <ul>
 													<li>
 														<p class="word">地区语言:</p>
-														<input id="domainId" name="domainId" type="hidden" />
 														<p>
 															<select class="select select-medium" id="language"
 																name="language">
@@ -169,7 +169,7 @@
 														</p>
 														<p id="errorMessage"></p>
 													</li>
-												</ul>
+												</ul> -->
 												<ul>
 													<li>
 														<p class="word">站点*:</p>
@@ -283,7 +283,7 @@
 	 
 	  <td>{{:sort}}</td>
 	  <td>
-			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}
+			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', updatetime)}}
 	  </td>
 	  <td>
 		  {{if  state == '0'}}
@@ -294,7 +294,7 @@
 	  </td>     
 	  <td>
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:domainId}}')">删除</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:domainId}}','{{:language}}','{{:site}}','{{:domainCn}}','{{:remarks)}}','{{:sort}}','{{:state)}}')">修改</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:domainId}}','{{:site}}','{{:domainCn}}','{{:remarks)}}','{{:sort}}','{{:state)}}')">修改</a>
 	  </td>
     </tr>
 </script>

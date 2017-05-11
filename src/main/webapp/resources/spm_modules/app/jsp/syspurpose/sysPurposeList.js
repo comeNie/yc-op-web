@@ -134,9 +134,9 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
 				}
 			});
 		},
-		_show:function(purposeId,language,site,purposeCn,remarks,sort,state){
+		_show:function(purposeId,site,purposeCn,remarks,sort,state){
 			var _this= this;
-    		$("#language").val("");
+    		//$("#language").val("");
     		$("#purposeId").val("");
     		$("#updatePurposeCn").val("");
     		$("#updateRemarks").val("");
@@ -145,7 +145,7 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
 			$('#eject-mask').fadeIn(100);
 			$('#add-samll').slideDown(200);
 			
-			$("#language").val(language);
+			//$("#language").val(language);
     		$("#updatePurposeCn").val(purposeCn);
     		$("#updateRemarks").val(remarks);
     		$("#updateSort").val(sort);

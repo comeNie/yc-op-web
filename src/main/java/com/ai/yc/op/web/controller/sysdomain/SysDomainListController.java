@@ -91,6 +91,7 @@ public class SysDomainListController {
     	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
+    	req.setLanguage("1");
     	IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
     	BaseResponse saveSysDomain = querySysDomainSV.saveSysDomain(req);
     	if(saveSysDomain.getResponseHeader().getIsSuccess()==false){
@@ -108,6 +109,7 @@ public class SysDomainListController {
     	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
+    	req.setLanguage("1");
     	IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
     	BaseResponse updateSysDomain = querySysDomainSV.updateSysDomain(req);
     	if(updateSysDomain.getResponseHeader().getIsSuccess()==false){

@@ -43,18 +43,18 @@
 												</select>
 											</p>
 										</li>
-										<li class="col-md-6">
+										<!-- <li class="col-md-6">
 											<p class="word">地区语言</p>
 											<p>
 												<select class="select select-medium" id="language">
 													<option value="" selected="selected">全部</option>
-													<!-- 启用 -->
+													启用
 													<option value="1">中文</option>
-													<!-- 禁用 --> 
+													禁用 
 													<option value="2">英文</option>
 												</select>
 											</p>
-										</li>
+										</li> -->
 										<li class="col-md-6">
 											<p class="word">站点</p>
 											<p>
@@ -181,7 +181,7 @@
 												</p>
 											</div>
 											<div class="form-label mt-10">
-												<ul>
+												<!-- <ul>
 													<li>
 														<p class="word">地区语言</p>
 														<p>
@@ -191,7 +191,7 @@
 																<option value="2">英语</option>
 															</select>
 													</li>
-												</ul>
+												</ul> -->
 												<ul>
 													<li>
 														<p class="word">站点*</p>
@@ -394,7 +394,7 @@
 	  </td>     
 	  <td>
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:duadId}}')">查看</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:duadId}}','{{:language}}','{{:site}}','{{:sourceCn}}','{{:targetCn)}}','{{:ordinary}}','{{:ordinaryUrgent}}','{{:professional}}','{{:professionalUrgent}}','{{:publish}}','{{:publishUrgent}}','{{:sort}}','{{:state}}','{{:ordinaryDollar}}','{{:ourgentDollar}}','{{:professionalDollar}}','{{:purgentDollar}}','{{:publishDollar}}','{{:puburgentDollar}}')">修改</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:duadId}}','{{:site}}','{{:sourceCn}}','{{:targetCn)}}','{{:ordinary}}','{{:ordinaryUrgent}}','{{:professional}}','{{:professionalUrgent}}','{{:publish}}','{{:publishUrgent}}','{{:sort}}','{{:state}}','{{:ordinaryDollar}}','{{:ourgentDollar}}','{{:professionalDollar}}','{{:purgentDollar}}','{{:publishDollar}}','{{:puburgentDollar}}')">修改</a>
 	  </td>
     </tr>
 </script>

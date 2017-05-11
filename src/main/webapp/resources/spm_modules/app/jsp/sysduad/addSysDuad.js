@@ -66,17 +66,17 @@ define('app/jsp/sysduad/addSysDuad', function (require, exports, module) {
 			var _this = this;
 			var sourceCn = $("#sourceCn").val();
 			var targetCn = $("#targetCn").val();
-			var language = $("#language").val();
-			if(sourceCn != "" && sourceCn != null && language != "" && language != null && targetCn != "" && targetCn != null){
+			//var language = $("#language").val();
+			if(sourceCn != "" && sourceCn != null && targetCn != "" && targetCn != null){
 				$.ajax({
 					type: "post",
 					data: {
-						sourceCn,targetCn,language
+						sourceCn,targetCn
 					},
 					url: _base + "/sysduad/checkDuadCn",
 					success: function (data) {
 						if(data >= 1){
-							$(".check").html("该语言下此语言对已存在");
+							$(".check").html("此语言对已存在");
 							$("#save").attr("disabled", true); 
 						}else{
 							$(".check").html("");

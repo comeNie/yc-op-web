@@ -29,7 +29,7 @@
 								<!-- form表单 -->
 								<div class="form-label mt-10">
 								<form id="dataForm">
-									<ul>
+									<!-- <ul>
 										<li>
 										    <p class="word">地区语言</p>
 											<p>
@@ -38,7 +38,7 @@
 															<option value="2">英语</option>
 												</select>
 										</li>
-									</ul>
+									</ul> -->
 									<ul>
 										<li>
 										    <p class="word">站点*</p>

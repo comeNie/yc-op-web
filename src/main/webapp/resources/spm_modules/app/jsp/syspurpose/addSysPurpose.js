@@ -65,17 +65,17 @@ define('app/jsp/syspurpose/addSysPurpose', function (require, exports, module) {
 		_chePurposeCn:function(){
 			var _this = this;
 			var purposeCn = $("#purposeCn").val();
-			var language = $("#language").val();
-			if(purposeCn != "" && purposeCn != null && language != "" && language != null){
+			/*var language = $("#language").val();*/
+			if(purposeCn != "" && purposeCn != null){
 				$.ajax({
 					type: "post",
 					data: {
-						purposeCn,language
+						purposeCn
 					},
 					url: _base + "/syspurpose/checkPurposeCn",
 					success: function (data) {
 						if(data >= 1){
-							$(".check").html("该语言下此名称已存在");
+							$(".check").html("此名称已存在");
 							$("#save").attr("disabled", true); 
 						}else{
 							$(".check").html("");

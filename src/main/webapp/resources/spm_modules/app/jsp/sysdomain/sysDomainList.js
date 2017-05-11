@@ -114,9 +114,9 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
 				}
 			});
 		},
-		_show:function(domainId,language,site,domainCn,remarks,sort,state){
+		_show:function(domainId,site,domainCn,remarks,sort,state){
 			var _this= this;
-    		$("#language").val("");
+    		//$("#language").val("");
     		$("#domainId").val("");
     		$("#updateDomainCn").val("");
     		$("#updateRemarks").val("");
@@ -128,7 +128,7 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
 			$('#eject-mask').fadeIn(100);
 			$('#add-samll').slideDown(200);
 			
-			$("#language").val(language);
+			//$("#language").val(language);
     		$("#updateDomainCn").val(domainCn);
     		$("#updateRemarks").val(remarks);
     		$("#updateSort").val(sort);

@@ -64,9 +64,9 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
 					var d=data.data;
 					$.each(d,function(index,item){
 						if(d[index].language == '2'){
-							var langugeName = "英文"+"->"+d[index].sourceCn+"->"+d[index].targetCn;
+							var langugeName = d[index].sourceCn+"->"+d[index].targetCn;
 						}else{
-							var langugeName = "中文"+"->"+d[index].sourceCn+"->"+d[index].targetCn;
+							var langugeName = d[index].sourceCn+"->"+d[index].targetCn;
 						}
 						var langugeCode = d[index].duadId;
 						$("#langugePaire").append('<option value="'+langugeCode+'">'+langugeName+'</option>');
@@ -117,9 +117,9 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     			"duadId":jQuery.trim($("#langugePaire option:selected").val())
     		}
     	},
-    	_show:function(duadId,language,site,sourceCn,targetCn,ordinary,ordinaryUrgent,professional,professionalUrgent,publish,publishUrgent,sort,state,ordinaryDollar,ourgentDollar,professionalDollar,purgentDollar,publishDollar,puburgentDollar){
+    	_show:function(duadId,site,sourceCn,targetCn,ordinary,ordinaryUrgent,professional,professionalUrgent,publish,publishUrgent,sort,state,ordinaryDollar,ourgentDollar,professionalDollar,purgentDollar,publishDollar,puburgentDollar){
 			var _this= this;
-    		$("#language").val("");
+    		//$("#language").val("");
     		$("#duadId").val("");
     		$("#sourceCn").val("");
     		$("#targetCn").val("");
@@ -139,7 +139,7 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
 			// 弹出框展示
 			$('#eject-mask').fadeIn(100);
 			$('#add-samll').slideDown(200);
-			$("#language").val(language);
+			//$("#language").val(language);
     		$("#duadId").val(duadId);
     		$("#sourceCn").val(sourceCn);
     		$("#targetCn").val(targetCn);

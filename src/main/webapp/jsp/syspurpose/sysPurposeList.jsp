@@ -133,9 +133,10 @@
 											<p class="img" id="colseImage"><i class="fa fa-times" ></i></p>
 										</div>
 										<div class="form-label mt-10">
-							           		<ul>
+										<input id="purposeId" name="purposeId" type="hidden"/>
+							           		 <!-- <ul>
 												<li>
-													<p class="word">地区语言:</p><input id="purposeId" name="purposeId" type="hidden"/>
+													<p class="word">地区语言:</p>
 													<p>
 														<select class="select select-medium" id="language" name="language">
 															<option value="1">中文</option>
@@ -144,7 +145,7 @@
 													</p>
 													<p id="errorMessage"></p>
 												</li>
-											</ul>
+											</ul>  -->
 											<ul>
 								                <li>
 								                    <p class="word">站点*:</p>
@@ -244,8 +245,6 @@
       <td>
 		 {{if  language == '1'}}
 		  	中文
-		  {{else language == '2'}}
-		  	英语
 		  {{/if}}
 	  </td>
 	 
@@ -262,7 +261,7 @@
 	  </td>     
 	  <td>
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:purposeId}}')">删除</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:purposeId}}','{{:language}}','{{:site}}','{{:purposeCn}}','{{:remarks)}}','{{:sort}}','{{:state)}}')">修改</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:purposeId}}','{{:site}}','{{:purposeCn}}','{{:remarks)}}','{{:sort}}','{{:state)}}')">修改</a>
 	  </td>
     </tr>
 </script>

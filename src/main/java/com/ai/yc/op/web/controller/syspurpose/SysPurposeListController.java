@@ -90,6 +90,7 @@ public class SysPurposeListController {
     	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
+    	req.setLanguage("1");
     	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
     	BaseResponse saveSysPurpose = querySysPurposeSV.saveSysPurpose(req);
     	if(saveSysPurpose.getResponseHeader().getIsSuccess()==false){
@@ -107,6 +108,7 @@ public class SysPurposeListController {
     	req.setCreateOperator(loginUser.getLoginName());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
+    	req.setLanguage("1");
     	IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
     	BaseResponse updateSysPurpose = querySysPurposeSV.updateSysPurpose(req);
     	if(updateSysPurpose.getResponseHeader().getIsSuccess()==false){
