@@ -100,9 +100,9 @@ dependencies {
 	compile 'com.ai.yc.order:orderreprocess:1.0-SNAPSHOT'
 	/********************公共中心*************************/
 	compile 'com.ai.yc.common:cache:1.0-SNAPSHOT'
-	compile 'com.ai.yc.common:syspurpose:1.0-SNAPSHOT'
-	compile 'com.ai.yc.common:sysdomain:1.0-SNAPSHOT'
-	compile 'com.ai.yc.common:sysduad:1.0-SNAPSHOT'
+	compile 'com.ai.yc.common:syspurpose:1.0.1-SNAPSHOT'
+	compile 'com.ai.yc.common:sysdomain:1.0.1-SNAPSHOT'
+	compile 'com.ai.yc.common:sysduad:1.0.1-SNAPSHOT'
 	/********************用户中心*************************/
 	compile 'com.ai.yc.user:userservice:1.0-SNAPSHOT'
 	compile 'com.ai.yc.translator:translatorservice:1.1-SNAPSHOT'

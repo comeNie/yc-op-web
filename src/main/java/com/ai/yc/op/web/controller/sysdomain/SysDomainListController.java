@@ -89,6 +89,7 @@ public class SysDomainListController {
     public ResponseData<Boolean> insertSysDomain(SaveSysDomain req){
     	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());
+    	req.setCreateOperatorId(loginUser.getUserId());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	req.setLanguage("1");
@@ -107,6 +108,7 @@ public class SysDomainListController {
     public ResponseData<Boolean> updateSysDomain(SaveSysDomain req){
     	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());
+    	req.setCreateOperatorId(loginUser.getUserId());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	req.setLanguage("1");

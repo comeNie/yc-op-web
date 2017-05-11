@@ -88,6 +88,7 @@ public class SysDuadListController {
     public ResponseData<Boolean> insertSysDuad(SaveSysDuad req){
     	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());
+    	req.setCreateOperatorId(loginUser.getUserId());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	req.setLanguage("1");
@@ -106,6 +107,7 @@ public class SysDuadListController {
     public ResponseData<Boolean> updateSysDuad(SaveSysDuad req){
     	GeneralSSOClientUser loginUser = LoginUtil.getLoginUser();
     	req.setCreateOperator(loginUser.getLoginName());
+    	req.setCreateOperatorId(loginUser.getUserId());
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	req.setLanguage("1");
