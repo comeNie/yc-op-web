@@ -117,13 +117,18 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     			"duadId":jQuery.trim($("#langugePaire option:selected").val())
     		}
     	},
-    	_show:function(duadId,site,sourceCn,targetCn,ordinary,ordinaryUrgent,professional,professionalUrgent,publish,publishUrgent,sort,state,ordinaryDollar,ourgentDollar,professionalDollar,purgentDollar,publishDollar,puburgentDollar){
+    	_show:function(duadId,site,sourceCn,sourceEn,sourceCode,targetCn,targetEn,targetCode,orderType,ordinary,ordinaryUrgent,professional,professionalUrgent,publish,publishUrgent,sort,state,ordinaryDollar,ourgentDollar,professionalDollar,purgentDollar,publishDollar,puburgentDollar){
 			var _this= this;
     		//$("#language").val("");
     		$("#duadId").val("");
     		$("#sourceCn").val("");
+    		$("#sourceEn").val("");
+    		$("#sourceCode").val("");
     		$("#targetCn").val("");
-    		$("#ordinary").val("");
+    		$("#targetEn").val("");
+    		$("#targetCode").val("");
+    		$("#targetCode").val("");
+    		$("#orderType").val("");
     		$("#ordinaryUrgent").val("");
     		$("#professional").val("");
     		$("#professionalUrgent").val("");
@@ -142,7 +147,12 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
 			//$("#language").val(language);
     		$("#duadId").val(duadId);
     		$("#sourceCn").val(sourceCn);
+    		$("#sourceEn").val(sourceEn);
+    		$("#sourceCode").val(sourceCode);
     		$("#targetCn").val(targetCn);
+    		$("#targetEn").val(targetEn);
+    		$("#targetCode").val(targetCode);
+    		$("#orderType").val(orderType);
     		$("#ordinary").val(ordinary);
     		$("#ordinaryUrgent").val(ordinaryUrgent);
     		$("#professional").val(professional);
@@ -199,7 +209,19 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     				"sourceCn":{
     					required:true
     				},
+    				"sourceEn":{
+    					required:true
+    				},
+    				"sourceCode":{
+    					required:true
+    				},
     				"targetCn":{
+    					required:true
+    				},
+    				"targetEn":{
+    					required:true
+    				},
+    				"targetCode":{
     					required:true
     				},
     				"ordinary":{
@@ -244,10 +266,22 @@ define('app/jsp/sysduad/sysDuadList', function (require, exports, module) {
     					required:"请选择站点"
     				},
     				"sourceCn":{
-    					required:"请输入领域名称"
+    					required:"请输入源语言中文名称"
+    				},
+    				"sourceEn":{
+    					required:"请输入源语言英文文名称"
+    				},
+    				"sourceCode":{
+    					required:"请输入源语言编码"
     				},
     				"targetCn":{
-    					required:"请输入领域名称"
+    					required:"请输入目标语言中文名称"
+    				},
+    				"targetEn":{
+    					required:"请输入目标语言英文名称"
+    				},
+    				"targetCode":{
+    					required:"请输入目标语言编码"
     				},
     				"ordinary":{
     					required:"请输入普通级翻译价格"

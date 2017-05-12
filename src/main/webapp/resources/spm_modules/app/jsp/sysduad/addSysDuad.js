@@ -96,7 +96,19 @@ define('app/jsp/sysduad/addSysDuad', function (require, exports, module) {
 	    				"sourceCn":{
 	    					required:true
 	    				},
+	    				"sourceEn":{
+	    					required:true
+	    				},
+	    				"sourceCode":{
+	    					required:true
+	    				},
 	    				"targetCn":{
+	    					required:true
+	    				},
+	    				"targetEn":{
+	    					required:true
+	    				},
+	    				"targetCode":{
 	    					required:true
 	    				},
 	    				"ordinary":{
@@ -141,10 +153,22 @@ define('app/jsp/sysduad/addSysDuad', function (require, exports, module) {
 	    					required:"请选择站点"
 	    				},
 	    				"sourceCn":{
-	    					required:"请输入领域名称"
+	    					required:"请输入源语言中文名称"
+	    				},
+	    				"sourceEn":{
+	    					required:"请输入源语言英文名称"
+	    				},
+	    				"sourceCode":{
+	    					required:"请输入源语言编码"
 	    				},
 	    				"targetCn":{
-	    					required:"请输入领域名称"
+	    					required:"请输入目标语言中文名称"
+	    				},
+	    				"targetEn":{
+	    					required:"请输入目标语言英文名称"
+	    				},
+	    				"targetCode":{
+	    					required:"请输入目标语言编码"
 	    				},
 	    				"ordinary":{
 	    					required:"请输入普通级翻译价格"

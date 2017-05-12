@@ -43,18 +43,14 @@
 													<option value="1">译云-中文站</option>
 													<!-- app -->
 													<option value="2">译云-英文站</option>
-													<!-- app-hd -->
-													<option value="3">百度</option>
-													<!-- pc -->
-													<option value="4">金山</option>
 													<!-- app -->
-													<option value="5">wap-中文</option>
+													<option value="3">wap-中文</option>
 													<!-- app-hd -->
-													<option value="6">wap-英文</option>
+													<option value="4">wap-英文</option>
 													<!-- pc -->
-													<option value="7">找翻译</option>
+													<option value="5">找翻译</option>
 													<!-- app -->
-													<option value="8">微信助手</option>
+													<option value="6">微信助手</option>
 												</select>
 											</p>
 										</li>
@@ -175,23 +171,31 @@
 														<p class="word">站点*:</p>
 														<p>
 															&nbsp;&nbsp; <input type="radio" name="site" value="1" />译云-中文站
-															<input type="radio" name="site" value="2" />译云-英文站 <input
-																type="radio" name="site" value="3" />百度 <input
-																type="radio" name="site" value="4" />金山<br />&nbsp;&nbsp;
-															<input type="radio" name="site" value="5" />wap-中文 <input
-																type="radio" name="site" value="6" />wap-英文 <input
-																type="radio" name="site" value="7" />找翻译 <input
-																type="radio" name="site" value="8" />微信助手
+															<input type="radio" name="site" value="2" />译云-英文站
+															<input type="radio" name="site" value="3" />wap-中文 <br />&nbsp;&nbsp; <input
+																type="radio" name="site" value="4" />wap-英文 <input
+																type="radio" name="site" value="5" />找翻译 <input
+																type="radio" name="site" value="6" />微信助手
 														</p>
 													</li>
 												</ul>
 												<ul>
 													<li>
-														<p class="word">领域名称*:</p>
+														<p class="word">中文名称*:</p>
 														<p>
 															<input type="text" class="int-text int-small"
 																id="updateDomainCn" name="domainCn"> <input
 																type="hidden" id="realPurposeCn">
+														</p>
+													</li>
+												</ul>
+												<ul>
+													<li>
+														<p class="word">英文名称*:</p>
+														<p>
+															<input type="text" class="int-text int-small"
+																id="updateDomainEn" name="domainEn"> <input
+																type="hidden" id="realPurposeEn">
 														</p>
 													</li>
 												</ul>
@@ -260,16 +264,12 @@
 		  {{else site == '2'}}
 		    译云-英文站
 		  {{else site == '3'}}
-		     百度
-		  {{else site == '4'}}
-		     金山
-		  {{else site == '5'}}
 		  wap-中文
-		  {{else site == '6'}}
+		  {{else site == '4'}}
 		  wap-英文
-		  {{else site == '7'}}
+		  {{else site == '5'}}
 		      找翻译
-		  {{else site == '8'}}
+		  {{else site == '6'}}
 		      微信助手
 		  {{/if}}
 	  </td>      
@@ -294,7 +294,7 @@
 	  </td>     
 	  <td>
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:domainId}}')">删除</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:domainId}}','{{:site}}','{{:domainCn}}','{{:remarks)}}','{{:sort}}','{{:state)}}')">修改</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:domainId}}','{{:site}}','{{:domainCn}}','{{:domainEn}}','{{:remarks)}}','{{:sort}}','{{:state)}}')">修改</a>
 	  </td>
     </tr>
 </script>

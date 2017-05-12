@@ -134,11 +134,12 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
 				}
 			});
 		},
-		_show:function(purposeId,site,purposeCn,remarks,sort,state){
+		_show:function(purposeId,site,purposeCn,purposeEn,remarks,sort,state){
 			var _this= this;
     		//$("#language").val("");
     		$("#purposeId").val("");
     		$("#updatePurposeCn").val("");
+    		$("#updatePurposeEn").val("");
     		$("#updateRemarks").val("");
     		$("#updateSort").val("");
 			//弹出框展示
@@ -147,6 +148,7 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
 			
 			//$("#language").val(language);
     		$("#updatePurposeCn").val(purposeCn);
+    		$("#updatePurposeEn").val(purposeEn);
     		$("#updateRemarks").val(remarks);
     		$("#updateSort").val(sort);
     		$("#purposeId").val(purposeId);
@@ -174,6 +176,9 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
 	    					required:true,
 	    					maxlength:10
 	    				},
+	    				"purposeEn":{
+	    					required:true
+	    				},
 	    				"remarks":{
 	    					maxlength:50
 	    				},
@@ -186,8 +191,11 @@ define('app/jsp/syspurpose/sysPurposeList', function (require, exports, module) 
 	    					required:"请选择站点"
 	    				},
 	    				"purposeCn":{
-	    					required:"请输入用途名称",
+	    					required:"请输入中文名称",
 	    					maxlength:"用途名称10个字以内"
+	    				},
+	    				"purposeEn":{
+	    					required:"请输入英文名称"
 	    				},
 	    				"remarks":{
 	    					maxlength:"描述50个字以内"

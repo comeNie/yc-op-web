@@ -45,27 +45,59 @@
 										    <p>		&nbsp;&nbsp;
 													<input type="radio" class="site" name="site" value="1"/>译云-中文站
 													<input type="radio" class="site" name="site" value="2"/>译云-英文站
-													<input type="radio" class="site" name="site" value="3"/>百度
-													<input type="radio" class="site" name="site" value="4"/>金山<br/>&nbsp;&nbsp;
-													<input type="radio" class="site" name="site" value="5"/>wap-中文
-													<input type="radio" class="site" name="site" value="6"/>wap-英文
-													<input type="radio" class="site" name="site" value="7"/>找翻译
-													<input type="radio" class="site" name="site" value="8"/>微信助手
+													<input type="radio" class="site" name="site" value="3"/>wap-中文<br/>&nbsp;&nbsp;
+													<input type="radio" class="site" name="site" value="4"/>wap-英文
+													<input type="radio" class="site" name="site" value="5"/>找翻译
+													<input type="radio" class="site" name="site" value="6"/>微信助手
 											</p>
 										</li>
 									</ul>
 									<ul>
 										<li>
-										    <p class="word">源语言*</p>
+										    <p class="word">源语言中文*</p>
 											<p><input type="text" id="sourceCn" name="sourceCn" onblur="sourceCn()" class="int-text int-small" ></p><span class="check"></span>
 										</li>
 									 </ul>
 									 <ul>
 										<li>
-										    <p class="word">目标语言*:</p>
+										    <p class="word">源语言英文*</p>
+											<p><input type="text" id="sourceEn" name="sourceEn" class="int-text int-small" ></p>
+										</li>
+									 </ul>
+									 <ul>
+										<li>
+										    <p class="word">源语言编码*</p>
+											<p><input type="text" id="sourceCode" name="sourceCode" class="int-text int-small" ></p>
+										</li>
+									 </ul>
+									 <ul>
+										<li>
+										    <p class="word">目标语言中文*:</p>
 											<p><input type="text" id="targetCn" name="targetCn" onblur="sourceCn()" class="int-text int-small" ></p><span class="check"></span>
 										</li>
 									 </ul>
+									 <ul>
+										<li>
+										    <p class="word">目标语言英文*:</p>
+											<p><input type="text" id="targetEn" name="targetEn" class="int-text int-small" ></p>
+										</li>
+									 </ul>
+									 <ul>
+										<li>
+										    <p class="word">目标语言编码*</p>
+											<p><input type="text" id="targetCode" name="targetCode" class="int-text int-small" ></p>
+										</li>
+									 </ul>
+									 <ul>
+										<li>
+										    <p class="word">订单类型</p>
+											<p>
+												<select class="select select-medium" id="orderType" name="orderType">
+															<option value="1">口译</option>
+															<option value="2">笔译</option>
+												</select>
+										</li>
+									</ul>
 									 <ul>
 										<li>
 										    <p class="word">价格*(￥)</p>

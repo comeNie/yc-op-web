@@ -97,6 +97,9 @@ define('app/jsp/sysdomain/addSysDomain', function (require, exports, module) {
 	    					required:true,
 	    					maxlength:10
 	    				},
+	    				"domainEn":{
+	    					required:true
+	    				},
 	    				"remarks":{
 	    					maxlength:50
 	    				},
@@ -109,8 +112,11 @@ define('app/jsp/sysdomain/addSysDomain', function (require, exports, module) {
 	    					required:"请选择站点"
 	    				},
 	    				"domainCn":{
-	    					required:"请输入领域名称",
+	    					required:"请输入中文名称",
 	    					maxlength:"用途名称10个字以内"
+	    				},
+	    				"domainEn":{
+	    					required:"请输入英文名称"
 	    				},
 	    				"remarks":{
 	    					maxlength:"描述50个字以内"

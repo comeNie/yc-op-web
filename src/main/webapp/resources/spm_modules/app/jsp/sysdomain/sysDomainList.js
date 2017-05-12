@@ -114,11 +114,12 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
 				}
 			});
 		},
-		_show:function(domainId,site,domainCn,remarks,sort,state){
+		_show:function(domainId,site,domainCn,domainEn,remarks,sort,state){
 			var _this= this;
     		//$("#language").val("");
     		$("#domainId").val("");
     		$("#updateDomainCn").val("");
+    		$("#updateDomainEn").val("");
     		$("#updateRemarks").val("");
     		$("#updateSort").val("");
     		
@@ -130,6 +131,7 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
 			
 			//$("#language").val(language);
     		$("#updateDomainCn").val(domainCn);
+    		$("#updateDomainEn").val(domainEn);
     		$("#updateRemarks").val(remarks);
     		$("#updateSort").val(sort);
     		$("#domainId").val(domainId);
@@ -179,6 +181,9 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
 	    					required:true,
 	    					maxlength:10
 	    				},
+	    				"domainEn":{
+	    					required:true
+	    				},
 	    				"remarks":{
 	    					maxlength:50
 	    				},
@@ -191,8 +196,11 @@ define('app/jsp/sysdomain/sysDomainList', function (require, exports, module) {
 	    					required:"请选择站点"
 	    				},
 	    				"domainCn":{
-	    					required:"请输入用途名称",
+	    					required:"请输入中文名称",
 	    					maxlength:"用途名称10个字以内"
+	    				},
+	    				"domainEn":{
+	    					required:"请输入英文名称"
 	    				},
 	    				"remarks":{
 	    					maxlength:"描述50个字以内"

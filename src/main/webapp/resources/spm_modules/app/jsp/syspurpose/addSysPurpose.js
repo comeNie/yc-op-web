@@ -97,6 +97,9 @@ define('app/jsp/syspurpose/addSysPurpose', function (require, exports, module) {
 	    					required:true,
 	    					maxlength:10
 	    				},
+	    				"purposeEn":{
+	    					required:true
+	    				},
 	    				"remarks":{
 	    					maxlength:50
 	    				},
@@ -109,8 +112,11 @@ define('app/jsp/syspurpose/addSysPurpose', function (require, exports, module) {
 	    					required:"请选择站点"
 	    				},
 	    				"purposeCn":{
-	    					required:"请输入用途名称",
+	    					required:"请输入中文名称",
 	    					maxlength:"用途名称10个字以内"
+	    				},
+	    				"purposeEn":{
+	    					required:"请输入英文名称"
 	    				},
 	    				"remarks":{
 	    					maxlength:"描述50个字以内"

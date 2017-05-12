@@ -37,20 +37,24 @@
 										    <p>		&nbsp;&nbsp;
 													<input type="radio" class="site" name="site" value="1"/>译云-中文站
 													<input type="radio" class="site" name="site" value="2"/>译云-英文站
-													<input type="radio" class="site" name="site" value="3"/>百度
-													<input type="radio" class="site" name="site" value="4"/>金山<br/>&nbsp;&nbsp;
-													<input type="radio" class="site" name="site" value="5"/>wap-中文
-													<input type="radio" class="site" name="site" value="6"/>wap-英文
-													<input type="radio" class="site" name="site" value="7"/>找翻译
-													<input type="radio" class="site" name="site" value="8"/>微信助手
+													<input type="radio" class="site" name="site" value="3"/>wap-中文<br/>&nbsp;&nbsp;
+													<input type="radio" class="site" name="site" value="4"/>wap-英文
+													<input type="radio" class="site" name="site" value="5"/>找翻译
+													<input type="radio" class="site" name="site" value="6"/>微信助手
 											</p>
 										</li>
 									</ul>
 									<ul>
 										<li>
-										    <p class="word">用途名称*:</p>
+										    <p class="word">中文名称*:</p>
 											<p><input type="text" id="purposeCn" name="purposeCn" onblur="purposeCn()" class="int-text int-small" ></p>
 											<span class="check"></span>
+										</li>
+									 </ul>
+									 <ul>
+										<li>
+										    <p class="word">英文名称*:</p>
+											<p><input type="text" id="purposeEn" name="purposeEn" class="int-text int-small" ></p>
 										</li>
 									 </ul>
 									<ul>
