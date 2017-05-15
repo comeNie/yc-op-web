@@ -84,6 +84,15 @@
 							<li menuAttr="menu"><a href="${_base}/sysitembank/toSysItemBankList" target="mainFrame">题库列表</a></li>
 						</ul>
 						<!--二级菜单结束--></li>
+						<li><!-- 一级菜单--> 
+					<a href="#" class="dropdown-toggle"> 
+						<i class="fa fa-inbox"></i><span>系统管理</span> <i class="fa fa-chevron-circle-right drop-icon"></i>
+					</a> <!-- 一级菜单结束--> 
+						<!--二级菜单-->
+						<ul class="submenu">
+							<li menuAttr="menu"><a href="${_base}/sysbasic/toSysBasicList" target="mainFrame">基本设置</a></li>
+						</ul>
+						<!--二级菜单结束--></li>
 				</ul>
 			</div>
 		</div>

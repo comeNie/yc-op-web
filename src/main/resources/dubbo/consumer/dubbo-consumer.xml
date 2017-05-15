@@ -133,6 +133,9 @@
 					 interface="com.ai.yc.ucenter.api.members.interfaces.IYCUcMembersSV" />		
 	<!-- 题库管理 -->	
 	<dubbo:reference id="iQuerySysItemBankSV"
-		interface="com.ai.yc.common.api.sysitembank.interfaces.IQuerySysItemBankSV" />			 
+		interface="com.ai.yc.common.api.sysitembank.interfaces.IQuerySysItemBankSV" />
+	<!-- 基本设置 -->	
+	<dubbo:reference id="iQuerySysBasicSV"
+		interface="com.ai.yc.common.api.sysbasic.interfaces.IQuerySysBasicSV" />				 
 					 				 
 </beans>
