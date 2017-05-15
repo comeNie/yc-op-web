@@ -255,8 +255,9 @@
 														<p class="word">地区语言</p>
 														<p>
 															<select class="select select-medium" id="orderType" name="orderType">
-																<option value="1">口译</option>
-																<option value="2">笔译</option>
+																<option value="0">快速翻译</option>
+																<option value="1">文档翻译</option>
+																<option value="2">口译</option>
 															</select>
 													</li>
 												</ul>
