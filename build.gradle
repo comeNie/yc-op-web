@@ -133,8 +133,9 @@ dependencies {
     compile 'com.ai.slp.balance:incomeoutquery:1.0-SNAPSHOT'
     //题库管理服务
     compile 'com.ai.yc.common:sysitembank:1.0-SNAPSHOT'
+    //基本设置服务
+    compile 'com.ai.yc.common:sysconfig:1.0-SNAPSHOT'
     
-    compile 'com.ai.yc.common:sysbasic:1.0.1-SNAPSHOT'
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
 	jarPaths=configurations.optUedTemplate.files.asType(List)

@@ -1,4 +1,4 @@
-define('app/jsp/sysbasic/sysBasicList', function (require, exports, module) {
+define('app/jsp/sysconfig/sysConfigList', function (require, exports, module) {
     'use strict';
     var $=require('jquery'),
     Widget = require('arale-widget/1.2.0/widget'),
@@ -47,7 +47,7 @@ define('app/jsp/sysbasic/sysBasicList', function (require, exports, module) {
 				return false;
 			}
 			var param = $("#dataForm").serializeArray();
-			var url = _base + "/sysbasic/updateSysBasic";
+			var url = _base + "/sysconfig/updateSysConfig";
 			ajaxController.ajax({
 				type: "post",
 				dataType:"json",
