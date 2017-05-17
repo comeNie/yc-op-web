@@ -143,7 +143,75 @@
 									</nav>
 								  </div>
 								<!--分页结束-->
-								
+								<form id="dataForm" method="post">
+                            	<div class="eject-big">
+									<div class="eject-medium" id="add-samll" style="overflow:auto;width: 70%; left: 40%; top: 35%;height:500px;">
+										<div class="eject-medium-title">
+											<p>修改</p>
+											<p class="img" id="colseImage"><i class="fa fa-times" ></i></p>
+										</div>
+										<div class="form-label mt-10">
+										<input id="bid" name="bid" type="hidden"/>
+							           		 <ul>
+												<li>
+												    <p class="word">题库名称*:</p>
+													<p><input type="text" id="updateqname" name="qname" class="int-text int-small" ></p>
+												</li>
+											 </ul>
+											 <ul>
+												<li>
+												    <p class="word">语言方向:</p>
+													<p>
+														<select class="select select-medium" id="updatelangugePaire" name="langDir">
+														</select>
+												</li>
+											</ul>
+											<ul>
+								                <li>
+								                    <p class="word">站点*:</p>
+								                    <p>
+														&nbsp;&nbsp;
+														<input type="radio" class="site" name="site" value="1"/>译云-中文站
+														<input type="radio" class="site" name="site" value="2"/>译云-英文站
+														<input type="radio" class="site" name="site" value="3"/>wap-中文<br/>&nbsp;&nbsp;
+														<input type="radio" class="site" name="site" value="4"/>wap-英文
+														<input type="radio" class="site" name="site" value="5"/>找翻译
+														<input type="radio" class="site" name="site" value="6"/>微信助手
+													</p>
+								                </li>
+								              </ul>
+								              <ul>
+													<li>
+													    <p class="word">题型:</p>
+														<p>
+															<select class="select select-medium" id="updatequestionType" name="questionType">
+																<option value="0">单选题</option>
+																<option value="1">简答题</option>
+															</select>
+													</li>
+												</ul>
+											  <ul>
+													<li>
+													    <p class="word">状态:</p>
+														<p>
+															<input name="state" type="radio" value="0" />显示
+															<input name="state" type="radio" value="1" />隐藏
+														</p>
+													</li>
+												</ul>
+									    </div>	
+										<!--按钮-->
+										<div class="row mt-15"><!--删格化-->
+								               <p class="center pr-30 mt-30">
+								                   <input type="button" id="update" class="biu-btn  btn-primary  btn-auto  ml-5" value="提  交">
+								                   <input id="add-close" type="button" class="biu-btn  btn-primary  btn-auto  ml-5 edit-close" value="取  消">
+								                </p>
+								        </div>
+									</div>	
+									<div class="mask" id="eject-mask"></div>	
+								</div>
+                            </form>
+                            <!-- 弹出框 end-->
                             </div>
                         </div>
                     </div>
@@ -156,14 +224,29 @@
   	  <td>{{:bid}}</td>
       <td>{{:qname}}</td>
 	  <td>
-		  {{if  questionType == '1'}}
+		  {{if  questionType == '0'}}
 		    单选题
-		  {{else questionType == '2'}}
+		  {{else questionType == '1'}}
 		    简答题
 		  {{/if}}
 	  </td>      
       <td>{{:langDir}}</td>
 	  <td></td>
+	  <td>
+		  {{if  site == '1'}}
+		     译云-中文站
+		  {{else site == '2'}}
+		    译云-英文站
+		  {{else site == '3'}}
+		  wap-中文
+		  {{else site == '4'}}
+		  wap-英文
+		  {{else site == '5'}}
+		      找翻译
+		  {{else site == '6'}}
+		      微信助手
+		  {{/if}}
+	  </td>    
 	  <td>{{:aditor}}</td>
 	  <td>
 			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}
@@ -176,9 +259,9 @@
 		  {{/if}}
 	  </td>     
 	  <td>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._look()">查看</a>
- 		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete()">删除</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._show()">修改</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._look('{{:bid}}','{{:questionType}}')">查看</a>
+ 		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:bid}}')">删除</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:bid}}','{{:qname}}','{{:questionType}}','{{:site}}','{{:state}}')">修改</a>
 	  </td>
     </tr>
 </script>

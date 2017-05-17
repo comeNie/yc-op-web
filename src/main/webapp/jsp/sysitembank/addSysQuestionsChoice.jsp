@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>添加用途</title>
+<title>添加题库</title>
 <%@include file="/inc/inc.jsp" %>
 </head>
 <body>
@@ -21,66 +21,59 @@
 								<!-- form表单 -->
 								<div class="form-label mt-10">
 								<form id="dataForm">
-									<!-- <ul>
-										<li>
-										    <p class="word">地区语言:</p>
-											<p>
-												<select class="select select-medium" id="language" name="language">
-															<option value="1">中文</option>
-															<option value="2">英语</option>
-												</select>
-										</li>
-									</ul> -->
 									<ul>
 										<li>
-										    <p class="word">站点*:</p>
-										    <p>		&nbsp;&nbsp;
-													<input type="radio" class="site" name="site" value="1"/>译云-中文站
-													<input type="radio" class="site" name="site" value="2"/>译云-英文站
-													<input type="radio" class="site" name="site" value="3"/>wap-中文<br/>&nbsp;&nbsp;
-													<input type="radio" class="site" name="site" value="4"/>wap-英文
-													<input type="radio" class="site" name="site" value="5"/>找翻译
-													<input type="radio" class="site" name="site" value="6"/>微信助手
-											</p>
-										</li>
-									</ul>
-									<ul>
-										<li>
-										    <p class="word">中文名称*:</p>
-											<p><input type="text" id="purposeCn" name="purposeCn" onblur="purposeCn()" class="int-text int-small" ></p>
-											<span class="check"></span>
+											<input id="bid" name="bid" type="hidden" value="${bid}"/>
+											<input id="questionType" name="qtype" type="hidden" value="${questionType}"/>
+										    <p class="word">标题*:</p>
+											<p><input type="text" id="choiceQuestion" name="choiceQuestion" class="int-text int-small" ></p>
 										</li>
 									 </ul>
 									 <ul>
 										<li>
-										    <p class="word">英文名称*:</p>
-											<p><input type="text" id="purposeEn" name="purposeEn" class="int-text int-small" ></p>
+										    <p class="word">选项A*:</p>
+											<p><input type="text" id="optiona" name="optiona" class="int-text int-small" ></p>
 										</li>
 									 </ul>
-									<ul>
+									 <ul>
 										<li>
-										    <p class="word">描述:</p>
-										    <p>
-												<textarea  rows="4" cols="30" id="remarks" name="remarks" style="border: black 1px solid"></textarea>
-											</p>
+										    <p class="word">选项B*:</p>
+											<p><input type="text" id="optionb" name="optionb" class="int-text int-small" ></p>
 										</li>
-									</ul>
-									<ul>
+									 </ul>
+									 <ul>
 										<li>
-										    <p class="word">排序:</p>
-											<p><input type="text" id="sort" name="sort" class="int-text int-small"></p>
+										    <p class="word">选项C*:</p>
+											<p><input type="text" id="optionc" name="optionc" class="int-text int-small" ></p>
+										</li>
+									 </ul>
+									 <ul>
+										<li>
+										    <p class="word">选项D*:</p>
+											<p><input type="text" id="optiond" name="optiond" class="int-text int-small" ></p>
+										</li>
+									 </ul>
+									 <ul>
+										<li>
+										    <p class="word">正确答案:</p>
+											<p>
+												<select class="select select-medium" id="answer" name="answer">
+													<option value="A">A</option>
+													<option value="B">B</option>
+													<option value="C">C</option>
+													<option value="D">D</option>
+												</select>
 										</li>
 									</ul>
 									<ul>
 										<li>
 										    <p class="word">状态:</p>
 											<p>
-												<input name="state" type="radio" value="0" />显示
-												<input name="state" type="radio" value="1" />隐藏
+												<input name="status" type="radio" value="0" />显示
+												<input name="status" type="radio" value="1" />隐藏
 											</p>
 										</li>
 									</ul>
-									
 									</form>
 								   </div>
 								   
@@ -102,7 +95,7 @@
  <script type="text/javascript">
     var pager;
     (function () {
-        seajs.use('app/jsp/syspurpose/addSysPurpose', function (OrderListPager) {
+        seajs.use('app/jsp/sysitembank/addSysQuestionsChoice', function (OrderListPager) {
             pager = new OrderListPager({element: document.body});
             pager.render();
         });

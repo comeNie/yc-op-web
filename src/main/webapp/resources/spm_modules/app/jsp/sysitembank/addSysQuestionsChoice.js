@@ -1,4 +1,4 @@
-define('app/jsp/syspurpose/addSysPurpose', function (require, exports, module) {
+define('app/jsp/sysitembank/addSysQuestionsChoice', function (require, exports, module) {
     'use strict';
     var $=require('jquery'),
     Widget = require('arale-widget/1.2.0/widget'),
@@ -32,12 +32,12 @@ define('app/jsp/syspurpose/addSysPurpose', function (require, exports, module) {
     	//事件代理
     	events: {
     		"click #save":"_save",
-    		"click #add-close":"_closeDialog",
-    		"blur #purposeCn":"_chePurposeCn"
+    		"click #add-close":"_closeDialog"
         },
     	//重写父类
     	setup: function () {
     		var _this = this;
+    		this._bindLanguageSelect();
     		OrderListPager.superclass.setup.call(this);
     	},
 		_save:function(){
@@ -48,7 +48,7 @@ define('app/jsp/syspurpose/addSysPurpose', function (require, exports, module) {
 				return false;
 			}
 			var param = $("#dataForm").serializeArray();
-			var url = _base + "/syspurpose/insertSysPurpose";
+			var url = _base + "/sysquestions/insertSysQuestions";
 			ajaxController.ajax({
 				type: "post",
 				dataType:"json",
@@ -62,74 +62,54 @@ define('app/jsp/syspurpose/addSysPurpose', function (require, exports, module) {
 			});
 		},
 		
-		_chePurposeCn:function(){
-			var _this = this;
-			var purposeCn = $("#purposeCn").val();
-			/*var language = $("#language").val();*/
-			if(purposeCn != "" && purposeCn != null){
-				$.ajax({
-					type: "post",
-					data: {
-						purposeCn
-					},
-					url: _base + "/syspurpose/checkPurposeCn",
-					success: function (data) {
-						if(data >= 1){
-							$(".check").html("此名称已存在");
-							$("#save").attr("disabled", true); 
-						}else{
-							$(".check").html("");
-							$("#save").attr("disabled", false); 
-						}
-					}
-				});
-			}
-		},
-		
 		_initValidate:function(){
 	    	   var _this = this;
 	    	   var formValidator = $("#dataForm").validate({
 	    			rules: {
-	    				"site":{
+	    				"choiceQuestion":{
 	    					required:true
 	    				},
-	    				"purposeCn":{
-	    					required:true,
-	    					maxlength:10
-	    				},
-	    				"purposeEn":{
+	    				"optiona":{
 	    					required:true
 	    				},
-	    				"remarks":{
-	    					maxlength:50
+	    				"optionb":{
+	    					required:true
 	    				},
-	    				"sort":{
-	    					digits:true
+	    				"optionc":{
+	    					required:true
+	    				},
+	    				"optiond":{
+	    					required:true
+	    				},
+	    				"state":{
+	    					required:true
 	    				}
 	    			},
 	    			messages: {
-	    				"site":{
-	    					required:"请选择站点"
+	    				"choiceQuestion":{
+	    					required:"请输入标题"
 	    				},
-	    				"purposeCn":{
-	    					required:"请输入中文名称",
-	    					maxlength:"用途名称10个字以内"
+	    				"optiona":{
+	    					required:"请输入A选项"
 	    				},
-	    				"purposeEn":{
-	    					required:"请输入英文名称"
+	    				"optionb":{
+	    					required:"请输入B选项"
 	    				},
-	    				"remarks":{
-	    					maxlength:"描述50个字以内"
+	    				"optionc":{
+	    					required:"请输入C选项"
 	    				},
-	    				"sort":{
-	    					number:"输入的排序格式不正确"
+	    				"optiond":{
+	    					required:"请输入D选项"
+	    				},
+	    				"state":{
+	    					required:"请选择状态"
 	    				}
 	    			}
 	    		});
 	    	   return formValidator ;
 	    	},
 	    	_closeDialog:function(){
-	    		window.location.href = _base+"/syspurpose/toSysPurposeList";
+	    		window.history.back(-1); 
 	    	}
 			
     });

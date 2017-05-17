@@ -137,5 +137,8 @@
 	<!-- 基本设置 -->	
 	<dubbo:reference id="iQuerySysConfigSV"
 		interface="com.ai.yc.common.api.sysconfig.interfaces.IQuerySysConfigSV" />
+	<!-- 题目管理 -->	
+	<dubbo:reference id="iQuerySysQuestionsSV"
+		interface="com.ai.yc.common.api.sysquestions.interfaces.IQuerySysQuestionsSV" />
 					 				 
 </beans>
