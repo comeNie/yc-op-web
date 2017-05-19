@@ -25,6 +25,8 @@ import com.ai.yc.common.api.sysitembank.param.ItemBankPageQueryRequest;
 import com.ai.yc.common.api.sysitembank.param.ItemBankPageQueryResponse;
 import com.ai.yc.common.api.sysitembank.param.ItemBankPageVo;
 import com.ai.yc.common.api.sysitembank.param.SaveSysItemBank;
+import com.ai.yc.common.api.sysquestions.interfaces.IQuerySysQuestionsSV;
+import com.ai.yc.common.api.sysquestions.param.QuestionsPageQueryRequest;
 import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
 import com.ai.yc.op.web.utils.LoginUtil;
 
@@ -90,6 +92,15 @@ public class SysItemBankListController {
 					QuerySysDuadDetailsRes querySysDuadDetails = querySysDuadSV.querySysDuadDetails(itemBankPageVo.getLangDir());
 					itemBankPageVo.setLangDir(querySysDuadDetails.getSourceCn()+"->"+querySysDuadDetails.getTargetCn());
 				}
+				//IQuerySysQuestionsSV
+				if(itemBankPageVo.getQnumber() == null){
+					IQuerySysQuestionsSV querySysQuestionsSV = DubboConsumerFactory.getService(IQuerySysQuestionsSV.class);
+					QuestionsPageQueryRequest param = new QuestionsPageQueryRequest();
+					param.setBid(itemBankPageVo.getBid());
+					param.setQtype(itemBankPageVo.getQuestionType());
+					Integer queryQuestionsNumber = querySysQuestionsSV.queryQuestionsNumber(param);
+					itemBankPageVo.setQnumber(queryQuestionsNumber.toString());
+				}
 			}
 			if (queryItemBankPageQueryResponse.getResponseHeader().isSuccess()) {
 				PageInfo<ItemBankPageVo> pageInfo = queryItemBankPageQueryResponse.getPageInfo();
@@ -106,7 +117,20 @@ public class SysItemBankListController {
 		}
 	    return responseData;
     }
-    
+    /**
+     * 验证语言对
+     */
+    @RequestMapping("/checkDuadCn")
+    @ResponseBody
+    public Integer checkDuadCn(String duadId){
+    	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
+		QuerySysDuadDetailsRes querySysDuadDetails = querySysDuadSV.querySysDuadDetails(duadId);
+		if(querySysDuadDetails != null){
+			return 1;
+		}else{
+			return 0;
+		}
+    }
     /**
      * 添加题库
      */

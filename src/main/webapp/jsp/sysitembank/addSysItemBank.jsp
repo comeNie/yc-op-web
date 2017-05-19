@@ -31,7 +31,8 @@
 										<li>
 										    <p class="word">语言方向:</p>
 											<p>
-												<select class="select select-medium" id="langugePaire" name="langDir"></select>
+												<select class="select select-medium" id="langugePaire" name="langDir" onblur="langugePaire()"></select>
+												<span class="check"></span>
 										</li>
 									</ul>
 									<ul>
@@ -61,7 +62,7 @@
 										<li>
 										    <p class="word">状态:</p>
 											<p>
-												<input name="state" type="radio" value="0" />显示
+												<input name="state" type="radio" value="0" checked="checked"/>显示
 												<input name="state" type="radio" value="1" />隐藏
 											</p>
 										</li>

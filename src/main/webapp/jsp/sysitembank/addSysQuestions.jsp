@@ -39,7 +39,7 @@
 										<li>
 										    <p class="word">状态:</p>
 											<p>
-												<input name="status" type="radio" value="0" />显示
+												<input name="status" type="radio" value="0" checked="checked"/>显示
 												<input name="status" type="radio" value="1" />隐藏
 											</p>
 										</li>

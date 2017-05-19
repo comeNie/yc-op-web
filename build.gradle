@@ -137,6 +137,8 @@ dependencies {
     compile 'com.ai.yc.common:sysconfig:1.0-SNAPSHOT'
     //题目管理服务
     compile 'com.ai.yc.common:sysquestions:1.0.1-SNAPSHOT'
+    //敏感词管理
+    compile 'com.ai.yc.common:syssensitive:1.0.1-SNAPSHOT'
     
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){

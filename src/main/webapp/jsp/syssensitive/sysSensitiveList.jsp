@@ -5,9 +5,9 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>题库列表</title>
+<title>敏感词管理</title>
 <%@include file="/inc/inc.jsp" %>
-<input type="hidden" id="bIdUpdate"/>
+<input type="hidden" id="IdUpdate"/>
 </head>
 <body>
    <div class="content-wrapper-iframe" ><!--右侧灰色背景-->
@@ -22,26 +22,17 @@
 		                    	<div id="selectDiv">
 			                    	<ul>
 										<li class="col-md-6">
-											<p class="word">题库名称</p>
-											<p><input class="int-text int-medium" id="qname" value="" type="text"></p>
+											<p class="word">敏感词</p>
+											<p><input class="int-text int-medium" id="sensitiveWords" value="" type="text"></p>
 										</li>
 										<li class="col-md-6">
 								           <p class="word">站点</p>
 						            		<p>
 							            		<select class="select select-medium" id="site">
 							            			<option value="" selected="selected">全部</option>
-													<!-- pc -->
-													<option value="1">译云-中文站</option>
-													<!-- app -->
-													<option value="2">译云-英文站</option>
-													<!-- app -->
-													<option value="3">wap-中文</option>
-													<!-- app-hd -->
-													<option value="4">wap-英文</option>
-													<!-- pc -->
-													<option value="5">找翻译</option>
-													<!-- app -->
-													<option value="6">微信助手</option>
+													<option value="1">译云</option>
+													<option value="2">找翻译</option>
+													<option value="3">wap站</option>
 												</select>
 						            		</p>
 							            </li>
@@ -59,28 +50,8 @@
 							            </li>
 							            <li class="col-md-6">
 											<p class="word">创建人</p>
-											<p><input class="int-text int-medium" id="createOperator" value="" type="text"></p>
+											<p><input class="int-text int-medium" id="creatPeople" value="" type="text"></p>
 										</li>
-										<li class="col-md-6">
-											<p class="word">语言方向</p>
-											<p>
-												<select class="select select-medium" id="langugePaire">
-													<option value="">全部</option>
-												</select>
-											</p>
-										</li>
-										<li class="col-md-6">
-								           <p class="word">题型</p>
-						            		<p>
-							            		<select class="select select-medium" id="questionType">
-							            			<option value="" selected="selected">全部</option>
-													<!-- 启用 -->
-													<option value="1">单选题</option>
-													<!-- 禁用 -->
-													<option value="2">简答题</option>
-												</select>
-						            		</p>
-							            </li>
 			                    	</ul>
 		                    	</div> 
 	                    		<ul>
@@ -107,6 +78,7 @@
 								<div class="order-list-table">
 									<p class="word">
 										<input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5" id="add" value="新 增">&nbsp;&nbsp;&nbsp;&nbsp;
+										<input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5" id="deleteAll" value="批量删除">
 									</p>
 								</div>
 							</div>
@@ -119,19 +91,17 @@
                                     <table class="table table-hover table-border table-bordered ">
                                         <thead>
                                             <tr>
-												<th>序号</th>
-												<th>题库名称</th>
-												<th>题型</th>
-												<th>语言方向</th>
-												<th>题目数量</th>
+												<th><input type="checkbox" id="allSen">序号</th>
+												<th>敏感词</th>
+												<th>替换为</th>
 												<th>站点</th>
-												<th>创建人</th>
 												<th>创建时间</th>
+												<th>创建人</th>
 												<th>状态</th>
 												<th>操作</th>
 											</tr>
                                         </thead>
-                                         <tbody id="sysItemBankListData"></tbody>
+                                         <tbody id="sysSensitiveListData"></tbody>
                                     </table>
                                     <div id="showMessage"></div>
                                 </div>
@@ -152,54 +122,39 @@
 											<p class="img" id="colseImage"><i class="fa fa-times" ></i></p>
 										</div>
 										<div class="form-label mt-10">
-										<input id="bid" name="bid" type="hidden"/>
+											<input id="id" name="id" type="hidden"/>
 							           		 <ul>
 												<li>
-												    <p class="word">题库名称*:</p>
-													<p><input type="text" id="updateqname" name="qname" class="int-text int-small" ></p>
+												    <p class="word">敏感词*:</p>
+													<p><input type="text" id="updateSensitiveWords" name="sensitiveWords" class="int-text int-small" ></p>
 												</li>
 											 </ul>
-											 <ul>
+											<ul>
 												<li>
-												    <p class="word">语言方向:</p>
-													<p>
-														<select class="select select-medium" id="updatelangugePaire" name="langDir">
-														</select>
+												    <p class="word">替换为*:</p>
+													<p><input type="text" id="replaceWords" name="replaceWords" class="int-text int-small" ></p>
+												</li>
+											 </ul>
+											<ul>
+												<li>
+												    <p class="word">站点*:</p>
+												    <p>		&nbsp;&nbsp;
+															<input type="checkbox" class="site" name="site" value=""/>全部
+															<input type="checkbox" class="site" name="site" value="1"/>译云
+															<input type="checkbox" class="site" name="site" value="2"/>找翻译
+															<input type="checkbox" class="site" name="site" value="3"/>wap站
+													</p>
 												</li>
 											</ul>
 											<ul>
-								                <li>
-								                    <p class="word">站点*:</p>
-								                    <p>
-														&nbsp;&nbsp;
-														<input type="radio" class="site" name="site" value="1"/>译云-中文站
-														<input type="radio" class="site" name="site" value="2"/>译云-英文站
-														<input type="radio" class="site" name="site" value="3"/>wap-中文<br/>&nbsp;&nbsp;
-														<input type="radio" class="site" name="site" value="4"/>wap-英文
-														<input type="radio" class="site" name="site" value="5"/>找翻译
-														<input type="radio" class="site" name="site" value="6"/>微信助手
+												<li>
+												    <p class="word">状态:</p>
+													<p>
+														<input name="state" type="radio" value="0" checked="checked"/>显示
+														<input name="state" type="radio" value="1" />隐藏
 													</p>
-								                </li>
-								              </ul>
-								              <ul>
-													<li>
-													    <p class="word">题型:</p>
-														<p>
-															<select class="select select-medium" id="updatequestionType" name="questionType">
-																<option value="0">单选题</option>
-																<option value="1">简答题</option>
-															</select>
-													</li>
-												</ul>
-											  <ul>
-													<li>
-													    <p class="word">状态:</p>
-														<p>
-															<input name="state" type="radio" value="0" />显示
-															<input name="state" type="radio" value="1" />隐藏
-														</p>
-													</li>
-												</ul>
+												</li>
+											</ul>
 									    </div>	
 										<!--按钮-->
 										<div class="row mt-15"><!--删格化-->
@@ -220,63 +175,58 @@
             </div>
     	</div>
    </div> 
-   <script type="text/javascript">
-   	$("#updatequestionType").attr("disabled",true);
-   	$("#updatelangugePaire").attr("disabled",true);
-   </script>
-<script id="sysItemBankListTemple" type="text/template">
+<script id="sysSensitiveListTemple" type="text/template">
 	<tr>
-  	  <td>{{:bid}}</td>
-      <td>{{:qname}}</td>
-	  <td>
-		  {{if  questionType == '0'}}
-		    单选题
-		  {{else questionType == '1'}}
-		    简答题
-		  {{/if}}
-	  </td>      
-      <td>{{:langDir}}</td>
-	  <td>{{:qnumber}}</td>
+  	  <td><input type="checkbox" name="subSen" value="{{:id}}">{{:id}}</td>
+      <td>{{:sensitiveWords}}</td>
+	  <td>{{:replaceWords}}</td>
 	  <td>
 		  {{if  site == '1'}}
-		     译云-中文站
+		     译云
 		  {{else site == '2'}}
-		    译云-英文站
-		  {{else site == '3'}}
-		  wap-中文
-		  {{else site == '4'}}
-		  wap-英文
-		  {{else site == '5'}}
 		      找翻译
-		  {{else site == '6'}}
-		      微信助手
+		  {{else site == '3'}}
+		   wap站
 		  {{/if}}
 	  </td>    
-	  <td>{{:aditor}}</td>
 	  <td>
-			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}
+			{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', creatTime)}}
 	  </td>
+	  <td>{{:creatPeople}}</td>
 	  <td>
 		  {{if  state == '0'}}
-		  	显示
+		  	启用
 		  {{else state == '1'}}
-		  	隐藏
+		  	禁用
 		  {{/if}}
 	  </td>     
 	  <td>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._look('{{:bid}}','{{:questionType}}')">查看</a>
- 		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:bid}}')">删除</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:bid}}','{{:qname}}','{{:questionType}}','{{:site}}','{{:state}}')">修改</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._look()">查看</a>
+ 		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete()">删除</a>
+		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:id}}','{{:sensitiveWords}}','{{:replaceWords}}','{{:site}}','{{:state}}')">修改</a>
 	  </td>
     </tr>
 </script>
  <script type="text/javascript">
 	var pager;
 	(function () {
-		seajs.use('app/jsp/sysitembank/sysItemBankList', function (OrderListPager) {
+		seajs.use('app/jsp/syssensitive/sysSensitiveList', function (OrderListPager) {
 			pager = new OrderListPager({element: document.body});
 			pager.render();
 		});
 	})();
+	$(function() {
+		$("#allSen").click(function() {
+			if(this.checked){
+				$("input[name='subSen']").each(function(){this.checked=true;});
+			}else{
+				$("input[name='subSen']").each(function(){this.checked=false;});
+			}
+		});
+		var $subSen = $("input[name='subSen']");
+		$subSen.click(function(){
+			$("#allSen").attr("checked",$subSen.length == $("input[name='subSen']:checked").length ? true : false);
+		});
+	});
  </script>  
 </body>

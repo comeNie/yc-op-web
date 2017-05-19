@@ -91,6 +91,7 @@
 						<!--二级菜单-->
 						<ul class="submenu">
 							<li menuAttr="menu"><a href="${_base}/sysconfig/toSysConfigList" target="mainFrame">基本设置</a></li>
+							<li menuAttr="menu"><a href="${_base}/syssensitive/toSysSensitiveList" target="mainFrame">敏感词库</a></li>
 						</ul>
 						<!--二级菜单结束--></li>
 				</ul>

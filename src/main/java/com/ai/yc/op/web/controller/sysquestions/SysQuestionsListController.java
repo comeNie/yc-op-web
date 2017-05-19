@@ -1,5 +1,8 @@
 package com.ai.yc.op.web.controller.sysquestions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -24,6 +27,7 @@ import com.ai.yc.common.api.sysquestions.param.QuestionsPageQueryResponse;
 import com.ai.yc.common.api.sysquestions.param.QuestionsPageVo;
 import com.ai.yc.common.api.sysquestions.param.SaveSysQuestions;
 import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
+import com.ai.yc.op.web.model.utils.ImportEmployee;
 import com.ai.yc.op.web.utils.LoginUtil;
 
 @Controller
@@ -146,5 +150,28 @@ public class SysQuestionsListController {
 		}
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "修改题目成功", true);
     }
-    
+    /**
+     * 修改题目
+     * @throws Exception 
+     */
+    @RequestMapping("/upload")
+    @ResponseBody
+    public void upload(HttpServletRequest request) throws Exception{
+    	 String excelPath = request.getParameter("excelPath");
+    	 //输入流 
+    	 File excelPaths=new File(excelPath);   
+    	String absolutePath = excelPaths.getAbsolutePath();
+        InputStream fis = new FileInputStream(absolutePath);  
+          
+        //POI:得到解析Excel的实体集合  
+        List<SaveSysQuestions> infos = ImportEmployee.importEmployeeByPoi(fis);  
+          
+        //遍历解析Excel的实体集合  
+        for(SaveSysQuestions req:infos) {  
+        	IQuerySysQuestionsSV querySysQuestionsSV = DubboConsumerFactory.getService(IQuerySysQuestionsSV.class);
+        	querySysQuestionsSV.saveSysQuestions(req);
+        }  
+        //关闭流  
+        fis.close();  
+    }
 }

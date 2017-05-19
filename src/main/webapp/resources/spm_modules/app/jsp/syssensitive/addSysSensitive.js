@@ -1,4 +1,4 @@
-define('app/jsp/sysitembank/addSysItemBank', function (require, exports, module) {
+define('app/jsp/syssensitive/addSysSensitive', function (require, exports, module) {
     'use strict';
     var $=require('jquery'),
     Widget = require('arale-widget/1.2.0/widget'),
@@ -41,49 +41,6 @@ define('app/jsp/sysitembank/addSysItemBank', function (require, exports, module)
     		this._bindLanguageSelect();
     		OrderListPager.superclass.setup.call(this);
     	},
-    	// 下拉 语种方向
-		_bindLanguageSelect:function() {
-			var this_=this;
-			$.ajax({
-				type : "post",
-				processing : false,
-				url : _base+ "/getLangugeSelect",
-				dataType : "json",
-				data : {
-				},
-				message : "正在加载数据..",
-				success : function(data) {
-					var d=data.data;
-					$.each(d,function(index,item){
-						var langugeName = d[index].sourceCn+"->"+d[index].targetCn;
-						var langugeCode = d[index].duadId;
-						$("#langugePaire").append('<option value="'+langugeCode+'">'+langugeName+'</option>');
-					})
-				}
-			});
-		},
-		_cheDuadCn:function(){
-			var _this = this;
-			var duadId = $("#langugePaire").val();
-			if(langugePaire != "" && langugePaire != null){
-				$.ajax({
-					type: "post",
-					data: {
-						duadId
-					},
-					url: _base + "/sysitembank/checkDuadCn",
-					success: function (data) {
-						if(data == 1){
-							$(".check").html("此语言对已存在");
-							$("#save").attr("disabled", true); 
-						}else{
-							$(".check").html("");
-							$("#save").attr("disabled", false); 
-						}
-					}
-				});
-			}
-		},
 		_save:function(){
 			var _this = this;
 			var formValidator=_this._initValidate();
@@ -92,7 +49,7 @@ define('app/jsp/sysitembank/addSysItemBank', function (require, exports, module)
 				return false;
 			}
 			var param = $("#dataForm").serializeArray();
-			var url = _base + "/sysitembank/insertSysItemBank";
+			var url = _base + "/syssensitive/insertSysSensitive";
 			ajaxController.ajax({
 				type: "post",
 				dataType:"json",
@@ -113,25 +70,23 @@ define('app/jsp/sysitembank/addSysItemBank', function (require, exports, module)
 	    				"site":{
 	    					required:true
 	    				},
-	    				"qname":{
-	    					required:true,
-	    					maxlength:10
+	    				"sensitiveWords":{
+	    					required:true
 	    				}
 	    			},
 	    			messages: {
 	    				"site":{
 	    					required:"请选择站点"
 	    				},
-	    				"qname":{
-	    					required:"请输入题库名称",
-	    					maxlength:"题库名称10个字以内"
+	    				"sensitiveWords":{
+	    					required:"请输入敏感词"
 	    				}
 	    			}
 	    		});
 	    	   return formValidator ;
 	    	},
 	    	_closeDialog:function(){
-	    		window.location.href = _base+"/sysitembank/toSysItemBankList";
+	    		window.location.href = _base+"/syssensitive/toSysSensitiveList";
 	    	}
 			
     });

@@ -23,6 +23,12 @@
 									<p class="word"><input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5"
 												  id="add" value="新 增"></p>
 								</div>
+								<form action="" id="empForm">
+									<div>
+										<input type="file" id="excelPath" name="excelPath"/><br/> 
+										<input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5" id="importEmp"  value="导入"/> 
+									</div>
+								</form>
 							</div>
 							<div class="main-box-body clearfix">
                             	<!--table表格-->
@@ -58,7 +64,7 @@
 									</nav>
 								  </div>
 								<!--分页结束-->
-								<form id="dataForm" method="post">
+								<%-- <form id="dataForm" method="post">
                             	<div class="eject-big">
 									<div class="eject-medium" id="add-samll" style="overflow:auto;width: 70%; left: 40%; top: 35%;height:500px;">
 										<div class="eject-medium-title">
@@ -131,7 +137,7 @@
 									</div>	
 									<div class="mask" id="eject-mask"></div>	
 								</div>
-                            </form>
+                            </form> --%>
                             <!-- 弹出框 end-->
                             </div>
                         </div>

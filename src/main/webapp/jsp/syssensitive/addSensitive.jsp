@@ -5,7 +5,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>添加题库</title>
+<title>添加敏感词</title>
 <%@include file="/inc/inc.jsp" %>
 </head>
 <body>
@@ -23,54 +23,33 @@
 								<form id="dataForm">
 									<ul>
 										<li>
-											<input id="bid" name="bid" type="hidden" value="${bid}"/>
-											<input id="questionType" name="qtype" type="hidden" value="${questionType}"/>
-										    <p class="word">标题*:</p>
-											<p><input type="text" id="choiceQuestion" name="choiceQuestion" class="int-text int-small" ></p>
+										    <p class="word">敏感词*:</p>
+											<p><input type="text" id="sensitiveWords" name="sensitiveWords" class="int-text int-small" ></p>
 										</li>
 									 </ul>
-									 <ul>
+									<ul>
 										<li>
-										    <p class="word">选项A*:</p>
-											<p><input type="text" id="optiona" name="optiona" class="int-text int-small" ></p>
+										    <p class="word">替换为*:</p>
+											<p><input type="text" id="replaceWords" name="replaceWords" value="***" class="int-text int-small" ></p>
 										</li>
 									 </ul>
-									 <ul>
+									<ul>
 										<li>
-										    <p class="word">选项B*:</p>
-											<p><input type="text" id="optionb" name="optionb" class="int-text int-small" ></p>
-										</li>
-									 </ul>
-									 <ul>
-										<li>
-										    <p class="word">选项C*:</p>
-											<p><input type="text" id="optionc" name="optionc" class="int-text int-small" ></p>
-										</li>
-									 </ul>
-									 <ul>
-										<li>
-										    <p class="word">选项D*:</p>
-											<p><input type="text" id="optiond" name="optiond" class="int-text int-small" ></p>
-										</li>
-									 </ul>
-									 <ul>
-										<li>
-										    <p class="word">正确答案:</p>
-											<p>
-												<select class="select select-medium" id="answer" name="answer">
-													<option value="A">A</option>
-													<option value="B">B</option>
-													<option value="C">C</option>
-													<option value="D">D</option>
-												</select>
+										    <p class="word">站点*:</p>
+										    <p>		&nbsp;&nbsp;
+													<input type="checkbox" class="site" name="site" value=""/>全部
+													<input type="checkbox" class="site" name="site" value="1"/>译云
+													<input type="checkbox" class="site" name="site" value="2"/>找翻译
+													<input type="checkbox" class="site" name="site" value="3"/>wap站
+											</p>
 										</li>
 									</ul>
 									<ul>
 										<li>
 										    <p class="word">状态:</p>
 											<p>
-												<input name="status" type="radio" value="0" checked="checked"/>显示
-												<input name="status" type="radio" value="1" />隐藏
+												<input name="state" type="radio" value="0" checked="checked"/>显示
+												<input name="state" type="radio" value="1" />隐藏
 											</p>
 										</li>
 									</ul>
@@ -95,7 +74,7 @@
  <script type="text/javascript">
     var pager;
     (function () {
-        seajs.use('app/jsp/sysitembank/addSysQuestionsChoice', function (OrderListPager) {
+        seajs.use('app/jsp/syssensitive/addSysSensitive', function (OrderListPager) {
             pager = new OrderListPager({element: document.body});
             pager.render();
         });

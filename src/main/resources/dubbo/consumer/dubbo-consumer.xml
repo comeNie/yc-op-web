@@ -140,5 +140,7 @@
 	<!-- 题目管理 -->	
 	<dubbo:reference id="iQuerySysQuestionsSV"
 		interface="com.ai.yc.common.api.sysquestions.interfaces.IQuerySysQuestionsSV" />
-					 				 
+	<!-- 敏感词管理 -->	
+	<dubbo:reference id="iQuerySysSensitiveSV"
+		interface="com.ai.yc.common.api.syssensitive.interfaces.IQuerySysSensitiveSV" />			 				 
 </beans>
