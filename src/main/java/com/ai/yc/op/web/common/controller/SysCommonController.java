@@ -35,7 +35,7 @@ public class SysCommonController {
 		QuerySysDomainListRes res = null;
 		QuerySysDomainListReq req = new QuerySysDomainListReq();
 		try {
-			req.setLanguage("zh_CN");
+			req.setLanguage("1");
 			res =iQuerySysDomainSV.querySysDomainList(req);
 		} catch (SystemException e) {
 			log.error("系统错误，请稍后重试", e);
@@ -65,7 +65,7 @@ public class SysCommonController {
 		QuerySysPurposeListRes res = null;
 		QuerySysPurposeListReq req = new QuerySysPurposeListReq();
 		try {
-			req.setLanguage("zh_CN");
+			req.setLanguage("1");
 			res = iQuerySysPurposeSV.querySysPurposeList(req);
 		} catch (SystemException e) {
 			log.error("系统错误，请稍后重试", e);
