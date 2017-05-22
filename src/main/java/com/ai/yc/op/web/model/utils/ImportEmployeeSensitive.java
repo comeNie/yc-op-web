@@ -13,18 +13,19 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.ai.yc.common.api.sysquestions.param.SaveSysQuestions;
+import com.ai.yc.common.api.syssensitive.param.SaveSysSensitive;
 
-public class ImportEmployee {
+public class ImportEmployeeSensitive {
 	/**
 	 * POI:解析Excel文件中的数据并把每行数据封装成一个实体
 	 * @param fis 文件输入流
 	 * @return List<EmployeeInfo> Excel中数据封装实体的集合
 	 */
-	public static List<SaveSysQuestions> importEmployeeByPoi(InputStream fis) {
+	public static List<SaveSysSensitive> importEmployeeByPoi(InputStream fis) {
 		//这里是解析出来的Excel的数据存放的List集合
-		List<SaveSysQuestions> infos = new ArrayList<SaveSysQuestions>();
+		List<SaveSysSensitive> infos = new ArrayList<SaveSysSensitive>();
 		//这里是解析出来的Excel中的每一条数据封装的实体BEAN.
-		SaveSysQuestions employeeInfo = null;
+		SaveSysSensitive employeeInfo = null;
 		
 		try {
 			//创建Excel工作薄
@@ -40,29 +41,29 @@ public class ImportEmployee {
 				//遍历该行所有的行,j表示行数 getPhysicalNumberOfRows行的总数
 				for(int j = 0; j < sheet.getPhysicalNumberOfRows(); j++) {
 					row = sheet.getRow(j);
-					employeeInfo = new SaveSysQuestions();
+					employeeInfo = new SaveSysSensitive();
 					
 					//此方法规定Excel文件中的数据必须为文本格式，所以在解析数据的时候未进行判断 
                     //方法1：Excel解析出来的数字为double类型，要转化为Long类型必须做相应的处理(一开始用的方法，比较笨。) 
                     //先把解析出来的double类型转化为String类型，然后截取String类型'.'以前的字符串，最后把字符串转化为Long类型。 
                     //方法2：其实double类型可以通过(long)Double这样直接转化为Long类型。 
-                    employeeInfo.setQid(row.getCell(0).toString());
-                    employeeInfo.setQtype(row.getCell(1).toString());
-                    employeeInfo.setOriginal(row.getCell(2).toString());
-                    employeeInfo.setTranslation(row.getCell(3).toString());
-                    employeeInfo.setStatus(row.getCell(4).toString()); 
-                    employeeInfo.setCreateOperatorId(row.getCell(5).toString());
-                    employeeInfo.setCreateOperator(row.getCell(6).toString());
+                    employeeInfo.setId(row.getCell(0).toString());
+                    employeeInfo.setSensitiveWords(row.getCell(1).toString());
+                    employeeInfo.setReplaceWords(row.getCell(2).toString());
+                    employeeInfo.setSite(row.getCell(3).toString());
+                    employeeInfo.setState(row.getCell(4).toString()); 
+                    employeeInfo.setCreatPeople(row.getCell(5).toString());
+                    employeeInfo.setCreatPeopleId(row.getCell(6).toString());
                   //此方法调用getCellValue(HSSFCell cell)对解析出来的数据进行判断，并做相应的处理   
-                    if(ImportEmployee.getCellValue(row.getCell(0)) != null && !"".equals(ImportEmployee.getCellValue(row.getCell(0)))) {   
-                        employeeInfo.setQid(ImportEmployee.getCellValue(row.getCell(0)));   
+                    if(ImportEmployeeSensitive.getCellValue(row.getCell(0)) != null && !"".equals(ImportEmployeeSensitive.getCellValue(row.getCell(0)))) {   
+                        employeeInfo.setId(ImportEmployeeSensitive.getCellValue(row.getCell(0)));   
                     }   
-                    employeeInfo.setQtype(ImportEmployee.getCellValue(row.getCell(1)));
-                    employeeInfo.setOriginal(ImportEmployee.getCellValue(row.getCell(2)));
-                    employeeInfo.setTranslation(ImportEmployee.getCellValue(row.getCell(3)));
-                    employeeInfo.setStatus(ImportEmployee.getCellValue(row.getCell(4)));
-                    employeeInfo.setCreateOperatorId(ImportEmployee.getCellValue(row.getCell(5)));
-                    employeeInfo.setCreateOperator(ImportEmployee.getCellValue(row.getCell(6)));
+                    employeeInfo.setSensitiveWords(ImportEmployeeSensitive.getCellValue(row.getCell(1)));
+                    employeeInfo.setReplaceWords(ImportEmployeeSensitive.getCellValue(row.getCell(2)));
+                    employeeInfo.setSite(ImportEmployeeSensitive.getCellValue(row.getCell(3)));
+                    employeeInfo.setSite(ImportEmployeeSensitive.getCellValue(row.getCell(4)));
+                    employeeInfo.setCreatPeople(ImportEmployeeSensitive.getCellValue(row.getCell(5)));
+                    employeeInfo.setCreatPeopleId(ImportEmployeeSensitive.getCellValue(row.getCell(6)));
                     /*if(ImportEmployee.getCellValue(row.getCell(4)) != null && !"".equals(ImportEmployee.getCellValue(row.getCell(4)))) {   
                         try {   
                             employeeInfo.setDateOfBirth(ft.parse(ImportEmployee.getCellValue(row.getCell(4))));   

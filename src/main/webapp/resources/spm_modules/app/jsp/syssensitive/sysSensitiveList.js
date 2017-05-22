@@ -35,6 +35,7 @@ define('app/jsp/syssensitive/sysSensitiveList', function (require, exports, modu
             "click #search":"_searchSysSensitiveList",
             "click #add":"_add",
             "click #update":"_update",
+            "click #importEmp":"_importEmp",
             "click #deleteAll":"_deleteAll",
             "click #add-close":"_closeDialog",
             "click #colseImage":"_closeDialog"
@@ -64,11 +65,29 @@ define('app/jsp/syssensitive/sysSensitiveList', function (require, exports, modu
  				processing: true,
  				message: "删除数据中，请等待...",
  				data: {ids:ids},
- 				url: _base + "/syssensitive/deleteSysSensitive",
+ 				url: _base + "/syssensitive/deleteAllSysSensitive",
  				success: function (rs) {
  					 window.location.reload();
  				}
  			});
+		},
+		_importEmp:function(){
+   		 //检验导入的文件是否为Excel文件  
+   	    var file = document.getElementById("excelPath").value;  
+   	    if(file == null || file == ''){  
+   	        alert("请选择要上传的Excel文件");  
+   	        return;  
+   	    }else{  
+   	        var fileExtend = file.substring(file.lastIndexOf('.')).toLowerCase();   
+   	        if(fileExtend == '.xls'){  
+   	        }else{  
+   	            alert("文件格式需为'.xls'格式");  
+   	            return;  
+   	        }  
+   	    }  
+   	    //提交表单  
+   	    document.getElementById("empForm").action=_base+"/syssensitive/upload";    
+   	    document.getElementById("empForm").submit();
 		},
     	_searchSysSensitiveList:function(){
 			var _this=this;
@@ -120,6 +139,19 @@ define('app/jsp/syssensitive/sysSensitiveList', function (require, exports, modu
     				sites[i].checked = true;
     			}
     		}
+		},
+		_delete:function(id){
+			var _this=this;
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "删除数据中，请等待...",
+				data: {id:id},
+				url: _base + "/syssensitive/deleteSysSensitive",
+				success: function (rs) {
+					 window.location.reload();
+				}
+			});
 		},
 		_update:function(){
 			var _this = this;

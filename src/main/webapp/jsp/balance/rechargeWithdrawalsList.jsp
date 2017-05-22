@@ -116,7 +116,7 @@
 				<div class="col-lg-12"><!--删格化-->
 					<div class="main-box clearfix"><!--白色背景-->
 						<p><input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5"
-								  id="new" value="新建"></p>
+								  id="add" value="新建"></p>
 						<div class="main-box-body clearfix">
 							<div class="order-list-table">
 								<ul>

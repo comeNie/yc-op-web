@@ -14,7 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.ai.yc.common.api.sysquestions.param.SaveSysQuestions;
 
-public class ImportEmployee {
+public class ImportEmployeeChoice {
 	/**
 	 * POI:解析Excel文件中的数据并把每行数据封装成一个实体
 	 * @param fis 文件输入流
@@ -48,21 +48,29 @@ public class ImportEmployee {
                     //方法2：其实double类型可以通过(long)Double这样直接转化为Long类型。 
                     employeeInfo.setQid(row.getCell(0).toString());
                     employeeInfo.setQtype(row.getCell(1).toString());
-                    employeeInfo.setOriginal(row.getCell(2).toString());
-                    employeeInfo.setTranslation(row.getCell(3).toString());
-                    employeeInfo.setStatus(row.getCell(4).toString()); 
-                    employeeInfo.setCreateOperatorId(row.getCell(5).toString());
-                    employeeInfo.setCreateOperator(row.getCell(6).toString());
+                    employeeInfo.setChoiceQuestion(row.getCell(2).toString());
+                    employeeInfo.setOptiona(row.getCell(3).toString());
+                    employeeInfo.setOptionb(row.getCell(4).toString());
+                    employeeInfo.setOptionc(row.getCell(5).toString());
+                    employeeInfo.setOptiond(row.getCell(6).toString()); 
+                    employeeInfo.setAnswer(row.getCell(7).toString()); 
+                    employeeInfo.setStatus(row.getCell(8).toString()); 
+                    employeeInfo.setCreateOperatorId(row.getCell(9).toString());
+                    employeeInfo.setCreateOperator(row.getCell(10).toString());
                   //此方法调用getCellValue(HSSFCell cell)对解析出来的数据进行判断，并做相应的处理   
-                    if(ImportEmployee.getCellValue(row.getCell(0)) != null && !"".equals(ImportEmployee.getCellValue(row.getCell(0)))) {   
-                        employeeInfo.setQid(ImportEmployee.getCellValue(row.getCell(0)));   
+                    if(ImportEmployeeChoice.getCellValue(row.getCell(0)) != null && !"".equals(ImportEmployeeChoice.getCellValue(row.getCell(0)))) {   
+                        employeeInfo.setQid(ImportEmployeeChoice.getCellValue(row.getCell(0)));   
                     }   
-                    employeeInfo.setQtype(ImportEmployee.getCellValue(row.getCell(1)));
-                    employeeInfo.setOriginal(ImportEmployee.getCellValue(row.getCell(2)));
-                    employeeInfo.setTranslation(ImportEmployee.getCellValue(row.getCell(3)));
-                    employeeInfo.setStatus(ImportEmployee.getCellValue(row.getCell(4)));
-                    employeeInfo.setCreateOperatorId(ImportEmployee.getCellValue(row.getCell(5)));
-                    employeeInfo.setCreateOperator(ImportEmployee.getCellValue(row.getCell(6)));
+                    employeeInfo.setQtype(ImportEmployeeChoice.getCellValue(row.getCell(1)));   
+                    employeeInfo.setChoiceQuestion(ImportEmployeeChoice.getCellValue(row.getCell(2)));
+                    employeeInfo.setOptiona(ImportEmployeeChoice.getCellValue(row.getCell(3)));
+                    employeeInfo.setOptionb(ImportEmployeeChoice.getCellValue(row.getCell(4)));   
+                    employeeInfo.setOptionc(ImportEmployeeChoice.getCellValue(row.getCell(5)));   
+                    employeeInfo.setOptiond(ImportEmployeeChoice.getCellValue(row.getCell(6)));
+                    employeeInfo.setAnswer(ImportEmployeeChoice.getCellValue(row.getCell(7))); 
+                    employeeInfo.setStatus(ImportEmployeeChoice.getCellValue(row.getCell(8)));
+                    employeeInfo.setCreateOperatorId(ImportEmployeeChoice.getCellValue(row.getCell(9)));
+                    employeeInfo.setCreateOperator(ImportEmployeeChoice.getCellValue(row.getCell(10)));
                     /*if(ImportEmployee.getCellValue(row.getCell(4)) != null && !"".equals(ImportEmployee.getCellValue(row.getCell(4)))) {   
                         try {   
                             employeeInfo.setDateOfBirth(ft.parse(ImportEmployee.getCellValue(row.getCell(4))));   

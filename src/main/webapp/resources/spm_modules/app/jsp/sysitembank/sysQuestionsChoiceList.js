@@ -151,12 +151,14 @@ define('app/jsp/sysitembank/sysQuestionsChoiceList', function (require, exports,
     	},
     	_importEmp:function(){
     		 //检验导入的文件是否为Excel文件  
-    	    var excelPath = document.getElementById("excelPath").value;  
-    	    if(excelPath == null || excelPath == ''){  
+    	    var file = document.getElementById("excelPath").value;  
+    	    var bid = document.getElementById("bid").value;  
+    	    var questionType = document.getElementById("questionType").value; 
+    	    if(file == null || file == ''){  
     	        alert("请选择要上传的Excel文件");  
     	        return;  
     	    }else{  
-    	        var fileExtend = excelPath.substring(excelPath.lastIndexOf('.')).toLowerCase();   
+    	        var fileExtend = file.substring(file.lastIndexOf('.')).toLowerCase();   
     	        if(fileExtend == '.xls'){  
     	        }else{  
     	            alert("文件格式需为'.xls'格式");  
@@ -164,9 +166,8 @@ define('app/jsp/sysitembank/sysQuestionsChoiceList', function (require, exports,
     	        }  
     	    }  
     	    //提交表单  
-    	    document.getElementById("empForm").action=_base+"/sysquestions/upload";    
+    	    document.getElementById("empForm").action=_base+"/sysquestions/uploadChoice?bid="+bid+'&questionType='+questionType;    
     	    document.getElementById("empForm").submit();
-    	    window.history.back(-1);
 		},
 		_closeDialog:function(){
     		$("#errorMessage").html("");

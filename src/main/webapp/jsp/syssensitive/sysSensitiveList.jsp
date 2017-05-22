@@ -81,6 +81,12 @@
 										<input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5" id="deleteAll" value="批量删除">
 									</p>
 								</div>
+								<form method="post" id="empForm" enctype="multipart/form-data">
+									<div>
+										<input type="file" id="excelPath" name="file"/><br/> 
+										<input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5" id="importEmp"  value="导入"/> 
+									</div>
+								</form>
 							</div>
                         <!--标题结束-->   
                             <div class="main-box-body clearfix">
@@ -202,7 +208,7 @@
 	  </td>     
 	  <td>
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._look()">查看</a>
- 		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete()">删除</a>
+ 		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:id}}')">删除</a>
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:id}}','{{:sensitiveWords}}','{{:replaceWords}}','{{:site}}','{{:state}}')">修改</a>
 	  </td>
     </tr>

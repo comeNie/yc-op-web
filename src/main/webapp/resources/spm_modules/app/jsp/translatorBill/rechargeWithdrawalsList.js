@@ -37,6 +37,7 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 			"click #showQuery":"_showQueryInfo",
 			"click #domestic":"_searchBillList",
 			"click #foreign":"_searchBillList",
+			"click #add":"_add",
 			//查询
 			"click #search":"_searchBillList",
 			"click #update":"_updatePayState",
@@ -55,9 +56,11 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 				formValidator.element(this);
 			});
 		},
-
+		_add:function(){
+			window.location.href = _base+"/rechargeWithdrawals/toAddRechargeWithdrawals";
+		},
 		_rejectReviewOrder:function(orderId){
-			var param = {};
+			/*var param = {};
 			var _this = this;
 			var d = Dialog({
 				content:'<textarea id="reasonDesc" style="width:200px;" class="int-text" maxlength="30"></textarea>',
@@ -73,7 +76,7 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 				cancelValue: '取消',
 				cancel: function () {}
 			});
-			d.showModal();
+			d.showModal();*/
 		},
 
 		_initValidate:function(){
@@ -102,7 +105,7 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 
 
 		_export:function(){
-			var _this=this;
+			/*var _this=this;
 			var stateBill="";
 			var flag="";
 			var orderTimeS = $("#billTimeBegin").val();
@@ -124,11 +127,11 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 				stateBill=  1;//待审核
 			}
 			window.location.href=_base+'/balance/export?flag='+flag+'&beginDate='+orderTimeS+'&endDate='+orderTimeE+
-				'&nickName='+nickName+'&acountType='+acountType+'&state='+stateBill+"&offset="+today.stdTimezoneOffset();
+				'&nickName='+nickName+'&acountType='+acountType+'&state='+stateBill+"&offset="+today.stdTimezoneOffset();*/
 		},
 
 		_searchBillList:function(){
-			var _this=this;
+			/*var _this=this;
 			var url = _base+"/balance/getBillPageData";
 			var queryData = this._getSearchParams();
 			$("#pagination").runnerPagination({
@@ -150,7 +153,7 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 						$("#orderListData").html("未搜索到信息");
 					}
 				},
-			});
+			});*/
 		},
 
 		_getSearchParams:function(){

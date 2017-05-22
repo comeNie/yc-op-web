@@ -23,9 +23,9 @@
 									<p class="word"><input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5"
 												  id="add" value="新 增"></p>
 								</div>
-								<form action="" id="empForm">
+								<form method="post" id="empForm" enctype="multipart/form-data">
 									<div>
-										<input type="file" id="excelPath" name="excelPath"/><br/> 
+										<input type="file" id="excelPath" name="file"/><br/> 
 										<input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5" id="importEmp"  value="导入"/> 
 									</div>
 								</form>
