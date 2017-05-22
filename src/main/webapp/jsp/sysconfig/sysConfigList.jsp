@@ -38,7 +38,7 @@
                           		<div class="table-responsive clearfix mt-10">
                           		<form id="dataForm">
                           		<div>
-                          			<input type="text" name="configId" value="${memberConfig.configId}">
+                          			<input type="hidden" name="configId" value="${memberConfig.configId}">
 	                          		<p>
 	                          			会员等级设置：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                          			普通会员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="ordinayryMember" name="ordinayryMember" type="text" value="${memberConfig.ordinaryMember}">&nbsp;&nbsp;&nbsp;&nbsp;
