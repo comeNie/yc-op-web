@@ -3,6 +3,7 @@ package com.ai.yc.op.web.controller.sysconfig;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,11 @@ import com.ai.yc.common.api.sysconfig.param.HomeDataEidtConfig;
 import com.ai.yc.common.api.sysconfig.param.MemberConfig;
 import com.ai.yc.common.api.sysconfig.param.NoticeConfig;
 import com.ai.yc.common.api.sysconfig.param.SaveSysConfig;
+import com.ai.yc.op.web.controller.syspurpose.SysPurposeListController;
 @Controller
 @RequestMapping("/sysconfig")
 public class SysConfigListController {
-	
+	private static final Logger logger = Logger.getLogger(SysPurposeListController.class);
 	@RequestMapping("/toSysConfigList")
 	public ModelAndView toSysConfigList(HttpServletRequest request, Model model) {
 		IQuerySysConfigSV querySysConfigSV = DubboConsumerFactory.getService(IQuerySysConfigSV.class);
@@ -37,10 +39,11 @@ public class SysConfigListController {
 		model.addAttribute("homeDataEidtConfig", homeDataEidtConfig);
 		model.addAttribute("noticeConfig", noticeConfig);
 		model.addAttribute("commissionConfig", commissionConfig);
+		logger.info("进入基本设置页面》》》》》》");
 		return new ModelAndView("jsp/sysconfig/sysConfigList");
 	}
 	/**
-     * 修改用途
+     * 修改基本设置
      */
     @RequestMapping("/updateSysConfig")
     @ResponseBody

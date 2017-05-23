@@ -54,7 +54,7 @@ public class SysSensitiveListController {
 	}
 	
 	/**
-     * 题库查询
+     * 敏感词查询
      */
     @RequestMapping("/getSysSensitivePageData")
     @ResponseBody
