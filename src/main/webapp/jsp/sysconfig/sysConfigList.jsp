@@ -41,17 +41,17 @@
                           			<input type="hidden" name="configId" value="${memberConfig.configId}">
 	                          		<p>
 	                          			会员等级设置：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	                          			普通会员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="ordinayryMember" name="ordinayryMember" type="text" value="${memberConfig.ordinaryMember}">&nbsp;&nbsp;&nbsp;&nbsp;
+	                          			普通会员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="ordinayryMember" name="ordinaryMember" type="text" value="${memberConfig.ordinaryMember}">&nbsp;&nbsp;&nbsp;&nbsp;
 	                          			黄金会员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="goldMember" name="goldMember" type="text" value="${memberConfig.goldMember}">&nbsp;&nbsp;&nbsp;&nbsp;
 	                          			白金会员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="platinumMember" name="platinumMember" type="text" value="${memberConfig.platinumMember}">&nbsp;&nbsp;&nbsp;&nbsp;
-	                          			钻石会员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="masonyMember" name="masonyMember" type="text" value="${memberConfig.masonryMember}">
+	                          			钻石会员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="masonyMember" name="masonryMember" type="text" value="${memberConfig.masonryMember}">
 	                          		</p><br/>
 	                          		<p>
 	                          			平台佣金比例：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	                          			封顶值：&nbsp;&nbsp;&nbsp;&nbsp;<input id="capValue" name="capValue" type="text" value="${commissionConfig.capValue}">元/美元&nbsp;&nbsp;&nbsp;&nbsp;
 	                          			v1译员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="v1Points" name="v1Points" type="text" value="${commissionConfig.v1Points}">%&nbsp;&nbsp;&nbsp;&nbsp;
-	                          			v1译员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="v2Points" name="v2Points" type="text" value="${commissionConfig.v2Points}">%&nbsp;&nbsp;&nbsp;&nbsp;
-	                          			v1译员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="v3Points" name="v3Points" type="text" value="${commissionConfig.v3Points}">%&nbsp;&nbsp;&nbsp;&nbsp;
+	                          			v2译员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="v2Points" name="v2Points" type="text" value="${commissionConfig.v2Points}">%&nbsp;&nbsp;&nbsp;&nbsp;
+	                          			v3译员：&nbsp;&nbsp;&nbsp;&nbsp;<input id="v3Points" name="v3Points" type="text" value="${commissionConfig.v3Points}">%&nbsp;&nbsp;&nbsp;&nbsp;
 	                          			lsp团队：&nbsp;&nbsp;&nbsp;&nbsp;<input id="lspPoints" name="lspPoints" type="text" value="${commissionConfig.lspPoints}">%
 	                          		</p><br/>
 	                          		<p>

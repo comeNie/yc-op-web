@@ -38,7 +38,6 @@ define('app/jsp/syssensitive/addSysSensitive', function (require, exports, modul
     	//重写父类
     	setup: function () {
     		var _this = this;
-    		this._bindLanguageSelect();
     		OrderListPager.superclass.setup.call(this);
     	},
 		_save:function(){

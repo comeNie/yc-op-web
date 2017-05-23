@@ -37,7 +37,7 @@
 										<li>
 										    <p class="word">站点*:</p>
 										    <p>		&nbsp;&nbsp;
-													<input type="checkbox" class="site" name="site" value=""/>全部
+													<input type="checkbox" id="allSite"/>全部
 													<input type="checkbox" class="site" name="site" value="1"/>译云
 													<input type="checkbox" class="site" name="site" value="2"/>找翻译
 													<input type="checkbox" class="site" name="site" value="3"/>wap站
@@ -79,5 +79,18 @@
             pager.render();
         });
     })();
+    $(function() {
+		$("#allSite").click(function() {
+			if(this.checked){
+				$("input[name='site']").each(function(){this.checked=true;});
+			}else{
+				$("input[name='site']").each(function(){this.checked=false;});
+			}
+		});
+		var $site = $("input[name='site']");
+		$site.click(function(){
+			$("#allSite").attr("checked",$site.length == $("input[name='site']:checked").length ? true : false);
+		});
+	});
 </script>               
 </body>
