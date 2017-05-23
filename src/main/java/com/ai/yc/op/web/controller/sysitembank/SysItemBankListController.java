@@ -20,6 +20,7 @@ import com.ai.opt.sdk.web.model.ResponseData;
 import com.ai.yc.common.api.sysduad.interfaces.IQuerySysDuadSV;
 import com.ai.yc.common.api.sysduad.param.QuerySysDuadDetailsRes;
 import com.ai.yc.common.api.sysitembank.interfaces.IQuerySysItemBankSV;
+import com.ai.yc.common.api.sysitembank.param.CheckDuad;
 import com.ai.yc.common.api.sysitembank.param.DeleteSysItemBank;
 import com.ai.yc.common.api.sysitembank.param.ItemBankPageQueryRequest;
 import com.ai.yc.common.api.sysitembank.param.ItemBankPageQueryResponse;
@@ -123,13 +124,11 @@ public class SysItemBankListController {
     @RequestMapping("/checkDuadCn")
     @ResponseBody
     public Integer checkDuadCn(String duadId){
-    	IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
-		QuerySysDuadDetailsRes querySysDuadDetails = querySysDuadSV.querySysDuadDetails(duadId);
-		if(querySysDuadDetails != null){
-			return 1;
-		}else{
-			return 0;
-		}
+    	IQuerySysItemBankSV querySysItemBankSV = DubboConsumerFactory.getService(IQuerySysItemBankSV.class);
+    	CheckDuad param = new CheckDuad();
+    	param.setLangDir(duadId);
+		Integer checkDuadCn = querySysItemBankSV.checkDuadCn(param);
+		return checkDuadCn;
     }
     /**
      * 添加题库

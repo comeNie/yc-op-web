@@ -184,12 +184,24 @@ define('app/jsp/syssensitive/sysSensitiveList', function (require, exports, modu
     	},
 		_initValidate:function(){
     		var formValidator=$("#dataForm").validate({
-    			rules: {
-    			},
-    			messages: {
-    			}
-    		});
-    		return formValidator;
+  	    			rules: {
+  	    				"site":{
+  	    					required:true
+  	    				},
+  	    				"sensitiveWords":{
+  	    					required:true
+  	    				}
+  	    			},
+  	    			messages: {
+  	    				"site":{
+  	    					required:"请选择站点"
+  	    				},
+  	    				"sensitiveWords":{
+  	    					required:"请输入敏感词"
+  	    				}
+  	    			}
+  	    		});
+  	    	   return formValidator ;
     	},
 		_closeDialog:function(){
     		$("#errorMessage").html("");

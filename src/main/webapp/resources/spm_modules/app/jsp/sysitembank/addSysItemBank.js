@@ -73,7 +73,7 @@ define('app/jsp/sysitembank/addSysItemBank', function (require, exports, module)
 					},
 					url: _base + "/sysitembank/checkDuadCn",
 					success: function (data) {
-						if(data == 1){
+						if(data >= 1){
 							$(".check").html("此语言对已存在");
 							$("#save").attr("disabled", true); 
 						}else{

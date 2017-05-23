@@ -183,7 +183,7 @@
    </div> 
 <script id="sysSensitiveListTemple" type="text/template">
 	<tr>
-  	  <td><input type="checkbox" name="subSen" value="{{:id}}">{{:id}}</td>
+  	  <td><input type="checkbox" name="subSen" value="{{:id}}"></td>
       <td>{{:sensitiveWords}}</td>
 	  <td>{{:replaceWords}}</td>
 	  <td>
