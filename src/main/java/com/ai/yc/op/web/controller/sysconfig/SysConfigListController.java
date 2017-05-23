@@ -57,6 +57,7 @@ public class SysConfigListController {
     	IQuerySysConfigSV querySysConfigSV = DubboConsumerFactory.getService(IQuerySysConfigSV.class);
     	BaseResponse saveConfig = querySysConfigSV.saveSysConfig(req);
     	if(saveConfig.getResponseHeader().getIsSuccess()==false){
+    		logger.error("controller层修改基本设置"+saveConfig);
 			return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_FAILURE, "系统异常，请稍后重试", null);
 		}
 		return new ResponseData<Boolean>(ResponseData.AJAX_STATUS_SUCCESS, "保存成功", true);
