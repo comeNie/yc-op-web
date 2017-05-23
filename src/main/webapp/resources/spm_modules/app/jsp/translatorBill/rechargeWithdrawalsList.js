@@ -32,16 +32,11 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 		//事件代理
 		events: {
 			//已处理
-			"click #waitHandle":"_searchBillList",
-			"click #refundId":"_searchBillList",
-			"click #showQuery":"_showQueryInfo",
-			"click #domestic":"_searchBillList",
-			"click #foreign":"_searchBillList",
+			"click #search":"_searchBillList",
 			"click #add":"_add",
 			//查询
-			"click #search":"_searchBillList",
-			"click #update":"_updatePayState",
-			"click #export":"_export",
+			//"click #update":"_updatePayState",
+			//"click #export":"_export",
 			"click #add-close":"_closeDialog",
 			"click #colseImage":"_closeDialog"
 
@@ -131,8 +126,8 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 		},
 
 		_searchBillList:function(){
-			/*var _this=this;
-			var url = _base+"/balance/getBillPageData";
+			var _this=this;
+			var url = _base+"/rechargeWithdrawals/getRechargeWithdrawalsPageData";
 			var queryData = this._getSearchParams();
 			$("#pagination").runnerPagination({
 				url:url,
@@ -153,11 +148,11 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 						$("#orderListData").html("未搜索到信息");
 					}
 				},
-			});*/
+			});
 		},
 
 		_getSearchParams:function(){
-			var stateBill="";
+			/*var stateBill="";
 			var flag="";
 			var orderTimeS = $("#billTimeBegin").val();
 			var orderTimeE = $("#billTimeEnd").val();
@@ -175,17 +170,14 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 				stateBill = 1;//未结算
 			}else if(refund=="current" && refund!=""){
 				stateBill=  2;//已结算
-			}
+			}*/
 			return {
-				"flag":flag,
-				"beginDate":orderTimeS,
-				"endDate":orderTimeE,
-				"nickName":jQuery.trim($("#nickName").val()),
-				"acountType":jQuery.trim($("#accountType option:selected").val()),
-				"state":stateBill,
-				"targetType":"3",
-
-			}
+    			"username":jQuery.trim($("#username").val()),
+    			"pattem":jQuery.trim($("#pattem option:selected").val()),
+    			"state":jQuery.trim($("#state option:selected").val()),
+    			"type":jQuery.trim($("#type option:selected").val()),
+    			"currency":jQuery.trim($("#currency option:selected").val())
+    		}
 		},
 		//弹出框
 		_popUp:function(billId,state,accountAmout){

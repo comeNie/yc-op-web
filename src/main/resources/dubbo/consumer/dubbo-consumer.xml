@@ -142,5 +142,8 @@
 		interface="com.ai.yc.common.api.sysquestions.interfaces.IQuerySysQuestionsSV" />
 	<!-- 敏感词管理 -->	
 	<dubbo:reference id="iQuerySysSensitiveSV"
-		interface="com.ai.yc.common.api.syssensitive.interfaces.IQuerySysSensitiveSV" />			 				 
+		interface="com.ai.yc.common.api.syssensitive.interfaces.IQuerySysSensitiveSV" />
+	<!--充值提现管理-->
+	<dubbo:reference id="iRechargeWithdrawalsSV"
+		interface="com.ai.slp.balance.api.rechargewithdrawals.interfaces.IRechargeWithdrawalsSV" />			 				 
 </beans>

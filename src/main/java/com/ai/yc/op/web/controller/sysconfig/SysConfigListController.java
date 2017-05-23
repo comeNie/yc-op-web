@@ -27,8 +27,8 @@ public class SysConfigListController {
 	private static final Logger logger = Logger.getLogger(SysPurposeListController.class);
 	@RequestMapping("/toSysConfigList")
 	public ModelAndView toSysConfigList(HttpServletRequest request, Model model) {
+		logger.info("进入基本设置页面》》》》》》》》》》》》》》》》》》》》》》》》》");
 		IQuerySysConfigSV querySysConfigSV = DubboConsumerFactory.getService(IQuerySysConfigSV.class);
-		
 		MemberConfig memberConfig = querySysConfigSV.getMemberConfig();
 		DonateIntegralConfig donateIntegralConfig = querySysConfigSV.getDonateIntegralConfig();
 		HomeDataEidtConfig homeDataEidtConfig = querySysConfigSV.getHomeDataEidtConfig();
@@ -39,7 +39,6 @@ public class SysConfigListController {
 		model.addAttribute("homeDataEidtConfig", homeDataEidtConfig);
 		model.addAttribute("noticeConfig", noticeConfig);
 		model.addAttribute("commissionConfig", commissionConfig);
-		logger.info("进入基本设置页面》》》》》》");
 		return new ModelAndView("jsp/sysconfig/sysConfigList");
 	}
 	/**
@@ -54,6 +53,7 @@ public class SysConfigListController {
     	long time = DateUtil.getSysDate().getTime();
     	req.setUpdatetime(time);
     	req.setLanguage("1");*/
+    	logger.info("开始修改基本设置》》》》》》》》》》》》》》》》》》》》》》》》》");
     	IQuerySysConfigSV querySysConfigSV = DubboConsumerFactory.getService(IQuerySysConfigSV.class);
     	BaseResponse saveConfig = querySysConfigSV.saveSysConfig(req);
     	if(saveConfig.getResponseHeader().getIsSuccess()==false){

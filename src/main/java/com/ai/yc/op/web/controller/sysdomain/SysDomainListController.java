@@ -61,6 +61,7 @@ public class SysDomainListController {
 			resultPageInfo.setPageNo(Integer.parseInt(strPageNo));
 			resultPageInfo.setPageSize(Integer.parseInt(strPageSize));
 			domainQueryRequest.setPageInfo(resultPageInfo);
+			logger.info("controller查询领域》》》》》》》》》》》》》》》》》》》》");
 			IQuerySysDomainSV querySysDomainSV = DubboConsumerFactory.getService(IQuerySysDomainSV.class);
 			DomainPageQueryResponse domainPageQueryResponse = querySysDomainSV.queryDomainPage(domainQueryRequest);
 			

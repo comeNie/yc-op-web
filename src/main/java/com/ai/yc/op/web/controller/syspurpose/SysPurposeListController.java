@@ -61,6 +61,7 @@ public class SysPurposeListController {
 			resultPageInfo.setPageNo(Integer.parseInt(strPageNo));
 			resultPageInfo.setPageSize(Integer.parseInt(strPageSize));
 			purposePageQueryRequest.setPageInfo(resultPageInfo);
+			logger.info("controller查询用途》》》》》》》》》》》》》》》》》》》》");
 			IQuerySysPurposeSV querySysPurposeSV = DubboConsumerFactory.getService(IQuerySysPurposeSV.class);
 			PurposePageQueryResponse purposePageQueryResponse = querySysPurposeSV.queryPurposePage(purposePageQueryRequest);
 			if (purposePageQueryResponse.getResponseHeader().isSuccess()) {

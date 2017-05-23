@@ -24,21 +24,21 @@
 							<div id="selectDiv">
 								<ul>
 									<li class="col-md-6">
-										<p class="word">昵称</p>
-										<p><input class="int-text int-medium" id="nickName"  value="" type="text"></p>
+										<p class="word">用户名</p>
+										<p><input class="int-text int-medium" id="username"  value="" type="text"></p>
 									</li>
-									<li class="col-md-6">
+									<!-- <li class="col-md-6">
 										<p class="word">姓名</p>
-										<p><input class="int-text int-medium" id="name"  value="" type="text"></p>
-									</li>
+										<p><input class="int-text int-medium" id="fullname"  value="" type="text"></p>
+									</li> -->
 									<li class="col-md-6">
 										<p class="word">申请人/处理人</p>
-										<p><input class="int-text int-medium" id="applicant"  value="" type="text"></p>
+										<p><input class="int-text int-medium" id=""  value="" type="text"></p>
 									</li>
 									<li class="col-md-6">
 										<p class="word">结算方式</p>
 										<p>
-											<select class="select select-medium" id="accountType">
+											<select class="select select-medium" id="pattem">
 												<option value="" selected="selected">全部</option>
 												<!-- 支付宝 -->
 												<option value="1">支付宝</option>
@@ -80,7 +80,7 @@
 									<li class="col-md-6">
 										<p class="word">币种单位</p>
 										<p>
-											<select class="select select-medium" id="currencyUnit">
+											<select class="select select-medium" id="currency">
 												<option value="" selected="selected">全部</option>
 												<!-- 充值 -->
 												<option value="1">CNY ¥</option>
@@ -135,8 +135,7 @@
 										<thead>
 										<tr>
 											<th><input type="checkbox" id="allBox">  编号</th>
-											<th>昵称</th>
-											<th>姓名</th>
+											<th>用户名</th>
 											<th>手机</th>
 											<th>类型</th>
 											<th>金额/明细</th>
@@ -164,7 +163,7 @@
 							<!--分页结束-->
 						</div>
 						<!-- 弹出框 start-->
-						<form id="dataForm" method="post">
+						<%-- <form id="dataForm" method="post">
 							<div class="eject-big">
 								<div class="eject-medium" id="add-samll">
 									<div class="eject-medium-title">
@@ -190,9 +189,9 @@
 														<option value="1">支付宝</option>
 														<!--微信 -->
 														<option value="2">微信</option>
-														<!-银行汇款/转账 -->
+														<!--银行汇款/转账  -->
 														<option value="3">银行汇款/转账</option>
-														<%--PayPal--%>
+														PayPal
 														<option value="4">PayPal</option>
 													</select>
 												</p>
@@ -213,7 +212,7 @@
 								</div>
 								<div class="mask" id="eject-mask"></div>
 							</div>
-						</form>
+						</form> --%>
 						<!-- 弹出框 end-->
 					</div>
 				</div>
@@ -223,63 +222,55 @@
 </div>
 <script id="orderListTemple" type="text/template">
 	<tr>
-		<td><input type="checkbox" name="subBox">{{:billId}}</td>
-		<td>{{:nickname}}</td>
-		<td>{{:targetName}}</td>
-		<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', startAccountTime)}}</td>
-		<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', endAccountTime)}}</td>
+		<td><input type="checkbox" name="subBox">{{:wid}}</td>
+		<td>{{:username}}</td>
+		<td>{{:mobilephone}}</td>
 		<td>
-			{{if  flag == '0'}}
-			¥
-			{{else flag == '1'}}
-			$
+			{{if  type == '1'}}
+			充值
+			{{else type == '2'}}
+			提现
 			{{/if}}
-			{{:~liToYuan(billFee)}}
 		</td>
 		<td>
-			{{if  flag == '0'}}
-			¥
-			{{else flag == '1'}}
-			$
-			{{/if}}
-			{{:~liToYuan(platFee)}}
+			{{if  currency == '1'}}
+			CNY¥
+			{{else currency == '2'}}
+			USD$
+			{{/if}}/
+			{{:~liToYuan(money)}}
 		</td>
 		<td>
-			{{if  flag == '0'}}
-			¥
-			{{else flag == '1'}}
-			$
-			{{/if}}
-			{{:~liToYuan(accountAmout)}}
-		</td>
-		<td>1个月</td>
-		<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', createTime)}}</td>
-		<td>
-			{{if  accountType == '1'}}
+			{{if  pattem == '1'}}
 			支付宝
-			{{else accountType == '2'}}
+			{{else pattem == '2'}}
 			微信
-			{{else accountType == '3'}}
+			{{else pattem == '3'}}
 			银行汇款/转账
-			{{else accountType == '4'}}
+			{{else pattem == '4'}}
 			PayPal
 			{{/if}}
 		</td>
-		<td>{{:settleAccount}}</td>
-		<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', actAccountTime)}}</td>
+		<td>{{:applyPeople}}</td>
+		<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', applyTime)}}</td>
+		<td>{{:bruisesPeople}}</td>
+		<td>{{:~timestampToDate('yyyy-MM-dd hh:mm:ss', bruisesTime)}}</td>
 		<td>
-			{{if  state == '2'}}
-			已结算
-			{{else }}
-			未结算
+			{{if  pattem == '1'}}
+			待审核
+			{{else pattem == '2'}}
+			已确认
+			{{else pattem == '3'}}
+			锁定
 			{{/if}}
 		</td>
 		<td>
-			{{if  state == '2'}}
-			<a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:billId}}')">明细</a>
+			{{if  state == '3'}}
+			<a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:wid}}')">查看</a>
 			{{else }}
-			<a href="javascript:void(0);" onclick="pager._popUp('{{:billId}}','{{:state}}','{{:~liToYuan(accountAmout)}}')">结算</a>
-			<a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:billId}}')">明细</a>
+			<a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:wid}}')">查看</a>
+			<a href="javascript:void(0);" class="adopt" onclick="pager._popUp('{{:wid}}')">确认</a>
+			<a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:wid}}')">锁定</a>
 			{{/if}}
 		</td>
 	</tr>

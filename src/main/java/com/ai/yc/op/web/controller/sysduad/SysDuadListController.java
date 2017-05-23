@@ -60,6 +60,7 @@ public class SysDuadListController {
 			resultPageInfo.setPageNo(Integer.parseInt(strPageNo));
 			resultPageInfo.setPageSize(Integer.parseInt(strPageSize));
 			duadPageQueryRequest.setPageInfo(resultPageInfo);
+			logger.info("controller查询语言对》》》》》》》》》》》》》》》》》》》》");
 			IQuerySysDuadSV querySysDuadSV = DubboConsumerFactory.getService(IQuerySysDuadSV.class);
 			DuadPageQueryResponse queryDuadPage = querySysDuadSV.queryDuadPage(duadPageQueryRequest);
 			

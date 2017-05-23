@@ -19,8 +19,6 @@ import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
 import com.ai.opt.sdk.web.model.ResponseData;
-import com.ai.yc.common.api.sysquestions.interfaces.IQuerySysQuestionsSV;
-import com.ai.yc.common.api.sysquestions.param.SaveSysQuestions;
 import com.ai.yc.common.api.syssensitive.interfaces.IQuerySysSensitiveSV;
 import com.ai.yc.common.api.syssensitive.param.DeleteSysSensitive;
 import com.ai.yc.common.api.syssensitive.param.SaveSysSensitive;
@@ -28,7 +26,6 @@ import com.ai.yc.common.api.syssensitive.param.SensitivePageQueryRequest;
 import com.ai.yc.common.api.syssensitive.param.SensitivePageQueryResponse;
 import com.ai.yc.common.api.syssensitive.param.SensitivePageVo;
 import com.ai.yc.op.web.model.sso.client.GeneralSSOClientUser;
-import com.ai.yc.op.web.model.utils.ImportEmployeeChoice;
 import com.ai.yc.op.web.model.utils.ImportEmployeeSensitive;
 import com.ai.yc.op.web.utils.LoginUtil;
 
@@ -98,6 +95,7 @@ public class SysSensitiveListController {
     	req.setCreatPeople(loginUser.getUsername());
     	Timestamp sysDate = DateUtil.getSysDate();
     	req.setCreatTime(sysDate);
+    	logger.info("controller开始添加敏感词》》》》》》》》》》》》》》》》》》》》"+req);
     	IQuerySysSensitiveSV querySysSensitiveSV = DubboConsumerFactory.getService(IQuerySysSensitiveSV.class);
     	BaseResponse saveSysSensitive = querySysSensitiveSV.saveSysSensitive(req);
     	if(saveSysSensitive.getResponseHeader().getIsSuccess()==false){
