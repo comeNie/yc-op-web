@@ -137,7 +137,7 @@
 											 </ul>
 											<ul>
 												<li>
-												    <p class="word">替换为*:</p>
+												    <p class="word">替换为:</p>
 													<p><input type="text" id="replaceWords" name="replaceWords" class="int-text int-small" ></p>
 												</li>
 											 </ul>
@@ -145,7 +145,7 @@
 												<li>
 												    <p class="word">站点*:</p>
 												    <p>		&nbsp;&nbsp;
-															<input type="checkbox" class="site" name="site" value=""/>全部
+															<input type="checkbox" id="allSite"/>全部
 															<input type="checkbox" class="site" name="site" value="1"/>译云
 															<input type="checkbox" class="site" name="site" value="2"/>找翻译
 															<input type="checkbox" class="site" name="site" value="3"/>wap站
@@ -201,9 +201,9 @@
 	  <td>{{:creatPeople}}</td>
 	  <td>
 		  {{if  state == '0'}}
-		  	启用
+		  	显示
 		  {{else state == '1'}}
-		  	禁用
+		  	隐藏
 		  {{/if}}
 	  </td>     
 	  <td>
@@ -232,6 +232,19 @@
 		var $subSen = $("input[name='subSen']");
 		$subSen.click(function(){
 			$("#allSen").attr("checked",$subSen.length == $("input[name='subSen']:checked").length ? true : false);
+		});
+	});
+	$(function() {
+		$("#allSite").click(function() {
+			if(this.checked){
+				$("input[name='site']").each(function(){this.checked=true;});
+			}else{
+				$("input[name='site']").each(function(){this.checked=false;});
+			}
+		});
+		var $site = $("input[name='site']");
+		$site.click(function(){
+			$("#allSite").attr("checked",$site.length == $("input[name='site']:checked").length ? true : false);
 		});
 	});
  </script>  

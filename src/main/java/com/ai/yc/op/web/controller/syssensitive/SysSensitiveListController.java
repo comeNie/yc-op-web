@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ai.opt.base.vo.BaseResponse;
 import com.ai.opt.base.vo.PageInfo;
-import com.ai.opt.sdk.constants.ExceptCodeConstants;
 import com.ai.opt.sdk.dubbo.util.DubboConsumerFactory;
 import com.ai.opt.sdk.util.BeanUtils;
 import com.ai.opt.sdk.util.DateUtil;
@@ -96,6 +95,9 @@ public class SysSensitiveListController {
     	req.setCreatPeople(loginUser.getUsername());
     	Timestamp sysDate = DateUtil.getSysDate();
     	req.setCreatTime(sysDate);
+    	if(req.getReplaceWords()== ""){
+    		req.setReplaceWords("***");
+    	}
     	logger.info("controller开始添加敏感词》》》》》》》》》》》》》》》》》》》》"+req);
     	IQuerySysSensitiveSV querySysSensitiveSV = DubboConsumerFactory.getService(IQuerySysSensitiveSV.class);
     	BaseResponse saveSysSensitive = querySysSensitiveSV.saveSysSensitive(req);
@@ -133,6 +135,9 @@ public class SysSensitiveListController {
     	req.setCreatPeople(loginUser.getUsername());
     	Timestamp sysDate = DateUtil.getSysDate();
     	req.setCreatTime(sysDate);
+    	if(req.getReplaceWords()== ""){
+    		req.setReplaceWords("***");
+    	}
     	IQuerySysSensitiveSV querySysSensitiveSV = DubboConsumerFactory.getService(IQuerySysSensitiveSV.class);
     	BaseResponse updateSysSensitive = querySysSensitiveSV.updateSysSensitive(req);
     	if(updateSysSensitive.getResponseHeader().getIsSuccess()==false){

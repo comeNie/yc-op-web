@@ -29,7 +29,7 @@
 									 </ul>
 									<ul>
 										<li>
-										    <p class="word">替换为*:</p>
+										    <p class="word">替换为:</p>
 											<p><input type="text" id="replaceWords" name="replaceWords" value="***" class="int-text int-small" ></p>
 										</li>
 									 </ul>

@@ -59,17 +59,21 @@ define('app/jsp/syssensitive/sysSensitiveList', function (require, exports, modu
 			    id_array.push($(this).val());//向数组中添加元素  
 			});  
 			var ids=id_array.join(',');//将数组元素连接起来以构建一个字符串  
-			var _this=this;
-			 ajaxController.ajax({
- 				type: "post",
- 				processing: true,
- 				message: "删除数据中，请等待...",
- 				data: {ids:ids},
- 				url: _base + "/syssensitive/deleteAllSysSensitive",
- 				success: function (rs) {
- 					 window.location.reload();
- 				}
- 			});
+			if(ids == null || ids == ''){
+				alert("请选择要删除的数据");  
+			}else{
+				var _this=this;
+				 ajaxController.ajax({
+	 				type: "post",
+	 				processing: true,
+	 				message: "删除数据中，请等待...",
+	 				data: {ids:ids},
+	 				url: _base + "/syssensitive/deleteAllSysSensitive",
+	 				success: function (rs) {
+	 					 window.location.reload();
+	 				}
+	 			});
+			}
 		},
 		_importEmp:function(){
    		 //检验导入的文件是否为Excel文件  
@@ -207,6 +211,7 @@ define('app/jsp/syssensitive/sysSensitiveList', function (require, exports, modu
     		$("#errorMessage").html("");
     		$('#eject-mask').fadeOut(100);
     		$('#add-samll').slideUp(150);
+    		window.location.reload();
     	}
     });
     
