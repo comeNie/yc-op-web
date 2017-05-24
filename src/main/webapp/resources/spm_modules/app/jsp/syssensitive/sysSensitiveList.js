@@ -188,22 +188,30 @@ define('app/jsp/syssensitive/sysSensitiveList', function (require, exports, modu
     	},
 		_initValidate:function(){
     		var formValidator=$("#dataForm").validate({
-  	    			rules: {
-  	    				"site":{
-  	    					required:true
-  	    				},
-  	    				"sensitiveWords":{
-  	    					required:true
-  	    				}
-  	    			},
-  	    			messages: {
-  	    				"site":{
-  	    					required:"请选择站点"
-  	    				},
-  	    				"sensitiveWords":{
-  	    					required:"请输入敏感词"
-  	    				}
-  	    			}
+    			rules: {
+    				"site":{
+    					required:true
+    				},
+    				"sensitiveWords":{
+    					required:true,
+    					maxlength:4
+    				},
+    				"replaceWords":{
+    					maxlength:4
+    				}
+    			},
+    			messages: {
+    				"site":{
+    					required:"请选择站点"
+    				},
+    				"sensitiveWords":{
+    					required:"请输入敏感词",
+    					maxlength:"敏感词4个字符以内"
+    				},
+    				"replaceWords":{
+    					maxlength:"替换的字符4个字以内"
+    				}
+    			}
   	    		});
   	    	   return formValidator ;
     	},

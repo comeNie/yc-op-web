@@ -70,7 +70,11 @@ define('app/jsp/syssensitive/addSysSensitive', function (require, exports, modul
 	    					required:true
 	    				},
 	    				"sensitiveWords":{
-	    					required:true
+	    					required:true,
+	    					maxlength:4
+	    				},
+	    				"replaceWords":{
+	    					maxlength:4
 	    				}
 	    			},
 	    			messages: {
@@ -78,7 +82,11 @@ define('app/jsp/syssensitive/addSysSensitive', function (require, exports, modul
 	    					required:"请选择站点"
 	    				},
 	    				"sensitiveWords":{
-	    					required:"请输入敏感词"
+	    					required:"请输入敏感词",
+	    					maxlength:"敏感词4个字符以内"
+	    				},
+	    				"replaceWords":{
+	    					maxlength:"替换的字符4个字以内"
 	    				}
 	    			}
 	    		});

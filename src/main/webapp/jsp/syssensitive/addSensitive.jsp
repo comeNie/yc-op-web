@@ -85,8 +85,12 @@
 				$("input[name='site']").each(function(){this.checked=true;});
 			}else{
 				$("input[name='site']").each(function(){this.checked=false;});
+				$("#allSite").each(function(){this.checked=false;});
 			}
 		});
+		if($("input[name='site']").checked == true){
+			$("#allSite").each(function(){this.checked=true;});
+		}
 		var $site = $("input[name='site']");
 		$site.click(function(){
 			$("#allSite").attr("checked",$site.length == $("input[name='site']:checked").length ? true : false);
