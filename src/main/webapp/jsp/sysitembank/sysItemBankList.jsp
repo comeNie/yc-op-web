@@ -51,9 +51,9 @@
 							            		<select class="select select-medium" id="state">
 							            			<option value="" selected="selected">全部</option>
 													<!-- 启用 -->
-													<option value="0">显示</option>
+													<option value="0">启用</option>
 													<!-- 禁用 -->
-													<option value="1">隐藏</option>
+													<option value="1">停用</option>
 												</select>
 						            		</p>
 							            </li>
@@ -75,9 +75,9 @@
 							            		<select class="select select-medium" id="questionType">
 							            			<option value="" selected="selected">全部</option>
 													<!-- 启用 -->
-													<option value="1">单选题</option>
+													<option value="0">单选题</option>
 													<!-- 禁用 -->
-													<option value="2">简答题</option>
+													<option value="1">简答题</option>
 												</select>
 						            		</p>
 							            </li>
@@ -195,8 +195,8 @@
 													<li>
 													    <p class="word">状态:</p>
 														<p>
-															<input name="state" type="radio" value="0" />显示
-															<input name="state" type="radio" value="1" />隐藏
+															<input name="state" type="radio" value="0" />启用
+															<input name="state" type="radio" value="1" />停用
 														</p>
 													</li>
 												</ul>
@@ -258,9 +258,9 @@
 	  </td>
 	  <td>
 		  {{if  state == '0'}}
-		  	显示
+		  	启用
 		  {{else state == '1'}}
-		  	隐藏
+		  	停用
 		  {{/if}}
 	  </td>     
 	  <td>

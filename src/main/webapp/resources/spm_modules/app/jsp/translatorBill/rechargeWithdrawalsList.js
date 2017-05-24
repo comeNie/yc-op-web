@@ -34,6 +34,7 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 			//已处理
 			"click #search":"_searchBillList",
 			"click #add":"_add",
+			 "click #confirmAll":"_confirmAll",
 			//查询
 			//"click #update":"_updatePayState",
 			//"click #export":"_export",
@@ -53,6 +54,54 @@ define('app/jsp/translatorBill/rechargeWithdrawalsList', function (require, expo
 		},
 		_add:function(){
 			window.location.href = _base+"/rechargeWithdrawals/toAddRechargeWithdrawals";
+		},
+		_confirmAll:function(){
+			var id_array=new Array();  
+			$('input[name="subBox"]:checked').each(function(){  
+			    id_array.push($(this).val());//向数组中添加元素  
+			});  
+			var ids=id_array.join(',');//将数组元素连接起来以构建一个字符串  
+			if(ids == null || ids == ''){
+				alert("请选择要删除的数据");  
+			}else{
+				var _this=this;
+				 ajaxController.ajax({
+	 				type: "post",
+	 				processing: true,
+	 				message: "确认数据中，请等待...",
+	 				data: {ids:ids},
+	 				url: _base + "/rechargeWithdrawals/allChangeState",
+	 				success: function (rs) {
+	 					 window.location.reload();
+	 				}
+	 			});
+			}
+		},
+		_confirm:function(wid){
+			var _this=this;
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "确认数据中，请等待...",
+				data: {id:id},
+				url: _base + "/rechargeWithdrawals/changeStateConfirm",
+				success: function (rs) {
+					 window.location.reload();
+				}
+			});
+		},
+		_lock:function(wid){
+			var _this=this;
+			ajaxController.ajax({
+				type: "post",
+				processing: true,
+				message: "确认数据中，请等待...",
+				data: {id:id},
+				url: _base + "/rechargeWithdrawals/changeStateLock",
+				success: function (rs) {
+					 window.location.reload();
+				}
+			});
 		},
 		_rejectReviewOrder:function(orderId){
 			/*var param = {};

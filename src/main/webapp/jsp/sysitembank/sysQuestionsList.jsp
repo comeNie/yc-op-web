@@ -129,7 +129,6 @@
 	  <td>
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._look()">查看</a>
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:qid}}')">删除</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:qid}}','{{:original}}','{{:translation}}','{{:status}}')">修改</a>
 	  </td>
     </tr>
 </script> 

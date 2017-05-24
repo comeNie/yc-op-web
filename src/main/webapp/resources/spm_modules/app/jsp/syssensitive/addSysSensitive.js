@@ -57,7 +57,7 @@ define('app/jsp/syssensitive/addSysSensitive', function (require, exports, modul
 				url: url,
 				data: param,
 				success: function (rs) {
-					window.history.back(-1); 
+					window.location.href = _base+"/syssensitive/toSysSensitiveList";
 				}
 			});
 		},

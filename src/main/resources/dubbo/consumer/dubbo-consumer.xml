@@ -145,5 +145,10 @@
 		interface="com.ai.yc.common.api.syssensitive.interfaces.IQuerySysSensitiveSV" />
 	<!--充值提现管理-->
 	<dubbo:reference id="iRechargeWithdrawalsSV"
-		interface="com.ai.slp.balance.api.rechargewithdrawals.interfaces.IRechargeWithdrawalsSV" />			 				 
+		interface="com.ai.slp.balance.api.rechargewithdrawals.interfaces.IRechargeWithdrawalsSV" />
+
+	<dubbo:reference id="iDeductSV"
+		interface="com.ai.slp.balance.api.deduct.interfaces.IDeductSV" />	
+	<dubbo:reference id="iDepositSV"
+		interface="com.ai.slp.balance.api.deposit.interfaces.IDepositSV" />	
 </beans>

@@ -86,7 +86,7 @@ define('app/jsp/sysitembank/sysQuestionsList', function (require, exports, modul
 				}
 			});
 		},
-		_update:function(){
+		/*_update:function(){
 			var _this = this;
 			var formValidator=_this._initValidate();
 			formValidator.form();
@@ -106,7 +106,7 @@ define('app/jsp/sysitembank/sysQuestionsList', function (require, exports, modul
 					window.location.reload();
 				}
 			});
-		},
+		},*/
 		_show:function(qid,original,translation,status){
 			var _this= this;
     		$("#qid").val("");

@@ -100,7 +100,7 @@
 									<p><input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5"
 											  id="export" value="导  出"></p>
 									<p><input type="button" class="biu-btn  btn-primary btn-blue btn-medium ml-5"
-											  id="confirm" value="批量确认"></p>
+											  id="confirmAll" value="批量确认"></p>
 								</li>
 							</ul>
 						</div>
@@ -269,8 +269,8 @@
 			<a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:wid}}')">查看</a>
 			{{else }}
 			<a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:wid}}')">查看</a>
-			<a href="javascript:void(0);" class="adopt" onclick="pager._popUp('{{:wid}}')">确认</a>
-			<a href="javascript:void(0);" class="adopt" onclick="pager._detailPage('{{:wid}}')">锁定</a>
+			<a href="javascript:void(0);" class="adopt" onclick="pager._confirm('{{:wid}}')">确认</a>
+			<a href="javascript:void(0);" class="adopt" onclick="pager._lock('{{:wid}}')">锁定</a>
 			{{/if}}
 		</td>
 	</tr>

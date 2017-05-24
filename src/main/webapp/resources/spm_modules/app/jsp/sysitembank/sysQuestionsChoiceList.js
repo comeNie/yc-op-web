@@ -99,7 +99,7 @@ define('app/jsp/sysitembank/sysQuestionsChoiceList', function (require, exports,
     			}
     		}
 		},
-		_update:function(){
+		/*_update:function(){
 			var _this = this;
 			var formValidator=_this._initValidate();
 			formValidator.form();
@@ -119,7 +119,7 @@ define('app/jsp/sysitembank/sysQuestionsChoiceList', function (require, exports,
 					window.location.reload();
 				}
 			});
-		},
+		},*/
 		_delete:function(qid){
 			var _this=this;
 			ajaxController.ajax({

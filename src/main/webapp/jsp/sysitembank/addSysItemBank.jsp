@@ -62,8 +62,8 @@
 										<li>
 										    <p class="word">状态:</p>
 											<p>
-												<input name="state" type="radio" value="0" checked="checked"/>显示
-												<input name="state" type="radio" value="1" />隐藏
+												<input name="state" type="radio" value="0" checked="checked"/>启用
+												<input name="state" type="radio" value="1" />停用
 											</p>
 										</li>
 									</ul>

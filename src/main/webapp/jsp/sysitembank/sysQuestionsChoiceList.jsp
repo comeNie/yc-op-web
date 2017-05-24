@@ -167,7 +167,6 @@
 	  <td>
 		  <a href="javascript:void(0);" class="adopt" onclick="pager._look('{{:bid}}','{{:questionType}}')">查看</a>
  		  <a href="javascript:void(0);" class="adopt" onclick="pager._delete('{{:qid}}')">删除</a>
-		  <a href="javascript:void(0);" class="adopt" onclick="pager._show('{{:qid}}','{{:choiceQuestion}}','{{:optiona}}','{{:optionb}}','{{:optionc}}','{{:optiond}}','{{:answer}}','{{:status}}')">修改</a>
 	  </td>
     </tr>
 </script> 

@@ -12,8 +12,8 @@ configurations {
     jsCommonLibs
 }
 configurations.all { 
-	    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-	    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+	    resolutionStrategy.cacheChangingModulesFor 10, 'seconds'
+	    resolutionStrategy.cacheDynamicVersionsFor 10, 'seconds'
 	    exclude group: 'log4j', module: 'log4j'
 	    exclude group: "org.slf4j", module: "slf4j-log4j12"
 	    exclude group: "org.slf4j", module: "log4j-over-slf4j"
@@ -140,7 +140,11 @@ dependencies {
     //敏感词管理
     compile 'com.ai.yc.common:syssensitive:1.0.1-SNAPSHOT'
     /*******************充值提现管理********************/
-    compile 'com.ai.slp.balance:rechargewithdrawals:1.0-SNAPSHOT'
+    compile 'com.ai.slp.balance:rechargewithdrawals:1.0.1-SNAPSHOT'
+    
+    compile 'com.ai.slp.balance:deduct:1.0-SNAPSHOT'
+    
+    compile 'com.ai.slp.balance:deposit:1.0.1-SNAPSHOT'
     
 }
 def getUedTemplate=task("getUedTemplate",type:com.ai.runner.gradle.plugin.jar.APIJarProcessTask){
